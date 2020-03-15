@@ -9,6 +9,7 @@ const apiUrl = 'http://localhost';
 
 const state = {
   user: {},
+  toke: {},
   products: [],
   ProductDetail: {},
   orders: [],
@@ -43,6 +44,17 @@ const actions = {
           reject();
         })
     })
+  },
+
+  async deleteProduct(context, data) {
+    await axios.delete(`${apiUrl}/api/product/${data.id}`,
+     { headers: { 'Authorization': "bearer " + state.token } })
+      .then(res => {
+        context.commit('deleteProduct', res.data);
+      })
+      .catch(error => {
+        console.error(error)
+      })
   },
 
   async fetchOrders(context) {
@@ -98,6 +110,11 @@ const mutations = {
   updateProductDetail(state, data) {
     state.ProductDetail = data
   },
+  deleteEventItem(state, data) {
+    state.products = state.products.filter((product) => {
+        return product.id != data.id
+    })
+},
   updateOrders(state, data) {
     state.orders = data
   },
