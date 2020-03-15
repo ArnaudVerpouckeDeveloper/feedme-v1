@@ -33,3 +33,12 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/merchant/protected', 'MerchantController@protected');
+});
+
+
