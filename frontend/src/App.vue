@@ -2,7 +2,7 @@
   <v-app>
     <nav-menu></nav-menu>
     <v-content>
-      <router-view/>
+      <router-view />
     </v-content>
   </v-app>
 </template>
@@ -11,12 +11,12 @@
 import NavMenu from "./components/NavMenu";
 
 export default {
-  name: 'App',
-  components:{
+  name: "App",
+  components: {
     NavMenu
   },
   data: () => ({
     //
-  }),
+  })
 };
 </script>

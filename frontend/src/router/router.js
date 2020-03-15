@@ -1,11 +1,13 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
+import { routes } from './routes'
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
 
-export const router = new VueRouter({
+export default new Router({
     mode: 'history',
+    base: process.env.BASE_URL,
     scrollBehavior() {
         return { x: 0, y: 0 };
     },
