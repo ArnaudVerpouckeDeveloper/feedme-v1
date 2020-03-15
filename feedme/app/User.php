@@ -56,13 +56,30 @@ class User extends Authenticatable implements JWTSubject
 
 
 
-    public function products()
-    {
-        return $this->hasMany('App\Product');
+    
+
+    public function roles(){
+        return $this->belongsToMany("App\Role");
     }
 
-    public function orders()
-    {
-        return $this->hasMany('App\Order');
+
+
+    public function merchant(){
+        return $this->hasOne('App\Merchant');
+    }
+    public function customer(){
+        return $this->hasOne('App\Customer');
+    }
+
+
+
+
+
+    public function hasAnyRoles($roles){
+        return null !== $this->roles()->whereIn("name", $roles)->first();
+    }
+
+    public function hasAnyRole($role){
+        return null !== $this->roles()->where("name", $role)->first();
     }
 }

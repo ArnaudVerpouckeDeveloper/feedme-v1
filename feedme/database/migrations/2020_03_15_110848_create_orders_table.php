@@ -16,19 +16,22 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            
             $table->string("firstName");
             $table->string("lastName");
+            $table->string("telephoneNumber");
+            $table->string("email");
+
             $table->string("addressStreet");
             $table->string("addressNumber");
             $table->integer("addressZipCode");
-            $table->string("addressCity");
-            $table->string("telephoneNumber");
-            $table->string("email");
+            $table->string("addressCity");      
             $table->text("details");
             $table->dateTime("deliveryOn");
             $table->boolean("confirmed");
 
-            $table->string("user_id");
+            $table->string("merchant_id");
+            //$table->string("customer_id");
         });
     }
 

@@ -53,3 +53,11 @@ Route::group([
 
 
 
+Route::group([
+    'middleware' => ['auth', 'auth.merchant'],
+    'prefix' => 'test'
+], function ($router) {
+    Route::get("/merchant-protected", "MerchantController@test");
+});
+
+

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function user()
+    public function merchant()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo("App\Merchant");
     }
 
-    public function order() //milat: hier probleem
+    public function order()
     {
         return $this->belongsToMany(Order::class);
     }
