@@ -6,12 +6,12 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn
-          v-for="item in nav"
+          v-for="item in routes"
           :key="item.icon"
-          :to="item.link"
+          :to="item.path"
           text
           class="white--text"
-        >{{ item.text }}</v-btn>
+        >{{ item.display }}</v-btn>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -31,14 +31,14 @@
           </v-toolbar>
 
           <v-list nav>
-              <v-list-item-group >
-            <v-list-item v-for="(item, index) in nav" :key="index" to="#">
-              <v-list-item-icon>
-                <v-icon v-if="item.icon">{{item.icon}}</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title :title="item.title">{{ item.text }}</v-list-item-title>
-            </v-list-item>
-              </v-list-item-group>
+            <v-list-item-group color="green lighten-1">
+              <v-list-item v-for="(item, index) in routes" :key="index" :to="item.path"  @click="dialog = false">
+                <v-list-item-icon>
+                  <v-icon v-if="item.icon">{{item.icon}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>{{ item.display }}</v-list-item-title>
+              </v-list-item>
+            </v-list-item-group>
           </v-list>
         </v-card>
       </v-dialog>
@@ -47,10 +47,13 @@
 </template>
 
 <script>
+import { routes } from "../router/routes";
+
 export default {
   data() {
     return {
       dialog: false,
+      routes,
       nav: [
         {
           icon: "mdi-home",
@@ -59,7 +62,7 @@ export default {
           active: true
         },
         {
-          icon: "mdi-account-multiple ",
+          icon: "mdi-account-multiple",
           text: "Over ons",
           title: "g",
           active: false
@@ -86,7 +89,7 @@ export default {
 body {
   color: #fff;
 }
-.v-toolbar__content{
-    width:100%
+.v-toolbar__content {
+  width: 100%;
 }
 </style>
