@@ -34,7 +34,11 @@ class MerchantController extends Controller
     }
 
     function getAllProducts(){
-        
+        return auth()->user()->products()->get();
+    }
+
+    function getAllOrders(){
+        return auth()->user()->orders()->get();
     }
 
 }

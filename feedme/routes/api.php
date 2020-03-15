@@ -46,6 +46,7 @@ Route::group([
     Route::get('/protected', 'MerchantController@protected');
     Route::post('/addProduct', 'MerchantController@addProduct');
     Route::get('/getAllProducts', 'MerchantController@getAllProducts');
+    Route::get('/getAllOrders', 'MerchantController@getAllOrders');
 
 });
 
