@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Product;
+use App\Order;
 //use Faker\Generator as Faker;
 
 
@@ -45,7 +46,32 @@ class DatabaseSeeder extends Seeder
                 $product->available = true;
                 $user->products()->save($product);
             }
+            for ($i = 0; $i <= 2; $i++)
+            {
+                $order = new Order();
+                $order->firstName = $faker->firstName();
+                $order->lastName = $faker->lastName();
+                $order->addressStreet = $faker->streetName();
+                $order->addressNumber = $faker->numberBetween(1,300);
+                $order->addressZipCode = $faker->numberBetween(1000,9000);
+                $order->addressCity = $faker->city();
+                $order->telephoneNumber = $faker->phoneNumber();
+                $order->email = $faker->email();
+                $order->details = $faker->realText(100);
+                $order->deliveryOn = date("Y-m-d H:i:s", strtotime("+1 hours"));
+                $order->confirmed = false;
+
+                $productsInStock = Product::all();
+                for ($j = 0; $j <= 2; $j++){
+                    $order->products()->save($productsInStock[$j]); //milat hier probleem
+                }
+
+                $user->orders()->save($order);
+
+            }
         }
+
+        
         
     }
     

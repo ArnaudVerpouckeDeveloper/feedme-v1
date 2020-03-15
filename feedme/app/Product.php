@@ -10,4 +10,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function order() //milat: hier probleem
+    {
+        return $this->belongsToMany('App\Order');
+    }
+
 }
