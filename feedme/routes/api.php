@@ -37,8 +37,18 @@ Route::group([
 
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/merchant/protected', 'MerchantController@protected');
+
+
+Route::group([
+    'middleware' => 'auth',
+    'prefix' => 'merchant'
+], function ($router) {
+    Route::get('/protected', 'MerchantController@protected');
+    Route::post('/addProduct', 'MerchantController@addProduct');
+    Route::get('/getAllProducts', 'MerchantController@getAllProducts');
+
 });
+
+
 
 
