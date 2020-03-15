@@ -13,7 +13,7 @@ class Product extends Model
 
     public function order() //milat: hier probleem
     {
-        return $this->belongsToMany('App\Order');
+        return $this->belongsToMany(Order::class);
     }
 
 }

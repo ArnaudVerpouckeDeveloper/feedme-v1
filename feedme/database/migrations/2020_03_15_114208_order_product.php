@@ -14,9 +14,17 @@ class OrderProduct extends Migration
     public function up()
     {
         Schema::create('order_product', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('order_id')->unsigned();
+            $table->integer('product_id')->unsigned();
 
-            $table->string("order_id");
-            $table->string("product_id");
+            $table->foreign('order_id')->references('id')->on('orders')
+
+                ->onDelete('cascade');
+
+            $table->foreign('product_id')->references('id')->on('products')
+
+                ->onDelete('cascade');
         });
     }
 

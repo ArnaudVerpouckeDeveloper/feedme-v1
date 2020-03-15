@@ -61,12 +61,14 @@ class DatabaseSeeder extends Seeder
                 $order->deliveryOn = date("Y-m-d H:i:s", strtotime("+1 hours"));
                 $order->confirmed = false;
 
+                $user->orders()->save($order);
+
                 $productsInStock = Product::all();
                 for ($j = 0; $j <= 2; $j++){
-                    $order->products()->save($productsInStock[$j]); //milat hier probleem
+                    $order->products()->attach($productsInStock[$j]); //milat hier probleem
                 }
 
-                $user->orders()->save($order);
+
 
             }
         }
