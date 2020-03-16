@@ -31,7 +31,7 @@ class CreateOrdersTable extends Migration
             $table->boolean("confirmed");
 
             $table->string("merchant_id");
-            //$table->string("customer_id");
+            $table->string("customer_id")->nullable();
         });
     }
 

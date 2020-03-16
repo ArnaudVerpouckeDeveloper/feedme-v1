@@ -110,8 +110,10 @@ class DatabaseSeeder extends Seeder
                 $order->deliveryOn = date("Y-m-d H:i:s", strtotime("+1 hours"));
                 $order->confirmed = false;
                 
+
                 $user->merchant->orders()->save($order);
-                $order->customer->save($customer1->customer);
+                $customer1->customer->orders()->save($order);
+
 
                 $productsInStock = Product::all();
                 for ($j = 0; $j <= 2; $j++){
