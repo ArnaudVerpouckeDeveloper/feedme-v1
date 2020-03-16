@@ -98,14 +98,22 @@ class DatabaseSeeder extends Seeder
             for ($i = 0; $i <= 2; $i++)
             {
                 $order = new Order();
+
+                /*
                 $order->firstName = $faker->firstName();
                 $order->lastName = $faker->lastName();
+                $order->telephoneNumber = $faker->phoneNumber();
+                $order->email = $faker->email();
+                */
+
                 $order->addressStreet = $faker->streetName();
                 $order->addressNumber = $faker->numberBetween(1,300);
                 $order->addressZipCode = $faker->numberBetween(1000,9000);
                 $order->addressCity = $faker->city();
-                $order->telephoneNumber = $faker->phoneNumber();
-                $order->email = $faker->email();
+                $order->deliveryMethod = "delivery";
+
+                
+
                 $order->details = $faker->realText(100);
                 $order->deliveryOn = date("Y-m-d H:i:s", strtotime("+1 hours"));
                 $order->confirmed = false;

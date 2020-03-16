@@ -17,18 +17,21 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamps();
             
+            /*
             $table->string("firstName");
             $table->string("lastName");
             $table->string("telephoneNumber");
             $table->string("email");
+            */
 
-            $table->string("addressStreet");
-            $table->string("addressNumber");
-            $table->integer("addressZipCode");
-            $table->string("addressCity");      
-            $table->text("details");
+            $table->string("addressStreet")->nullable();
+            $table->string("addressNumber")->nullable();
+            $table->integer("addressZipCode")->nullable();
+            $table->string("addressCity")->nullable();      
+            $table->text("details")->nullable();
             $table->dateTime("deliveryOn");
             $table->boolean("confirmed");
+            $table->string("deliveryMethod");
 
             $table->string("merchant_id");
             $table->string("customer_id")->nullable();
