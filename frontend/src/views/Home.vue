@@ -1,15 +1,20 @@
 <template>
-  <hello-world />
+<div>
+  <HelloWorld />
+  <HelloWorld />
+
+  <Contact id="contact" /></div>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+import Contact from "../components/Contact.vue";
+import HelloWorld from "../components/HelloWorld.vue";
+export default {
+  name: "Home",
 
-  export default {
-    name: 'Home',
-
-    components: {
-      HelloWorld,
-    },
+  components: {
+    Contact,
+    HelloWorld
   }
+};
 </script>

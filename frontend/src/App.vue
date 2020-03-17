@@ -13,7 +13,7 @@ import NavMenu from "./components/NavMenu";
 export default {
   name: "App",
   components: {
-    NavMenu
+    NavMenu,
   },
   data: () => ({
     //
