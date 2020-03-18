@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md6>
-        <v-card class="elevation-12">
+        <v-card class="elevation-3">
           <v-toolbar color="green" dark flat>
             <v-toolbar-title>Contact</v-toolbar-title>
           </v-toolbar>
