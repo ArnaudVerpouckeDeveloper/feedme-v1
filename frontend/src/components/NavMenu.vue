@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- desktop -->
-    <v-app-bar app elevate-on-scroll color="green" class="d-none d-sm-flex">
+    <v-app-bar app elevate-on-scroll color="green" class="d-none d-md-flex">
       <v-toolbar-title class="white--text">Speedmeal</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -16,7 +16,7 @@
     </v-app-bar>
 
     <!-- Mobile -->
-    <v-app-bar app color="green" class="d-flex d-sm-none">
+    <v-app-bar app color="green" class="d-flex d-md-none">
       <v-app-bar-nav-icon color="white" @click="dialog = true"></v-app-bar-nav-icon>
       <v-toolbar-title class="white--text">SpeedMeal</v-toolbar-title>
       <v-spacer></v-spacer>
