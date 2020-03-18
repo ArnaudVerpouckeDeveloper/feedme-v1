@@ -14,27 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 
 
 Route::group([
-
-    'middleware' => 'api',
     'prefix' => 'auth'
-
 ], function ($router) {
-
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
-
 });
-
-
 
 
 
@@ -47,17 +36,25 @@ Route::group([
     Route::post('/addProduct', 'MerchantController@addProduct');
     Route::get('/getAllProducts', 'MerchantController@getAllProducts');
     Route::get('/getAllOrders', 'MerchantController@getAllOrders');
-
 });
 
 
 
+Route::group([
+    'middleware' => ['auth.customer'],
+], function ($router) {
+    Route::post('/placeOrder', 'CustomerController@placeOrder');
+});
+
+
 
 Route::group([
-    'middleware' => ['auth', 'auth.merchant'],
+    'middleware' => ['auth.customer'],
     'prefix' => 'test'
 ], function ($router) {
-    Route::get("/merchant-protected", "MerchantController@test");
+    Route::get("/merchant-protected", function(){
+        return "ok";
+    });
 });
 
 

@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
         ]);
         $merchant1->roles()->attach($merchantRole);
         $merchant1->merchant()->save(new Merchant());
+        $merchant1->merchant()->deliveryMethod_delivery = true;
+        $merchant1->merchant()->deliveryMethod_takeaway = true;
 
         $merchant2 = User::create([
             'name' => 'Milat Qais',
@@ -45,7 +47,8 @@ class DatabaseSeeder extends Seeder
         ]);
         $merchant2->roles()->attach($merchantRole);
         $merchant2->merchant()->save(new Merchant());
-
+        $merchant2->merchant()->deliveryMethod_delivery = true;
+        $merchant2->merchant()->deliveryMethod_takeaway = true;
 
         $customer1 = User::create([
             'name' => 'emma',
@@ -98,20 +101,30 @@ class DatabaseSeeder extends Seeder
             for ($i = 0; $i <= 2; $i++)
             {
                 $order = new Order();
+
+                /*
                 $order->firstName = $faker->firstName();
                 $order->lastName = $faker->lastName();
+                $order->telephoneNumber = $faker->phoneNumber();
+                $order->email = $faker->email();
+                */
+
                 $order->addressStreet = $faker->streetName();
                 $order->addressNumber = $faker->numberBetween(1,300);
                 $order->addressZipCode = $faker->numberBetween(1000,9000);
                 $order->addressCity = $faker->city();
-                $order->telephoneNumber = $faker->phoneNumber();
-                $order->email = $faker->email();
+                $order->deliveryMethod = "delivery";
+
+                
+
                 $order->details = $faker->realText(100);
                 $order->deliveryOn = date("Y-m-d H:i:s", strtotime("+1 hours"));
                 $order->confirmed = false;
                 
+
                 $user->merchant->orders()->save($order);
-                $order->customer->save($customer1->customer);
+                $customer1->customer->orders()->save($order);
+
 
                 $productsInStock = Product::all();
                 for ($j = 0; $j <= 2; $j++){

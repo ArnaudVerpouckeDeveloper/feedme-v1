@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-
     public function products()
     {
         return $this->belongsToMany(Product::class);
@@ -17,15 +16,8 @@ class Order extends Model
         return $this->belongsTo(Merchant::class);
     }
 
-
-
-  
-
     public function customer()
     {
         return $this->belongsTo("App\Customer");
-    }
-
-
-  
+    }  
 }

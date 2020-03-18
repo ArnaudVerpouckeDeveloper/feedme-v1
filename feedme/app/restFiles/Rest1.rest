@@ -1,0 +1,42 @@
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NDU1NTI4MCwiZXhwIjoxNTg0NTU4ODgwLCJuYmYiOjE1ODQ1NTUyODAsImp0aSI6InFnbmtFQVVHcjljSEpoNW0iLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.GXtTsNbBYNhLW3IGJRCH2moXxltsb-ebzgaW1fATDkU
+
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "arnaud@test.com",
+    "password": "123"
+}
+
+###
+
+POST http://localhost:8000/api/placeOrder
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+    "merchantId": 1,
+    "deliveryMethod": "takeaway",
+    "addressStreet": "Vijfwegenstraat",
+    "addressNumber": 200,
+    "addressZipCode": 8800,
+    "addressCity": "Roeselare",
+    "productIds": [1,2,3]
+}
+
+###
+
+GET http://localhost:8000/api/test/merchant-protected
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+POST http://localhost:8000/api/auth/me
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
