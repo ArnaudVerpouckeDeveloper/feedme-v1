@@ -19,6 +19,7 @@ class AccessMerchant
         if (auth::user()->hasAnyRole("merchant")){
             return $next($request);
         }
-        return redirect("/");
+        return response()->json(['error' => 'Unauthorized'], 401);
+
     }
 }

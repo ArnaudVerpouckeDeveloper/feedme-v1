@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class AccessCustomer
 {
@@ -18,6 +19,7 @@ class AccessCustomer
         if (auth::user()->hasAnyRole("customer")){
             return $next($request);
         }
-        return redirect("/");
+        return response()->json(['error' => 'Unauthorized'], 401);
+
     }
 }

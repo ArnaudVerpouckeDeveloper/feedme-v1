@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
         ]);
         $merchant1->roles()->attach($merchantRole);
         $merchant1->merchant()->save(new Merchant());
+        $merchant1->merchant()->deliveryMethod_delivery = true;
+        $merchant1->merchant()->deliveryMethod_takeaway = true;
 
         $merchant2 = User::create([
             'name' => 'Milat Qais',
@@ -45,7 +47,8 @@ class DatabaseSeeder extends Seeder
         ]);
         $merchant2->roles()->attach($merchantRole);
         $merchant2->merchant()->save(new Merchant());
-
+        $merchant2->merchant()->deliveryMethod_delivery = true;
+        $merchant2->merchant()->deliveryMethod_takeaway = true;
 
         $customer1 = User::create([
             'name' => 'emma',
