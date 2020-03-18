@@ -9,6 +9,20 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    function getMerchant($merchantId){
+        $merchant = Merchant::find($merchantId);
+        if ($merchant == null){
+            exit();
+        }
+        $merchantObject = new \stdClass;
+        $merchantObject->name = $merchant->name;
+        $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
+        $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
+        $merchantObject->products = $merchant->products()->get();
+
+
+        return json_encode($merchantObject);
+    }
     //
     function placeOrder(Request $request){
         if(!$this->merchantIdExists($request->merchantId)){

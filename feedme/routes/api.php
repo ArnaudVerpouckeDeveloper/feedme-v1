@@ -29,7 +29,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => 'auth',
+    'middleware' => ['auth',"auth.merchant"],
     'prefix' => 'merchant'
 ], function ($router) {
     Route::get('/protected', 'MerchantController@protected');
@@ -58,3 +58,7 @@ Route::group([
 });
 
 
+
+
+
+Route::get("/merchant/{merchantId}","CustomerController@getMerchant");

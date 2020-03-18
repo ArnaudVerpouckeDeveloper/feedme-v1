@@ -29,7 +29,7 @@ class MerchantController extends Controller
         $product->price = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
         $product->available = $request->available;
 
-        auth()->user()->products()->save($product);
+        auth()->user()->merchant->products()->save($product);
         return "added";
     }
 
