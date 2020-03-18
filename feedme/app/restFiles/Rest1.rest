@@ -1,10 +1,21 @@
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NDU1NTI4MCwiZXhwIjoxNTg0NTU4ODgwLCJuYmYiOjE1ODQ1NTUyODAsImp0aSI6InFnbmtFQVVHcjljSEpoNW0iLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.GXtTsNbBYNhLW3IGJRCH2moXxltsb-ebzgaW1fATDkU
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NDU2NTgxOCwiZXhwIjoxNTg0NTY5NDE4LCJuYmYiOjE1ODQ1NjU4MTgsImp0aSI6Ik90OUdnTE03WVA1U1lwekwiLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.CJM4BKTKytdGSObH-tIjzgHwknb1yzUdKrhtUC4geN8
 
 POST http://localhost:8000/api/auth/login
 Content-Type: application/json
 
 {
     "email": "arnaud@test.com",
+    "password": "123"
+}
+
+###
+
+
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "emma@test.com",
     "password": "123"
 }
 
@@ -17,12 +28,13 @@ Authorization: Bearer {{token}}
 
 {
     "merchantId": 1,
-    "deliveryMethod": "takeaway",
+    "deliveryMethod": "delivery",
     "addressStreet": "Vijfwegenstraat",
     "addressNumber": 200,
     "addressZipCode": 8800,
     "addressCity": "Roeselare",
-    "productIds": [1,2,3]
+    "productIds": [1,2,3],
+    "requestedTime": "{{$datetime 'YYYY-MM-DD H:m:s' 2 h}}"
 }
 
 ###

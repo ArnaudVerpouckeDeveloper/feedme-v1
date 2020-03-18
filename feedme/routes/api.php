@@ -41,7 +41,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth.customer'],
+    'middleware' => ['auth','auth.customer'],
 ], function ($router) {
     Route::post('/placeOrder', 'CustomerController@placeOrder');
 });

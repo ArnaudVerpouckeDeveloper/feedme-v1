@@ -29,8 +29,8 @@ class CreateOrdersTable extends Migration
             $table->integer("addressZipCode")->nullable();
             $table->string("addressCity")->nullable();      
             $table->text("details")->nullable();
-            $table->dateTime("deliveryOn");
-            $table->boolean("confirmed");
+            $table->dateTime("requestedTime");
+            $table->boolean("confirmed")->default(false);
             $table->string("deliveryMethod");
 
             $table->string("merchant_id");

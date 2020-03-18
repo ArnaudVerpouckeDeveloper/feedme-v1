@@ -4,21 +4,22 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Order;
 use App\Merchant;
-
+use Auth;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
     //
     function placeOrder(Request $request){
-        if(!merchantIdExists($request->merchantId)){
+        if(!$this->merchantIdExists($request->merchantId)){
             exit();
         }
         
         $merchant = Merchant::find($request->merchantId);
         $order = new Order();
 
-        if (isValidDeliveryMethod($merchant, $request->deliveryMethod)){
+
+        if ($this->isValidDeliveryMethod($merchant, $request->deliveryMethod)){
             $order->deliveryMethod = $request->deliveryMethod;
             if ($request->deliveryMethod == "delivery"){
                 $order->addressStreet = $request->addressStreet;
@@ -31,14 +32,20 @@ class CustomerController extends Controller
                 $order->deliveryMethod = "takeaway";
             }
         }
-        
-        if (productIdsAreValid($request->productIds, $merchant)){
-            
-            $productsInOrder = [];
-            $merchant->orders()->save($order);
-            $customer->orders()->save($order);
+        else{
+            exit();
+        }
 
-            foreach ($productIdsInOrder as $productId){
+        $order->requestedTime = $request->requestedTime;
+        //$order->deliveryMethod = "takeaway"; //must be removed
+
+        
+        if ($this->productIdsAreValid($request->productIds, $merchant)){
+            
+            $merchant->orders()->save($order);
+            auth()->user()->customer->orders()->save($order);
+
+            foreach ($request->productIds as $productId){
                 $order->products()->attach(Product::find($productId));
             }
 
@@ -78,11 +85,11 @@ class CustomerController extends Controller
     }
 
     function productIdsAreValid($productIds, $merchant){
-        foreach(productIds as $productId){
+        foreach($productIds as $productId){
             $product = Product::find($productId);
             if (
                 $product == null 
-                || $product->merchant()->id != $merchant->id
+                || $product->merchant->id != $merchant->id
                 || !$product->available 
                 ){
                 return false; 

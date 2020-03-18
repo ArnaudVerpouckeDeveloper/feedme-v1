@@ -16,8 +16,8 @@ class CreateMerchantsTable extends Migration
         Schema::create('merchants', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id")->unsigned();
-            $table->boolean("deliveryMethod_takeaway")->nullable();
-            $table->boolean("deliveryMethod_delivery")->nullable();
+            $table->boolean("deliveryMethod_takeaway")->default(true);
+            $table->boolean("deliveryMethod_delivery")->default(true);
             $table->timestamps();
         });
     }

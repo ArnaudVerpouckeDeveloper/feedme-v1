@@ -37,8 +37,13 @@ class DatabaseSeeder extends Seeder
         ]);
         $merchant1->roles()->attach($merchantRole);
         $merchant1->merchant()->save(new Merchant());
+
+        /* updating does not work
         $merchant1->merchant()->deliveryMethod_delivery = true;
         $merchant1->merchant()->deliveryMethod_takeaway = true;
+        $merchant1->merchant()->update(['deliveryMethod_delivery' => $true]);
+        $merchant1->merchant()->update(['deliveryMethod_takeaway' => $true]);
+        */
 
         $merchant2 = User::create([
             'name' => 'Milat Qais',
@@ -47,8 +52,9 @@ class DatabaseSeeder extends Seeder
         ]);
         $merchant2->roles()->attach($merchantRole);
         $merchant2->merchant()->save(new Merchant());
-        $merchant2->merchant()->deliveryMethod_delivery = true;
-        $merchant2->merchant()->deliveryMethod_takeaway = true;
+        
+        //$merchant2->merchant()->deliveryMethod_delivery = true;
+        //$merchant2->merchant()->deliveryMethod_takeaway = true;
 
         $customer1 = User::create([
             'name' => 'emma',
@@ -114,11 +120,10 @@ class DatabaseSeeder extends Seeder
                 $order->addressZipCode = $faker->numberBetween(1000,9000);
                 $order->addressCity = $faker->city();
                 $order->deliveryMethod = "delivery";
-
                 
 
                 $order->details = $faker->realText(100);
-                $order->deliveryOn = date("Y-m-d H:i:s", strtotime("+1 hours"));
+                $order->requestedTime = date("Y-m-d H:i:s", strtotime("+1 hours"));
                 $order->confirmed = false;
                 
 
