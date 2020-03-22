@@ -36,6 +36,8 @@ Route::group([
     Route::post('/addProduct', 'MerchantController@addProduct');
     Route::get('/getAllProducts', 'MerchantController@getAllProducts');
     Route::get('/getAllOrders', 'MerchantController@getAllOrders');
+    Route::post('/updateLogo', 'MerchantController@updateLogo');
+    Route::post('/updateBanner', 'MerchantController@updateBanner');
 });
 
 

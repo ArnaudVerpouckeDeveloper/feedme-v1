@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Merchant extends Model
 {
+    protected $fillable = [
+        'logoFileName'
+    ];
+
     public function user(){
         return $this->belongsTo('App\User');
     }
