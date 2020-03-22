@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+
+Broadcast::channel('private-orders', function ($user) {
+    return true;
+});
+
+
+/*
+Broadcast::channel('orders.{id}', function ($user, $id) {
+    return (int) $user->merchant->id === (int) $id;
+    //return false;
+});
+*/

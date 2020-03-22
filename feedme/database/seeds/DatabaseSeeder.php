@@ -36,7 +36,13 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123'),
         ]);
         $merchant1->roles()->attach($merchantRole);
-        $merchant1->merchant()->save(new Merchant());
+        $newMerchant = new Merchant();
+        $newMerchant->name = "Arnaud's restaurant";
+        $newMerchant->apiName = "arnaudsrestaurant";
+        $merchant1->merchant()->save($newMerchant);
+
+
+
 
         /* updating does not work
         $merchant1->merchant()->deliveryMethod_delivery = true;
@@ -51,7 +57,10 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123'),
         ]);
         $merchant2->roles()->attach($merchantRole);
-        $merchant2->merchant()->save(new Merchant());
+        $newMerchant = new Merchant();
+        $newMerchant->name = "Qais & fresh";
+        $newMerchant->apiName = "qaisandfresh";
+        $merchant2->merchant()->save($newMerchant);
         
         //$merchant2->merchant()->deliveryMethod_delivery = true;
         //$merchant2->merchant()->deliveryMethod_takeaway = true;

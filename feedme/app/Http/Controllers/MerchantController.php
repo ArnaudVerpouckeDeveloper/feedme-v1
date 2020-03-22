@@ -41,4 +41,19 @@ class MerchantController extends Controller
         return auth()->user()->orders()->get();
     }
 
+
+    function updateLogo(Request $request){
+        $file = $request->file("logo");
+        $fileName = "logo-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
+        $path = $file->move(public_path("/merchantLogos/"), $fileName);
+        auth()->user()->merchant->update(['logoFileName' => $fileName]);
+    }
+
+    function updateBanner(Request $request){
+        $file = $request->file("banner");
+        $fileName = "banner-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
+        $path = $file->move(public_path("/merchantBanners/"), $fileName);
+        auth()->user()->merchant->update(['bannerFileName' => $fileName]);
+    }
+
 }
