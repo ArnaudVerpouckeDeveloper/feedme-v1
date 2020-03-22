@@ -33,9 +33,8 @@ export default {
 article {
   font-size: 1.6em;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
   transition: all 0.2s ease;
+  padding: 15px 0;
 }
 div {
   color: #fff;
@@ -59,9 +58,6 @@ p {
   text-align: center;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -69,8 +65,12 @@ p {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  article {
+    top: 50%;
+    transform: translateY(-50%);
+    padding:0;
+  }
   .landing {
-    padding-top: 3%;
     width: 50vw;
     height: 40em;
   }

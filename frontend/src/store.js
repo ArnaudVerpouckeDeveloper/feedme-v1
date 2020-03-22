@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
-const apiUrl = 'http://localhost';
+const apiUrl = 'http://127.0.0.1:8000/api';
 
 
 
@@ -14,18 +15,37 @@ const state = {
   ProductDetail: {},
   orders: [],
   orderDetail: {},
+  isMobile: false,
+  cartIsOpen: false,
+  cartItems: [],
 }
 
 const getters = {
-
+  products: (state) => {
+    return state.products;
+  },
+  cartItems: (state) => {
+    return state.cartItems;
+  },
+  isMobile: (state) => {
+    return state.isMobile;
+  },
+  cartIsOpen: (state) => {
+    return state.cartIsOpen;
+  },
+  showCartButton: (state) => {
+    if (!state.cartIsOpen)
+      return true;
+    else
+      return false;
+  }
 }
 
 const actions = {
   async fetchProducts(context) {
-    await axios.get(`${apiUrl}/api/products`)
+    await axios.get(`${apiUrl}/merchant/1`)
       .then(res => {
-        context.commit('updateProducts', res.data);
-
+        context.commit('updateProducts', res.data.products);
       })
       .catch(error => {
         console.error(error)
@@ -48,7 +68,7 @@ const actions = {
 
   async deleteProduct(context, data) {
     await axios.delete(`${apiUrl}/api/product/${data.id}`,
-     { headers: { 'Authorization': "bearer " + state.token } })
+      { headers: { 'Authorization': "bearer " + state.token } })
       .then(res => {
         context.commit('deleteProduct', res.data);
       })
@@ -82,6 +102,13 @@ const actions = {
     })
   },
 
+  async addItemToCart(context, data) {
+    context.commit('updateCart', data)
+  },
+  async removeItemFromCart(context, data) {
+    context.commit('removeItemCart', data)
+  },
+
   async login(context, data) {
     await axios.post(`${apiUrl}/api/user/signin`, data)
       .then(res => {
@@ -101,6 +128,21 @@ const actions = {
         console.error(error)
       })
   },
+
+  async windowsResize(context) {
+    context.commit('mobileWatcher', document.body.clientWidth)
+    window.addEventListener("resize", () => {
+      context.commit('mobileWatcher', document.body.clientWidth);
+      if (!state.isMobile)
+        context.commit('cartWatcher', true)
+    });
+  },
+  async onChangeDrawer(context, data) {
+    context.commit('cartWatcher', data)
+  },
+  async toggleCart(context, data) {
+    context.commit('cartWatcher', data)
+  }
 }
 
 const mutations = {
@@ -112,15 +154,59 @@ const mutations = {
   },
   deleteEventItem(state, data) {
     state.products = state.products.filter((product) => {
-        return product.id != data.id
+      return product.id != data.id
     })
-},
+  },
   updateOrders(state, data) {
     state.orders = data
   },
   updateOrdersDetail(state, data) {
     state.OrdersDetail = data
   },
+
+  updateCart(state, data) {
+    if (state.cartItems.length == 0) {
+      data.count = 1;
+      state.cartItems.push(data);
+    }
+    else {
+      //update existing item.
+      state.cartItems = state.cartItems.map(item => {
+        if (item.id == data.id) {
+          item.count++;
+        }
+        return item;
+      })
+      //add new item.
+      let index = state.cartItems.findIndex(x => x.id == data.id)
+      if (index === -1) {
+        data.count = 1;
+        state.cartItems.push(data);
+      }
+    }
+  },
+  removeItemCart(state, data) {
+    let index = state.cartItems.findIndex(x => x.id == data.id)
+    if (index != -1) {
+      if (data.count == 1) {
+        console.log("index")
+        state.cartItems.splice(index, 1);
+
+      }
+    }
+
+    state.cartItems = state.cartItems.map(item => {
+      if (item.id == data.id) {
+        console.log("hoho")
+        if (item.count > 1) {
+          item.count--;
+        }
+      }
+      return item;
+    })
+
+  },
+
   authUser(state, data) {
     localStorage.setItem("user", data.access_token);
     state.token = localStorage.getItem("user");
@@ -128,7 +214,17 @@ const mutations = {
   logOut(state) {
     state.token = null;
     localStorage.removeItem("user");
-  }
+  },
+  mobileWatcher(state, size) {
+    if (size < 1000) {
+      state.isMobile = true;
+    } else {
+      state.isMobile = false;
+    }
+  },
+  cartWatcher(state, data) {
+    state.cartIsOpen = data;
+  },
 }
 
 

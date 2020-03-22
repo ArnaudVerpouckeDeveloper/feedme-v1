@@ -9,11 +9,15 @@
 
 <script>
 import NavMenu from "./components/NavMenu";
+import { store } from "./store";
 
 export default {
   name: "App",
   components: {
-    NavMenu,
+    NavMenu
+  },
+  created() {
+    this.$store.dispatch("fetchProducts");
   },
   data: () => ({
     //
