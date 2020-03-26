@@ -16,12 +16,13 @@ class CustomerController extends Controller
         }
         $merchantObject = new \stdClass;
         $merchantObject->name = $merchant->name;
+        $merchantObject->name = $merchant->id;
         $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
         $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
         $merchantObject->products = $merchant->products()->get();
 
 
-        return json_encode($merchantObject);
+        return response()->json($merchantObject,200);
     }
     //
     function placeOrder(Request $request){

@@ -11,6 +11,10 @@ class Product extends Model
         return $this->belongsTo("App\Merchant");
     }
 
+    protected $casts = [
+        'available' => 'boolean',
+    ];
+
     public function order()
     {
         return $this->belongsToMany(Order::class);
