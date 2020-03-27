@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
 
 
         $merchant1 = User::create([
-            'name' => 'Arnaud Verpoucke',
+            'firstName' => 'Arnaud',
+            'lastName' => 'Verpoucke',
             'email' => 'arnaud@test.com',
             'password' => bcrypt('123'),
         ]);
@@ -52,7 +53,8 @@ class DatabaseSeeder extends Seeder
         */
 
         $merchant2 = User::create([
-            'name' => 'Milat Qais',
+            'firstName' => 'Milat',
+            'lastName' => 'Qais',
             'email' => 'malat@test.com',
             'password' => bcrypt('123'),
         ]);
@@ -66,7 +68,8 @@ class DatabaseSeeder extends Seeder
         //$merchant2->merchant()->deliveryMethod_takeaway = true;
 
         $customer1 = User::create([
-            'name' => 'emma',
+            'firstName' => 'Emma',
+            'lastName' => 'De Smedt',
             'email' => 'emma@test.com',
             'password' => bcrypt('123'),
         ]);
@@ -75,7 +78,8 @@ class DatabaseSeeder extends Seeder
 
 
         $customer2 = User::create([
-            'name' => 'Bart',
+            'firstName' => 'Bart',
+            'lastName' => 'Geesens',
             'email' => 'bart@test.com',
             'password' => bcrypt('123'),
         ]);

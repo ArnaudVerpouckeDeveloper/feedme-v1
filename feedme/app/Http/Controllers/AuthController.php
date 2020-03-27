@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\User;
+use App\Role;
+use App\Customer;
+use App\Merchant;
 
 class AuthController extends Controller
 {
@@ -14,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'registerCustomer', 'registerMerchant']]);
     }
 
     /**
@@ -80,4 +85,51 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
+
+
+
+
+
+
+
+
+
+    public function registerUser($request){
+        //todo: validate input
+
+        $user = User::create([
+            'firstName' => $request->firstName, //todo: edit migration and seeder (name is now splitted in first and last)
+            'lastName' => $request->lastName,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+        return $user;
+    }
+
+
+
+    public function registerMerchant(Request $request){
+        $user = $this->registerUser($request);
+
+        $merchantRole = Role::where("name", "merchant")->get();
+        $user->roles()->attach($merchantRole);
+
+        //todo: validate input
+        $newMerchant = new Merchant();
+        $newMerchant->name = $request->merchantName;
+        $newMerchant->apiName = $request->merchantApiName; //todo: create this dynamically
+        $user->merchant()->save($newMerchant);
+    }
+
+    public function registerCustomer(Request $request){
+        $user = $this->registerUser($request);
+
+        $customerRole = Role::where("name", "customer")->get();
+        $user->roles()->attach($customerRole);
+
+        $user->customer()->save(new Customer());
+     }
+
+
+    
 }

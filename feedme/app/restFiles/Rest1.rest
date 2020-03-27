@@ -1,5 +1,35 @@
 @token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NDU3MDE3MSwiZXhwIjoxNTg0NTczNzcxLCJuYmYiOjE1ODQ1NzAxNzEsImp0aSI6Ik9DYmdmenBkOTQySVlKWWYiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.7eun5VeSRmQboa-Rft4G3KDCljaWP9hITYm-942CVUE
 
+
+
+POST http://localhost:8000/api/auth/registerMerchant
+Content-Type: application/json
+
+{
+    "firstName": "Ditiseenvoornaam",
+    "lastName": "Ditiseenachternaam",
+    "email": "merchant1@test.com",
+    "password": "123",
+    "merchantName": "Dit is een merchantName",
+    "merchantApiName": "ditiseenmerchantapiname"
+}
+
+
+###
+
+POST http://localhost:8000/api/auth/registerCustomer
+Content-Type: application/json
+
+{
+    "firstName": "Ditiseenvoornaam",
+    "lastName": "Ditiseenachternaam",
+    "email": "customer1@test.com",
+    "password": "123"
+}
+
+
+###
+
 POST http://localhost:8000/api/auth/login
 Content-Type: application/json
 
