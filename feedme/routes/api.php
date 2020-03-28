@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Route::post("/previewApiNameFromMerchantName", "AuthController@previewApiNameFromMerchantName");
+
 Route::group([
     'prefix' => 'auth'
 ], function ($router) {

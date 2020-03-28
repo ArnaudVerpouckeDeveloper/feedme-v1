@@ -9,6 +9,8 @@ use App\User;
 use App\Role;
 use App\Customer;
 use App\Merchant;
+use Illuminate\Support\Facades\Validator;
+
 
 class AuthController extends Controller
 {
@@ -19,7 +21,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'registerCustomer', 'registerMerchant']]);
+        $this->middleware('auth:api', ['except' => ['login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName']]);
     }
 
     /**
@@ -95,7 +97,12 @@ class AuthController extends Controller
 
 
     public function registerUser($request){
-        //todo: validate input
+        $validatedData = $request->validate([
+            'firstName' => 'required|min:1|alpha_dash',
+            'lastName' => 'required|min:1|alpha_dash',
+            'email' => 'required|email:rfc,dns',
+            'password' => 'required|min:8',
+        ]);
 
         $user = User::create([
             'firstName' => $request->firstName, //todo: edit migration and seeder (name is now splitted in first and last)
@@ -109,6 +116,9 @@ class AuthController extends Controller
 
 
     public function registerMerchant(Request $request){
+        $validatedData = $request->validate([
+            'merchantName' => "required|min:1"
+        ]);
         $user = $this->registerUser($request);
 
         $merchantRole = Role::where("name", "merchant")->get();
@@ -117,8 +127,9 @@ class AuthController extends Controller
         //todo: validate input
         $newMerchant = new Merchant();
         $newMerchant->name = $request->merchantName;
-        $newMerchant->apiName = $request->merchantApiName; //todo: create this dynamically
+        $newMerchant->apiName = $this->generateApiNameFromMerchantName($request->merchantName);
         $user->merchant()->save($newMerchant);
+        return "ok";
     }
 
     public function registerCustomer(Request $request){
@@ -128,6 +139,38 @@ class AuthController extends Controller
         $user->roles()->attach($customerRole);
 
         $user->customer()->save(new Customer());
+        return "ok";
+     }
+
+
+
+
+
+
+
+
+
+
+     private function generateApiNameFromMerchantName($merchantName){
+        $merchantApiName = strtolower($merchantName);
+        $merchantApiName = trim($merchantApiName);
+        $merchantApiName = str_replace(' ', '', $merchantApiName);
+        $merchantApiName = preg_replace("/[^a-zA-Z0-9-]/", "", $merchantApiName);
+
+        $counter = 1;
+        while (Merchant::where("apiName", $merchantApiName)->exists()){
+           $merchantApiName = $merchantApiName . $counter;
+           $counter++; 
+        }
+
+        return $merchantApiName;
+     }
+
+     public function previewApiNameFromMerchantName(Request $request){
+        $validatedData = $request->validate([
+            'fullName' => 'required|min:4'
+        ]);
+        return $this->generateApiNameFromMerchantName($request->fullName);         
      }
 
 
