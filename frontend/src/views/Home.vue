@@ -1,18 +1,22 @@
 <template>
   <div>
     <div class="landing">
-      <article>
-        <h1>SpeedMeal</h1>
-        <p>
-          Laat uw zelfstandige activiteiten niet
-          ophouden door het coronavirus.
-          SpeedMeal biedt u
-          <strong>GRATIS</strong> een systeem
-          aan waarop gerechten besteld kunnen worden.
-        </p>
-        <p>- Gebouwd door studenten, voor zelfstandigen.</p>
-      </article>
+      <v-img class="landing-illustration" src="/assets/images/landing.png"></v-img>
+      <div class="landing-content">
+        <article>
+          <h1>SpeedMeal</h1>
+          <p>
+            Laat uw zelfstandige activiteiten niet
+            ophouden door het coronavirus.
+            SpeedMeal biedt u
+            <strong>GRATIS</strong> een systeem
+            aan waarop gerechten besteld kunnen worden.
+          </p>
+          <p>- Gebouwd door studenten, voor zelfstandigen.</p>
+        </article>
+      </div>
     </div>
+
     <Contact id="contact" />
   </div>
 </template>
@@ -39,11 +43,18 @@ article {
 div {
   color: #fff;
 }
-.landing {
+.landing-content {
   width: 100vw;
   height: 50%;
   background: #4caf50;
   transition: all 0.2s ease;
+}
+.landing-illustration {
+  width: 400px;
+  position: absolute;
+  display: flex;
+  right: 190px;
+  top: 50px;
 }
 h1 {
   font-size: 2em;
@@ -58,7 +69,6 @@ p {
   text-align: center;
 }
 
-
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 }
@@ -68,9 +78,9 @@ p {
   article {
     top: 50%;
     transform: translateY(-50%);
-    padding:0;
+    padding: 0;
   }
-  .landing {
+  .landing-content {
     width: 50vw;
     height: 40em;
   }
@@ -78,7 +88,7 @@ p {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .landing {
+  .landing-content {
     width: 100vw;
     clip-path: polygon(0 0, 60% 0, 33% 100%, 0 100%);
   }
@@ -103,7 +113,7 @@ p {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1300px) {
-  .landing {
+  .landing-content {
     clip-path: polygon(0 0, 55% 0, 28% 100%, 0 100%);
   }
 }

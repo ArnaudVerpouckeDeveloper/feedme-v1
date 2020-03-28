@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from './router/router'
+
 
 Vue.use(Vuex)
 
 const apiUrl = 'http://127.0.0.1:8000/api';
 
-
-
 const state = {
   user: {},
-  toke: {},
+  token: {},
   products: [],
   ProductDetail: {},
   orders: [],
@@ -21,6 +21,9 @@ const state = {
 }
 
 const getters = {
+  token: (state) => {
+    return state.token;
+  },
   products: (state) => {
     return state.products;
   },
@@ -66,6 +69,22 @@ const actions = {
     })
   },
 
+  async addProduct(context, data) {
+    console.log(data)
+    return await new Promise((resolve, reject) => {
+      axios.post(`${apiUrl}/merchant/addProduct`, data, { headers: {'Content-Type': 'application/json'}})
+        .then(res => {
+          console.log("product:", res);
+         // context.commit('updateOrderDetail', res.data);
+          resolve();
+        })
+        .catch(error => {
+          console.error(error)
+          reject();
+        })
+    })
+  },
+
   async deleteProduct(context, data) {
     await axios.delete(`${apiUrl}/api/product/${data.id}`,
       { headers: { 'Authorization': "bearer " + state.token } })
@@ -101,6 +120,22 @@ const actions = {
         })
     })
   },
+  
+  async addOrder(context, data) {
+    console.log(data)
+    return await new Promise((resolve, reject) => {
+      axios.post(`${apiUrl}/placeOrder`, data, { headers: {'Content-Type': 'application/json'}})
+        .then(res => {
+          console.log("order:", res);
+         // context.commit('updateOrderDetail', res.data);
+          resolve();
+        })
+        .catch(error => {
+          console.error(error)
+          reject();
+        })
+    })
+  },
 
   async addItemToCart(context, data) {
     context.commit('updateCart', data)
@@ -110,7 +145,7 @@ const actions = {
   },
 
   async login(context, data) {
-    await axios.post(`${apiUrl}/api/user/signin`, data)
+    await axios.post(`${apiUrl}/auth/login`, data)
       .then(res => {
         context.commit('authUser', res.data)
         router.replace({ name: "home" });
@@ -119,10 +154,12 @@ const actions = {
         console.error(error)
       })
   },
-  async register(data) {
-    await axios.post(`${apiUrl}/api/user/signup`, data)
+  async register(context, data) {
+    console.log(data)
+    await axios.post(`${apiUrl}/auth/registerCustomer`, data)
       .then(res => {
-        router.replace({ name: "home" });
+        console.log(res);
+        router.replace({ name: "login" });
       })
       .catch(error => {
         console.error(error)
@@ -210,6 +247,7 @@ const mutations = {
   authUser(state, data) {
     localStorage.setItem("user", data.access_token);
     state.token = localStorage.getItem("user");
+    console.log(state.token);
   },
   logOut(state) {
     state.token = null;

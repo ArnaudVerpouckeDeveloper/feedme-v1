@@ -6,12 +6,18 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn
-          v-for="item in routes"
+          v-for="item in filteredRoutes"
           :key="item.icon"
           :to="item.path"
           text
           class="white--text"
         >{{ item.display }}</v-btn>
+        <v-btn v-if="!LoggedIn" :to="{ name: 'login'}" text class="white--text">Aanmelden</v-btn>
+        <a
+          v-if="LoggedIn"
+          @click="logOutUser"
+          class="white--text v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"
+        >Afmelden</a>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -32,7 +38,12 @@
 
           <v-list nav>
             <v-list-item-group color="green lighten-1">
-              <v-list-item v-for="(item, index) in routes" :key="index" :to="item.path"  @click="dialog = false">
+              <v-list-item
+                v-for="(item, index) in filteredRoutes"
+                :key="index"
+                :to="item.path"
+                @click="dialog = false"
+              >
                 <v-list-item-icon>
                   <v-icon v-if="item.icon">{{item.icon}}</v-icon>
                 </v-list-item-icon>
@@ -48,39 +59,41 @@
 
 <script>
 import { routes } from "../router/routes";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
+  computed: {
+    filteredRoutes() {
+      return routes.filter(r => {
+        if (r.display !== "hide") {
+          return true;
+        }
+      });
+    },
+    LoggedIn() {
+      //Kan veeeeel beter, maar geen tijd voor serverside controle of de user echt ingelogd is.
+      if (
+        this.userLogged ||
+        this.token 
+      )
+        return true;
+      else return false;
+    },
+    ...mapGetters(["token"])
+  },
   data() {
     return {
       dialog: false,
       routes,
-      nav: [
-        {
-          icon: "mdi-home",
-          text: "Home",
-          title: "Back to Home page",
-          active: true
-        },
-        {
-          icon: "mdi-account-multiple",
-          text: "Over ons",
-          title: "g",
-          active: false
-        },
-        {
-          icon: "mdi-frequently-asked-questions",
-          text: "FAQ",
-          title: "g",
-          active: false
-        },
-        {
-          icon: "mdi-email",
-          text: "Contact",
-          title: "Our Contact info",
-          active: false
-        }
-      ]
+      userLogged: null
     };
+  },
+  methods: {
+    logOutUser() {
+      this.logOut();
+      this.userLogged = false;
+    },
+    ...mapMutations(["logOut"])
   }
 };
 </script>

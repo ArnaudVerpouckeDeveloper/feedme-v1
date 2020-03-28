@@ -49,9 +49,9 @@ export default {
   methods: {
     Postlogin() {
       console.log(this.user)
-      //this.login(this.user);
+      this.login(this.user);
     },
-    //...mapActions(["login"])
+    ...mapActions(["login"])
   }
 };
 </script>

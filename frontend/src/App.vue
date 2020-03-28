@@ -24,3 +24,9 @@ export default {
   })
 };
 </script>
+<style>
+/* shoppingCart button */
+.btn-wrapper > .theme--light.v-btn > span{
+  color: #fff !important;
+}
+</style>

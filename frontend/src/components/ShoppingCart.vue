@@ -26,15 +26,15 @@
     <v-card elevation="0">
       <v-row>
         <v-card-text class="col-6">Subtotaal</v-card-text>
-        <v-card-text class="col-6 price">€ {{totalCart}}</v-card-text>
+        <v-card-text class="col-6 price">€ {{formatPrice(totalCart)}}</v-card-text>
         <v-card-text class="col-6">Bezorgkosten</v-card-text>
         <v-card-text class="col-6 delivery-price">Gratis</v-card-text>
         <v-card-text class="col-6 total-text">Totaal</v-card-text>
         <v-card-text class="col-6 total-price">€ {{formatPrice(totalPrice)}}</v-card-text>
       </v-row>
     </v-card>
-    <div class="btn-wrapper">
-      <v-btn color="green" large>Bestellen</v-btn>
+    <div class="btn-wrapper" v-if="showOrderBtn">
+      <v-btn color="green" large @click="orderItems" >Bestellen</v-btn>
     </div>
   </v-navigation-drawer>
 </template>
@@ -43,6 +43,12 @@
 import { mapGetters } from "vuex";
 
 export default {
+  props: {
+    showOrderBtn:{
+      default: true,
+      type: Boolean
+    }
+  },
   computed: {
     totalCart() {
       this.totalPrice = 0;
@@ -73,6 +79,9 @@ export default {
     totalItem(product){
      return product.price * product.count;
     },
+    orderItems(){
+      //TODDO: to="/confirmorder"
+    }
   }
 };
 </script>
@@ -103,8 +112,11 @@ export default {
   text-align: center;
   padding: 10px;
 }
-.btn-wrapper > button {
+.btn-wrapper > a {
   width: 100%;
-  color: #fff !important;
 }
+.theme--light.v-btn{
+  color: #4caf50 !important;
+}
+
 </style>
