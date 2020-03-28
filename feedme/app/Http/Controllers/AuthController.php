@@ -101,11 +101,20 @@ class AuthController extends Controller
             'firstName' => 'required|min:1|alpha_dash',
             'lastName' => 'required|min:1|alpha_dash',
             'email' => 'required|email:rfc,dns',
-            'password' => 'required|min:8',
+            'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_-@!?#|[^\w])).+$/']
         ]);
 
+        /*
+            Wachtwoordvereisten:
+            Minstens 1 hoofdletter
+            Minstens 1 speciaal teken @_-!?#|
+            Minstens 1 kleine letter
+            Minstens 1 cijfer
+            Minstens 8 tekens
+        */
+
         $user = User::create([
-            'firstName' => $request->firstName, //todo: edit migration and seeder (name is now splitted in first and last)
+            'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
             'password' => bcrypt($request->password)
