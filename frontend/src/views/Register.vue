@@ -9,6 +9,20 @@
           <v-card-text>
             <v-form>
               <v-text-field
+                v-model="user.firstName"
+                label="Voornaam"
+                name="firstName"
+                prepend-icon="mdi-card-account-details "
+                type="text"
+              ></v-text-field>
+               <v-text-field
+                v-model="user.lastName"
+                label="Achternaam"
+                name="lastName"
+                prepend-icon="mdi-card-account-details "
+                type="text"
+              ></v-text-field>
+              <v-text-field
                 v-model="user.email"
                 label="Email"
                 name="Email"
@@ -50,7 +64,6 @@ export default {
   data() {
     return {
       user: {
-        name: null,
         email: null,
         password: null,
         confirmPassword: null
@@ -60,8 +73,7 @@ export default {
   methods: {
     Postregister() {
       if (this.user.password === this.user.confirmPassword)
-        console.log("No registrations allowed :)");
-      //this.register(this.user);
+          this.register(this.user);
     },
     ...mapActions(["register"])
   }

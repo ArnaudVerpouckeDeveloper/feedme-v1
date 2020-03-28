@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from './router/router'
+
 
 Vue.use(Vuex)
 
@@ -110,7 +112,7 @@ const actions = {
   },
 
   async login(context, data) {
-    await axios.post(`${apiUrl}/api/user/signin`, data)
+    await axios.post(`${apiUrl}/auth/login`, data)
       .then(res => {
         context.commit('authUser', res.data)
         router.replace({ name: "home" });
@@ -119,10 +121,12 @@ const actions = {
         console.error(error)
       })
   },
-  async register(data) {
-    await axios.post(`${apiUrl}/api/user/signup`, data)
+  async register(context, data) {
+    console.log(data)
+    await axios.post(`${apiUrl}/auth/registerCustomer`, data)
       .then(res => {
-        router.replace({ name: "home" });
+        console.log(res);
+        router.replace({ name: "login" });
       })
       .catch(error => {
         console.error(error)
