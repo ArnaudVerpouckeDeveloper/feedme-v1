@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    <ShoppingCart></ShoppingCart>
     <v-img
       src="/assets/images/placeholder/merchant_heading.jpg"
       alt="pizza hawai with chicken"
@@ -25,26 +24,25 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-snackbar v-model="showCartButton" :timeout="0" color="transparent">
-      <v-btn x-large class="cartBtn" color="green" @click="onChangeDrawer">Winkelmandje</v-btn>
-    </v-snackbar>
+    <ShoppingCart></ShoppingCart>
+    <CartButton></CartButton>
   </v-container>
 </template>
 
 <script>
 import ShoppingCart from "../components/ShoppingCart";
+import CartButton from "../components/CartButton";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    ShoppingCart
+    ShoppingCart,
+    CartButton
   },
   computed: {
-    cardStyle(){
-      if(!this.isMobile)
-        return "margin-right: 350px;"
-      else
-        return "margin-right: -12px"
+    cardStyle() {
+      if (!this.isMobile) return "margin-right: 350px;";
+      else return "margin-right: -12px";
     },
     ...mapGetters(["products", "isMobile", "showCartButton"])
   },
@@ -55,13 +53,13 @@ export default {
       this.$store.dispatch("onChangeDrawer", bool);
     },
     addProduct(product) {
-      this.addItemToCart(product)
+      this.addItemToCart(product);
     },
     removeProduct(product) {
-      this.removeItemFromCart(product)
+      this.removeItemFromCart(product);
     },
-    
-    ...mapActions(["addItemToCart","removeItemFromCart"])
+
+    ...mapActions(["addItemToCart", "removeItemFromCart"])
   }
 };
 </script>

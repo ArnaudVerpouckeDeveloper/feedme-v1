@@ -8,11 +8,9 @@ Vue.use(Vuex)
 
 const apiUrl = 'http://127.0.0.1:8000/api';
 
-
-
 const state = {
   user: {},
-  toke: {},
+  token: {},
   products: [],
   ProductDetail: {},
   orders: [],
@@ -23,6 +21,9 @@ const state = {
 }
 
 const getters = {
+  token: (state) => {
+    return state.token;
+  },
   products: (state) => {
     return state.products;
   },
@@ -68,6 +69,22 @@ const actions = {
     })
   },
 
+  async addProduct(context, data) {
+    console.log(data)
+    return await new Promise((resolve, reject) => {
+      axios.post(`${apiUrl}/merchant/addProduct`, data, { headers: {'Content-Type': 'application/json'}})
+        .then(res => {
+          console.log("product:", res);
+         // context.commit('updateOrderDetail', res.data);
+          resolve();
+        })
+        .catch(error => {
+          console.error(error)
+          reject();
+        })
+    })
+  },
+
   async deleteProduct(context, data) {
     await axios.delete(`${apiUrl}/api/product/${data.id}`,
       { headers: { 'Authorization': "bearer " + state.token } })
@@ -95,6 +112,22 @@ const actions = {
       axios.get(`${apiUrl}/api/order/${id}`)
         .then(res => {
           context.commit('updateOrderDetail', res.data);
+          resolve();
+        })
+        .catch(error => {
+          console.error(error)
+          reject();
+        })
+    })
+  },
+  
+  async addOrder(context, data) {
+    console.log(data)
+    return await new Promise((resolve, reject) => {
+      axios.post(`${apiUrl}/placeOrder`, data, { headers: {'Content-Type': 'application/json'}})
+        .then(res => {
+          console.log("order:", res);
+         // context.commit('updateOrderDetail', res.data);
           resolve();
         })
         .catch(error => {
@@ -214,6 +247,7 @@ const mutations = {
   authUser(state, data) {
     localStorage.setItem("user", data.access_token);
     state.token = localStorage.getItem("user");
+    console.log(state.token);
   },
   logOut(state) {
     state.token = null;
