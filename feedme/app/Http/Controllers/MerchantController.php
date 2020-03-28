@@ -26,11 +26,13 @@ class MerchantController extends Controller
 
         $product = new Product();
         $product->name = $request->name;
+        $product->description = $request->description;
         $product->price = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
         $product->available = $request->available;
 
         auth()->user()->merchant->products()->save($product);
-        return "added";
+
+        return response()->json($product,201);
     }
 
     function getAllProducts(){
