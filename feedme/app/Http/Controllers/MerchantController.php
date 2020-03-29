@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Merchant;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Product;
@@ -14,6 +15,9 @@ class MerchantController extends Controller
         return $request;
     }
 
+    function getAllMerchants(Request $request){
+        return Merchant::all();
+    }
 
     function addProduct(Request $request){
         

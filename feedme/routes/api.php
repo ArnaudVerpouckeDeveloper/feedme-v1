@@ -30,6 +30,11 @@ Route::group([
 });
 
 
+Route::group([
+    'prefix' => 'merchant'
+], function ($router) {
+    Route::get('/all', 'MerchantController@getAllMerchants');
+});
 
 
 Route::group([
