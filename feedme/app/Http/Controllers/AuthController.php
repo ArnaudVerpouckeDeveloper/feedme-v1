@@ -147,9 +147,6 @@ class AuthController extends Controller
         $newMerchant->apiName = $this->generateApiNameFromMerchantName($request->merchantName);
         $user->merchant()->save($newMerchant);
 
-        //Mail::to($user->email)->send(new ConfirmEmail($user));
-        //Mail::to("arnaud.verpoucke@student.howest.be")->send(new ConfirmEmail($user));
-
         return "ok";
     }
 
@@ -210,6 +207,7 @@ class AuthController extends Controller
         else{
             $user->email_verified_at = now();
             $user->save();
+            return view("emailConfirmation");
             return "Uw e-mailadres is bevestigd";
         }
      }
