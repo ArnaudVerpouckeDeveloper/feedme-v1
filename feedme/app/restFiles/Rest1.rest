@@ -32,10 +32,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "firstName": "Ditiseenvoornaam",
-    "lastName": "Ditiseenachternaam",
-    "email": "customer1@test.com",
-    "password": "12345678"
+    "firstName": "voornaamabc",
+    "lastName": "achternaamabc",
+    "email": "arnaud.verpoucke@student.howest.be",
+    "password": "Voornaam-achternaam2019"
 }
 
 

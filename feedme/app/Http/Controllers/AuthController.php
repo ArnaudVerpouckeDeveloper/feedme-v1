@@ -10,6 +10,9 @@ use App\Role;
 use App\Customer;
 use App\Merchant;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\ConfirmEmail;
+use Illuminate\Support\Facades\Mail;
+use Str;
 
 
 class AuthController extends Controller
@@ -21,7 +24,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName']]);
+        $this->middleware('auth:api', ['except' => ['login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
     }
 
     /**
@@ -100,16 +103,30 @@ class AuthController extends Controller
         $validatedData = $request->validate([
             'firstName' => 'required|min:1|alpha_dash',
             'lastName' => 'required|min:1|alpha_dash',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required|min:8',
+            'email' => 'required|email:rfc,dns|unique:users',
+            'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!$#%]).+$/']
         ]);
 
+        //'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(@-!_?#|[^\w])).+$/']
+
+
+        /*
+            Wachtwoordvereisten:
+            Minstens 1 hoofdletter
+            Minstens 1 speciaal teken @_-!?#|
+            Minstens 1 kleine letter
+            Minstens 1 cijfer
+            Minstens 8 tekens
+        */
+
         $user = User::create([
-            'firstName' => $request->firstName, //todo: edit migration and seeder (name is now splitted in first and last)
+            'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'verificationCode' => Str::random(128)
         ]);
+        Mail::to($user->email)->send(new ConfirmEmail($user));
         return $user;
     }
 
@@ -129,6 +146,7 @@ class AuthController extends Controller
         $newMerchant->name = $request->merchantName;
         $newMerchant->apiName = $this->generateApiNameFromMerchantName($request->merchantName);
         $user->merchant()->save($newMerchant);
+
         return "ok";
     }
 
@@ -174,5 +192,23 @@ class AuthController extends Controller
      }
 
 
-    
+
+
+
+
+
+
+     public function confirmEmail(Request $request, $verificationCode){
+        $user = User::where("verificationCode", $verificationCode)->first();
+        if($user == null)
+        {
+            return "Er kon geen gebruiker gevonden worden.";
+        }
+        else{
+            $user->email_verified_at = now();
+            $user->save();
+            return view("emailConfirmation");
+            return "Uw e-mailadres is bevestigd";
+        }
+     }
 }
