@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Verpoucke',
             'email' => 'arnaud@test.com',
             'password' => bcrypt('123'),
+            'verificationCode' => Str::random(128)
         ]);
         $merchant1->roles()->attach($merchantRole);
         $newMerchant = new Merchant();
@@ -57,6 +58,7 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Qais',
             'email' => 'malat@test.com',
             'password' => bcrypt('123'),
+            'verificationCode' => Str::random(128)
         ]);
         $merchant2->roles()->attach($merchantRole);
         $newMerchant = new Merchant();
@@ -72,6 +74,7 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'De Smedt',
             'email' => 'emma@test.com',
             'password' => bcrypt('123'),
+            'verificationCode' => Str::random(128)
         ]);
         $customer1->roles()->attach($customerRole);
         $customer1->customer()->save(new Customer());
@@ -82,6 +85,7 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Geesens',
             'email' => 'bart@test.com',
             'password' => bcrypt('123'),
+            'verificationCode' => Str::random(128)
         ]);
         $customer2->roles()->attach($customerRole);
         $customer2->customer()->save(new Customer());

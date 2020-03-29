@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Merchant extends Model
 {
     protected $fillable = [
-        'logoFileName'
+        'logoFileName', 'bannerFileName'
     ];
 
     public function user(){
