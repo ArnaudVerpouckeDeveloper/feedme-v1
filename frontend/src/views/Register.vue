@@ -46,9 +46,16 @@
                 type="password"
               ></v-text-field>
               <v-radio-group v-model="user.isMerchant" :mandatory="true">
-                <v-radio label="Ik ben een consument" :value="false"></v-radio>
+                <v-radio label="Ik ben consument" :value="false"></v-radio>
                 <v-radio label="Ik ben een producent" :value="true"></v-radio>
               </v-radio-group>
+               <v-text-field v-if="user.isMerchant"
+                v-model="user.merchantName"
+                label="Bedrijfsnaam"
+                name="company"
+                prepend-icon="mdi-store"
+                type="text"
+              ></v-text-field>
             </v-form>
           </v-card-text>
            <p class="register">

@@ -34,7 +34,7 @@
       </v-row>
     </v-card>
     <div class="btn-wrapper" v-if="showOrderBtn">
-      <v-btn color="green" large @click="orderItems" >Bestellen</v-btn>
+      <v-btn color="green" large  :to="{name:'order'}" >Bestellen</v-btn>
     </div>
   </v-navigation-drawer>
 </template>
@@ -81,6 +81,7 @@ export default {
     },
     orderItems(){
       //TODDO: to="/confirmorder"
+      // this.router.push({ path: 'confirmorder' })
     }
   }
 };

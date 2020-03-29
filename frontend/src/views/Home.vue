@@ -23,16 +23,16 @@
 </template>
 
 <script>
-import Contact from "../components/Contact.vue";
-import About from "../components/About.vue";
-import Faq from "../components/Faq.vue";
+// import Contact from "../components/Contact.vue";
+// import About from "../components/About.vue";
+// import Faq from "../components/Faq.vue";
 
 export default {
   name: "Home",
   components: {
-    Contact,
-    About,
-    Faq
+    // Contact,
+    // About,
+    // Faq
   }
 };
 </script>

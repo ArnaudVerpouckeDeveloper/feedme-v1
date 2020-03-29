@@ -12,6 +12,26 @@
                 <v-expansion-panel-header>{{faq.q}}</v-expansion-panel-header>
                 <v-expansion-panel-content>{{faq.a}}</v-expansion-panel-content>
               </v-expansion-panel>
+              
+              <v-expansion-panel>
+                <v-expansion-panel-header>4. Wat zijn de betaalmogelijkheden?</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  De betaalmogelijkheden hangen af van de gebruikte systemen van de horecazaak waarbij u bestelt.
+                  <br/>
+                  <br/>
+
+                  <p>*Aandacht: SpeedMeal is geen tussenpersoon bij de betalingen. Betalingen gebeuren van de koper rechtstreeks naar de horecazaak.</p>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+
+              <v-expansion-panel>
+                <v-expansion-panel-header>5. Hoe kan ik mijn horecazaak bij Speedmeal aansluiten?</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  Om uw horecazaak aan te sluiten bij SpeedMeal dient u zich te
+                  registreren als horecazaak. Dit kan hier:
+                  <router-link :to="{name:'register'}">https://www.speedmeal.be/register</router-link>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
             </v-expansion-panels>
           </v-card-text>
         </v-card>
@@ -36,19 +56,7 @@ export default {
           "Om een bestelling te plaatsen dient u eerst een account aan te maken. Met uw account kan u bestellingen plaatsen bij een horecazaak. "
       },
       {
-        q: "3.	Hoe kan ik mijn horecazaak bij Speedmeal aansluiten?",
-        a:
-          "Om uw horecazaak aan te sluiten bij SpeedMeal dient u zich te registreren als horecazaak. Dit kan hier: https://www.speedmeal.be/xxx"
-      },
-      {
-        q: "4.	Wat zijn de betaalmogelijkheden?",
-        a: `De betaalmogelijkheden hangen af van de gebruikte systemen van de horecazaak waarbij u bestelt. 
-           
-           Aandacht: SpeedMeal is geen tussenpersoon bij de betalingen. Betalingen gebeuren van de koper rechtstreeks naar de horecazaak.
-           `
-      },
-      {
-        q: "5.	Kunnen bestellingen geleverd worden bij mij thuis?",
+        q: "3.	Kunnen bestellingen geleverd worden bij mij thuis?",
         a:
           "Dit kan, in het geval dat de horecazaak deze mogelijkheid aanbiedt. U kunt de afhaal- en levermethodes van de horecazaak bekijken op de SpeedMeal pagina van de betreffende horecazaak."
       }
@@ -60,5 +68,9 @@ export default {
 <style>
 .faq-card-text {
   padding: 15px 0;
+}
+
+.v-expansion-panel-content__wrap {
+  padding: 12px 24px 16px !important;
 }
 </style>
