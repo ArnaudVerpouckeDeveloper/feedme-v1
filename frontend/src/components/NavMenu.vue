@@ -2,7 +2,9 @@
   <div>
     <!-- desktop -->
     <v-app-bar app elevate-on-scroll color="green" class="d-none d-md-flex">
-      <v-toolbar-title class="white--text">Speedmeal</v-toolbar-title>
+      <v-toolbar-title>
+        <img class="nav-logo" src="/assets/images/logo.png" alt="SpeedMeal logo" />
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn
@@ -24,7 +26,9 @@
     <!-- Mobile -->
     <v-app-bar app color="green" class="d-flex d-md-none">
       <v-app-bar-nav-icon color="white" @click="dialog = true"></v-app-bar-nav-icon>
-      <v-toolbar-title class="white--text">SpeedMeal</v-toolbar-title>
+      <v-toolbar-title>
+        <img class="nav-logo" src="/assets/images/logo.png" alt="SpeedMeal logo" />
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
         <v-card>
@@ -131,6 +135,11 @@ export default {
 body {
   color: #fff;
 }
+.nav-logo {
+  width: 10em;
+  display: flex;
+}
+
 .v-toolbar__content {
   width: 100%;
 }
