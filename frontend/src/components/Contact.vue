@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md6>
+      <v-flex xs12 sm8 lg6>
         <v-card class="elevation-3">
           <v-toolbar color="green" dark flat>
             <v-toolbar-title>Contact</v-toolbar-title>

@@ -15,7 +15,7 @@
                 prepend-icon="mdi-card-account-details "
                 type="text"
               ></v-text-field>
-               <v-text-field
+              <v-text-field
                 v-model="user.lastName"
                 label="Achternaam"
                 name="lastName"
@@ -45,8 +45,16 @@
                 prepend-icon="mdi-lock-reset"
                 type="password"
               ></v-text-field>
+              <v-radio-group v-model="user.isMerchant" :mandatory="true">
+                <v-radio label="Ik ben een consument" :value="false"></v-radio>
+                <v-radio label="Ik ben een producent" :value="true"></v-radio>
+              </v-radio-group>
             </v-form>
           </v-card-text>
+           <p class="register">
+            Hebt u al een account?
+            <router-link :to="{name:'login'}">Login hier.</router-link>
+          </p>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="Postregister">Verzenden</v-btn>
@@ -61,19 +69,26 @@
 import { mapActions } from "vuex";
 
 export default {
+  computed: {
+    isMerchant() {
+      if (this.user.isMerchant) return "ik ben een producent";
+      else return "ik ben een consument";
+    }
+  },
   data() {
     return {
       user: {
         email: null,
         password: null,
-        confirmPassword: null
+        confirmPassword: null,
+        isMerchant: false
       }
     };
   },
   methods: {
     Postregister() {
       if (this.user.password === this.user.confirmPassword)
-          this.register(this.user);
+        this.register(this.user);
     },
     ...mapActions(["register"])
   }

@@ -49,6 +49,36 @@
                 </v-list-item-icon>
                 <v-list-item-title>{{ item.display }}</v-list-item-title>
               </v-list-item>
+
+              <v-list-item
+                v-if="!LoggedIn"
+                :to="{ name: 'login'}"
+                @click="dialog = false"
+                key="login"
+              >
+                <v-list-item-icon>
+                  <v-icon>mdi-login-variant</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Aanmelden</v-list-item-title>
+              </v-list-item>
+
+              <a
+                v-if="LoggedIn"
+                @click="logOutUser"
+                class="v-list-item v-list-item--link theme--light"
+                tabindex="0"
+                role="listitem"
+                aria-selected="false"
+                key="logout"
+              >
+                <div class="v-list-item__icon">
+                  <i
+                    aria-hidden="true"
+                    class="v-icon notranslate mdi mdi-logout-variant theme--light"
+                  ></i>
+                </div>
+                <div class="v-list-item__title">Afmelden</div>
+              </a>
             </v-list-item-group>
           </v-list>
         </v-card>
@@ -72,12 +102,11 @@ export default {
     },
     LoggedIn() {
       //Kan veeeeel beter, maar geen tijd voor serverside controle of de user echt ingelogd is.
-      if (
-        this.userLogged ||
-        this.token 
-      )
-        return true;
-      else return false;
+      if (!this.token) {
+        if (localStorage.getItem("user")) return true;
+        else return false;
+      }
+      return true;
     },
     ...mapGetters(["token"])
   },
@@ -90,8 +119,8 @@ export default {
   },
   methods: {
     logOutUser() {
+      this.dialog = false;
       this.logOut();
-      this.userLogged = false;
     },
     ...mapMutations(["logOut"])
   }

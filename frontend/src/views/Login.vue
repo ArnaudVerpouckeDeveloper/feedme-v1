@@ -8,13 +8,14 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-              <v-text-field v-model="user.email"
-               label="Email" 
-               name="Email" 
-               prepend-icon="mdi-account" 
-               type="email">
-               </v-text-field>
-              <v-text-field 
+              <v-text-field
+                v-model="user.email"
+                label="Email"
+                name="Email"
+                prepend-icon="mdi-account"
+                type="email"
+              ></v-text-field>
+              <v-text-field
                 v-model="user.password"
                 id="password"
                 label="Wachtwoord"
@@ -24,6 +25,10 @@
               ></v-text-field>
             </v-form>
           </v-card-text>
+          <p class="register">
+            Nog geen account?
+            <router-link :to="{name:'register'}">Registreer u hier.</router-link>
+          </p>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="Postlogin">Login</v-btn>
@@ -48,7 +53,6 @@ export default {
   },
   methods: {
     Postlogin() {
-      console.log(this.user)
       this.login(this.user);
     },
     ...mapActions(["login"])
@@ -57,4 +61,11 @@ export default {
 </script>
 
 <style>
+.register {
+  text-align: center;
+}
+.register a {
+  text-decoration: none;
+  border-bottom: 2px solid #4caf50;
+}
 </style>

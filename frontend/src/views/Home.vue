@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="landing">
-      <v-img class="landing-illustration" src="/assets/images/landing.png"></v-img>
       <div class="landing-content">
         <article>
           <h1>SpeedMeal</h1>
@@ -15,25 +14,34 @@
           <p>- Gebouwd door studenten, voor zelfstandigen.</p>
         </article>
       </div>
+      <v-img class="landing-illustration" src="/assets/images/landing.jpg"></v-img>
     </div>
-
+    <About id="about" />
+    <Faq id="faq" />
     <Contact id="contact" />
   </div>
 </template>
 
 <script>
 import Contact from "../components/Contact.vue";
-import HelloWorld from "../components/HelloWorld.vue";
+import About from "../components/About.vue";
+import Faq from "../components/Faq.vue";
+
 export default {
   name: "Home",
-
   components: {
     Contact,
-    HelloWorld
+    About,
+    Faq
   }
 };
 </script>
 <style scoped>
+.landing {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 article {
   font-size: 1.6em;
   position: relative;
@@ -48,13 +56,15 @@ div {
   height: 50%;
   background: #4caf50;
   transition: all 0.2s ease;
+  z-index: 1;
+  position: relative;
 }
 .landing-illustration {
-  width: 400px;
   position: absolute;
-  display: flex;
-  right: 190px;
-  top: 50px;
+  right: 0;
+  width: 100%;
+  top: 0;
+  z-index: 0;
 }
 h1 {
   font-size: 2em;
@@ -70,7 +80,11 @@ p {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+@media only screen and (max-width: 992px) {
+  .landing-illustration {
+    max-width: 100%;
+    height: 100%;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -84,6 +98,7 @@ p {
     width: 50vw;
     height: 40em;
   }
+  
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

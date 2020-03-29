@@ -12,6 +12,7 @@
           <v-row>
             <v-col cols="8">
               <v-card-title>{{product.name}}</v-card-title>
+              <v-card-subtitle v-if="product.description">€{{product.description}}</v-card-subtitle>
               <v-card-subtitle>€{{product.price}}</v-card-subtitle>
             </v-col>
             <v-col cols="4" style="align-self: center;">
@@ -35,6 +36,12 @@ import CartButton from "../components/CartButton";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    const store = require("../store");
+    store.default.dispatch("fetchProducts", to.params.id).then(() => {
+      next();
+    });
+  },
   components: {
     ShoppingCart,
     CartButton

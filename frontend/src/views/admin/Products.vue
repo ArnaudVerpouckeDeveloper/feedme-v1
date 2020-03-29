@@ -20,17 +20,17 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="3">
+                  <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.name" label="Naam"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="3">
+                  <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.price" label="Prijs"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="3">
-                    <v-text-field v-model="editedItem.description" label="Beschrijving"></v-text-field>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-checkbox v-model="editedItem.available" label="Beschikbaar"></v-checkbox>
                   </v-col>
-                  <v-col cols="12" sm="6" md="3">
-                    <v-simple-checkbox v-model="editedItem.available" label="Beschikbaar"></v-simple-checkbox>
+                  <v-col cols="12">
+                    <v-textarea v-model="editedItem.description" label="Beschrijving" rows="2"></v-textarea>
                   </v-col>
                 </v-row>
               </v-container>
@@ -59,15 +59,21 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    const store = require("../../store");
+    store.default.dispatch("fetchProducts", to.params.id).then(() => {
+      next();
+    });
+  },
   computed: {
     formTitle() {
-    console.log(this.products)
+      console.log(this.products);
 
       return this.editedIndex === -1 ? "Nieuw product" : "Product bewerken";
     },
     ...mapGetters(["products"])
   },
-  
+
   watch: {
     dialog(val) {
       val || this.close();
@@ -208,14 +214,13 @@ export default {
       // if (this.editedIndex > -1) {
       //   Object.assign(this.desserts[this.editedIndex], this.editedItem);
       // } else {
-        console.log("add", this.editedItem);
-        this.addProduct(this.editedItem);
+      console.log("add", this.editedItem);
+      this.addProduct(this.editedItem);
       // }
       this.close();
     },
     ...mapActions(["addProduct"])
   }
-  
 };
 </script>
 

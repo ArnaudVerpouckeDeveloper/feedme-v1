@@ -10,7 +10,8 @@ const apiUrl = 'http://127.0.0.1:8000/api';
 
 const state = {
   user: {},
-  token: {},
+  merchants: [],
+  token: "",
   products: [],
   ProductDetail: {},
   orders: [],
@@ -23,6 +24,9 @@ const state = {
 const getters = {
   token: (state) => {
     return state.token;
+  },
+  merchants: (state) => {
+    return state.merchants;
   },
   products: (state) => {
     return state.products;
@@ -45,21 +49,22 @@ const getters = {
 }
 
 const actions = {
-  async fetchProducts(context) {
-    await axios.get(`${apiUrl}/merchant/1`)
+  async fetchMerchants(context) {
+    await axios.get(`${apiUrl}/merchant/all`)
       .then(res => {
-        context.commit('updateProducts', res.data.products);
+        context.commit('updateMerchants', res.data);
       })
       .catch(error => {
         console.error(error)
       })
   },
 
-  async fetchProductDetail(context, id) {
+  async fetchProducts(context, id) {
     return await new Promise((resolve, reject) => {
-      axios.get(`${apiUrl}/api/product/${id}`)
+      axios.get(`${apiUrl}/merchant/${id}`)
         .then(res => {
-          context.commit('updateProductDetail', res.data);
+          context.commit('updateProducts', res.data.products);
+          console.log(res.data)
           resolve();
         })
         .catch(error => {
@@ -72,10 +77,10 @@ const actions = {
   async addProduct(context, data) {
     console.log(data)
     return await new Promise((resolve, reject) => {
-      axios.post(`${apiUrl}/merchant/addProduct`, data, { headers: {'Content-Type': 'application/json'}})
+      axios.post(`${apiUrl}/merchant/addProduct`, data, { headers: { 'Content-Type': 'application/json' } })
         .then(res => {
           console.log("product:", res);
-         // context.commit('updateOrderDetail', res.data);
+          // context.commit('createProducts', res.data);
           resolve();
         })
         .catch(error => {
@@ -86,7 +91,7 @@ const actions = {
   },
 
   async deleteProduct(context, data) {
-    await axios.delete(`${apiUrl}/api/product/${data.id}`,
+    await axios.delete(`${apiUrl}/product/${data.id}`,
       { headers: { 'Authorization': "bearer " + state.token } })
       .then(res => {
         context.commit('deleteProduct', res.data);
@@ -97,7 +102,7 @@ const actions = {
   },
 
   async fetchOrders(context) {
-    await axios.get(`${apiUrl}/api/orders`)
+    await axios.get(`${apiUrl}/orders`)
       .then(res => {
         context.commit('updateOrders', res.data);
 
@@ -109,7 +114,7 @@ const actions = {
 
   async fetchOrdersDetail(context, id) {
     return await new Promise((resolve, reject) => {
-      axios.get(`${apiUrl}/api/order/${id}`)
+      axios.get(`${apiUrl}/order/${id}`)
         .then(res => {
           context.commit('updateOrderDetail', res.data);
           resolve();
@@ -120,14 +125,15 @@ const actions = {
         })
     })
   },
-  
+
   async addOrder(context, data) {
     console.log(data)
     return await new Promise((resolve, reject) => {
-      axios.post(`${apiUrl}/placeOrder`, data, { headers: {'Content-Type': 'application/json'}})
+      axios.post(`${apiUrl}/placeOrder`, data,
+        { headers: { 'Authorization': "bearer " + state.token } })
         .then(res => {
           console.log("order:", res);
-         // context.commit('updateOrderDetail', res.data);
+          context.commit('updateOrderDetail', res.data);
           resolve();
         })
         .catch(error => {
@@ -183,11 +189,14 @@ const actions = {
 }
 
 const mutations = {
+  updateMerchants(state, data) {
+    state.merchants = data
+  },
   updateProducts(state, data) {
     state.products = data
   },
-  updateProductDetail(state, data) {
-    state.ProductDetail = data
+  createProducts(state, data){
+    state.products.push(data);
   },
   deleteEventItem(state, data) {
     state.products = state.products.filter((product) => {
@@ -226,7 +235,6 @@ const mutations = {
     let index = state.cartItems.findIndex(x => x.id == data.id)
     if (index != -1) {
       if (data.count == 1) {
-        console.log("index")
         state.cartItems.splice(index, 1);
 
       }
@@ -234,7 +242,6 @@ const mutations = {
 
     state.cartItems = state.cartItems.map(item => {
       if (item.id == data.id) {
-        console.log("hoho")
         if (item.count > 1) {
           item.count--;
         }
@@ -247,7 +254,6 @@ const mutations = {
   authUser(state, data) {
     localStorage.setItem("user", data.access_token);
     state.token = localStorage.getItem("user");
-    console.log(state.token);
   },
   logOut(state) {
     state.token = null;
@@ -265,11 +271,11 @@ const mutations = {
   },
 }
 
-
-
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state,
   getters,
   actions,
   mutations,
 });
+
+export default store;
