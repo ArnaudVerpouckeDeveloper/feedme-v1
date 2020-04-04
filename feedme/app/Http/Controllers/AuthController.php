@@ -41,7 +41,7 @@ class AuthController extends Controller
         }
 
         if (auth()->user()->hasAnyRole("merchant")){
-            return redirect("/manager/helloWorld");
+            return response()->json(['redirect' => 'http://127.0.0.1:8000/manager/helloWorld']);
         }
 
         return $this->respondWithToken($token);

@@ -151,8 +151,13 @@ const actions = {
     async login(context, data) {
         await axios.post(`${apiUrl}/auth/login`, data)
             .then(res => {
-                context.commit('authUser', res.data)
-                router.replace({ name: "home" });
+                console.log(res.data.redirect);
+                if (res.data.redirect) {
+                    window.location = res.data.redirect;
+                } else {
+                    context.commit('authUser', res.data)
+                    router.replace({ name: "home" });
+                }
             })
             .catch(error => {
                 console.error(error)

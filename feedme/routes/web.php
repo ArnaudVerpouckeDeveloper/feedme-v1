@@ -30,7 +30,7 @@ Route::get('/confirmEmail', function () {
 });
 
 Route::get('/manager/helloWorld', function(){
-    return "hey";
+    return view("managerDashboard");
 });
 
 Route::get('/manager/login', "MerchantController@login");
