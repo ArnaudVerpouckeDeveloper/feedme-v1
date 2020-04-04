@@ -31,6 +31,7 @@ class CreateOrdersTable extends Migration
             $table->text("details")->nullable();
             $table->dateTime("requestedTime");
             $table->boolean("confirmed")->default(false);
+            $table->boolean("denied")->default(false);
             $table->string("deliveryMethod");
 
             $table->string("merchant_id");

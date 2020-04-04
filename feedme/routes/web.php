@@ -29,6 +29,21 @@ Route::get('/confirmEmail', function () {
     return new App\Mail\ConfirmEmail($user);
 });
 
+Route::get('/manager/helloWorld', function(){
+    return "hey";
+});
+
+Route::get('/manager/login', "MerchantController@login");
+Route::get('/manager/dashboard', "MerchantController@showManagerDashboard");
+Route::get('/manager/orders', "MerchantController@showManagerOrders");
+Route::get('/manager/producten', "MerchantController@showManagerProducts");
+Route::get('/manager/instellingen', "MerchantController@showManagerSettings");
+
+Route::post('/manager/producten/addProduct', "MerchantController@addProduct");
+Route::put('/manager/producten/toggleOrderable', "MerchantController@toggleOrderable");
+Route::put('/manager/producten/updateProduct', "MerchantController@updateProduct");
+Route::delete('/manager/producten/deleteProduct', "MerchantController@deleteProduct");
+
 
 Route::get("/testmail", function(){
     /*

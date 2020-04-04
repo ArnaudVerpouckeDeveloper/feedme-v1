@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
             for ($i = 0; $i <= 6; $i++)
             {
                 $product = new Product();
-                $product->name = "test";
+                $product->name = $faker->catchPhrase();
                 $product->price = $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 30);
                 $product->available = true;
 
@@ -121,7 +121,7 @@ class DatabaseSeeder extends Seeder
             }
             
             
-            for ($i = 0; $i <= 2; $i++)
+            for ($i = 0; $i <= 8; $i++)
             {
                 $order = new Order();
 
@@ -132,14 +132,24 @@ class DatabaseSeeder extends Seeder
                 $order->email = $faker->email();
                 */
 
-                $order->addressStreet = $faker->streetName();
-                $order->addressNumber = $faker->numberBetween(1,300);
-                $order->addressZipCode = $faker->numberBetween(1000,9000);
-                $order->addressCity = $faker->city();
-                $order->deliveryMethod = "delivery";
+                $randomValue = rand(0,1);
+                if ($randomValue == 1){
+                    $order->deliveryMethod = "delivery";
+                    $order->addressStreet = $faker->streetName();
+                    $order->addressNumber = $faker->numberBetween(1,300);
+                    $order->addressZipCode = $faker->numberBetween(1000,9000);
+                    $order->addressCity = $faker->city();
+                }
+                else{
+                    $order->deliveryMethod = "takeaway";
+                }
+
+                
                 
 
-                $order->details = $faker->realText(100);
+                if (rand(0,1) == 1){
+                    $order->details = $faker->realText(100);
+                }
                 $order->requestedTime = date("Y-m-d H:i:s", strtotime("+1 hours"));
                 $order->confirmed = false;
                 
@@ -149,9 +159,14 @@ class DatabaseSeeder extends Seeder
 
 
                 $productsInStock = Product::all();
-                for ($j = 0; $j <= 2; $j++){
+                for ($j = rand(0,3); $j <= rand(3,4); $j++){
                     $order->products()->attach($productsInStock[$j]);
                 }
+
+                
+                $order->products()->attach($productsInStock[0]);
+                $order->products()->attach($productsInStock[2]);
+                
             }
             
         }

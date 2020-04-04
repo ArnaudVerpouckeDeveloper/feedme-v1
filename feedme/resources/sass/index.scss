@@ -1,0 +1,395 @@
+$mainGreen: #68A25F;
+$mainRed: #e43a3a;
+$mediumGrey: grey;
+body {
+    font-family: "Poppins", sans-serif;
+    header {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        .logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 3rem;
+            margin-bottom: 1rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            a {
+                border: 2px solid $mainGreen;
+                color: $mainGreen;
+                width: 10rem;
+                height: 4rem;
+                display: flex;
+                border-radius: 0.5rem;
+                padding: 1rem;
+                margin: 1rem;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+                transition: all 100ms;
+                .material-icons {
+                    margin-bottom: 0.7rem;
+                }
+            }
+            a.active,
+            a:hover {
+                background-color: $mainGreen;
+                color: white;
+            }
+        }
+    }
+    main {
+        padding-top: 3rem;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        h1 {
+            color: $mainGreen;
+            font-weight: bold;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-transform: capitalize;
+        }
+        .orders {
+            .order {
+                border: 1px solid #c3c3c3;
+                margin-bottom: 2rem;
+                background-color: #fbfbfb;
+                .orderSections {
+                    display: flex;
+                    flex-wrap: wrap;
+                    >li {
+                        min-height: 4rem;
+                        padding: 1rem;
+                        border-left: 1px solid #c3c3c3;
+                        box-sizing: border-box;
+                        &:first-of-type {
+                            border-left: none;
+                        }
+                        &.orderOverview {
+                            width: 70%;
+                            ul {
+                                li {
+                                    display: flex;
+                                    margin-bottom: 0.3rem;
+                                    .amount {
+                                        width: 2rem;
+                                    }
+                                }
+                            }
+                            .remarks {
+                                margin-top: 2rem;
+                                >.title {
+                                    font-weight: bold;
+                                    margin-bottom: 0.5rem;
+                                }
+                            }
+                        }
+                        &.deliveryMethod {
+                            width: 10%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            p {
+                                font-weight: bold;
+                                &.type {
+                                    font-size: 1.2rem;
+                                    text-transform: uppercase;
+                                    margin-bottom: 0.5rem;
+                                }
+                                &.time {
+                                    font-size: 1.5rem;
+                                }
+                            }
+                        }
+                        &.action {
+                            padding: 0 1rem;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            width: 10%;
+                            .material-icons {
+                                margin-bottom: 0.7rem;
+                            }
+                            p {
+                                font-size: 0.8rem;
+                                text-transform: uppercase;
+                                font-weight: bold;
+                                letter-spacing: 1px;
+                            }
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                        &.confirmOrder:hover {
+                            background-color: #68A25F;
+                            color: white;
+                        }
+                        &.denyOrder:hover {
+                            background-color: $mainRed;
+                            color: white;
+                        }
+                        &.totalPrice {
+                            width: 70%;
+                        }
+                    }
+                }
+            }
+        }
+        .createProductForm {
+            padding: 4rem;
+            margin-bottom: 3rem;
+            width: 80%;
+            padding-bottom: 4rem;
+            border-radius: 0.4rem;
+            background-color: $mainGreen;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+            .input-row {
+                display: flex;
+                justify-content: space-between;
+                input[type="text"],
+                input[type="value"] {
+                    border: none;
+                    font-size: 1rem;
+                    padding: 0.4rem 0.8rem;
+                    border-radius: 0.3rem;
+                    font-weight: bold;
+                    box-sizing: border-box;
+                }
+                input[type="submit"] {
+                    width: 15%;
+                    font-weight: bold;
+                    border: none;
+                    border-radius: 0.3rem;
+                    padding: 0 1.5rem;
+                    background-color: #375f31;
+                    color: white;
+                    box-sizing: border-box;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #528a4a;
+                        color: white;
+                    }
+                }
+                .name {
+                    width: 60%;
+                }
+                .price {
+                    width: 20%;
+                }
+            }
+            .errors {
+                margin-top: 1rem;
+                p {
+                    color: white;
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+        .products {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            li {
+                box-sizing: border-box;
+                width: 48%;
+                margin-bottom: 3rem;
+                background-color: white;
+                box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+                border-radius: 0.3rem;
+                >.row {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 1.15rem;
+                    font-weight: bold;
+                    align-items: center;
+                    &.upper {
+                        padding: 1.5rem;
+                        border-bottom: 1px solid #dadada;
+                        .name {
+                            width: 75%;
+                        }
+                        .price {
+                            width: 20%;
+                            text-align: right;
+                        }
+                    }
+                    &.bottom {
+                        padding-left: 1.5rem;
+                        padding-right: 1.5rem;
+                        display: flex;
+                        justify-content: space-between;
+                        height: 5rem;
+                        .orderable {
+                            padding: 1rem 0;
+                            width: 30%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            .info {
+                                font-size: 0.8rem;
+                                margin-bottom: 0.4rem;
+                            }
+                        }
+                        button {
+                            border: none;
+                            background-color: transparent;
+                            width: 30%;
+                            color: $mediumGrey;
+                            font-size: 2rem;
+                            height: 4rem;
+                            border-radius: 0.5rem;
+                            &:hover {
+                                cursor: pointer;
+                            }
+                            &.edit {
+                                &:hover {
+                                    background-color: gold;
+                                    color: black;
+                                }
+                            }
+                            &.remove {
+                                &:hover {
+                                    background-color: $mainRed;
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+                form {
+                    padding: 1.5rem;
+                    .row {
+                        &.inputValues {
+                            margin-bottom: 1.5rem;
+                            display: flex;
+                            justify-content: space-between;
+                            input {
+                                border: none;
+                                font-size: 1.15rem;
+                                font-weight: bold;
+                                border: 2px solid lightgray;
+                                border-radius: 0.3rem;
+                                padding: 0.2rem 0.4rem;
+                                box-sizing: border-box;
+                                &[type="text"] {
+                                    width: 75%;
+                                }
+                                &[type="value"] {
+                                    width: 20%;
+                                    text-align: right;
+                                }
+                            }
+                        }
+                        &.buttons {
+                            display: flex;
+                            justify-content: space-between;
+                            input[type="button"],
+                            input[type="submit"] {
+                                height: 2.5rem;
+                                padding: 0.3rem 1.5rem;
+                                border: none;
+                                cursor: pointer;
+                                border-radius: 0.3rem;
+                                background-color: unset;
+                                font-weight: bold;
+                                width: 48%;
+                            }
+                            input[type="button"] {
+                                background-color: #eaeaea;
+                                &:hover {
+                                    background-color: #c7c7c7;
+                                }
+                            }
+                            input[type="submit"] {
+                                background-color: $mainGreen;
+                                color: white;
+                                &:hover {
+                                    background-color: #375f31;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        &:checked+.slider {
+            background-color: $mainGreen;
+        }
+        &:focus+.slider {
+            box-shadow: 0 0 1px $mainGreen;
+        }
+        &:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        &:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        &.round {
+            border-radius: 34px;
+            &:before {
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+input {
+    font-family: "poppins", sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+button {
+    box-shadow: none !important;
+}

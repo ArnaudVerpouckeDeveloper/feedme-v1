@@ -1,0 +1,384 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+body header {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+body header .logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+body header nav {
+  display: flex;
+  justify-content: center;
+}
+body header nav a {
+  border: 2px solid #68A25F;
+  color: #68A25F;
+  width: 10rem;
+  height: 4rem;
+  display: flex;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  transition: all 100ms;
+}
+body header nav a .material-icons {
+  margin-bottom: 0.7rem;
+}
+body header nav a.active,
+body header nav a:hover {
+  background-color: #68A25F;
+  color: white;
+}
+body main {
+  padding-top: 3rem;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body main h1 {
+  color: #68A25F;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  text-transform: capitalize;
+}
+body main .orders .order {
+  border: 1px solid #c3c3c3;
+  margin-bottom: 2rem;
+  background-color: #fbfbfb;
+}
+body main .orders .order .orderSections {
+  display: flex;
+  flex-wrap: wrap;
+}
+body main .orders .order .orderSections > li {
+  min-height: 4rem;
+  padding: 1rem;
+  border-left: 1px solid #c3c3c3;
+  box-sizing: border-box;
+}
+body main .orders .order .orderSections > li:first-of-type {
+  border-left: none;
+}
+body main .orders .order .orderSections > li.orderOverview {
+  width: 70%;
+}
+body main .orders .order .orderSections > li.orderOverview ul li {
+  display: flex;
+  margin-bottom: 0.3rem;
+}
+body main .orders .order .orderSections > li.orderOverview ul li .amount {
+  width: 2rem;
+}
+body main .orders .order .orderSections > li.orderOverview .remarks {
+  margin-top: 2rem;
+}
+body main .orders .order .orderSections > li.orderOverview .remarks > .title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+body main .orders .order .orderSections > li.deliveryMethod {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body main .orders .order .orderSections > li.deliveryMethod p {
+  font-weight: bold;
+}
+body main .orders .order .orderSections > li.deliveryMethod p.type {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+body main .orders .order .orderSections > li.deliveryMethod p.time {
+  font-size: 1.5rem;
+}
+body main .orders .order .orderSections > li.action {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+}
+body main .orders .order .orderSections > li.action .material-icons {
+  margin-bottom: 0.7rem;
+}
+body main .orders .order .orderSections > li.action p {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+body main .orders .order .orderSections > li.action:hover {
+  cursor: pointer;
+}
+body main .orders .order .orderSections > li.confirmOrder:hover {
+  background-color: #68A25F;
+  color: white;
+}
+body main .orders .order .orderSections > li.denyOrder:hover {
+  background-color: #e43a3a;
+  color: white;
+}
+body main .orders .order .orderSections > li.totalPrice {
+  width: 70%;
+}
+body main .createProductForm {
+  padding: 4rem;
+  margin-bottom: 3rem;
+  width: 80%;
+  padding-bottom: 4rem;
+  border-radius: 0.4rem;
+  background-color: #68A25F;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+body main .createProductForm .input-row {
+  display: flex;
+  justify-content: space-between;
+}
+body main .createProductForm .input-row input[type=text],
+body main .createProductForm .input-row input[type=value] {
+  border: none;
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+body main .createProductForm .input-row input[type=submit] {
+  width: 15%;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0 1.5rem;
+  background-color: #375f31;
+  color: white;
+  box-sizing: border-box;
+}
+body main .createProductForm .input-row input[type=submit]:hover {
+  cursor: pointer;
+  background-color: #528a4a;
+  color: white;
+}
+body main .createProductForm .input-row .name {
+  width: 60%;
+}
+body main .createProductForm .input-row .price {
+  width: 20%;
+}
+body main .createProductForm .errors {
+  margin-top: 1rem;
+}
+body main .createProductForm .errors p {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+body main .products {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body main .products li {
+  box-sizing: border-box;
+  width: 48%;
+  margin-bottom: 3rem;
+  background-color: white;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+  border-radius: 0.3rem;
+}
+body main .products li > .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.15rem;
+  font-weight: bold;
+  align-items: center;
+}
+body main .products li > .row.upper {
+  padding: 1.5rem;
+  border-bottom: 1px solid #dadada;
+}
+body main .products li > .row.upper .name {
+  width: 75%;
+}
+body main .products li > .row.upper .price {
+  width: 20%;
+  text-align: right;
+}
+body main .products li > .row.bottom {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  height: 5rem;
+}
+body main .products li > .row.bottom .orderable {
+  padding: 1rem 0;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body main .products li > .row.bottom .orderable .info {
+  font-size: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+body main .products li > .row.bottom button {
+  border: none;
+  background-color: transparent;
+  width: 30%;
+  color: grey;
+  font-size: 2rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+}
+body main .products li > .row.bottom button:hover {
+  cursor: pointer;
+}
+body main .products li > .row.bottom button.edit:hover {
+  background-color: gold;
+  color: black;
+}
+body main .products li > .row.bottom button.remove:hover {
+  background-color: #e43a3a;
+  color: white;
+}
+body main .products li form {
+  padding: 1.5rem;
+}
+body main .products li form .row.inputValues {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+body main .products li form .row.inputValues input {
+  border: none;
+  font-size: 1.15rem;
+  font-weight: bold;
+  border: 2px solid lightgray;
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.4rem;
+  box-sizing: border-box;
+}
+body main .products li form .row.inputValues input[type=text] {
+  width: 75%;
+}
+body main .products li form .row.inputValues input[type=value] {
+  width: 20%;
+  text-align: right;
+}
+body main .products li form .row.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+body main .products li form .row.buttons input[type=button],
+body main .products li form .row.buttons input[type=submit] {
+  height: 2.5rem;
+  padding: 0.3rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  background-color: unset;
+  font-weight: bold;
+  width: 48%;
+}
+body main .products li form .row.buttons input[type=button] {
+  background-color: #eaeaea;
+}
+body main .products li form .row.buttons input[type=button]:hover {
+  background-color: #c7c7c7;
+}
+body main .products li form .row.buttons input[type=submit] {
+  background-color: #68A25F;
+  color: white;
+}
+body main .products li form .row.buttons input[type=submit]:hover {
+  background-color: #375f31;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch input:checked + .slider {
+  background-color: #68A25F;
+}
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #68A25F;
+}
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.switch .slider.round {
+  border-radius: 34px;
+}
+.switch .slider.round:before {
+  border-radius: 50%;
+}
+
+input {
+  font-family: "poppins", sans-serif;
+}
+
+.hidden {
+  display: none !important;
+}
+
+button {
+  box-shadow: none !important;
+}
+
+/*# sourceMappingURL=index.css.map */
