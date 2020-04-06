@@ -24,7 +24,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
+        $this->middleware('auth:api', ['except' => ['verifyEmailNotice','logMerchantIn','login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
     }
 
     /**
@@ -32,7 +32,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
 
@@ -41,11 +41,126 @@ class AuthController extends Controller
         }
 
         if (auth()->user()->hasAnyRole("merchant")){
-            return response()->json(['redirect' => 'http://127.0.0.1:8000/manager/helloWorld']);
+            return response()->json(['role' => 'merchant']);
+
+            //return redirect()->route('merchant-login', ['email' => $request->email, 'password' => $request->password]);
+
+
+
+            //return response()->json(['redirect' => 'http://127.0.0.1:8000/manager/login']);
+            //return redirect("/manager/login")->with('email', $request->email)->with('password', $request->password);
         }
 
         return $this->respondWithToken($token);
     }
+
+
+
+
+    
+    function verifyEmailNotice(){
+        return back()->withError("Om aan te melden dient u eerst nog uw e-mailadres te bevestigen.");
+    }
+
+
+
+
+
+    public function logMerchantIn(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $credentials = request(['email', 'password']);
+
+        if (auth()->attempt($credentials)){
+            if(!auth()->user()->hasAnyRole("merchant")){
+                return back()->withError('Het account is niet gekoppeld aan een horecazaak.');
+            }
+            return redirect("/manager/dashboard");
+        }
+        else{
+            return back()->withError('Het opgegeven wachtwoord of e-mailadres is niet correct, probeer opnieuw.');
+        }
+
+        /*
+        if (auth()->attempt($credentials)) {
+            
+            $errors = new MessageBag(['password' => ['Email and/or password invalid.']]); // if Auth::attempt fails (wrong credentials) create a new message bag instance.
+
+            return Redirect::back()->withErrors($errors)->withInput(Input::except('password')); // redirect back to the login page, using ->withErrors($errors) you send the error created above
+            
+        }
+        */
+
+        if (auth()->user()->hasAnyRole("merchant")){
+            return response()->json(['role' => 'merchant']);
+
+            //return redirect()->route('merchant-login', ['email' => $request->email, 'password' => $request->password]);
+
+
+
+            //return response()->json(['redirect' => 'http://127.0.0.1:8000/manager/login']);
+            //return redirect("/manager/login")->with('email', $request->email)->with('password', $request->password);
+        }
+
+        return $this->respondWithToken($token);
+    }
+    
+
+
+
+
+
+
+    public function registerMerchant(Request $request)
+    {
+        $request->validate([
+            'merchantName' => "required|min:1",
+            'mobilePhone' => "required",
+            'address_street' => "required",
+            'address_number' => "required",
+            'address_zip' => "required",
+            'address_city' => "required",
+            'tax_number' => "required",
+            ]);
+
+        $user = $this->registerUser($request);
+        $merchantRole = Role::where("name", "merchant")->get();
+        $user->roles()->attach($merchantRole);
+
+        //todo: validate input
+        $newMerchant = new Merchant();
+        $newMerchant->name = $request->merchantName;
+        $newMerchant->apiName = $this->generateApiNameFromMerchantName($request->merchantName);
+        $newMerchant->mobilePhone = $request->mobilePhone;
+        $newMerchant->address_street = $request->address_street;
+        $newMerchant->address_number = $request->address_number;
+        $newMerchant->address_zip = $request->address_zip;
+        $newMerchant->address_city = $request->address_city;
+        $newMerchant->tax_number = $request->tax_number;
+        $user->merchant()->save($newMerchant);
+
+        return view("postRegistration");
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Get the authenticated User.
@@ -105,10 +220,11 @@ class AuthController extends Controller
 
     public function registerUser($request){
         $validatedData = $request->validate([
-            'firstName' => 'required|min:1|alpha_dash',
-            'lastName' => 'required|min:1|alpha_dash',
+            'firstName' => 'required|min:1|string',
+            'lastName' => 'required|min:1|string',
             'email' => 'required|email:rfc,dns|unique:users',
-            'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!$#%]).+$/']
+            'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!$#%]).+$/', 'confirmed'],
+            'password_confirmation' => 'required'
         ]);
 
         //'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(@-!_?#|[^\w])).+$/']
@@ -135,7 +251,7 @@ class AuthController extends Controller
     }
 
 
-
+/*
     public function registerMerchant(Request $request){
         $validatedData = $request->validate([
             'merchantName' => "required|min:1"
@@ -153,6 +269,7 @@ class AuthController extends Controller
 
         return "ok";
     }
+    */
 
     public function registerCustomer(Request $request){
         $user = $this->registerUser($request);
@@ -212,7 +329,6 @@ class AuthController extends Controller
             $user->email_verified_at = now();
             $user->save();
             return view("emailConfirmation");
-            return "Uw e-mailadres is bevestigd";
         }
      }
 }

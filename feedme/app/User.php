@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use Notifiable;
 
@@ -82,4 +82,6 @@ class User extends Authenticatable implements JWTSubject
     public function hasAnyRole($role){
         return null !== $this->roles()->where("name", $role)->first();
     }
+
+
 }

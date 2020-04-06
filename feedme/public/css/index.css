@@ -57,6 +57,101 @@ body main h1 {
   margin-bottom: 3rem;
   text-transform: capitalize;
 }
+body main .merchantAuthPanel {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 4rem;
+  margin-top: 5rem;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5rem;
+}
+body main .merchantAuthPanel .logo {
+  height: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 3rem;
+}
+body main .merchantAuthPanel .login,
+body main .merchantAuthPanel .register {
+  display: flex;
+  flex-direction: column;
+}
+body main .merchantAuthPanel .login label,
+body main .merchantAuthPanel .register label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #68A25F;
+  margin-top: 2rem;
+}
+body main .merchantAuthPanel .login label:first-of-type,
+body main .merchantAuthPanel .register label:first-of-type {
+  margin-top: unset;
+}
+body main .merchantAuthPanel .login input[type=email],
+body main .merchantAuthPanel .login input[type=password],
+body main .merchantAuthPanel .login input[type=text],
+body main .merchantAuthPanel .login input[type=value],
+body main .merchantAuthPanel .register input[type=email],
+body main .merchantAuthPanel .register input[type=password],
+body main .merchantAuthPanel .register input[type=text],
+body main .merchantAuthPanel .register input[type=value] {
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid lightgrey;
+}
+body main .merchantAuthPanel .login input[type=submit],
+body main .merchantAuthPanel .register input[type=submit] {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+  background-color: #68A25F;
+  color: white;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 0.3rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+body main .merchantAuthPanel .login input[type=submit]:hover,
+body main .merchantAuthPanel .register input[type=submit]:hover {
+  cursor: pointer;
+  filter: brightness(1.1);
+}
+body main .merchantAuthPanel .login p.error,
+body main .merchantAuthPanel .register p.error {
+  color: #e43a3a;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-align: left;
+}
+body main .merchantAuthPanel .login hr,
+body main .merchantAuthPanel .register hr {
+  width: 100%;
+  background-color: lightgrey;
+  border: none;
+  height: 1px;
+  margin-bottom: 3rem;
+}
+body main .merchantAuthPanel .login p,
+body main .merchantAuthPanel .register p {
+  text-align: center;
+  color: grey;
+  margin-bottom: 1rem;
+}
+body main .merchantAuthPanel .login a,
+body main .merchantAuthPanel .register a {
+  text-align: center;
+  color: #68A25F;
+}
+body main .merchantAuthPanel .login a:hover,
+body main .merchantAuthPanel .register a:hover {
+  text-decoration: underline;
+}
 body main .orders .order {
   border: 1px solid #c3c3c3;
   margin-bottom: 2rem;

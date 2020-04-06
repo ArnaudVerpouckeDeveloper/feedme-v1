@@ -151,6 +151,10 @@ const actions = {
     async login(context, data) {
         await axios.post(`${apiUrl}/auth/login`, data)
             .then(res => {
+                console.log(res);
+                if (res.data.role == "merchant") {
+
+                }
                 console.log(res.data.redirect);
                 if (res.data.redirect) {
                     window.location = res.data.redirect;

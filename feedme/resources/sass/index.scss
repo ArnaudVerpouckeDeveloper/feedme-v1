@@ -58,6 +58,89 @@ body {
             margin-bottom: 3rem;
             text-transform: capitalize;
         }
+        .merchantAuthPanel {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 4rem;
+            margin-top: 5rem;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+            .logo {
+                height: 4rem;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                margin-bottom: 3rem;
+            }
+            .login,
+            .register {
+                display: flex;
+                flex-direction: column;
+                label {
+                    margin-bottom: 0.5rem;
+                    font-weight: bold;
+                    color: $mainGreen;
+                    margin-top: 2rem;
+                    &:first-of-type {
+                        margin-top: unset;
+                    }
+                }
+                input[type="email"],
+                input[type="password"],
+                input[type="text"],
+                input[type="value"] {
+                    border-radius: 0.3rem;
+                    font-size: 1.2rem;
+                    padding: 0.5rem 0.8rem;
+                    margin-bottom: 0.5rem;
+                    border: 1px solid lightgrey;
+                }
+                input[type="submit"] {
+                    width: 40%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    font-size: 1rem;
+                    background-color: $mainGreen;
+                    color: white;
+                    border: none;
+                    padding: 0.7rem 2rem;
+                    border-radius: 0.3rem;
+                    margin-bottom: 3rem;
+                    margin-top: 3rem;
+                    &:hover {
+                        cursor: pointer;
+                        filter: brightness(1.1);
+                    }
+                }
+                p.error {
+                    color: $mainRed;
+                    font-weight: bold;
+                    font-size: 0.8rem;
+                    text-align: left;
+                }
+                hr {
+                    width: 100%;
+                    background-color: lightgrey;
+                    border: none;
+                    height: 1px;
+                    margin-bottom: 3rem;
+                }
+                p {
+                    text-align: center;
+                    color: grey;
+                    margin-bottom: 1rem;
+                }
+                a {
+                    text-align: center;
+                    color: $mainGreen;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+            .register {}
+        }
         .orders {
             .order {
                 border: 1px solid #c3c3c3;

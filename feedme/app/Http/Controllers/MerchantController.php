@@ -53,10 +53,16 @@ class MerchantController extends Controller
 
 
 
+
+
+
+
+
     function showManagerDashboard(Request $request){
         //$merchant = auth()->user()->merchant;
         $merchant = Merchant::first();
-        return view("managerDashboard")->with("merchant", $merchant);
+        $banana = auth()->user();
+        return view("managerDashboard")->with("merchant", $merchant)->with("banana", $banana);
     }
 
     function showManagerOrders(Request $request){
@@ -68,7 +74,8 @@ class MerchantController extends Controller
     function showManagerProducts(Request $request){
         //$merchant = auth()->user()->merchant;
         $merchant = Merchant::first();
-        return view("managerProducts")->with("merchant", $merchant);
+        $auth = auth();
+        return view("managerProducts")->with("merchant", $merchant)->with("auth", $auth);
     }
 
     function showManagerSettings(Request $request){

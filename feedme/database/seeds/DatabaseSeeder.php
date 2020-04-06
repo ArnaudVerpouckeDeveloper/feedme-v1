@@ -41,6 +41,12 @@ class DatabaseSeeder extends Seeder
         $newMerchant = new Merchant();
         $newMerchant->name = "Arnaud's restaurant";
         $newMerchant->apiName = "arnaudsrestaurant";
+        $newMerchant->mobilePhone = "0470123456";
+        $newMerchant->address_street = $faker->streetName();
+        $newMerchant->address_number = $faker->buildingNumber;
+        $newMerchant->address_zip = 8800;
+        $newMerchant->address_city = $faker->city();
+        $newMerchant->tax_number = "BE 1234.567.890";
         $merchant1->merchant()->save($newMerchant);
 
 
@@ -64,6 +70,13 @@ class DatabaseSeeder extends Seeder
         $newMerchant = new Merchant();
         $newMerchant->name = "Qais & fresh";
         $newMerchant->apiName = "qaisandfresh";
+        $newMerchant->mobilePhone = "0470123456";
+        $newMerchant->address_street = $faker->streetName();
+        $newMerchant->address_number = $faker->buildingNumber;
+        $newMerchant->address_zip = 8800;
+        $newMerchant->address_city = $faker->city();
+        $newMerchant->tax_number = "BE 1234.567.890";
+
         $merchant2->merchant()->save($newMerchant);
         
         //$merchant2->merchant()->deliveryMethod_delivery = true;
