@@ -375,7 +375,7 @@ body main .products li > .row.bottom button:hover {
   cursor: pointer;
 }
 body main .products li > .row.bottom button.edit:hover {
-  background-color: gold;
+  background-color: #e6e6e6;
   color: black;
 }
 body main .products li > .row.bottom button.remove:hover {

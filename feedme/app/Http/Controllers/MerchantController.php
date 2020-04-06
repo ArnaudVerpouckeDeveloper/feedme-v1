@@ -59,28 +59,22 @@ class MerchantController extends Controller
 
 
     function showManagerDashboard(Request $request){
-        //$merchant = auth()->user()->merchant;
-        $merchant = Merchant::first();
-        $banana = auth()->user();
-        return view("managerDashboard")->with("merchant", $merchant)->with("banana", $banana);
+        $merchant = auth()->user()->merchant;
+        return view("managerDashboard")->with("merchant", $merchant);
     }
 
     function showManagerOrders(Request $request){
-        //$merchant = auth()->user()->merchant;
-        $merchant = Merchant::first();
+        $merchant = auth()->user()->merchant;
         return view("managerOrders")->with("merchant", $merchant);
     }
 
     function showManagerProducts(Request $request){
-        //$merchant = auth()->user()->merchant;
-        $merchant = Merchant::first();
-        $auth = auth();
-        return view("managerProducts")->with("merchant", $merchant)->with("auth", $auth);
+        $merchant = auth()->user()->merchant;
+        return view("managerProducts")->with("merchant", $merchant);
     }
 
     function showManagerSettings(Request $request){
-        //$merchant = auth()->user()->merchant;
-        $merchant = Merchant::first();
+        $merchant = auth()->user()->merchant;
         return view("managerSettings")->with("merchant", $merchant);
     }
 
@@ -103,10 +97,9 @@ class MerchantController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
-        $product->available = $request->available;
 
         auth()->user()->merchant->products()->save($product);
-        return back();
+        return response()->json("ok");
     }
 
     function toggleOrderable(Request $request){

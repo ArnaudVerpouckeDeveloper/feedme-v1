@@ -35,7 +35,8 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Verpoucke',
             'email' => 'arnaud@test.com',
             'password' => bcrypt('123'),
-            'verificationCode' => Str::random(128)
+            'verificationCode' => Str::random(128),
+            'email_verified_at' => now()
         ]);
         $merchant1->roles()->attach($merchantRole);
         $newMerchant = new Merchant();
@@ -126,10 +127,7 @@ class DatabaseSeeder extends Seeder
                 $product = new Product();
                 $product->name = $faker->catchPhrase();
                 $product->price = $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 30);
-                $product->available = true;
-
-
-                
+               
                 $user->merchant->products()->save($product);
             }
             

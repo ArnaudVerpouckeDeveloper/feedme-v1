@@ -11,7 +11,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 price: document.querySelector(".createProductForm .price").value
             })
             .then(res => {
-                console.log("res", res);
+                if (res == "ok") {
+                    Swal.fire(
+                            'Geslaagd!',
+                            'Uw product is toegevoegd.',
+                            'success'
+                        )
+                        .then(res => {
+                            window.location.href = "/manager/producten";
+                        })
+                } else {
+                    throw (res);
+                }
             })
             .catch(error => {
                 console.log("error: ", error);

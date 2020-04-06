@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
             $table->string("name");
             $table->string("description")->nullable();
             $table->double("price");
-            $table->boolean("available");
             $table->boolean("orderable")->default(true);
             $table->string("merchant_id");
         });
