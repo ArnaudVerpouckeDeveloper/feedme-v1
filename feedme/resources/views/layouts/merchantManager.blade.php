@@ -35,6 +35,10 @@
                     <span class="material-icons">settings</span>
                     Instellingen</a>
             </nav>
+        <div class="signOut">
+            <p>{{auth()->user()->firstName}} {{auth()->user()->lastName}}</p>
+            <a href="/manager/logout"><span class="material-icons">power_settings_new</span></a>
+        </div>
         </header>
 
         <main>  

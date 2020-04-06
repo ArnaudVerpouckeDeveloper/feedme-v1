@@ -24,7 +24,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['verifyEmailNotice','logMerchantIn','login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
+        $this->middleware('auth:api', ['except' => ['logMerchantOut','verifyEmailNotice','logMerchantIn','login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
     }
 
     /**
@@ -182,6 +182,11 @@ class AuthController extends Controller
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function logMerchantOut(){
+        auth()->logout();
+        return redirect("/manager/login");
     }
 
     /**

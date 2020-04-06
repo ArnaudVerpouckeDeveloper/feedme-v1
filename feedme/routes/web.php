@@ -29,6 +29,7 @@ Route::get("/manager/register", function () {
     return view("merchantRegister");
 });
 Route::post("/manager/register", "AuthController@registerMerchant");
+Route::get("/manager/logout", "AuthController@logMerchantOut");
 
 
 Route::group([
