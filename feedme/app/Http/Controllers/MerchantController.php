@@ -6,7 +6,9 @@ use App\Merchant;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Product;
+use App\Rules\ScheduleTime;
 use App\User;
+
 
 
 class MerchantController extends Controller
@@ -32,19 +34,37 @@ class MerchantController extends Controller
 
 
     function updateLogo(Request $request){
+        $request->validate([
+            'logo' => 'required|max:5000|image',
+        ]);
         $file = $request->file("logo");
         $fileName = "logo-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
         $path = $file->move(public_path("/merchantLogos/"), $fileName);
         auth()->user()->merchant->update(['logoFileName' => $fileName]);
+        return redirect("/manager/instellingen");
     }
 
     function updateBanner(Request $request){
+        $request->validate([
+            'banner' => 'required|max:5000|image',
+        ]);
         $file = $request->file("banner");
         $fileName = "banner-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
         $path = $file->move(public_path("/merchantBanners/"), $fileName);
         auth()->user()->merchant->update(['bannerFileName' => $fileName]);
+        return redirect("/manager/instellingen");
     }
 
+
+
+
+    function updateMessage(Request $request){
+        $request->validate([
+            'message' => 'required'
+        ]);
+        auth()->user()->merchant->update(['message' => $request->message]);
+        return redirect("/manager/instellingen");
+    }
 
 
 
@@ -144,6 +164,86 @@ class MerchantController extends Controller
         }
         $productToDelete->delete();
         return response()->json("ok");
+    }
+
+
+
+
+
+
+
+
+
+
+
+    function updateTakeawayHours(Request $request){
+        
+        $request->validate([
+            'takeaway_monday_from_1' => ['required', new ScheduleTime],
+            'takeaway_monday_till_1' => ['required', new ScheduleTime],
+            'takeaway_monday_from_2' => ['required', new ScheduleTime],
+            'takeaway_monday_till_2' => ['required', new ScheduleTime],
+            'takeaway_tuesday_from_1' => ['required', new ScheduleTime],
+            'takeaway_tuesday_till_1' => ['required', new ScheduleTime],
+            'takeaway_tuesday_from_2' => ['required', new ScheduleTime],
+            'takeaway_tuesday_till_2' => ['required', new ScheduleTime],
+            'takeaway_wednesday_from_1' => ['required', new ScheduleTime],
+            'takeaway_wednesday_till_1' => ['required', new ScheduleTime],
+            'takeaway_wednesday_from_2' => ['required', new ScheduleTime],
+            'takeaway_wednesday_till_2' => ['required', new ScheduleTime],
+            'takeaway_thursday_from_1' => ['required', new ScheduleTime],
+            'takeaway_thursday_till_1' => ['required', new ScheduleTime],
+            'takeaway_thursday_from_2' => ['required', new ScheduleTime],
+            'takeaway_thursday_till_2' => ['required', new ScheduleTime],
+            'takeaway_friday_from_1' => ['required', new ScheduleTime],
+            'takeaway_friday_till_1' => ['required', new ScheduleTime],
+            'takeaway_friday_from_2' => ['required', new ScheduleTime],
+            'takeaway_friday_till_2' => ['required', new ScheduleTime],
+            'takeaway_saturday_from_1' => ['required', new ScheduleTime],
+            'takeaway_saturday_till_1' => ['required', new ScheduleTime],
+            'takeaway_saturday_from_2' => ['required', new ScheduleTime],
+            'takeaway_saturday_till_2' => ['required', new ScheduleTime],
+            'takeaway_sunday_from_1' => ['required', new ScheduleTime],
+            'takeaway_sunday_till_1' => ['required', new ScheduleTime],
+            'takeaway_sunday_from_2' => ['required', new ScheduleTime],
+            'takeaway_sunday_till_2' => ['required', new ScheduleTime]
+            ]);
+        
+
+        $merchant = auth()->user()->merchant();
+        $merchant->update([
+            'takeaway_monday_from_1' => $request->takeaway_monday_from_1,
+            'takeaway_monday_till_1' => $request->takeaway_monday_till_1,
+            'takeaway_monday_from_2' => $request->takeaway_monday_from_2,
+            'takeaway_monday_till_2' => $request->takeaway_monday_till_2,
+            'takeaway_tuesday_from_1' => $request->takeaway_tuesday_from_1,
+            'takeaway_tuesday_till_1' => $request->takeaway_tuesday_till_1,
+            'takeaway_tuesday_from_2' => $request->takeaway_tuesday_from_2,
+            'takeaway_tuesday_till_2' => $request->takeaway_tuesday_till_2,
+            'takeaway_wednesday_from_1' => $request->takeaway_wednesday_from_1,
+            'takeaway_wednesday_till_1' => $request->takeaway_wednesday_till_1,
+            'takeaway_wednesday_from_2' => $request->takeaway_wednesday_from_2,
+            'takeaway_wednesday_till_2' => $request->takeaway_wednesday_till_2,
+            'takeaway_thursday_from_1' => $request->takeaway_thursday_from_1,
+            'takeaway_thursday_till_1' => $request->takeaway_thursday_till_1,
+            'takeaway_thursday_from_2' => $request->takeaway_thursday_from_2,
+            'takeaway_thursday_till_2' => $request->takeaway_thursday_till_2,
+            'takeaway_friday_from_1' => $request->takeaway_friday_from_1,
+            'takeaway_friday_till_1' => $request->takeaway_friday_till_1,
+            'takeaway_friday_from_2' => $request->takeaway_friday_from_2,
+            'takeaway_friday_till_2' => $request->takeaway_friday_till_2,
+            'takeaway_saturday_from_1' => $request->takeaway_saturday_from_1,
+            'takeaway_saturday_till_1' => $request->takeaway_saturday_till_1,
+            'takeaway_saturday_from_2' => $request->takeaway_saturday_from_2,
+            'takeaway_saturday_till_2' => $request->takeaway_saturday_till_2,
+            'takeaway_sunday_from_1' => $request->takeaway_sunday_from_1,
+            'takeaway_sunday_till_1' => $request->takeaway_sunday_till_1,
+            'takeaway_sunday_from_2' => $request->takeaway_sunday_from_2,
+            'takeaway_sunday_till_2' => $request->takeaway_sunday_till_2
+            ]);
+
+
+        return redirect("/manager/instellingen");
     }
 
 }

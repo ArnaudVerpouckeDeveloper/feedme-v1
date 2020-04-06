@@ -481,6 +481,95 @@ body main .products li form .row.buttons input[type=submit] {
 body main .products li form .row.buttons input[type=submit]:hover {
   background-color: #375f31;
 }
+body main .settings {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body main .settings form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8rem;
+}
+body main .settings form label {
+  margin-bottom: 0.5rem;
+}
+body main .settings form input[type=file],
+body main .settings form textarea {
+  margin-bottom: 1rem;
+}
+body main .settings form textarea {
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.7rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+}
+body main .settings form textarea:focus {
+  outline: none;
+}
+body main .settings form img {
+  margin-bottom: 1rem;
+  height: 10rem;
+  object-fit: contain;
+  margin-left: 0;
+  display: block;
+  object-position: left;
+}
+body main .settings form img.square {
+  width: 10rem;
+  object-fit: cover;
+}
+body main .settings form input[type=submit] {
+  background-color: #68A25F;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  padding: 0.4rem 1rem;
+  width: 8rem;
+}
+body main .settings form input[type=submit]:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+body main .settings form p.error {
+  color: #e43a3a;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}
+body main .settings form.schedule > label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #68A25F;
+}
+body main .settings form.schedule .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+body main .settings form.schedule .row label {
+  margin: unset;
+}
+body main .settings form.schedule .row label:first-of-type {
+  width: 8rem;
+}
+body main .settings form.schedule .row label b {
+  font-weight: bold;
+}
+body main .settings form.schedule .row select {
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+}
+body main .settings form.schedule .row select:hover {
+  cursor: pointer;
+  border-color: #68A25F;
+}
+body main .settings form.schedule .row select:focus {
+  outline: none;
+}
 
 .switch {
   position: relative;
