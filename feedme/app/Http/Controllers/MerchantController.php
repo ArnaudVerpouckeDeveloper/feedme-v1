@@ -83,6 +83,19 @@ class MerchantController extends Controller
 
 
 
+    function confirmOrder(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["confirmed" => true]);
+        return response()->json("ok");
+    }
+
+
+    function denyOrder(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["denied" => true]);
+        return response()->json("ok");
+    }
+
 
 
 

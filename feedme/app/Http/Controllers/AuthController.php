@@ -125,6 +125,7 @@ class AuthController extends Controller
             'address_zip' => "required",
             'address_city' => "required",
             'tax_number' => "required",
+            'merchantPhone' => "required"
             ]);
 
         $user = $this->registerUser($request);
@@ -135,12 +136,13 @@ class AuthController extends Controller
         $newMerchant = new Merchant();
         $newMerchant->name = $request->merchantName;
         $newMerchant->apiName = $this->generateApiNameFromMerchantName($request->merchantName);
-        $newMerchant->mobilePhone = $request->mobilePhone;
+        $newMerchant->merchantPhone = $request->merchantPhone;
         $newMerchant->address_street = $request->address_street;
         $newMerchant->address_number = $request->address_number;
         $newMerchant->address_zip = $request->address_zip;
         $newMerchant->address_city = $request->address_city;
         $newMerchant->tax_number = $request->tax_number;
+        
         $user->merchant()->save($newMerchant);
 
         return view("postRegistration");
@@ -229,7 +231,8 @@ class AuthController extends Controller
             'lastName' => 'required|min:1|string',
             'email' => 'required|email:rfc,dns|unique:users',
             'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!$#%]).+$/', 'confirmed'],
-            'password_confirmation' => 'required'
+            'password_confirmation' => 'required',
+            'mobilePhone' => "required"
         ]);
 
         //'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(@-!_?#|[^\w])).+$/']
@@ -249,7 +252,8 @@ class AuthController extends Controller
             'lastName' => $request->lastName,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'verificationCode' => Str::random(128)
+            'verificationCode' => Str::random(128),
+            'mobilePhone' => $request->mobilePhone
         ]);
         Mail::to($user->email)->send(new ConfirmEmail($user));
         return $user;

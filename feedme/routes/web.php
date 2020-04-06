@@ -45,6 +45,10 @@ Route::group([
     Route::put('/manager/producten/toggleOrderable', "MerchantController@toggleOrderable");
     Route::put('/manager/producten/updateProduct', "MerchantController@updateProduct");
     Route::delete('/manager/producten/deleteProduct', "MerchantController@deleteProduct");
+
+    Route::put('/manager/orders/confirmOrder', "MerchantController@confirmOrder");
+    Route::put('/manager/orders/denyOrder', "MerchantController@denyOrder");
+
 });
 
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");

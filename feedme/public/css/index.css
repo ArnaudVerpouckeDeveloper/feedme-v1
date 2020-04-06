@@ -175,42 +175,93 @@ body main .merchantAuthPanel .register a:hover {
   text-decoration: underline;
 }
 body main .orders .order {
-  border: 1px solid #c3c3c3;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+body main .orders .order.confirmed .orderOverview, body main .orders .order.denied .orderOverview {
+  border-color: white;
+  color: white;
+}
+body main .orders .order.confirmed .orderOverview .totalPrice, body main .orders .order.denied .orderOverview .totalPrice {
+  color: white;
+}
+body main .orders .order.confirmed .orderSections > li, body main .orders .order.denied .orderSections > li {
+  color: white;
+  border-color: white;
+}
+body main .orders .order.confirmed .orderOverview {
+  background-color: #68A25F;
+}
+body main .orders .order.confirmed .orderSections > li {
+  background-color: #68A25F;
+}
+body main .orders .order.denied .orderOverview {
+  background-color: #e43a3a;
+}
+body main .orders .order.denied .orderSections > li {
+  background-color: #e43a3a;
+}
+body main .orders .order .orderOverview {
+  border: 1px solid #c3c3c3;
   background-color: #fbfbfb;
+  width: 70%;
+  padding: 1rem;
+}
+body main .orders .order .orderOverview > ul {
+  margin-bottom: 1rem;
+}
+body main .orders .order .orderOverview > ul li {
+  display: flex;
+  margin-bottom: 0.3rem;
+}
+body main .orders .order .orderOverview > ul li .amount {
+  width: 2rem;
+}
+body main .orders .order .orderOverview .totalPrice {
+  font-weight: bold;
+  color: #68A25F;
+}
+body main .orders .order .orderOverview div > .title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+body main .orders .order .orderOverview .remarks {
+  margin-top: 2rem;
+}
+body main .orders .order .orderOverview .contactDetails {
+  margin-top: 2rem;
+}
+body main .orders .order .orderOverview .contactDetails p {
+  display: flex;
+}
+body main .orders .order .orderOverview .contactDetails p span {
+  width: 15rem;
+}
+body main .orders .order .orderOverview .deliveryDetails {
+  margin-top: 2rem;
 }
 body main .orders .order .orderSections {
+  width: 30%;
   display: flex;
-  flex-wrap: wrap;
+  align-self: flex-start;
 }
 body main .orders .order .orderSections > li {
-  min-height: 4rem;
+  min-height: 8rem;
   padding: 1rem;
-  border-left: 1px solid #c3c3c3;
+  border: 1px solid #c3c3c3;
+  background-color: #fbfbfb;
   box-sizing: border-box;
+  width: 33%;
+  border-right: none;
+}
+body main .orders .order .orderSections > li:last-of-type {
+  border-right: 1px solid #c3c3c3;
 }
 body main .orders .order .orderSections > li:first-of-type {
   border-left: none;
 }
-body main .orders .order .orderSections > li.orderOverview {
-  width: 70%;
-}
-body main .orders .order .orderSections > li.orderOverview ul li {
-  display: flex;
-  margin-bottom: 0.3rem;
-}
-body main .orders .order .orderSections > li.orderOverview ul li .amount {
-  width: 2rem;
-}
-body main .orders .order .orderSections > li.orderOverview .remarks {
-  margin-top: 2rem;
-}
-body main .orders .order .orderSections > li.orderOverview .remarks > .title {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
 body main .orders .order .orderSections > li.deliveryMethod {
-  width: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -233,7 +284,6 @@ body main .orders .order .orderSections > li.action {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 10%;
 }
 body main .orders .order .orderSections > li.action .material-icons {
   margin-bottom: 0.7rem;
@@ -254,9 +304,6 @@ body main .orders .order .orderSections > li.confirmOrder:hover {
 body main .orders .order .orderSections > li.denyOrder:hover {
   background-color: #e43a3a;
   color: white;
-}
-body main .orders .order .orderSections > li.totalPrice {
-  width: 70%;
 }
 body main .createProductForm {
   padding: 4rem;

@@ -24,7 +24,7 @@ class CreateMerchantsTable extends Migration
             $table->boolean("deliveryMethod_takeaway")->default(true);
             $table->boolean("deliveryMethod_delivery")->default(true);
             $table->timestamps();
-            $table->string("mobilePhone");
+            $table->string("merchantPhone");
             $table->string("address_street");
             $table->string("address_number");
             $table->integer("address_zip");

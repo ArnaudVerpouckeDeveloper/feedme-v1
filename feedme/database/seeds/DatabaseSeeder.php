@@ -36,13 +36,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'arnaud@test.com',
             'password' => bcrypt('123'),
             'verificationCode' => Str::random(128),
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'mobilePhone' => "0479456321"
         ]);
         $merchant1->roles()->attach($merchantRole);
         $newMerchant = new Merchant();
         $newMerchant->name = "Arnaud's restaurant";
         $newMerchant->apiName = "arnaudsrestaurant";
-        $newMerchant->mobilePhone = "0470123456";
+        $newMerchant->merchantPhone = "0470123456";
         $newMerchant->address_street = $faker->streetName();
         $newMerchant->address_number = $faker->buildingNumber;
         $newMerchant->address_zip = 8800;
@@ -65,13 +66,14 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Qais',
             'email' => 'malat@test.com',
             'password' => bcrypt('123'),
-            'verificationCode' => Str::random(128)
+            'verificationCode' => Str::random(128),
+            'mobilePhone' => "0479456321"
         ]);
         $merchant2->roles()->attach($merchantRole);
         $newMerchant = new Merchant();
         $newMerchant->name = "Qais & fresh";
         $newMerchant->apiName = "qaisandfresh";
-        $newMerchant->mobilePhone = "0470123456";
+        $newMerchant->merchantPhone = "0470123456";
         $newMerchant->address_street = $faker->streetName();
         $newMerchant->address_number = $faker->buildingNumber;
         $newMerchant->address_zip = 8800;
@@ -88,7 +90,8 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'De Smedt',
             'email' => 'emma@test.com',
             'password' => bcrypt('123'),
-            'verificationCode' => Str::random(128)
+            'verificationCode' => Str::random(128),
+            'mobilePhone' => "0479456321"
         ]);
         $customer1->roles()->attach($customerRole);
         $customer1->customer()->save(new Customer());
@@ -99,7 +102,8 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Geesens',
             'email' => 'bart@test.com',
             'password' => bcrypt('123'),
-            'verificationCode' => Str::random(128)
+            'verificationCode' => Str::random(128),
+            'mobilePhone' => "0479456321"
         ]);
         $customer2->roles()->attach($customerRole);
         $customer2->customer()->save(new Customer());
@@ -170,9 +174,15 @@ class DatabaseSeeder extends Seeder
 
 
                 $productsInStock = Product::all();
+                $totalPrice = 0;
                 for ($j = rand(0,3); $j <= rand(3,4); $j++){
                     $order->products()->attach($productsInStock[$j]);
+                    $totalPrice = $totalPrice + $productsInStock[$j]->price;
                 }
+
+                $order->totalPrice = $totalPrice;
+                $order->save();
+
 
                 
                 $order->products()->attach($productsInStock[0]);

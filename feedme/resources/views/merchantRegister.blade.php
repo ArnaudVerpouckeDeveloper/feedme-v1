@@ -53,13 +53,13 @@
                     <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <label>GSM-nummer</label>
+                    <label>Persoonlijk GSM-nummer</label>
                     <input type="text" name="mobilePhone" value="{{ old('mobilePhone') }}"/>
                     @error("mobilePhone")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <label>Naam van uw horecazaak</label>
+                    <label>Naam horecazaak</label>
                     <input type="text" name="merchantName" value="{{ old('merchantName') }}"/>
                     @error("merchantName")
                     <p class="error">{{ $message }}</p>
@@ -86,6 +86,12 @@
                     <label>Stad</label>
                     <input type="text" name="address_city" value="{{ old('address_city') }}"/>
                     @error("address_city")
+                    <p class="error">{{ $message }}</p>
+                    @enderror
+
+                    <label>Telefoonnummer horecazaak</label>
+                    <input type="text" name="merchantPhone" value="{{ old('merchantPhone') }}"/>
+                    @error("merchantPhone")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
