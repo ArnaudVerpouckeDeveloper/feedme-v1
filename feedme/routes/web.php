@@ -50,6 +50,7 @@ Route::group([
     Route::put('/manager/orders/denyOrder', "MerchantController@denyOrder");
     
     Route::put('/manager/settings/updateTakeawayHours', "MerchantController@updateTakeawayHours");
+    Route::put('/manager/settings/updateDeliveryHours', "MerchantController@updateDeliveryHours");
     Route::put('/manager/settings/updateBanner', "MerchantController@updateBanner");
     Route::put('/manager/settings/updateLogo', "MerchantController@updateLogo");
     Route::put('/manager/settings/updateMessage', "MerchantController@updateMessage");

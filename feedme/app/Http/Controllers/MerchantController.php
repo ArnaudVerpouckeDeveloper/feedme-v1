@@ -246,4 +246,76 @@ class MerchantController extends Controller
         return redirect("/manager/instellingen");
     }
 
+
+    
+    function updateDeliveryHours(Request $request){
+        
+        $request->validate([
+            'delivery_monday_from_1' => ['required', new ScheduleTime],
+            'delivery_monday_till_1' => ['required', new ScheduleTime],
+            'delivery_monday_from_2' => ['required', new ScheduleTime],
+            'delivery_monday_till_2' => ['required', new ScheduleTime],
+            'delivery_tuesday_from_1' => ['required', new ScheduleTime],
+            'delivery_tuesday_till_1' => ['required', new ScheduleTime],
+            'delivery_tuesday_from_2' => ['required', new ScheduleTime],
+            'delivery_tuesday_till_2' => ['required', new ScheduleTime],
+            'delivery_wednesday_from_1' => ['required', new ScheduleTime],
+            'delivery_wednesday_till_1' => ['required', new ScheduleTime],
+            'delivery_wednesday_from_2' => ['required', new ScheduleTime],
+            'delivery_wednesday_till_2' => ['required', new ScheduleTime],
+            'delivery_thursday_from_1' => ['required', new ScheduleTime],
+            'delivery_thursday_till_1' => ['required', new ScheduleTime],
+            'delivery_thursday_from_2' => ['required', new ScheduleTime],
+            'delivery_thursday_till_2' => ['required', new ScheduleTime],
+            'delivery_friday_from_1' => ['required', new ScheduleTime],
+            'delivery_friday_till_1' => ['required', new ScheduleTime],
+            'delivery_friday_from_2' => ['required', new ScheduleTime],
+            'delivery_friday_till_2' => ['required', new ScheduleTime],
+            'delivery_saturday_from_1' => ['required', new ScheduleTime],
+            'delivery_saturday_till_1' => ['required', new ScheduleTime],
+            'delivery_saturday_from_2' => ['required', new ScheduleTime],
+            'delivery_saturday_till_2' => ['required', new ScheduleTime],
+            'delivery_sunday_from_1' => ['required', new ScheduleTime],
+            'delivery_sunday_till_1' => ['required', new ScheduleTime],
+            'delivery_sunday_from_2' => ['required', new ScheduleTime],
+            'delivery_sunday_till_2' => ['required', new ScheduleTime]
+            ]);
+        
+
+        $merchant = auth()->user()->merchant();
+        $merchant->update([
+            'delivery_monday_from_1' => $request->delivery_monday_from_1,
+            'delivery_monday_till_1' => $request->delivery_monday_till_1,
+            'delivery_monday_from_2' => $request->delivery_monday_from_2,
+            'delivery_monday_till_2' => $request->delivery_monday_till_2,
+            'delivery_tuesday_from_1' => $request->delivery_tuesday_from_1,
+            'delivery_tuesday_till_1' => $request->delivery_tuesday_till_1,
+            'delivery_tuesday_from_2' => $request->delivery_tuesday_from_2,
+            'delivery_tuesday_till_2' => $request->delivery_tuesday_till_2,
+            'delivery_wednesday_from_1' => $request->delivery_wednesday_from_1,
+            'delivery_wednesday_till_1' => $request->delivery_wednesday_till_1,
+            'delivery_wednesday_from_2' => $request->delivery_wednesday_from_2,
+            'delivery_wednesday_till_2' => $request->delivery_wednesday_till_2,
+            'delivery_thursday_from_1' => $request->delivery_thursday_from_1,
+            'delivery_thursday_till_1' => $request->delivery_thursday_till_1,
+            'delivery_thursday_from_2' => $request->delivery_thursday_from_2,
+            'delivery_thursday_till_2' => $request->delivery_thursday_till_2,
+            'delivery_friday_from_1' => $request->delivery_friday_from_1,
+            'delivery_friday_till_1' => $request->delivery_friday_till_1,
+            'delivery_friday_from_2' => $request->delivery_friday_from_2,
+            'delivery_friday_till_2' => $request->delivery_friday_till_2,
+            'delivery_saturday_from_1' => $request->delivery_saturday_from_1,
+            'delivery_saturday_till_1' => $request->delivery_saturday_till_1,
+            'delivery_saturday_from_2' => $request->delivery_saturday_from_2,
+            'delivery_saturday_till_2' => $request->delivery_saturday_till_2,
+            'delivery_sunday_from_1' => $request->delivery_sunday_from_1,
+            'delivery_sunday_till_1' => $request->delivery_sunday_till_1,
+            'delivery_sunday_from_2' => $request->delivery_sunday_from_2,
+            'delivery_sunday_till_2' => $request->delivery_sunday_till_2
+            ]);
+
+
+        return redirect("/manager/instellingen");
+    }
+
 }
