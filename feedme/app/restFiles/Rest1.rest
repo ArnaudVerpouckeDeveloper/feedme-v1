@@ -20,8 +20,16 @@ Accept: application/json
     "firstName": "Ditiseenvoornaam",
     "lastName": "Ditiseenachternaam",
     "email": "merchant1@test.com",
-    "password": "12345678",
-    "merchantName": "ditiseenmerchantapiname"
+    "password": "Voornaam-achternaam2019",
+    "password_confirmation": "Voornaam-achternaam2019",
+    "merchantName": "ditiseenmerchantapiname",
+    "mobilePhone": "0400 123 456",
+    "address_street": "Ergenslaan",
+    "address_number": "22b",
+    "address_zip": "8520",
+    "address_city": "Kuurne",
+    "tax_number": "BE 1234.567.890",
+    "merchantPhone": "0479 333 222"
 }
 
 
@@ -35,7 +43,9 @@ Accept: application/json
     "firstName": "voornaamabc",
     "lastName": "achternaamabc",
     "email": "arnaud.verpoucke@student.howest.be",
-    "password": "Voornaam-achternaam2019"
+    "password": "Voornaam-achternaam2019",
+    "password_confirmation": "Voornaam-achternaam2019",
+    "mobilePhone": "0400 123 456"
 }
 
 

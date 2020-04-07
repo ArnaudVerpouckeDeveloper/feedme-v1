@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Mail;
 use Str;
 
 
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
+
+
 class AuthController extends Controller
 {
     /**
@@ -36,35 +41,15 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = auth("api")->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        if (auth()->user()->hasAnyRole("merchant")){
-            return response()->json(['role' => 'merchant']);
-
-            //return redirect()->route('merchant-login', ['email' => $request->email, 'password' => $request->password]);
-
-
-
-            //return response()->json(['redirect' => 'http://127.0.0.1:8000/manager/login']);
-            //return redirect("/manager/login")->with('email', $request->email)->with('password', $request->password);
-        }
-
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token);    
     }
 
-
-
-
-    
     function verifyEmailNotice(){
         return back()->withError("Om aan te melden dient u eerst nog uw e-mailadres te bevestigen.");
     }
-
-
-
-
 
     public function logMerchantIn(Request $request)
     {
@@ -83,27 +68,6 @@ class AuthController extends Controller
         }
         else{
             return back()->withError('Het opgegeven wachtwoord of e-mailadres is niet correct, probeer opnieuw.');
-        }
-
-        /*
-        if (auth()->attempt($credentials)) {
-            
-            $errors = new MessageBag(['password' => ['Email and/or password invalid.']]); // if Auth::attempt fails (wrong credentials) create a new message bag instance.
-
-            return Redirect::back()->withErrors($errors)->withInput(Input::except('password')); // redirect back to the login page, using ->withErrors($errors) you send the error created above
-            
-        }
-        */
-
-        if (auth()->user()->hasAnyRole("merchant")){
-            return response()->json(['role' => 'merchant']);
-
-            //return redirect()->route('merchant-login', ['email' => $request->email, 'password' => $request->password]);
-
-
-
-            //return response()->json(['redirect' => 'http://127.0.0.1:8000/manager/login']);
-            //return redirect("/manager/login")->with('email', $request->email)->with('password', $request->password);
         }
 
         return $this->respondWithToken($token);
@@ -213,7 +177,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60 * 3
+            'expires_in' => auth("api")->factory()->getTTL() * 60 * 3
         ]);
     }
 
@@ -226,7 +190,7 @@ class AuthController extends Controller
 
 
     public function registerUser($request){
-        $validatedData = $request->validate([
+        $request->validate([
             'firstName' => 'required|min:1|string',
             'lastName' => 'required|min:1|string',
             'email' => 'required|email:rfc,dns|unique:users',
@@ -282,6 +246,7 @@ class AuthController extends Controller
 
     public function registerCustomer(Request $request){
         $user = $this->registerUser($request);
+        
 
         $customerRole = Role::where("name", "customer")->get();
         $user->roles()->attach($customerRole);
@@ -289,6 +254,8 @@ class AuthController extends Controller
         $user->customer()->save(new Customer());
         return "ok";
      }
+
+
 
 
 
