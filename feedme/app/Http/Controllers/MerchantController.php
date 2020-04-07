@@ -8,6 +8,8 @@ use GuzzleHttp\Client;
 use App\Product;
 use App\Rules\ScheduleTime;
 use App\User;
+use Exception;
+use DateTime;
 
 
 
@@ -170,11 +172,6 @@ class MerchantController extends Controller
 
 
 
-
-    function orderPossibleInSchedule($merchant, $orderDeliveryMethod, $time){
-        
-        
-    }
 
 
     

@@ -28,4 +28,24 @@ class Merchant extends Model
         'deliveryMethod_takeaway' => 'boolean',
         'deliveryMethod_delivery' => 'boolean',
     ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
 }

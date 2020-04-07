@@ -56,6 +56,8 @@ Route::group([
     Route::put('/manager/settings/updateMessage', "MerchantController@updateMessage");
     Route::put('/manager/settings/updateMinimumWaitTime', "MerchantController@updateMinimumWaitTime");
     
+    Route::get('/manager/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
+
 });
 
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");

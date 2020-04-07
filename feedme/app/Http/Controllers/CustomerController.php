@@ -6,9 +6,12 @@ use App\Order;
 use App\Merchant;
 use Auth;
 use Illuminate\Http\Request;
+use App\Traits\SharedMerchantTrait;
 
 class CustomerController extends Controller
 {
+    use SharedMerchantTrait;
+
     function getMerchant($merchantId){
         $merchant = Merchant::find($merchantId);
         if ($merchant == null){
@@ -34,6 +37,7 @@ class CustomerController extends Controller
         $order = new Order();
 
 
+
         if ($this->isValidDeliveryMethod($merchant, $request->deliveryMethod)){
             $order->deliveryMethod = $request->deliveryMethod;
             if ($request->deliveryMethod == "delivery"){
@@ -52,18 +56,16 @@ class CustomerController extends Controller
         }
 
         $order->requestedTime = $request->requestedTime;
-        //$order->deliveryMethod = "takeaway"; //must be removed
-
         
         if ($this->productIdsAreValid($request->productIds, $merchant)){
-            
-            $merchant->orders()->save($order);
-            auth()->user()->customer->orders()->save($order);
+            if($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime )){
+                $merchant->orders()->save($order);
+                auth()->user()->customer->orders()->save($order);
 
-            foreach ($request->productIds as $productId){
-                $order->products()->attach(Product::find($productId));
+                foreach ($request->productIds as $productId){
+                    $order->products()->attach(Product::find($productId));
+                }
             }
-
         }
         else{
             exit();
