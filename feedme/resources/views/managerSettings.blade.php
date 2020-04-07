@@ -2964,10 +2964,33 @@
     </form>
 
 
+
+
+
+
+    <form method="POST" action="/manager/settings/updateMinimumWaitTime" class="schedule">
+        {{method_field('PUT')}}
+        @csrf
+        <label>Minimale wachttijd:</label>
+        <div class="row">
+            <select name="minimumWaitTime">
+                <option value='00:15'>00:15</option>
+                <option value='00:30'>00:30</option>
+                <option value='00:45'>00:45</option>
+                <option value='01:00'>01:00</option>
+                <option value='01:15'>01:15</option>
+                <option value='01:30'>01:30</option>
+                <option value='01:45'>01:45</option>
+                <option value='02:00'>02:00</option>
+                <option value='02:15'>02:15</option>
+                <option value='02:30'>02:30</option>
+                <option value='02:45'>02:45</option>
+                <option value='03:00'>03:00</option>
+            </select>
+        </div>
+        <input type="submit" value="opslaan"/>
+    </form>
 </div>
-
-
-
 @endsection
 
 
@@ -3051,6 +3074,10 @@
         const deliveryTime = deliverySchedule[i];
         document.querySelector("select[name='"+deliveryTime.name+"'] option[value='"+deliveryTime.value+"']").selected=true;      
     }
+
+    document.querySelector("select[name='minimumWaitTime'] option[value='{{$merchant->minimumWaitTime}}']").selected=true;      
+
+
 </script>
 <script src="{{asset('js/settings.js')}}"></script>
 @endsection

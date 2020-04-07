@@ -30,6 +30,7 @@ class CreateMerchantsTable extends Migration
             $table->integer("address_zip");
             $table->string("address_city");
             $table->string("tax_number");
+            $table->string("minimumWaitTime",20)->default("00:30");
 
             $table->string("takeaway_monday_from_1",20)->default("11:30");
             $table->string("takeaway_monday_till_1",20)->default("13:30");

@@ -171,9 +171,21 @@ class MerchantController extends Controller
 
 
 
+    function orderPossibleInSchedule($merchant, $orderDeliveryMethod, $time){
+        
+        
+    }
 
 
+    
+    function updateMinimumWaitTime(Request $request){
+        $request->validate([
+            'minimumWaitTime' => ['required', new ScheduleTime]
+        ]);        
 
+        $merchant = auth()->user()->merchant()->update(["minimumWaitTime" => $request->minimumWaitTime]);
+        return redirect("/manager/instellingen");
+    }
 
 
     function updateTakeawayHours(Request $request){
