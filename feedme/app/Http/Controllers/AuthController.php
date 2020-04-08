@@ -11,6 +11,7 @@ use App\Customer;
 use App\Merchant;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\ConfirmEmail;
+use App\Mail\confirmEmail_v2;
 use Illuminate\Support\Facades\Mail;
 use Str;
 
@@ -29,7 +30,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['logMerchantOut','verifyEmailNotice','logMerchantIn','login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
+        $this->middleware('auth:api', ['except' => ["sendBatchOfEmails",'logMerchantOut','verifyEmailNotice','logMerchantIn','login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
     }
 
     /**
@@ -314,4 +315,45 @@ class AuthController extends Controller
             return view("emailConfirmation");
         }
      }
+
+
+
+
+
+
+
+
+     
+
+    function sendBatchOfEmails(){
+        $user = User::first();
+        $emailAddresses = [
+            /*
+            "michele_coene@hotmail.com",
+            "michele.coene@hotmail.com",
+            "marie-michele.cecile.coene@vub.be",
+            "arnaud.verpoucke@hotmail.com",
+            "arnaud.verpoucke@student.howest.be",
+            "iemand4@gmail.com",
+            "arnaud@plenso.be",
+            "milat.omed@studiohyperdrive.be",
+            "qais187@gmail.com",
+            "milatomed@gmail.com",
+            "omedmil@cronos.be",
+            "milat.omed@student.howest.be",
+            "oksana.gorin@student.howest.be",
+            "oksana.gorin@somko.be",
+            "oksana_gorin@mail.ru",
+            "oksana.gorin.i@gmail.com",
+            "arno.arzumanyan@student.howest.be",
+            "arnogohar@yandex.ru",
+            "arnogohar@gmail.com",
+            "arno.arzumanyan@deloitte.com",
+            "dominos.roeselare@hotmail.com"*/
+        ];
+
+        foreach ($emailAddresses as $emailAddress) {
+            Mail::to($emailAddress)->send(new confirmEmail($user));
+        }     
+    }
 }

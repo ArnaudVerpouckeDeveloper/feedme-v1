@@ -331,4 +331,8 @@ class MerchantController extends Controller
         return redirect("/manager/instellingen");
     }
 
+
+
+
+
 }
