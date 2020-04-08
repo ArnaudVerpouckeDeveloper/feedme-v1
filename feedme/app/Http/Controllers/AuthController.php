@@ -44,7 +44,14 @@ class AuthController extends Controller
         if (! $token = auth("api")->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return $this->respondWithToken($token);    
+        else{
+            if(auth("api")->user()->hasVerifiedEmail()){
+                return $this->respondWithToken($token);    
+            }
+            else{
+                return response()->json("emailaddres not verified",401);
+            }
+        }
     }
 
     function verifyEmailNotice(){
