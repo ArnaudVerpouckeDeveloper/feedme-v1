@@ -1510,7 +1510,7 @@
         {{method_field('PUT')}}
         @csrf
 
-        <label>Afhalen:</label>
+        <label>Leveren:</label>
         <div class="row">
             <label><b>Maandag</b></label>
             <label>van:</label>

@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('css/reset.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}">
     </head>
-    <body>
+    <body class="green-bg">
         <main>
             <div class="merchantAuthPanel">
                 <img class="logo" src="{{asset('images/Logo_TP_Green.png')}}" alt="logo"/>

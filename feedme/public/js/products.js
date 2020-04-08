@@ -49,7 +49,7 @@ function setEventListenersForProduct(product) {
                 if (res == "ok") {
                     hideForm(product);
                     product.querySelector(".row.upper .name").innerHTML = name;
-                    product.querySelector(".row.upper .price").innerHTML = price;
+                    product.querySelector(".row.upper .price").innerHTML = "€ " + price;
 
                 } else {
                     throw (res);

@@ -1,6 +1,9 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+body.green-bg {
+  background-color: #68A25F;
+}
 body header {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   padding-top: 2rem;
@@ -87,6 +90,8 @@ body main .merchantAuthPanel {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5rem;
+  background-color: white;
+  border-radius: 0.3rem;
 }
 body main .merchantAuthPanel .logo {
   height: 4rem;
@@ -518,6 +523,9 @@ body main .settings form img {
 body main .settings form img.square {
   width: 10rem;
   object-fit: cover;
+}
+body main .settings form.bannerForm img.showBorder {
+  border: 1px dashed lightgrey;
 }
 body main .settings form input[type=submit] {
   background-color: #68A25F;

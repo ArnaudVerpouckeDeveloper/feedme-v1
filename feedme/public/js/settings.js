@@ -15,6 +15,7 @@ function readURL(input, DOM_preview_element) {
         reader.onload = function(e) {
             DOM_preview_element.src = e.target.result;
         }
+        DOM_preview_element.classList.add("showBorder");
 
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }

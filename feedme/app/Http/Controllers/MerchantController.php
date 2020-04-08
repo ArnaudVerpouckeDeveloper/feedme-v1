@@ -123,9 +123,9 @@ class MerchantController extends Controller
 
 
     function addProduct(Request $request){
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|min:2',
-            'price' => 'required|min:1'
+            'price' => ['required','min:0']
         ]);        
 
         $product = new Product();
@@ -146,6 +146,10 @@ class MerchantController extends Controller
     }
 
     function updateProduct(Request $request){
+        $request->validate([
+            'name' => 'required|min:2',
+            'price' => ['required','regex:/^\d*(\.|\,\d{2})?$/']
+        ]);
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->name = $request->name;
         $product->price = str_replace(",",".",$request->price);

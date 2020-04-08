@@ -15,6 +15,5 @@
 <a href="{{$confirmationLink}}" style="color:grey;margin-bottom:3rem;display:inline-block;font-size:1rem;">{{$confirmationLink}}</a>
 <p>Met vriendelijke groeten</p>
 <p style="margin-bottom:1rem;">Team SpeedMeal</p>
-<img style="height: 2rem;" src="{{ asset('/images/Logo_TP_Green.png') }}" alt=" logo SpeedMeal">
 </body>
 </html>
