@@ -136,8 +136,15 @@ trait SharedMerchantTrait
         }else{
             if (($requestedTime > $method_today_from_1 && $requestedTime < $method_today_till_1)||($requestedTime > $method_today_from_2 && $requestedTime < $method_today_till_2))
             {
+                $minimumWaitTime = null;
+                if ($orderDeliveryMethod == "takeaway"){
+                    $minimumWaitTime = $merchant->minimumWaitTime_takeaway;
+                }
+                elseif( $orderDeliveryMethod == "delivery"){
+                    $minimumWaitTime = $merchant->minimumWaitTime_delivery;
+                }
                 $currentTimeRoundedToNearestQuarter = $this->roundToNearestMinuteInterval($currentTime, 15);
-                $fastestTimeAnOrderMayBePlaced = $this->roundToNearestMinuteInterval(DateTime::createFromFormat("H:i",$currentTimeRoundedToNearestQuarter), $this->time_to_decimal($merchant->minimumWaitTime));
+                $fastestTimeAnOrderMayBePlaced = $this->roundToNearestMinuteInterval(DateTime::createFromFormat("H:i",$currentTimeRoundedToNearestQuarter), $this->time_to_decimal($minimumWaitTime));
                 $fastestTimeAnOrderMayBePlaced = DateTime::createFromFormat('H:i',date("H:i", strtotime('30 minutes', strtotime($currentTimeRoundedToNearestQuarter))));
 
                 if($requestedTime >= $fastestTimeAnOrderMayBePlaced){ 
