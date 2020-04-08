@@ -1,135 +1,122 @@
 <template>
-  <div>
-    <div class="landing">
-      <div class="landing-content">
-        <article>
-          <h1>SpeedMeal</h1>
-          <p>
-            Laat uw zelfstandige activiteiten niet
-            ophouden door het coronavirus.
-            SpeedMeal biedt u
-            <strong>GRATIS</strong> een systeem
-            aan waarop gerechten besteld kunnen worden.
-          </p>
-          <p>- Gebouwd door studenten, voor zelfstandigen.</p>
-        </article>
-      </div>
-      <v-img class="landing-illustration" src="/assets/images/landing.jpg"></v-img>
-    </div>
-    <About id="about" />
-    <Faq id="faq" />
-    <Contact id="contact" />
+  <div class="landing">
+    <v-img
+      class="landing-illustration v-row"
+      src="/assets/images/landing.jpg"
+      :gradient="overlayFilter"
+    >
+      <article class="landing-content col-11 col-sm-9 col-md-6 col-xl-4">
+        <img class="landing-content-img" src="/assets/images/Logo_Green.png" alt="SpeedMeal logo" />
+        <p class="landing-content-paragraph">
+          Laat uw zelfstandige activiteiten niet
+          ophouden door het coronavirus.
+          SpeedMeal biedt u
+          <strong>GRATIS</strong> een systeem
+          aan waarop gerechten besteld kunnen worden.
+        </p>
+        <p class="landing-content-ps">- Gebouwd door studenten, voor zelfstandigen.</p>
+        <div class="landing-cta">
+          <v-btn large color="green" class="landing-cta-customer">ETEN BESTELLEN</v-btn>
+          <span class="landing-cta-divider">of</span>
+          <v-btn large color="white" class="landing-cta-horeca">IK WIL MIJN ZAAK REGISTREREN</v-btn>
+        </div>
+      </article>
+    </v-img>
   </div>
 </template>
 
 <script>
-// import Contact from "../components/Contact.vue";
-// import About from "../components/About.vue";
-// import Faq from "../components/Faq.vue";
-
 export default {
   name: "Home",
-  components: {
-    // Contact,
-    // About,
-    // Faq
+  computed: {
+    overlayFilter() {
+      return "to top right, rgba(99, 162, 91, 0.33), rgba(4, 9, 0, 0.84)";
+    }
   }
 };
 </script>
-<style scoped>
+<style>
 .landing {
-  position: relative;
-  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
-article {
-  font-size: 1.6em;
-  position: relative;
-  transition: all 0.2s ease;
-  padding: 15px 0;
-}
-div {
-  color: #fff;
-}
-.landing-content {
-  width: 100vw;
-  height: 50%;
-  background: #4caf50;
-  transition: all 0.2s ease;
-  z-index: 1;
-  position: relative;
+.landing .v-responsive__content {
+  align-self: center;
 }
 .landing-illustration {
-  position: absolute;
-  right: 0;
-  width: 100%;
-  top: 0;
-  z-index: 0;
+  height: 81vh;
+  background-image: linear-gradient(
+    to top right,
+    rgba(100, 115, 201, 0.33),
+    rgba(25, 32, 72, 0.7)
+  );
 }
-h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
+.landing-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 23em;
+  margin: 0 auto;
+  font-size: 1.6em;
+  background: #fff;
+  transition: all 0.2s ease;
   text-align: center;
+  padding: 1em;
 }
 
-p {
+.landing-content-img {
+  margin-bottom: 12px;
+  color: #000;
+  margin: 0 auto;
+  max-width: 12em;
+}
+
+.landing-content-paragraph {
   max-width: 100%;
   padding-right: 5%;
   padding-left: 5%;
-  text-align: center;
+  color: #000;
+}
+.landing-content-ps {
+  font-size: 0.8em;
+}
+.landing-cta {
+  font-size: 0.8em;
+  color: #5f5f5f;
+  margin-top: 1.5em;
 }
 
+.landing-cta-customer {
+  color: #fff !important;
+}
+.landing-cta-divider {
+  display: block;
+  margin: 0.8em 0;
+}
+.landing-cta-horeca {
+  color: #000 !important;
+}
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 992px) {
-  .landing-illustration {
-    max-width: 100%;
-    height: 100%;
-  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  article {
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0;
-  }
+@media only screen and (max-width: 768px) {
   .landing-content {
-    width: 50vw;
-    height: 40em;
+    height: 26em;
+    padding: 1.5em !important;
   }
-  
+  .landing-cta-customer,
+  .landing-cta-horeca {
+    width: 100%;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .landing-content {
-    width: 100vw;
-    clip-path: polygon(0 0, 60% 0, 33% 100%, 0 100%);
-  }
-  h1 {
-    text-align: unset;
-    padding-left: 5%;
-  }
-  article {
-    padding-top: 3%;
-    font-size: 1.6em;
-    position: unset;
-    top: unset;
-    transform: unset;
-  }
-  p {
-    max-width: 40%;
-    padding-right: 5%;
-    padding-left: 5%;
-    text-align: left;
-  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1300px) {
-  .landing-content {
-    clip-path: polygon(0 0, 55% 0, 28% 100%, 0 100%);
-  }
 }
 </style>
