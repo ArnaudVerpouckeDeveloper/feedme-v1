@@ -16,9 +16,9 @@
         </p>
         <p class="landing-content-ps">- Gebouwd door studenten, voor zelfstandigen.</p>
         <div class="landing-cta">
-          <v-btn large color="green" class="landing-cta-customer">ETEN BESTELLEN</v-btn>
+          <v-btn tile large color="green" class="landing-cta-customer">ETEN BESTELLEN</v-btn>
           <span class="landing-cta-divider">of</span>
-          <v-btn large color="white" class="landing-cta-horeca">IK WIL MIJN ZAAK REGISTREREN</v-btn>
+          <v-btn tile large color="white" class="landing-cta-horeca">IK WIL MIJN ZAAK REGISTREREN</v-btn>
         </div>
       </article>
     </v-img>
@@ -114,6 +114,13 @@ export default {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .landing-cta-customer,
+  .landing-cta-horeca {
+    height: 3.5em !important;
+  }
+  .landing-cta-customer {
+    width: 14em !important;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
