@@ -181,12 +181,21 @@ class MerchantController extends Controller
 
 
     
-    function updateMinimumWaitTime(Request $request){
+    function updateMinimumWaitTimeForTakeaway(Request $request){
         $request->validate([
-            'minimumWaitTime' => ['required', new ScheduleTime]
+            'minimumWaitTime_takeaway' => ['required', new ScheduleTime]
         ]);        
 
-        $merchant = auth()->user()->merchant()->update(["minimumWaitTime" => $request->minimumWaitTime]);
+        $merchant = auth()->user()->merchant()->update(["minimumWaitTime_takeaway" => $request->minimumWaitTime_takeaway]);
+        return redirect("/manager/instellingen");
+    }
+
+    function updateMinimumWaitTimeForDelivery(Request $request){
+        $request->validate([
+            'minimumWaitTime_delivery' => ['required', new ScheduleTime]
+        ]);        
+
+        $merchant = auth()->user()->merchant()->update(["minimumWaitTime_delivery" => $request->minimumWaitTime_delivery]);
         return redirect("/manager/instellingen");
     }
 

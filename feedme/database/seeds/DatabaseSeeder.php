@@ -165,7 +165,9 @@ class DatabaseSeeder extends Seeder
                 if (rand(0,1) == 1){
                     $order->details = $faker->realText(100);
                 }
-                $order->requestedTime = date("Y-m-d H:i:s", strtotime("+1 hours"));
+                $extraHours = random_int(0,3);
+                $extraMinutes = random_int(0,60);
+                $order->requestedTime = date("Y-m-d H:i:s", strtotime("+$extraHours hour +$extraMinutes minutes"));
                 $order->confirmed = false;
                 
 

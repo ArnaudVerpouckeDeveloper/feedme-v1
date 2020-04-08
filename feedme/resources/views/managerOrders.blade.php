@@ -2,7 +2,8 @@
 
 @section('content')
     <ul class="orders">
-        @foreach ($merchant->orders as $order)
+        @foreach ($merchant->orders()->orderBy("requestedTime", "desc")->get() as $order)
+        @php $order->requestedTime = date("H:i", strtotime($order->requestedTime)); @endphp
         @if($order->confirmed)
     <li class="order confirmed" data-orderId="{{$order->id}}">
         
@@ -70,11 +71,11 @@
                 <li class="deliveryMethod">
                     @if($order->deliveryMethod == "delivery")
                         <p class="type">leveren</p>
-                        <p class="time">16:00</p>
+                        <p class="time">{{$order->requestedTime}}</p>
                     @endif
                     @if($order->deliveryMethod == "takeaway")
                         <p class="type">afhalen</p>
-                        <p class="time">16:00</p>
+                        <p class="time">{{$order->requestedTime}}</p>
                     @endif
                 </li>
                 @if ($order->confirmed || $order->denied)

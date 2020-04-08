@@ -54,8 +54,9 @@ Route::group([
     Route::put('/manager/settings/updateBanner', "MerchantController@updateBanner");
     Route::put('/manager/settings/updateLogo', "MerchantController@updateLogo");
     Route::put('/manager/settings/updateMessage', "MerchantController@updateMessage");
-    Route::put('/manager/settings/updateMinimumWaitTime', "MerchantController@updateMinimumWaitTime");
-    
+    Route::put('/manager/settings/updateMinimumWaitTimeForTakeaway', "MerchantController@updateMinimumWaitTimeForTakeaway");
+    Route::put('/manager/settings/updateMinimumWaitTimeForDelivery', "MerchantController@updateMinimumWaitTimeForDelivery");
+
     Route::get('/manager/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
 
 });

@@ -20,8 +20,15 @@ class CustomerController extends Controller
         $merchantObject = new \stdClass;
         $merchantObject->name = $merchant->name;
         $merchantObject->name = $merchant->id;
+        /* DEPRECATED, schedule should be used now
         $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
         $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
+        */
+
+        $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
+        $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
+
+
         $merchantObject->products = $merchant->products()->get();
 
         $merchantObject->opening_hours = [
@@ -128,6 +135,7 @@ class CustomerController extends Controller
 
 
 
+        /*
         if ($this->isValidDeliveryMethod($merchant, $request->deliveryMethod)){
             $order->deliveryMethod = $request->deliveryMethod;
             if ($request->deliveryMethod == "delivery"){
@@ -144,6 +152,27 @@ class CustomerController extends Controller
         else{
             exit();
         }
+        */
+
+
+        if ($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime)){
+            $order->deliveryMethod = $request->deliveryMethod;
+            if ($request->deliveryMethod == "delivery"){
+                $order->addressStreet = $request->addressStreet;
+                $order->addressNumber = $request->addressNumber;
+                $order->addressZipCode = $request->addressZipCode;
+                $order->addressCity = $request->addressCity;
+                $order->deliveryMethod = "delivery";
+            }
+            else{
+                $order->deliveryMethod = "takeaway";
+            }
+        }
+        else{
+            exit();
+        }
+
+
 
         $order->requestedTime = $request->requestedTime;
         
@@ -163,7 +192,7 @@ class CustomerController extends Controller
         
     }
 
-
+/*  DEPRECATED
     function isValidDeliveryMethod($merchant, $method){
         switch ($method) {
             case 'delivery':
@@ -181,6 +210,7 @@ class CustomerController extends Controller
         }
         return false;
     }
+*/
 
     function merchantIdExists($id){
         if (Merchant::find($id) != null){
