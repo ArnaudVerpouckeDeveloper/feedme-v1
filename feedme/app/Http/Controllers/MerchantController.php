@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Product;
 use App\Rules\ScheduleTime;
+use App\Rules\Price;
 use App\User;
 use Exception;
 use DateTime;
@@ -146,13 +147,14 @@ class MerchantController extends Controller
     }
 
     function updateProduct(Request $request){
+        $request->price = str_replace(",",".",$request->price);
         $request->validate([
             'name' => 'required|min:2',
-            'price' => ['required','regex:/^\d*(\.|\,\d{2})?$/']
+            'price' => ['required', new Price]
         ]);
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->name = $request->name;
-        $product->price = str_replace(",",".",$request->price);
+        $product->price = $request->price;
         $product->save();
         return response()->json("ok");
     }

@@ -24,6 +24,96 @@ class CustomerController extends Controller
         $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
         $merchantObject->products = $merchant->products()->get();
 
+        $merchantObject->opening_hours = [
+            "takeaway" => [
+                0 => [
+                    "from_1" => $merchant->takeaway_monday_from_1,
+                    "till_1" => $merchant->takeaway_monday_till_1,
+                    "from_2" => $merchant->takeaway_monday_from_2,
+                    "till_2" => $merchant->takeaway_monday_till_2
+                ],
+                1 => [
+                    "from_1" => $merchant->takeaway_tuesday_from_1,
+                    "till_1" => $merchant->takeaway_tuesday_till_1,
+                    "from_2" => $merchant->takeaway_tuesday_from_2,
+                    "till_2" => $merchant->takeaway_tuesday_till_2
+                ],
+                2 => [
+                    "from_1" => $merchant->takeaway_wednesday_from_1,
+                    "till_1" => $merchant->takeaway_wednesday_till_1,
+                    "from_2" => $merchant->takeaway_wednesday_from_2,
+                    "till_2" => $merchant->takeaway_wednesday_till_2
+                ],
+                3 => [
+                    "from_1" => $merchant->takeaway_thursday_from_1,
+                    "till_1" => $merchant->takeaway_thursday_till_1,
+                    "from_2" => $merchant->takeaway_thursday_from_2,
+                    "till_2" => $merchant->takeaway_thursday_till_2
+                ],
+                4 => [
+                    "from_1" => $merchant->takeaway_friday_from_1,
+                    "till_1" => $merchant->takeaway_friday_till_1,
+                    "from_2" => $merchant->takeaway_friday_from_2,
+                    "till_2" => $merchant->takeaway_friday_till_2
+                ],
+                5 => [
+                    "from_1" => $merchant->takeaway_saturday_from_1,
+                    "till_1" => $merchant->takeaway_saturday_till_1,
+                    "from_2" => $merchant->takeaway_saturday_from_2,
+                    "till_2" => $merchant->takeaway_saturday_till_2
+                ],
+                6 => [
+                    "from_1" => $merchant->takeaway_sunday_from_1,
+                    "till_1" => $merchant->takeaway_sunday_till_1,
+                    "from_2" => $merchant->takeaway_sunday_from_2,
+                    "till_2" => $merchant->takeaway_sunday_till_2
+                ]
+            ], 
+            "delivery" => [
+                0 => [
+                    "from_1" => $merchant->delivery_monday_from_1,
+                    "till_1" => $merchant->delivery_monday_till_1,
+                    "from_2" => $merchant->delivery_monday_from_2,
+                    "till_2" => $merchant->delivery_monday_till_2
+                ],
+                1 => [
+                    "from_1" => $merchant->delivery_tuesday_from_1,
+                    "till_1" => $merchant->delivery_tuesday_till_1,
+                    "from_2" => $merchant->delivery_tuesday_from_2,
+                    "till_2" => $merchant->delivery_tuesday_till_2
+                ],
+                2 => [
+                    "from_1" => $merchant->delivery_wednesday_from_1,
+                    "till_1" => $merchant->delivery_wednesday_till_1,
+                    "from_2" => $merchant->delivery_wednesday_from_2,
+                    "till_2" => $merchant->delivery_wednesday_till_2
+                ],
+                3 => [
+                    "from_1" => $merchant->delivery_thursday_from_1,
+                    "till_1" => $merchant->delivery_thursday_till_1,
+                    "from_2" => $merchant->delivery_thursday_from_2,
+                    "till_2" => $merchant->delivery_thursday_till_2
+                ],
+                4 => [
+                    "from_1" => $merchant->delivery_friday_from_1,
+                    "till_1" => $merchant->delivery_friday_till_1,
+                    "from_2" => $merchant->delivery_friday_from_2,
+                    "till_2" => $merchant->delivery_friday_till_2
+                ],
+                5 => [
+                    "from_1" => $merchant->delivery_saturday_from_1,
+                    "till_1" => $merchant->delivery_saturday_till_1,
+                    "from_2" => $merchant->delivery_saturday_from_2,
+                    "till_2" => $merchant->delivery_saturday_till_2
+                ],
+                6 => [
+                    "from_1" => $merchant->delivery_sunday_from_1,
+                    "till_1" => $merchant->delivery_sunday_till_1,
+                    "from_2" => $merchant->delivery_sunday_from_2,
+                    "till_2" => $merchant->delivery_sunday_till_2
+                ]]
+            ];
+
 
         return response()->json($merchantObject,200);
     }

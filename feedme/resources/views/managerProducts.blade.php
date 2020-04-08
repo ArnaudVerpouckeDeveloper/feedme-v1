@@ -25,13 +25,14 @@
     <li data-id="{{$product->id}}">
         <div class="row upper">
             <p class="name">{{$product->name}}</p>
-            <p class="price">€ {{str_replace(".", ",", $product->price)}}</p>
+            <p class="price">€ {{str_replace(".", ",", number_format($product->price, 2, '.', ''))}}</p>
+            
         </div>
 
         <form class="hidden">
             <div class="row inputValues">
                 <input type="text" name="name" placeholder="{{$product->name}}" class="name" value="{{$product->name}}"/>
-                <input type="value" name="price" placeholder="{{$product->price}}" class="price" value="{{str_replace('.', ',',$product->price)}}"/>    
+                <input type="value" name="price" placeholder="{{$product->price}}" class="price" value="{{str_replace(".", ",", number_format($product->price, 2, '.', ''))}}"/>    
             </div>
             <div class="row buttons">
                 <input type="button" value="Annuleren" class="cancel-button"/>

@@ -49,7 +49,7 @@ function setEventListenersForProduct(product) {
                 if (res == "ok") {
                     hideForm(product);
                     product.querySelector(".row.upper .name").innerHTML = name;
-                    product.querySelector(".row.upper .price").innerHTML = "€ " + price;
+                    product.querySelector(".row.upper .price").innerHTML = "€ " + addTrailZero(price, 2);
 
                 } else {
                     throw (res);
@@ -141,4 +141,33 @@ function hideForm(productDOM_element) {
     productDOM_element.querySelector("form").classList.add("hidden");
     productDOM_element.querySelector(".row.upper").classList.remove("hidden");
     productDOM_element.querySelector(".row.bottom").classList.remove("hidden");
+}
+
+function addTrailZero(num, digits) {
+    // addTrailZero() : add trailing zeroes to given number
+    // PARAM num : original number
+    //       digits : total number of decimal places required
+
+    var cString = num.toString(), // Convert to string
+        cLength = cString.indexOf(","); // Position of decimal point
+
+    // Is a whole number
+    if (cLength == -1) {
+        cLength = 0;
+        cString += ",";
+    }
+    // Is a decimal nummber 
+    else {
+        cLength = cString.substr(cLength + 1).length;
+    }
+
+    // Pad with zeroes
+    if (cLength < digits) {
+        for (let i = cLength; i < digits; i++) {
+            cString += "0";
+        }
+    }
+
+    // Return result
+    return cString;
 }
