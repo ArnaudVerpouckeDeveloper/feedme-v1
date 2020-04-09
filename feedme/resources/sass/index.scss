@@ -1,6 +1,10 @@
 $mainGreen: #68A25F;
 $mainRed: #e43a3a;
 $mediumGrey: grey;
+$alt-orange: #FCA326;
+$alt-blue: #4A8BEE;
+$alt-pink: #E62958;
+$alt-purple: #975bbd;
 body {
     font-family: "Poppins", sans-serif;
     &.green-bg {
@@ -673,6 +677,47 @@ body {
                     }
                 }
             }
+        }
+        .dashboard {
+            .basic-metrics {
+                display: flex;
+                justify-content: space-between;
+                li {
+                    padding: 0.4rem;
+                    width: 22%;
+                    box-sizing: border-box;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: $mainGreen;
+                    border-radius: 0.3rem;
+                    box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+                    color: white;
+                    .top {
+                        display: flex;
+                        align-items: center;
+                        font-size: 0.9rem;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        .material-icons {
+                            margin-right: 0.5rem;
+                        }
+                    }
+                    .value {
+                        margin-top: 0.5rem;
+                        font-size: 4rem;
+                        text-align: center;
+                        margin-top: 1rem;
+                        margin-bottom: 1rem;
+                    }
+                    &.warning {
+                        background-color: $alt-orange;
+                    }
+                    &.danger {
+                        background-color: $mainRed;
+                    }
+                }
+            }
+            .environmentLink {}
         }
     }
     .switch {

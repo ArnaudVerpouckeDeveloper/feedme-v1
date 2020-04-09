@@ -636,6 +636,44 @@ body main .settings form.schedule .row select:hover {
 body main .settings form.schedule .row select:focus {
   outline: none;
 }
+body main .dashboard .basic-metrics {
+  display: flex;
+  justify-content: space-between;
+}
+body main .dashboard .basic-metrics li {
+  padding: 0.4rem;
+  width: 22%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: #68A25F;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+body main .dashboard .basic-metrics li .top {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+body main .dashboard .basic-metrics li .top .material-icons {
+  margin-right: 0.5rem;
+}
+body main .dashboard .basic-metrics li .value {
+  margin-top: 0.5rem;
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+body main .dashboard .basic-metrics li.warning {
+  background-color: #FCA326;
+}
+body main .dashboard .basic-metrics li.danger {
+  background-color: #e43a3a;
+}
 body .switch {
   position: relative;
   display: inline-block;

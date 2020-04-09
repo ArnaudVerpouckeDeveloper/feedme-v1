@@ -85,7 +85,20 @@ class MerchantController extends Controller
 
     function showManagerDashboard(Request $request){
         $merchant = auth()->user()->merchant;
-        return view("managerDashboard")->with("merchant", $merchant);
+
+        $amountOfProducts = $merchant->products()->count();
+        $amountOfOpenOrders = $merchant->orders()->where("completed",false)->count();
+        $amountOfClosedOrders = $merchant->orders()->where("completed",true)->count();
+        $amountOfToDos = 10;
+
+
+        return view("managerDashboard")
+        ->with("merchant", $merchant)
+        ->with("amountOfProducts", $amountOfProducts)
+        ->with("amountOfOpenOrders", $amountOfOpenOrders)
+        ->with("amountOfClosedOrders", $amountOfClosedOrders)
+        ->with("amountOfToDos", $amountOfClosedOrders);
+
     }
 
     function showManagerOrders(Request $request){
@@ -384,6 +397,8 @@ class MerchantController extends Controller
         ]);      }
 
 
+
+        
 
 
 }

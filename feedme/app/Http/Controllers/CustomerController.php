@@ -30,6 +30,7 @@ class CustomerController extends Controller
         $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
         $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
 
+        $merchantObject->possibleTimes = $this->getPossibleRequestTimes($merchant);
 
         $merchantObject->products = $merchant->products()->get();
 
