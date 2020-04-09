@@ -338,7 +338,8 @@ body {
                                     background-color: gold;
                                 }
                             }
-                            &.acceptOrder {
+                            &.acceptOrder,
+                            &.completeOrder {
                                 &:hover {
                                     background-color: #68A25F;
                                     color: white;

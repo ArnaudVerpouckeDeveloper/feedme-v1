@@ -326,7 +326,7 @@ body main .orders .order .orderSections .row > li.action:hover {
 body main .orders .order .orderSections .row > li.addExtraTime:hover, body main .orders .order .orderSections .row > li.addExtraTime.delayed {
   background-color: gold;
 }
-body main .orders .order .orderSections .row > li.acceptOrder:hover {
+body main .orders .order .orderSections .row > li.acceptOrder:hover, body main .orders .order .orderSections .row > li.completeOrder:hover {
   background-color: #68A25F;
   color: white;
 }

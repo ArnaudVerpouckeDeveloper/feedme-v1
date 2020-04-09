@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'accepted', 'denied', 'extraTime'
+        'accepted', 'denied', 'extraTime', 'completed'
     ];
 
     public function products()

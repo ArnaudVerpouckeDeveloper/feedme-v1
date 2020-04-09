@@ -11,7 +11,30 @@ document.addEventListener("DOMContentLoaded", function() {
 function setEventListenersForOrder(order) {
     let orderId = order.dataset.orderid;
     if (order.classList.contains("accepted") || order.classList.contains("denied")) {
-
+        order.querySelector(".orderSections .completeOrder").addEventListener("click", async function(e) {
+            console.log("completing order...");
+            makeRequest("PUT", "/manager/orders/completeOrder", {
+                    orderId: orderId
+                })
+                .then(res => {
+                    if (res == "ok") {
+                        Swal.fire(
+                            'Geslaagd!',
+                            'Het order werd succesvol afgerond.',
+                            'success'
+                        );
+                        $(".order[data-orderId='" + orderId + "']").fadeOut(400, "swing", function() {
+                            order.remove();
+                        });
+                    } else {
+                        throw (res);
+                    }
+                })
+                .catch(error => {
+                    console.log("error: ", error);
+                    promptError();
+                });
+        });
     } else {
         order.querySelector(".orderSections .acceptOrder").addEventListener("click", async function(e) {
             console.log("confirming order...");
@@ -23,6 +46,8 @@ function setEventListenersForOrder(order) {
                         order.classList.add("accepted");
                         order.querySelector(".orderSections .acceptOrder").remove();
                         order.querySelector(".orderSections .denyOrder").remove();
+                        order.querySelector(".orderSections .deliveryMethod").insertAdjacentHTML("afterEnd", "<li class='action completeOrder'><span class='material-icons'>check</span><p>Voltooi</p></li>");
+                        setEventListenersForOrder(order);
                     } else {
                         throw (res);
                     }
@@ -54,6 +79,11 @@ function setEventListenersForOrder(order) {
                     promptError();
                 });
         });
+
+
+
+
+
 
 
 

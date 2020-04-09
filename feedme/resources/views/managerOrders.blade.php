@@ -2,17 +2,14 @@
 
 @section('content')
     <ul class="orders">
-        @foreach ($merchant->orders()->orderBy("requestedTime", "desc")->get() as $order)
+        @foreach ($merchant->orders()->where("completed",false)->orderBy("requestedTime", "desc")->get() as $order)
         @php $order->requestedTime = date("H:i", strtotime($order->requestedTime)); @endphp
         @if($order->accepted)
-    <li class="order accepted" data-orderId="{{$order->id}}">
-        
+            <li class="order accepted" data-orderId="{{$order->id}}">
         @elseif($order->denied)
             <li class="order denied" data-orderId="{{$order->id}}">
-        
         @else
             <li class="order" data-orderId="{{$order->id}}">
-        
         @endif
             <div class="orderOverview">
                 <ul>
@@ -84,7 +81,7 @@
                     @endif                    
                 </li>
                 @if ($order->accepted || $order->denied)
-
+                    <li class="action completeOrder"><span class="material-icons">check</span><p>Voltooi</p></li>
                 @else
                     <li class="action acceptOrder"><span class="material-icons">check</span><p>Accepteer</p></li>
                     <li class="action denyOrder"><span class="material-icons">close</span><p>Weiger</p></li>
@@ -105,6 +102,7 @@
 @endsection
 
 @section("scripts")
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{{asset('js/mountaineer.js')}}"></script>
 <script src="{{asset('js/orders.js')}}"></script>
 @endsection

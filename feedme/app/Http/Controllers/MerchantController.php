@@ -122,6 +122,13 @@ class MerchantController extends Controller
     }
 
 
+    function completeOrder(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["completed" => true]);
+        return response()->json("ok");
+    }
+
+
 
 
 

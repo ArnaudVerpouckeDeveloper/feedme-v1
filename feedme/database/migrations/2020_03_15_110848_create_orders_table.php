@@ -32,6 +32,7 @@ class CreateOrdersTable extends Migration
             $table->dateTime("requestedTime");
             $table->boolean("accepted")->default(false);
             $table->boolean("denied")->default(false);
+            $table->boolean("completed")->default(false);
             $table->string("deliveryMethod");
             $table->float("totalPrice")->nullable();
             $table->string("extratime")->nullable();
