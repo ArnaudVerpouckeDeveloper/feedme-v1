@@ -1510,7 +1510,7 @@
         {{method_field('PUT')}}
         @csrf
 
-        <label>Afhalen:</label>
+        <label>Leveren:</label>
         <div class="row">
             <label><b>Maandag</b></label>
             <label>van:</label>
@@ -2968,12 +2968,35 @@
 
 
 
-    <form method="POST" action="/manager/settings/updateMinimumWaitTime" class="schedule">
+    <form method="POST" action="/manager/settings/updateMinimumWaitTimeForTakeaway" class="schedule">
         {{method_field('PUT')}}
         @csrf
-        <label>Minimale wachttijd:</label>
+        <label>Minimale wachttijd voor afhalingen:</label>
         <div class="row">
-            <select name="minimumWaitTime">
+            <select name="minimumWaitTime_takeaway">
+                <option value='00:15'>00:15</option>
+                <option value='00:30'>00:30</option>
+                <option value='00:45'>00:45</option>
+                <option value='01:00'>01:00</option>
+                <option value='01:15'>01:15</option>
+                <option value='01:30'>01:30</option>
+                <option value='01:45'>01:45</option>
+                <option value='02:00'>02:00</option>
+                <option value='02:15'>02:15</option>
+                <option value='02:30'>02:30</option>
+                <option value='02:45'>02:45</option>
+                <option value='03:00'>03:00</option>
+            </select>
+        </div>
+        <input type="submit" value="opslaan"/>
+    </form>
+
+    <form method="POST" action="/manager/settings/updateMinimumWaitTimeForDelivery" class="schedule">
+        {{method_field('PUT')}}
+        @csrf
+        <label>Minimale wachttijd voor leveringen:</label>
+        <div class="row">
+            <select name="minimumWaitTime_delivery">
                 <option value='00:15'>00:15</option>
                 <option value='00:30'>00:30</option>
                 <option value='00:45'>00:45</option>
@@ -3075,7 +3098,8 @@
         document.querySelector("select[name='"+deliveryTime.name+"'] option[value='"+deliveryTime.value+"']").selected=true;      
     }
 
-    document.querySelector("select[name='minimumWaitTime'] option[value='{{$merchant->minimumWaitTime}}']").selected=true;      
+    document.querySelector("select[name='minimumWaitTime_takeaway'] option[value='{{$merchant->minimumWaitTime_takeaway}}']").selected=true;      
+    document.querySelector("select[name='minimumWaitTime_delivery'] option[value='{{$merchant->minimumWaitTime_delivery}}']").selected=true;      
 
 
 </script>

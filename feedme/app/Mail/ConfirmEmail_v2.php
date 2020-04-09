@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\User;
 
-class ConfirmEmail extends Mailable
+class ConfirmEmail_v2 extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,7 +30,7 @@ class ConfirmEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@speedmeal.be')->subject("Emailverificatie")
-                ->view('emails.confirmEmail');
+        return $this->from('noreply@speedmeal.be')
+                ->view('emails.confirmEmail_v2');
     }
 }

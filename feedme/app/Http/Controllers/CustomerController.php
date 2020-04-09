@@ -7,6 +7,8 @@ use App\Merchant;
 use Auth;
 use Illuminate\Http\Request;
 use App\Traits\SharedMerchantTrait;
+use App\Mail\ConfirmOrder;
+use Mail;
 
 class CustomerController extends Controller
 {
@@ -20,9 +22,106 @@ class CustomerController extends Controller
         $merchantObject = new \stdClass;
         $merchantObject->name = $merchant->name;
         $merchantObject->name = $merchant->id;
+        /* DEPRECATED, schedule should be used now
         $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
         $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
+        */
+
+        $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
+        $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
+
+
         $merchantObject->products = $merchant->products()->get();
+
+        $merchantObject->opening_hours = [
+            "takeaway" => [
+                0 => [
+                    "from_1" => $merchant->takeaway_monday_from_1,
+                    "till_1" => $merchant->takeaway_monday_till_1,
+                    "from_2" => $merchant->takeaway_monday_from_2,
+                    "till_2" => $merchant->takeaway_monday_till_2
+                ],
+                1 => [
+                    "from_1" => $merchant->takeaway_tuesday_from_1,
+                    "till_1" => $merchant->takeaway_tuesday_till_1,
+                    "from_2" => $merchant->takeaway_tuesday_from_2,
+                    "till_2" => $merchant->takeaway_tuesday_till_2
+                ],
+                2 => [
+                    "from_1" => $merchant->takeaway_wednesday_from_1,
+                    "till_1" => $merchant->takeaway_wednesday_till_1,
+                    "from_2" => $merchant->takeaway_wednesday_from_2,
+                    "till_2" => $merchant->takeaway_wednesday_till_2
+                ],
+                3 => [
+                    "from_1" => $merchant->takeaway_thursday_from_1,
+                    "till_1" => $merchant->takeaway_thursday_till_1,
+                    "from_2" => $merchant->takeaway_thursday_from_2,
+                    "till_2" => $merchant->takeaway_thursday_till_2
+                ],
+                4 => [
+                    "from_1" => $merchant->takeaway_friday_from_1,
+                    "till_1" => $merchant->takeaway_friday_till_1,
+                    "from_2" => $merchant->takeaway_friday_from_2,
+                    "till_2" => $merchant->takeaway_friday_till_2
+                ],
+                5 => [
+                    "from_1" => $merchant->takeaway_saturday_from_1,
+                    "till_1" => $merchant->takeaway_saturday_till_1,
+                    "from_2" => $merchant->takeaway_saturday_from_2,
+                    "till_2" => $merchant->takeaway_saturday_till_2
+                ],
+                6 => [
+                    "from_1" => $merchant->takeaway_sunday_from_1,
+                    "till_1" => $merchant->takeaway_sunday_till_1,
+                    "from_2" => $merchant->takeaway_sunday_from_2,
+                    "till_2" => $merchant->takeaway_sunday_till_2
+                ]
+            ], 
+            "delivery" => [
+                0 => [
+                    "from_1" => $merchant->delivery_monday_from_1,
+                    "till_1" => $merchant->delivery_monday_till_1,
+                    "from_2" => $merchant->delivery_monday_from_2,
+                    "till_2" => $merchant->delivery_monday_till_2
+                ],
+                1 => [
+                    "from_1" => $merchant->delivery_tuesday_from_1,
+                    "till_1" => $merchant->delivery_tuesday_till_1,
+                    "from_2" => $merchant->delivery_tuesday_from_2,
+                    "till_2" => $merchant->delivery_tuesday_till_2
+                ],
+                2 => [
+                    "from_1" => $merchant->delivery_wednesday_from_1,
+                    "till_1" => $merchant->delivery_wednesday_till_1,
+                    "from_2" => $merchant->delivery_wednesday_from_2,
+                    "till_2" => $merchant->delivery_wednesday_till_2
+                ],
+                3 => [
+                    "from_1" => $merchant->delivery_thursday_from_1,
+                    "till_1" => $merchant->delivery_thursday_till_1,
+                    "from_2" => $merchant->delivery_thursday_from_2,
+                    "till_2" => $merchant->delivery_thursday_till_2
+                ],
+                4 => [
+                    "from_1" => $merchant->delivery_friday_from_1,
+                    "till_1" => $merchant->delivery_friday_till_1,
+                    "from_2" => $merchant->delivery_friday_from_2,
+                    "till_2" => $merchant->delivery_friday_till_2
+                ],
+                5 => [
+                    "from_1" => $merchant->delivery_saturday_from_1,
+                    "till_1" => $merchant->delivery_saturday_till_1,
+                    "from_2" => $merchant->delivery_saturday_from_2,
+                    "till_2" => $merchant->delivery_saturday_till_2
+                ],
+                6 => [
+                    "from_1" => $merchant->delivery_sunday_from_1,
+                    "till_1" => $merchant->delivery_sunday_till_1,
+                    "from_2" => $merchant->delivery_sunday_from_2,
+                    "till_2" => $merchant->delivery_sunday_till_2
+                ]]
+            ];
 
 
         return response()->json($merchantObject,200);
@@ -38,6 +137,7 @@ class CustomerController extends Controller
 
 
 
+        /*
         if ($this->isValidDeliveryMethod($merchant, $request->deliveryMethod)){
             $order->deliveryMethod = $request->deliveryMethod;
             if ($request->deliveryMethod == "delivery"){
@@ -54,6 +154,27 @@ class CustomerController extends Controller
         else{
             exit();
         }
+        */
+
+
+        if ($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime)){
+            $order->deliveryMethod = $request->deliveryMethod;
+            if ($request->deliveryMethod == "delivery"){
+                $order->addressStreet = $request->addressStreet;
+                $order->addressNumber = $request->addressNumber;
+                $order->addressZipCode = $request->addressZipCode;
+                $order->addressCity = $request->addressCity;
+                $order->deliveryMethod = "delivery";
+            }
+            else{
+                $order->deliveryMethod = "takeaway";
+            }
+        }
+        else{
+            exit();
+        }
+
+
 
         $order->requestedTime = $request->requestedTime;
         
@@ -65,6 +186,8 @@ class CustomerController extends Controller
                 foreach ($request->productIds as $productId){
                     $order->products()->attach(Product::find($productId));
                 }
+
+                Mail::to(auth()->user()->email)->send(new confirmOrder($order));
             }
         }
         else{
@@ -73,7 +196,7 @@ class CustomerController extends Controller
         
     }
 
-
+/*  DEPRECATED
     function isValidDeliveryMethod($merchant, $method){
         switch ($method) {
             case 'delivery':
@@ -91,6 +214,7 @@ class CustomerController extends Controller
         }
         return false;
     }
+*/
 
     function merchantIdExists($id){
         if (Merchant::find($id) != null){

@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->string("name");
             $table->string("description")->nullable();
-            $table->double("price");
+            $table->float("price");
             $table->boolean("orderable")->default(true);
             $table->string("merchant_id");
         });

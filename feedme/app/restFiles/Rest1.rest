@@ -19,9 +19,9 @@ Accept: application/json
 {
     "firstName": "Ditiseenvoornaam",
     "lastName": "Ditiseenachternaam",
-    "email": "merchant1@test.com",
-    "password": "Voornaam-achternaam2019",
-    "password_confirmation": "Voornaam-achternaam2019",
+    "email": "arnaud.verpoucke@hotmail.com",
+    "password": "Arnaud_2019",
+    "password_confirmation": "Arnaud_2019",
     "merchantName": "ditiseenmerchantapiname",
     "mobilePhone": "0400 123 456",
     "address_street": "Ergenslaan",
@@ -40,12 +40,23 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "firstName": "voornaamabc",
+    "firstName": "bob",
     "lastName": "achternaamabc",
-    "email": "arnaud.verpoucke@student.howest.be",
-    "password": "Voornaam-achternaam2019",
-    "password_confirmation": "Voornaam-achternaam2019",
+    "email": "arnaud@plenso.be",
+    "password": "Bob_2019",
+    "password_confirmation": "Bob_2019",
     "mobilePhone": "0400 123 456"
+}
+
+
+###
+
+POST http://localhost:8000/manager/login
+Content-Type: application/json
+
+{
+    "email": "arnaud.verpoucke@hotmail.com",
+    "password": "Arnaud_2019"
 }
 
 
@@ -68,6 +79,18 @@ Content-Type: application/json
 {
     "email": "emma@test.com",
     "password": "123"
+}
+
+
+###
+
+
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "arnaud@plenso.be",
+    "password": "Bob_2019"
 }
 
 ###

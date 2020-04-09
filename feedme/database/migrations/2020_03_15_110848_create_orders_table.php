@@ -34,7 +34,7 @@ class CreateOrdersTable extends Migration
             $table->boolean("denied")->default(false);
             $table->string("deliveryMethod");
             $table->float("totalPrice")->nullable();
-
+            $table->string("extratime")->nullable();
 
             $table->string("merchant_id");
             $table->string("customer_id")->nullable();

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderHasBeenDelayed;
 use App\Merchant;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Product;
 use App\Rules\ScheduleTime;
+use App\Rules\Price;
 use App\User;
 use Exception;
 use DateTime;
+use Mail;
 
 
 
@@ -123,9 +126,10 @@ class MerchantController extends Controller
 
 
     function addProduct(Request $request){
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|min:2',
-            'price' => 'required|min:1'
+            'price' => ['required','min:0'],
+            'description' => 'nullable'
         ]);        
 
         $product = new Product();
@@ -146,9 +150,15 @@ class MerchantController extends Controller
     }
 
     function updateProduct(Request $request){
+        $request->price = str_replace(",",".",$request->price);
+        $request->validate([
+            'name' => 'required|min:2',
+            'price' => ['required', new Price]
+        ]);
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->name = $request->name;
-        $product->price = str_replace(",",".",$request->price);
+        $product->price = $request->price;
+        $product->description = $request->description;
         $product->save();
         return response()->json("ok");
     }
@@ -175,12 +185,21 @@ class MerchantController extends Controller
 
 
     
-    function updateMinimumWaitTime(Request $request){
+    function updateMinimumWaitTimeForTakeaway(Request $request){
         $request->validate([
-            'minimumWaitTime' => ['required', new ScheduleTime]
+            'minimumWaitTime_takeaway' => ['required', new ScheduleTime]
         ]);        
 
-        $merchant = auth()->user()->merchant()->update(["minimumWaitTime" => $request->minimumWaitTime]);
+        $merchant = auth()->user()->merchant()->update(["minimumWaitTime_takeaway" => $request->minimumWaitTime_takeaway]);
+        return redirect("/manager/instellingen");
+    }
+
+    function updateMinimumWaitTimeForDelivery(Request $request){
+        $request->validate([
+            'minimumWaitTime_delivery' => ['required', new ScheduleTime]
+        ]);        
+
+        $merchant = auth()->user()->merchant()->update(["minimumWaitTime_delivery" => $request->minimumWaitTime_delivery]);
         return redirect("/manager/instellingen");
     }
 
@@ -326,5 +345,31 @@ class MerchantController extends Controller
 
         return redirect("/manager/instellingen");
     }
+
+
+
+    function addTimeToOrder_15(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["extraTime" => 15]);
+        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+        return response()->json("ok");       
+    }
+
+    function addTimeToOrder_30(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["extraTime" => 30]);
+        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+        return response()->json("ok");       
+    }
+
+    function addTimeToOrder_60(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["extraTime" => 60]);
+        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+        return response()->json("ok");       
+    }
+
+
+
 
 }

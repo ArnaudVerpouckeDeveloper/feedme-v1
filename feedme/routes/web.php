@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Mail\ConfirmEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmOrder;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,16 +49,23 @@ Route::group([
 
     Route::put('/manager/orders/confirmOrder', "MerchantController@confirmOrder");
     Route::put('/manager/orders/denyOrder', "MerchantController@denyOrder");
-    
+    Route::put('/manager/orders/addTimeToOrder_15', "MerchantController@addTimeToOrder_15");
+    Route::put('/manager/orders/addTimeToOrder_30', "MerchantController@addTimeToOrder_30");
+    Route::put('/manager/orders/addTimeToOrder_60', "MerchantController@addTimeToOrder_60");
+
     Route::put('/manager/settings/updateTakeawayHours', "MerchantController@updateTakeawayHours");
     Route::put('/manager/settings/updateDeliveryHours', "MerchantController@updateDeliveryHours");
     Route::put('/manager/settings/updateBanner', "MerchantController@updateBanner");
     Route::put('/manager/settings/updateLogo', "MerchantController@updateLogo");
     Route::put('/manager/settings/updateMessage', "MerchantController@updateMessage");
-    Route::put('/manager/settings/updateMinimumWaitTime', "MerchantController@updateMinimumWaitTime");
-    
+    Route::put('/manager/settings/updateMinimumWaitTimeForTakeaway', "MerchantController@updateMinimumWaitTimeForTakeaway");
+    Route::put('/manager/settings/updateMinimumWaitTimeForDelivery', "MerchantController@updateMinimumWaitTimeForDelivery");
+
     Route::get('/manager/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
 
-});
+    });
 
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");
+
+
+Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");

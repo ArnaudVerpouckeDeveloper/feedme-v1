@@ -2,7 +2,8 @@
 
 @section('content')
     <ul class="orders">
-        @foreach ($merchant->orders as $order)
+        @foreach ($merchant->orders()->orderBy("requestedTime", "desc")->get() as $order)
+        @php $order->requestedTime = date("H:i", strtotime($order->requestedTime)); @endphp
         @if($order->confirmed)
     <li class="order confirmed" data-orderId="{{$order->id}}">
         
@@ -70,11 +71,11 @@
                 <li class="deliveryMethod">
                     @if($order->deliveryMethod == "delivery")
                         <p class="type">leveren</p>
-                        <p class="time">16:00</p>
+                        <p class="time">{{$order->requestedTime}}</p>
                     @endif
                     @if($order->deliveryMethod == "takeaway")
                         <p class="type">afhalen</p>
-                        <p class="time">16:00</p>
+                        <p class="time">{{$order->requestedTime}}</p>
                     @endif
                 </li>
                 @if ($order->confirmed || $order->denied)
@@ -83,6 +84,9 @@
                     <li class="action confirmOrder"><span class="material-icons">check</span><p>Bevestig</p></li>
                     <li class="action denyOrder"><span class="material-icons">close</span><p>Weiger</p></li>
                 @endif
+                    <li class="action addExtraTime addExtraTime_15 {{$order->extratime === '15'?'delayed':''}}"><span class="material-icons">schedule</span><p>+15 min.</p></li>
+                    <li class="action addExtraTime addExtraTime_30 {{$order->extratime === '30'?'delayed':''}}"><span class="material-icons">schedule</span><p>+30 min.</p></li>
+                    <li class="action addExtraTime addExtraTime_60 {{$order->extratime === '60'?'delayed':''}}"><span class="material-icons">schedule</span><p>+60 min.</p></li>
                 </ul>
         </li>
         @endforeach

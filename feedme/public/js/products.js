@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
         makeRequest("POST", "/manager/producten/addProduct", {
                 name: document.querySelector(".createProductForm .name").value,
-                price: document.querySelector(".createProductForm .price").value
+                price: document.querySelector(".createProductForm .price").value,
+                description: document.querySelector(".createProductForm .description").value
             })
             .then(res => {
                 if (res == "ok") {
@@ -39,17 +40,33 @@ function setEventListenersForProduct(product) {
         e.preventDefault();
         const name = product.querySelector("form .inputValues .name").value;
         const price = product.querySelector("form .inputValues .price").value;
+        const description = product.querySelector("form .descriptionValue textarea").value;
 
         makeRequest("PUT", "/manager/producten/updateProduct", {
                 productId: productId,
                 name: name,
-                price: price
+                price: price,
+                description: description
             })
             .then(res => {
                 if (res == "ok") {
                     hideForm(product);
                     product.querySelector(".row.upper .name").innerHTML = name;
-                    product.querySelector(".row.upper .price").innerHTML = price;
+                    product.querySelector(".row.upper .price").innerHTML = "€ " + addTrailZero(price, 2);
+                    if (product.querySelector(".row.descriptionRow") && description != "") {
+                        console.log("a");
+                        product.querySelector(".row.descriptionRow p").innerHTML = description;
+                    } else {
+                        console.log("b");
+                        if (description != "") {
+                            console.log("c");
+                            product.querySelector(".row.upper").insertAdjacentHTML("afterEnd", '<div class="row descriptionRow"><p>' + description + '</p></div>');
+                        } else {
+                            if (product.querySelector(".row.descriptionRow")) {
+                                product.querySelector(".row.descriptionRow").remove();
+                            }
+                        }
+                    }
 
                 } else {
                     throw (res);
@@ -134,11 +151,42 @@ function setEventListenersForProduct(product) {
 function showForm(productDOM_element) {
     productDOM_element.querySelector("form").classList.remove("hidden");
     productDOM_element.querySelector(".row.upper").classList.add("hidden");
+    if (productDOM_element.querySelector(".row.descriptionRow")) { productDOM_element.querySelector(".row.descriptionRow").classList.add("hidden"); };
     productDOM_element.querySelector(".row.bottom").classList.add("hidden");
 }
 
 function hideForm(productDOM_element) {
     productDOM_element.querySelector("form").classList.add("hidden");
     productDOM_element.querySelector(".row.upper").classList.remove("hidden");
+    if (productDOM_element.querySelector(".row.descriptionRow")) { productDOM_element.querySelector(".row.descriptionRow").classList.remove("hidden"); };
     productDOM_element.querySelector(".row.bottom").classList.remove("hidden");
+}
+
+function addTrailZero(num, digits) {
+    // addTrailZero() : add trailing zeroes to given number
+    // PARAM num : original number
+    //       digits : total number of decimal places required
+
+    var cString = num.toString(), // Convert to string
+        cLength = cString.indexOf(","); // Position of decimal point
+
+    // Is a whole number
+    if (cLength == -1) {
+        cLength = 0;
+        cString += ",";
+    }
+    // Is a decimal nummber 
+    else {
+        cLength = cString.substr(cLength + 1).length;
+    }
+
+    // Pad with zeroes
+    if (cLength < digits) {
+        for (let i = cLength; i < digits; i++) {
+            cString += "0";
+        }
+    }
+
+    // Return result
+    return cString;
 }
