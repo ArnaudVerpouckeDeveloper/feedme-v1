@@ -4,8 +4,8 @@
     <ul class="orders">
         @foreach ($merchant->orders()->orderBy("requestedTime", "desc")->get() as $order)
         @php $order->requestedTime = date("H:i", strtotime($order->requestedTime)); @endphp
-        @if($order->confirmed)
-    <li class="order confirmed" data-orderId="{{$order->id}}">
+        @if($order->accepted)
+    <li class="order accepted" data-orderId="{{$order->id}}">
         
         @elseif($order->denied)
             <li class="order denied" data-orderId="{{$order->id}}">
@@ -67,7 +67,8 @@
                 @endif
 
             </div>
-            <ul class="orderSections">
+            <div class="orderSections">
+                <ul class="row">
                 <li class="deliveryMethod">
                     @if($order->deliveryMethod == "delivery")
                         <p class="type">leveren</p>
@@ -82,16 +83,20 @@
                         <p class="timeDelay">{{date("H:i", strtotime("+".$order->extratime." minutes", strtotime($order->requestedTime)))}}</p>
                     @endif                    
                 </li>
-                @if ($order->confirmed || $order->denied)
+                @if ($order->accepted || $order->denied)
 
                 @else
-                    <li class="action confirmOrder"><span class="material-icons">check</span><p>Bevestig</p></li>
+                    <li class="action acceptOrder"><span class="material-icons">check</span><p>Accepteer</p></li>
                     <li class="action denyOrder"><span class="material-icons">close</span><p>Weiger</p></li>
                 @endif
+            </ul>
+
+                <ul class="row">
                     <li class="action addExtraTime addExtraTime_15 {{$order->extratime === '15'?'delayed':''}}"><span class="material-icons">schedule</span><p>+15 min.</p></li>
                     <li class="action addExtraTime addExtraTime_30 {{$order->extratime === '30'?'delayed':''}}"><span class="material-icons">schedule</span><p>+30 min.</p></li>
                     <li class="action addExtraTime addExtraTime_60 {{$order->extratime === '60'?'delayed':''}}"><span class="material-icons">schedule</span><p>+60 min.</p></li>
                 </ul>
+            </div>
         </li>
         @endforeach
         

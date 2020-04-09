@@ -184,22 +184,24 @@ body main .orders .order {
   display: flex;
   justify-content: space-between;
 }
-body main .orders .order.confirmed .orderOverview, body main .orders .order.denied .orderOverview {
+body main .orders .order.accepted .orderOverview, body main .orders .order.denied .orderOverview {
+  /*border-color: white;*/
+  color: white;
+}
+body main .orders .order.accepted .orderOverview .totalPrice, body main .orders .order.denied .orderOverview .totalPrice {
+  color: white;
+}
+body main .orders .order.accepted .orderSections .row > li, body main .orders .order.denied .orderSections .row > li {
+  /*
+  color: white;
   border-color: white;
-  color: white;
+  */
 }
-body main .orders .order.confirmed .orderOverview .totalPrice, body main .orders .order.denied .orderOverview .totalPrice {
-  color: white;
-}
-body main .orders .order.confirmed .orderSections > li, body main .orders .order.denied .orderSections > li {
-  color: white;
-  border-color: white;
-}
-body main .orders .order.confirmed .orderOverview {
+body main .orders .order.accepted .orderOverview {
   background-color: #68A25F;
 }
-body main .orders .order.confirmed .orderSections > li {
-  background-color: #68A25F;
+body main .orders .order.accepted .orderSections .row > li {
+  /*background-color: $mainGreen;*/
 }
 body main .orders .order.denied .orderOverview {
   background-color: #e43a3a;
@@ -252,81 +254,83 @@ body main .orders .order .orderSections {
   align-self: flex-start;
   flex-wrap: wrap;
 }
-body main .orders .order .orderSections > li {
+body main .orders .order .orderSections .row {
+  width: 100%;
+  display: flex;
+}
+body main .orders .order .orderSections .row:last-of-type > li {
+  border-bottom: 1px solid #c3c3c3;
+}
+body main .orders .order .orderSections .row > li {
   min-height: 8rem;
   padding: 1rem;
   border: 1px solid #c3c3c3;
+  border-bottom: none;
   background-color: #fbfbfb;
   box-sizing: border-box;
   width: 33%;
-  border-right: none;
 }
-body main .orders .order .orderSections > li.deliveryMethod {
+body main .orders .order .orderSections .row > li:first-of-type {
   border-left: none;
-  border-bottom: none;
+}
+body main .orders .order .orderSections .row > li:nth-of-type(2) {
+  border-left: none;
+}
+body main .orders .order .orderSections .row > li:last-of-type {
+  border-right: 1px solid #c3c3c3;
+  border-left: none;
+}
+body main .orders .order .orderSections .row > li.deliveryMethod {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-body main .orders .order .orderSections > li.deliveryMethod p {
+body main .orders .order .orderSections .row > li.deliveryMethod p {
   font-weight: bold;
 }
-body main .orders .order .orderSections > li.deliveryMethod p.type {
+body main .orders .order .orderSections .row > li.deliveryMethod p.type {
   font-size: 1.2rem;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
 }
-body main .orders .order .orderSections > li.deliveryMethod p.time {
+body main .orders .order .orderSections .row > li.deliveryMethod p.time {
   font-size: 1.5rem;
 }
-body main .orders .order .orderSections > li.deliveryMethod p.time.lineThrough {
+body main .orders .order .orderSections .row > li.deliveryMethod p.time.lineThrough {
   text-decoration: line-through;
 }
-body main .orders .order .orderSections > li.deliveryMethod p.timeDelay {
+body main .orders .order .orderSections .row > li.deliveryMethod p.timeDelay {
   font-size: 1.5rem;
   margin-top: 0.4rem;
 }
-body main .orders .order .orderSections > li.action {
+body main .orders .order .orderSections .row > li.action {
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-body main .orders .order .orderSections > li.action .material-icons {
+body main .orders .order .orderSections .row > li.action .material-icons {
   margin-bottom: 0.7rem;
 }
-body main .orders .order .orderSections > li.action p {
+body main .orders .order .orderSections .row > li.action p {
   font-size: 0.8rem;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1px;
 }
-body main .orders .order .orderSections > li.action:hover {
+body main .orders .order .orderSections .row > li.action:hover {
   cursor: pointer;
 }
-body main .orders .order .orderSections > li.addExtraTime.addExtraTime_15 {
-  border-left: none;
-}
-body main .orders .order .orderSections > li.addExtraTime.addExtraTime_60 {
-  border-right: 1px solid #c3c3c3;
-}
-body main .orders .order .orderSections > li.addExtraTime:hover, body main .orders .order .orderSections > li.addExtraTime.delayed {
+body main .orders .order .orderSections .row > li.addExtraTime:hover, body main .orders .order .orderSections .row > li.addExtraTime.delayed {
   background-color: gold;
 }
-body main .orders .order .orderSections > li.confirmOrder {
-  border-bottom: none;
-}
-body main .orders .order .orderSections > li.confirmOrder:hover {
+body main .orders .order .orderSections .row > li.acceptOrder:hover {
   background-color: #68A25F;
   color: white;
 }
-body main .orders .order .orderSections > li.denyOrder {
-  border-right: 1px solid #c3c3c3;
-  border-bottom: none;
-}
-body main .orders .order .orderSections > li.denyOrder:hover {
+body main .orders .order .orderSections .row > li.denyOrder:hover {
   background-color: #e43a3a;
   color: white;
 }

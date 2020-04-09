@@ -168,7 +168,6 @@ class DatabaseSeeder extends Seeder
                 $extraHours = random_int(0,3);
                 $extraMinutes = random_int(0,60);
                 $order->requestedTime = date("Y-m-d H:i:s", strtotime("+$extraHours hour +$extraMinutes minutes"));
-                $order->confirmed = false;
                 
 
                 $user->merchant->orders()->save($order);

@@ -10,18 +10,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function setEventListenersForOrder(order) {
     let orderId = order.dataset.orderid;
-    if (order.classList.contains("confirmed") || order.classList.contains("denied")) {
+    if (order.classList.contains("accepted") || order.classList.contains("denied")) {
 
     } else {
-        order.querySelector(".orderSections .confirmOrder").addEventListener("click", async function(e) {
+        order.querySelector(".orderSections .acceptOrder").addEventListener("click", async function(e) {
             console.log("confirming order...");
-            makeRequest("PUT", "/manager/orders/confirmOrder", {
+            makeRequest("PUT", "/manager/orders/acceptOrder", {
                     orderId: orderId
                 })
                 .then(res => {
                     if (res == "ok") {
-                        order.classList.add("confirmed");
-                        order.querySelector(".orderSections .confirmOrder").remove();
+                        order.classList.add("accepted");
+                        order.querySelector(".orderSections .acceptOrder").remove();
                         order.querySelector(".orderSections .denyOrder").remove();
                     } else {
                         throw (res);
@@ -43,7 +43,7 @@ function setEventListenersForOrder(order) {
                 .then(res => {
                     if (res == "ok") {
                         order.classList.add("denied");
-                        order.querySelector(".orderSections .confirmOrder").remove();
+                        order.querySelector(".orderSections .acceptOrder").remove();
                         order.querySelector(".orderSections .denyOrder").remove();
                     } else {
                         throw (res);

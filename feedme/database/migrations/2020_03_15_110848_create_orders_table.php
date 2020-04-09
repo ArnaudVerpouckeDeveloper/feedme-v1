@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
             $table->string("addressCity")->nullable();      
             $table->text("details")->nullable();
             $table->dateTime("requestedTime");
-            $table->boolean("confirmed")->default(false);
+            $table->boolean("accepted")->default(false);
             $table->boolean("denied")->default(false);
             $table->string("deliveryMethod");
             $table->float("totalPrice")->nullable();

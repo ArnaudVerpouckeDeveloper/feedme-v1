@@ -173,29 +173,35 @@ body {
                 margin-bottom: 2rem;
                 display: flex;
                 justify-content: space-between;
-                &.confirmed,
+                &.accepted,
                 &.denied {
                     .orderOverview {
-                        border-color: white;
+                        /*border-color: white;*/
                         color: white;
                         .totalPrice {
                             color: white;
                         }
                     }
                     .orderSections {
-                        >li {
-                            color: white;
-                            border-color: white;
+                        .row {
+                            >li {
+                                /*
+                                color: white;
+                                border-color: white;
+                                */
+                            }
                         }
                     }
                 }
-                &.confirmed {
+                &.accepted {
                     .orderOverview {
                         background-color: $mainGreen;
                     }
                     .orderSections {
-                        >li {
-                            background-color: $mainGreen;
+                        .row {
+                            >li {
+                                /*background-color: $mainGreen;*/
+                            }
                         }
                     }
                 }
@@ -255,84 +261,94 @@ body {
                     display: flex;
                     align-self: flex-start;
                     flex-wrap: wrap;
-                    >li {
-                        min-height: 8rem;
-                        padding: 1rem;
-                        border: 1px solid #c3c3c3;
-                        background-color: #fbfbfb;
-                        box-sizing: border-box;
-                        width: 33%;
-                        border-right: none;
-                        &.deliveryMethod {
-                            border-left: none;
+                    .row {
+                        width: 100%;
+                        display: flex;
+                        &:last-of-type {
+                            >li {
+                                border-bottom: 1px solid #c3c3c3;
+                            }
+                        }
+                        >li {
+                            min-height: 8rem;
+                            padding: 1rem;
+                            border: 1px solid #c3c3c3;
                             border-bottom: none;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            p {
-                                font-weight: bold;
-                                &.type {
-                                    font-size: 1.2rem;
-                                    text-transform: uppercase;
-                                    margin-bottom: 0.5rem;
-                                }
-                                &.time {
-                                    font-size: 1.5rem;
-                                    &.lineThrough {
-                                        text-decoration: line-through;
-                                    }
-                                }
-                                &.timeDelay {
-                                    font-size: 1.5rem;
-                                    margin-top: 0.4rem;
-                                }
-                            }
-                        }
-                        &.action {
-                            padding: 0 1rem;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            .material-icons {
-                                margin-bottom: 0.7rem;
-                            }
-                            p {
-                                font-size: 0.8rem;
-                                text-transform: uppercase;
-                                font-weight: bold;
-                                letter-spacing: 1px;
-                            }
-                            &:hover {
-                                cursor: pointer;
-                            }
-                        }
-                        &.addExtraTime {
-                            &.addExtraTime_15 {
+                            background-color: #fbfbfb;
+                            box-sizing: border-box;
+                            width: 33%;
+                            &:first-of-type {
                                 border-left: none;
                             }
-                            &.addExtraTime_60 {
+                            &:nth-of-type(2) {
+                                border-left: none;
+                            }
+                            &:last-of-type {
                                 border-right: 1px solid #c3c3c3;
+                                border-left: none;
                             }
-                            &:hover,
-                            &.delayed {
-                                background-color: gold;
+                            &.deliveryMethod {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                p {
+                                    font-weight: bold;
+                                    &.type {
+                                        font-size: 1.2rem;
+                                        text-transform: uppercase;
+                                        margin-bottom: 0.5rem;
+                                    }
+                                    &.time {
+                                        font-size: 1.5rem;
+                                        &.lineThrough {
+                                            text-decoration: line-through;
+                                        }
+                                    }
+                                    &.timeDelay {
+                                        font-size: 1.5rem;
+                                        margin-top: 0.4rem;
+                                    }
+                                }
                             }
-                        }
-                        &.confirmOrder {
-                            border-bottom: none;
-                            &:hover {
-                                background-color: #68A25F;
-                                color: white;
+                            &.action {
+                                padding: 0 1rem;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                .material-icons {
+                                    margin-bottom: 0.7rem;
+                                }
+                                p {
+                                    font-size: 0.8rem;
+                                    text-transform: uppercase;
+                                    font-weight: bold;
+                                    letter-spacing: 1px;
+                                }
+                                &:hover {
+                                    cursor: pointer;
+                                }
                             }
-                        }
-                        &.denyOrder {
-                            border-right: 1px solid #c3c3c3;
-                            border-bottom: none;
-                            &:hover {
-                                background-color: $mainRed;
-                                color: white;
+                            &.addExtraTime {
+                                &.addExtraTime_15 {}
+                                &.addExtraTime_60 {}
+                                &:hover,
+                                &.delayed {
+                                    background-color: gold;
+                                }
+                            }
+                            &.acceptOrder {
+                                &:hover {
+                                    background-color: #68A25F;
+                                    color: white;
+                                }
+                            }
+                            &.denyOrder {
+                                &:hover {
+                                    background-color: $mainRed;
+                                    color: white;
+                                }
                             }
                         }
                     }
