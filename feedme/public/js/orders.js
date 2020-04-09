@@ -10,19 +10,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function setEventListenersForOrder(order) {
     let orderId = order.dataset.orderid;
-    if (order.classList.contains("confirmed") || order.classList.contains("denied")) {
-
-    } else {
-        order.querySelector(".orderSections .confirmOrder").addEventListener("click", async function(e) {
-            console.log("confirming order...");
-            makeRequest("PUT", "/manager/orders/confirmOrder", {
+    if (order.classList.contains("accepted") || order.classList.contains("denied")) {
+        order.querySelector(".orderSections .completeOrder").addEventListener("click", async function(e) {
+            console.log("completing order...");
+            makeRequest("PUT", "/manager/orders/completeOrder", {
                     orderId: orderId
                 })
                 .then(res => {
                     if (res == "ok") {
-                        order.classList.add("confirmed");
-                        order.querySelector(".orderSections .confirmOrder").remove();
+                        Swal.fire(
+                            'Geslaagd!',
+                            'Het order werd succesvol afgerond.',
+                            'success'
+                        );
+                        $(".order[data-orderId='" + orderId + "']").fadeOut(400, "swing", function() {
+                            order.remove();
+                        });
+                    } else {
+                        throw (res);
+                    }
+                })
+                .catch(error => {
+                    console.log("error: ", error);
+                    promptError();
+                });
+        });
+    } else {
+        order.querySelector(".orderSections .acceptOrder").addEventListener("click", async function(e) {
+            console.log("confirming order...");
+            makeRequest("PUT", "/manager/orders/acceptOrder", {
+                    orderId: orderId
+                })
+                .then(res => {
+                    if (res == "ok") {
+                        order.classList.add("accepted");
+                        order.querySelector(".orderSections .acceptOrder").remove();
                         order.querySelector(".orderSections .denyOrder").remove();
+                        order.querySelector(".orderSections .deliveryMethod").insertAdjacentHTML("afterEnd", "<li class='action completeOrder'><span class='material-icons'>check</span><p>Voltooi</p></li>");
+                        setEventListenersForOrder(order);
                     } else {
                         throw (res);
                     }
@@ -43,7 +68,7 @@ function setEventListenersForOrder(order) {
                 .then(res => {
                     if (res == "ok") {
                         order.classList.add("denied");
-                        order.querySelector(".orderSections .confirmOrder").remove();
+                        order.querySelector(".orderSections .acceptOrder").remove();
                         order.querySelector(".orderSections .denyOrder").remove();
                     } else {
                         throw (res);
@@ -57,14 +82,21 @@ function setEventListenersForOrder(order) {
 
 
 
+
+
+
+
+
         order.querySelector(".orderSections .addExtraTime.addExtraTime_15").addEventListener("click", async function(e) {
             console.log("Adding 15 minutes extra time to order...");
             makeRequest("PUT", "/manager/orders/addTimeToOrder_15", {
                     orderId: orderId
                 })
                 .then(res => {
-                    if (res == "ok") {
+                    console.log(res);
+                    if (res.message == "ok") {
                         removeAllDelaysFromExtraTimeButtons(order);
+                        showNewTime(order, res.newTime);
                         order.querySelector(".orderSections .addExtraTime.addExtraTime_15").classList.add("delayed");
                         Swal.fire(
                             'Geslaagd!',
@@ -86,8 +118,11 @@ function setEventListenersForOrder(order) {
                     orderId: orderId
                 })
                 .then(res => {
-                    if (res == "ok") {
+                    console.log(res);
+
+                    if (res.message == "ok") {
                         removeAllDelaysFromExtraTimeButtons(order);
+                        showNewTime(order, res.newTime);
                         order.querySelector(".orderSections .addExtraTime.addExtraTime_30").classList.add("delayed");
                         Swal.fire(
                             'Geslaagd!',
@@ -109,8 +144,11 @@ function setEventListenersForOrder(order) {
                     orderId: orderId
                 })
                 .then(res => {
-                    if (res == "ok") {
+                    console.log(res);
+
+                    if (res.message == "ok") {
                         removeAllDelaysFromExtraTimeButtons(order);
+                        showNewTime(order, res.newTime);
                         order.querySelector(".orderSections .addExtraTime.addExtraTime_60").classList.add("delayed");
                         Swal.fire(
                             'Geslaagd!',
@@ -220,4 +258,13 @@ function removeAllDelaysFromExtraTimeButtons(order) {
     for (let i = 0; i < extraTimeElements.length; i++) {
         extraTimeElements[i].classList.remove("delayed");
     }
-};
+}
+
+function showNewTime(order, newTime) {
+    order.querySelector(".time").classList.add("lineThrough");
+    if (order.querySelector(".timeDelay")) {
+        order.querySelector(".timeDelay").remove();
+    }
+    order.querySelector(".time").insertAdjacentHTML("afterEnd", "<p class='timeDelay'>" + newTime + "</p>");
+
+}

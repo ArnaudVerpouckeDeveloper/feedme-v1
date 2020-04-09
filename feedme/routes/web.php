@@ -47,11 +47,12 @@ Route::group([
     Route::put('/manager/producten/updateProduct', "MerchantController@updateProduct");
     Route::delete('/manager/producten/deleteProduct', "MerchantController@deleteProduct");
 
-    Route::put('/manager/orders/confirmOrder', "MerchantController@confirmOrder");
+    Route::put('/manager/orders/acceptOrder', "MerchantController@acceptOrder");
     Route::put('/manager/orders/denyOrder', "MerchantController@denyOrder");
     Route::put('/manager/orders/addTimeToOrder_15', "MerchantController@addTimeToOrder_15");
     Route::put('/manager/orders/addTimeToOrder_30', "MerchantController@addTimeToOrder_30");
     Route::put('/manager/orders/addTimeToOrder_60', "MerchantController@addTimeToOrder_60");
+    Route::put('/manager/orders/completeOrder', "MerchantController@completeOrder");
 
     Route::put('/manager/settings/updateTakeawayHours', "MerchantController@updateTakeawayHours");
     Route::put('/manager/settings/updateDeliveryHours', "MerchantController@updateDeliveryHours");
