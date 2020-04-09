@@ -6,9 +6,9 @@ import Merchants from '../views/Merchants.vue'
 import MerchantDetail from '../views/Merchant-Detail.vue'
 import Order from '../views/Order.vue'
 import Legal from '../views/TermsAndConditions.vue'
-import Contact from '../components/Contact.vue'
-import About from '../components/About.vue'
-import Faq from '../components/Faq.vue'
+import Contact from '../views/Contact.vue'
+import About from '../views/About.vue'
+import Faq from '../views/Faq.vue'
 
 
 

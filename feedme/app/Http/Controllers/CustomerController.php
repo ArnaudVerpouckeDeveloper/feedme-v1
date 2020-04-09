@@ -21,12 +21,11 @@ class CustomerController extends Controller
         }
         $merchantObject = new \stdClass;
         $merchantObject->name = $merchant->name;
-        $merchantObject->name = $merchant->id;
+        $merchantObject->id = $merchant->id;
         /* DEPRECATED, schedule should be used now
         $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
         $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
         */
-
         $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
         $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
 
