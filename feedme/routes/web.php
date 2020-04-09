@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Mail\ConfirmEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmOrder;
 
 /*
 |--------------------------------------------------------------------------

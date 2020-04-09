@@ -7,6 +7,7 @@ use App\Merchant;
 use Auth;
 use Illuminate\Http\Request;
 use App\Traits\SharedMerchantTrait;
+use App\Mail\ConfirmOrder;
 
 class CustomerController extends Controller
 {
@@ -184,6 +185,8 @@ class CustomerController extends Controller
                 foreach ($request->productIds as $productId){
                     $order->products()->attach(Product::find($productId));
                 }
+
+                Mail::to(auth()->user()->email)->send(new confirmOrder($order));
             }
         }
         else{
