@@ -337,384 +337,384 @@ body {
                         }
                     }
                 }
-                .createProductForm {
-                    padding: 4rem;
-                    margin-bottom: 3rem;
-                    width: 80%;
-                    padding-bottom: 4rem;
-                    border-radius: 0.4rem;
-                    background-color: $mainGreen;
-                    margin-left: auto;
-                    margin-right: auto;
+            }
+        }
+        .createProductForm {
+            padding: 4rem;
+            margin-bottom: 3rem;
+            width: 80%;
+            padding-bottom: 4rem;
+            border-radius: 0.4rem;
+            background-color: $mainGreen;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+            .input-row {
+                display: flex;
+                justify-content: space-between;
+                input[type="text"],
+                input[type="value"] {
+                    border: none;
+                    font-size: 1rem;
+                    padding: 0.4rem 0.8rem;
+                    border-radius: 0.3rem;
+                    font-weight: bold;
                     box-sizing: border-box;
-                    .input-row {
-                        display: flex;
-                        justify-content: space-between;
-                        input[type="text"],
-                        input[type="value"] {
-                            border: none;
-                            font-size: 1rem;
-                            padding: 0.4rem 0.8rem;
-                            border-radius: 0.3rem;
-                            font-weight: bold;
-                            box-sizing: border-box;
-                        }
-                        input[type="submit"] {
-                            width: 15%;
-                            font-weight: bold;
-                            border: none;
-                            border-radius: 0.3rem;
-                            padding: 0 1.5rem;
-                            background-color: #375f31;
-                            color: white;
-                            box-sizing: border-box;
-                            &:hover {
-                                cursor: pointer;
-                                background-color: #528a4a;
-                                color: white;
-                            }
-                        }
+                }
+                input[type="submit"] {
+                    width: 15%;
+                    font-weight: bold;
+                    border: none;
+                    border-radius: 0.3rem;
+                    padding: 0 1.5rem;
+                    background-color: #375f31;
+                    color: white;
+                    box-sizing: border-box;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #528a4a;
+                        color: white;
+                    }
+                }
+                .name {
+                    width: 60%;
+                }
+                .price {
+                    width: 20%;
+                }
+            }
+            .errors {
+                margin-top: 1rem;
+                p {
+                    color: white;
+                    margin-bottom: 0.5rem;
+                }
+            }
+            .row {
+                .description {
+                    width: 100%;
+                    margin-top: 1.5rem;
+                    box-sizing: border-box;
+                    border-radius: 0.3rem;
+                    border: none;
+                    font-size: 1rem;
+                    padding: 0.4rem 0.8rem;
+                    font-weight: bold;
+                    font-family: "poppins", sans-serif;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+        .products {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            li {
+                box-sizing: border-box;
+                width: 48%;
+                margin-bottom: 3rem;
+                background-color: white;
+                box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+                border-radius: 0.3rem;
+                >.row {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 1.15rem;
+                    font-weight: bold;
+                    align-items: center;
+                    &.upper {
+                        padding: 1.5rem;
+                        border-bottom: 1px solid #dadada;
                         .name {
-                            width: 60%;
+                            width: 75%;
                         }
                         .price {
                             width: 20%;
+                            text-align: right;
                         }
                     }
-                    .errors {
-                        margin-top: 1rem;
-                        p {
-                            color: white;
-                            margin-bottom: 0.5rem;
-                        }
+                    &.descriptionRow {
+                        padding: 1.5rem;
+                        font-size: 0.9rem;
+                        color: grey;
+                        border-bottom: 1px solid #dadada;
                     }
-                    .row {
-                        .description {
-                            width: 100%;
-                            margin-top: 1.5rem;
-                            box-sizing: border-box;
-                            border-radius: 0.3rem;
+                    &.bottom {
+                        padding-left: 1.5rem;
+                        padding-right: 1.5rem;
+                        display: flex;
+                        justify-content: space-between;
+                        height: 5rem;
+                        .orderable {
+                            padding: 1rem 0;
+                            width: 30%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            .info {
+                                font-size: 0.8rem;
+                                margin-bottom: 0.4rem;
+                            }
+                        }
+                        button {
                             border: none;
-                            font-size: 1rem;
-                            padding: 0.4rem 0.8rem;
-                            font-weight: bold;
-                            font-family: "poppins", sans-serif;
-                            &:focus {
-                                outline: none;
+                            background-color: transparent;
+                            width: 30%;
+                            color: $mediumGrey;
+                            font-size: 2rem;
+                            height: 4rem;
+                            border-radius: 0.5rem;
+                            &:hover {
+                                cursor: pointer;
+                            }
+                            &.edit {
+                                &:hover {
+                                    background-color: #e6e6e6;
+                                    color: black;
+                                }
+                            }
+                            &.remove {
+                                &:hover {
+                                    background-color: $mainRed;
+                                    color: white;
+                                }
                             }
                         }
                     }
                 }
-                .products {
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    width: 80%;
-                    margin-left: auto;
-                    margin-right: auto;
-                    li {
-                        box-sizing: border-box;
-                        width: 48%;
-                        margin-bottom: 3rem;
-                        background-color: white;
-                        box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
-                        border-radius: 0.3rem;
-                        >.row {
+                form {
+                    padding: 1.5rem;
+                    .row {
+                        &.inputValues {
+                            margin-bottom: 1.5rem;
                             display: flex;
                             justify-content: space-between;
-                            font-size: 1.15rem;
-                            font-weight: bold;
-                            align-items: center;
-                            &.upper {
-                                padding: 1.5rem;
-                                border-bottom: 1px solid #dadada;
-                                .name {
+                            input {
+                                border: none;
+                                font-size: 1.15rem;
+                                font-weight: bold;
+                                border: 2px solid lightgray;
+                                border-radius: 0.3rem;
+                                padding: 0.2rem 0.4rem;
+                                box-sizing: border-box;
+                                &[type="text"] {
                                     width: 75%;
                                 }
-                                .price {
+                                &[type="value"] {
                                     width: 20%;
                                     text-align: right;
                                 }
                             }
-                            &.descriptionRow {
-                                padding: 1.5rem;
-                                font-size: 0.9rem;
-                                color: grey;
-                                border-bottom: 1px solid #dadada;
-                            }
-                            &.bottom {
-                                padding-left: 1.5rem;
-                                padding-right: 1.5rem;
-                                display: flex;
-                                justify-content: space-between;
-                                height: 5rem;
-                                .orderable {
-                                    padding: 1rem 0;
-                                    width: 30%;
-                                    display: flex;
-                                    flex-direction: column;
-                                    align-items: center;
-                                    .info {
-                                        font-size: 0.8rem;
-                                        margin-bottom: 0.4rem;
-                                    }
-                                }
-                                button {
-                                    border: none;
-                                    background-color: transparent;
-                                    width: 30%;
-                                    color: $mediumGrey;
-                                    font-size: 2rem;
-                                    height: 4rem;
-                                    border-radius: 0.5rem;
-                                    &:hover {
-                                        cursor: pointer;
-                                    }
-                                    &.edit {
-                                        &:hover {
-                                            background-color: #e6e6e6;
-                                            color: black;
-                                        }
-                                    }
-                                    &.remove {
-                                        &:hover {
-                                            background-color: $mainRed;
-                                            color: white;
-                                        }
-                                    }
+                        }
+                        &.descriptionValue {
+                            textarea {
+                                width: 100%;
+                                box-sizing: border-box;
+                                border-radius: 0.3rem;
+                                margin-bottom: 1.5rem;
+                                border: 2px solid lightgray;
+                                font-size: 1rem;
+                                padding: 0.4rem 0.8rem;
+                                font-weight: bold;
+                                font-family: "poppins", sans-serif;
+                                &:focus {
+                                    outline: none;
                                 }
                             }
                         }
-                        form {
-                            padding: 1.5rem;
-                            .row {
-                                &.inputValues {
-                                    margin-bottom: 1.5rem;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    input {
-                                        border: none;
-                                        font-size: 1.15rem;
-                                        font-weight: bold;
-                                        border: 2px solid lightgray;
-                                        border-radius: 0.3rem;
-                                        padding: 0.2rem 0.4rem;
-                                        box-sizing: border-box;
-                                        &[type="text"] {
-                                            width: 75%;
-                                        }
-                                        &[type="value"] {
-                                            width: 20%;
-                                            text-align: right;
-                                        }
-                                    }
+                        &.buttons {
+                            display: flex;
+                            justify-content: space-between;
+                            input[type="button"],
+                            input[type="submit"] {
+                                height: 2.5rem;
+                                padding: 0.3rem 1.5rem;
+                                border: none;
+                                cursor: pointer;
+                                border-radius: 0.3rem;
+                                background-color: unset;
+                                font-weight: bold;
+                                width: 48%;
+                            }
+                            input[type="button"] {
+                                background-color: #eaeaea;
+                                &:hover {
+                                    background-color: #c7c7c7;
                                 }
-                                &.descriptionValue {
-                                    textarea {
-                                        width: 100%;
-                                        box-sizing: border-box;
-                                        border-radius: 0.3rem;
-                                        margin-bottom: 1.5rem;
-                                        border: 2px solid lightgray;
-                                        font-size: 1rem;
-                                        padding: 0.4rem 0.8rem;
-                                        font-weight: bold;
-                                        font-family: "poppins", sans-serif;
-                                        &:focus {
-                                            outline: none;
-                                        }
-                                    }
-                                }
-                                &.buttons {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    input[type="button"],
-                                    input[type="submit"] {
-                                        height: 2.5rem;
-                                        padding: 0.3rem 1.5rem;
-                                        border: none;
-                                        cursor: pointer;
-                                        border-radius: 0.3rem;
-                                        background-color: unset;
-                                        font-weight: bold;
-                                        width: 48%;
-                                    }
-                                    input[type="button"] {
-                                        background-color: #eaeaea;
-                                        &:hover {
-                                            background-color: #c7c7c7;
-                                        }
-                                    }
-                                    input[type="submit"] {
-                                        background-color: $mainGreen;
-                                        color: white;
-                                        &:hover {
-                                            background-color: #375f31;
-                                        }
-                                    }
+                            }
+                            input[type="submit"] {
+                                background-color: $mainGreen;
+                                color: white;
+                                &:hover {
+                                    background-color: #375f31;
                                 }
                             }
                         }
                     }
                 }
-                .settings {
-                    width: 65%;
-                    margin-left: auto;
-                    margin-right: auto;
-                    form {
+            }
+        }
+        .settings {
+            width: 65%;
+            margin-left: auto;
+            margin-right: auto;
+            form {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 8rem;
+                label {
+                    margin-bottom: 0.5rem;
+                }
+                input[type="file"],
+                textarea {
+                    margin-bottom: 1rem;
+                }
+                textarea {
+                    border-radius: 0.3rem;
+                    padding: 0.5rem 0.7rem;
+                    font-family: "Poppins", sans-serif;
+                    font-size: 1.1rem;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                img {
+                    margin-bottom: 1rem;
+                    height: 10rem;
+                    object-fit: contain;
+                    margin-left: 0;
+                    display: block;
+                    object-position: left;
+                    &.square {
+                        width: 10rem;
+                        object-fit: cover;
+                    }
+                }
+                &.bannerForm {
+                    img {
+                        &.showBorder {
+                            border: 1px dashed lightgrey;
+                        }
+                    }
+                }
+                input[type="submit"] {
+                    background-color: $mainGreen;
+                    color: white;
+                    border: none;
+                    border-radius: 0.3rem;
+                    font-size: 1rem;
+                    padding: 0.4rem 1rem;
+                    width: 8rem;
+                    &:hover {
+                        filter: brightness(1.1);
+                        cursor: pointer;
+                    }
+                }
+                p.error {
+                    color: $mainRed;
+                    font-weight: bold;
+                    font-size: 0.8rem;
+                    margin-top: 1rem;
+                }
+                &.schedule {
+                    >label {
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        margin-bottom: 1rem;
+                        color: $mainGreen;
+                    }
+                    .row {
                         display: flex;
-                        flex-direction: column;
-                        margin-bottom: 8rem;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 1rem;
                         label {
-                            margin-bottom: 0.5rem;
+                            margin: unset;
+                            &:first-of-type {
+                                width: 8rem;
+                            }
+                            b {
+                                font-weight: bold;
+                            }
                         }
-                        input[type="file"],
-                        textarea {
-                            margin-bottom: 1rem;
-                        }
-                        textarea {
+                        select {
+                            padding: 0.3rem 0.5rem;
                             border-radius: 0.3rem;
-                            padding: 0.5rem 0.7rem;
-                            font-family: "Poppins", sans-serif;
-                            font-size: 1.1rem;
+                            &:hover {
+                                cursor: pointer;
+                                border-color: $mainGreen;
+                            }
                             &:focus {
                                 outline: none;
                             }
                         }
-                        img {
-                            margin-bottom: 1rem;
-                            height: 10rem;
-                            object-fit: contain;
-                            margin-left: 0;
-                            display: block;
-                            object-position: left;
-                            &.square {
-                                width: 10rem;
-                                object-fit: cover;
-                            }
-                        }
-                        &.bannerForm {
-                            img {
-                                &.showBorder {
-                                    border: 1px dashed lightgrey;
-                                }
-                            }
-                        }
-                        input[type="submit"] {
-                            background-color: $mainGreen;
-                            color: white;
-                            border: none;
-                            border-radius: 0.3rem;
-                            font-size: 1rem;
-                            padding: 0.4rem 1rem;
-                            width: 8rem;
-                            &:hover {
-                                filter: brightness(1.1);
-                                cursor: pointer;
-                            }
-                        }
-                        p.error {
-                            color: $mainRed;
-                            font-weight: bold;
-                            font-size: 0.8rem;
-                            margin-top: 1rem;
-                        }
-                        &.schedule {
-                            >label {
-                                font-size: 1.2rem;
-                                font-weight: bold;
-                                margin-bottom: 1rem;
-                                color: $mainGreen;
-                            }
-                            .row {
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                margin-bottom: 1rem;
-                                label {
-                                    margin: unset;
-                                    &:first-of-type {
-                                        width: 8rem;
-                                    }
-                                    b {
-                                        font-weight: bold;
-                                    }
-                                }
-                                select {
-                                    padding: 0.3rem 0.5rem;
-                                    border-radius: 0.3rem;
-                                    &:hover {
-                                        cursor: pointer;
-                                        border-color: $mainGreen;
-                                    }
-                                    &:focus {
-                                        outline: none;
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
         }
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-            input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-                &:checked+.slider {
-                    background-color: $mainGreen;
-                }
-                &:focus+.slider {
-                    box-shadow: 0 0 1px $mainGreen;
-                }
-                &:checked+.slider:before {
-                    -webkit-transform: translateX(26px);
-                    -ms-transform: translateX(26px);
-                    transform: translateX(26px);
-                }
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            &:checked+.slider {
+                background-color: $mainGreen;
             }
-            .slider {
+            &:focus+.slider {
+                box-shadow: 0 0 1px $mainGreen;
+            }
+            &:checked+.slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            &:before {
                 position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
                 -webkit-transition: .4s;
                 transition: .4s;
+            }
+            &.round {
+                border-radius: 34px;
                 &:before {
-                    position: absolute;
-                    content: "";
-                    height: 26px;
-                    width: 26px;
-                    left: 4px;
-                    bottom: 4px;
-                    background-color: white;
-                    -webkit-transition: .4s;
-                    transition: .4s;
-                }
-                &.round {
-                    border-radius: 34px;
-                    &:before {
-                        border-radius: 50%;
-                    }
+                    border-radius: 50%;
                 }
             }
         }
-        input {
-            font-family: "poppins", sans-serif;
-        }
-        .hidden {
-            display: none !important;
-        }
-        button {
-            box-shadow: none !important;
-        }
+    }
+    input {
+        font-family: "poppins", sans-serif;
+    }
+    .hidden {
+        display: none !important;
+    }
+    button {
+        box-shadow: none !important;
     }
 }
