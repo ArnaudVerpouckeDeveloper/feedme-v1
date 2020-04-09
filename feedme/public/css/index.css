@@ -280,6 +280,13 @@ body main .orders .order .orderSections > li.deliveryMethod p.type {
 body main .orders .order .orderSections > li.deliveryMethod p.time {
   font-size: 1.5rem;
 }
+body main .orders .order .orderSections > li.deliveryMethod p.time.lineThrough {
+  text-decoration: line-through;
+}
+body main .orders .order .orderSections > li.deliveryMethod p.timeDelay {
+  font-size: 1.5rem;
+  margin-top: 0.4rem;
+}
 body main .orders .order .orderSections > li.action {
   padding: 0 1rem;
   display: flex;

@@ -63,8 +63,10 @@ function setEventListenersForOrder(order) {
                     orderId: orderId
                 })
                 .then(res => {
-                    if (res == "ok") {
+                    console.log(res);
+                    if (res.message == "ok") {
                         removeAllDelaysFromExtraTimeButtons(order);
+                        showNewTime(order, res.newTime);
                         order.querySelector(".orderSections .addExtraTime.addExtraTime_15").classList.add("delayed");
                         Swal.fire(
                             'Geslaagd!',
@@ -86,8 +88,11 @@ function setEventListenersForOrder(order) {
                     orderId: orderId
                 })
                 .then(res => {
-                    if (res == "ok") {
+                    console.log(res);
+
+                    if (res.message == "ok") {
                         removeAllDelaysFromExtraTimeButtons(order);
+                        showNewTime(order, res.newTime);
                         order.querySelector(".orderSections .addExtraTime.addExtraTime_30").classList.add("delayed");
                         Swal.fire(
                             'Geslaagd!',
@@ -109,8 +114,11 @@ function setEventListenersForOrder(order) {
                     orderId: orderId
                 })
                 .then(res => {
-                    if (res == "ok") {
+                    console.log(res);
+
+                    if (res.message == "ok") {
                         removeAllDelaysFromExtraTimeButtons(order);
+                        showNewTime(order, res.newTime);
                         order.querySelector(".orderSections .addExtraTime.addExtraTime_60").classList.add("delayed");
                         Swal.fire(
                             'Geslaagd!',
@@ -220,4 +228,13 @@ function removeAllDelaysFromExtraTimeButtons(order) {
     for (let i = 0; i < extraTimeElements.length; i++) {
         extraTimeElements[i].classList.remove("delayed");
     }
-};
+}
+
+function showNewTime(order, newTime) {
+    order.querySelector(".time").classList.add("lineThrough");
+    if (order.querySelector(".timeDelay")) {
+        order.querySelector(".timeDelay").remove();
+    }
+    order.querySelector(".time").insertAdjacentHTML("afterEnd", "<p class='timeDelay'>" + newTime + "</p>");
+
+}

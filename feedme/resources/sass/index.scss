@@ -279,6 +279,13 @@ body {
                                 }
                                 &.time {
                                     font-size: 1.5rem;
+                                    &.lineThrough {
+                                        text-decoration: line-through;
+                                    }
+                                }
+                                &.timeDelay {
+                                    font-size: 1.5rem;
+                                    margin-top: 0.4rem;
                                 }
                             }
                         }

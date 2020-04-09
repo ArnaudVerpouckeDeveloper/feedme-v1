@@ -71,12 +71,16 @@
                 <li class="deliveryMethod">
                     @if($order->deliveryMethod == "delivery")
                         <p class="type">leveren</p>
-                        <p class="time">{{$order->requestedTime}}</p>
+                        <p class="time {{$order->extratime != null?'lineThrough':''}}">{{$order->requestedTime}}</p>
                     @endif
                     @if($order->deliveryMethod == "takeaway")
                         <p class="type">afhalen</p>
-                        <p class="time">{{$order->requestedTime}}</p>
+                        <p class="time {{$order->extratime != null?'lineThrough':''}}">{{$order->requestedTime}}</p>
                     @endif
+
+                    @if($order->extratime != "" || $order->extratime != null)
+                        <p class="timeDelay">{{date("H:i", strtotime("+".$order->extratime." minutes", strtotime($order->requestedTime)))}}</p>
+                    @endif                    
                 </li>
                 @if ($order->confirmed || $order->denied)
 
