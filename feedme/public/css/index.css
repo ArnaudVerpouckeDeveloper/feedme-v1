@@ -362,6 +362,20 @@ body main .createProductForm .errors p {
   color: white;
   margin-bottom: 0.5rem;
 }
+body main .createProductForm .row .description {
+  width: 100%;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+  border-radius: 0.3rem;
+  border: none;
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-weight: bold;
+  font-family: "poppins", sans-serif;
+}
+body main .createProductForm .row .description:focus {
+  outline: none;
+}
 body main .products {
   display: flex;
   justify-content: space-between;
@@ -395,6 +409,12 @@ body main .products li > .row.upper .name {
 body main .products li > .row.upper .price {
   width: 20%;
   text-align: right;
+}
+body main .products li > .row.descriptionRow {
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  color: grey;
+  border-bottom: 1px solid #dadada;
 }
 body main .products li > .row.bottom {
   padding-left: 1.5rem;
@@ -457,6 +477,20 @@ body main .products li form .row.inputValues input[type=text] {
 body main .products li form .row.inputValues input[type=value] {
   width: 20%;
   text-align: right;
+}
+body main .products li form .row.descriptionValue textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.3rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid lightgray;
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-weight: bold;
+  font-family: "poppins", sans-serif;
+}
+body main .products li form .row.descriptionValue textarea:focus {
+  outline: none;
 }
 body main .products li form .row.buttons {
   display: flex;

@@ -126,7 +126,8 @@ class MerchantController extends Controller
     function addProduct(Request $request){
         $request->validate([
             'name' => 'required|min:2',
-            'price' => ['required','min:0']
+            'price' => ['required','min:0'],
+            'description' => 'nullable'
         ]);        
 
         $product = new Product();
@@ -155,6 +156,7 @@ class MerchantController extends Controller
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->description = $request->description;
         $product->save();
         return response()->json("ok");
     }

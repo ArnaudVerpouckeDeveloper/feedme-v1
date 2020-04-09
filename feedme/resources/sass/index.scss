@@ -367,6 +367,22 @@ body {
                     margin-bottom: 0.5rem;
                 }
             }
+            .row {
+                .description {
+                    width: 100%;
+                    margin-top: 1.5rem;
+                    box-sizing: border-box;
+                    border-radius: 0.3rem;
+                    border: none;
+                    font-size: 1rem;
+                    padding: 0.4rem 0.8rem;
+                    font-weight: bold;
+                    font-family: "poppins", sans-serif;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
         }
         .products {
             display: flex;
@@ -398,6 +414,12 @@ body {
                             width: 20%;
                             text-align: right;
                         }
+                    }
+                    &.descriptionRow {
+                        padding: 1.5rem;
+                        font-size: 0.9rem;
+                        color: grey;
+                        border-bottom: 1px solid #dadada;
                     }
                     &.bottom {
                         padding-left: 1.5rem;
@@ -463,6 +485,22 @@ body {
                                 &[type="value"] {
                                     width: 20%;
                                     text-align: right;
+                                }
+                            }
+                        }
+                        &.descriptionValue {
+                            textarea {
+                                width: 100%;
+                                box-sizing: border-box;
+                                border-radius: 0.3rem;
+                                margin-bottom: 1.5rem;
+                                border: 2px solid lightgray;
+                                font-size: 1rem;
+                                padding: 0.4rem 0.8rem;
+                                font-weight: bold;
+                                font-family: "poppins", sans-serif;
+                                &:focus {
+                                    outline: none;
                                 }
                             }
                         }
