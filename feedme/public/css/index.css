@@ -250,6 +250,7 @@ body main .orders .order .orderSections {
   width: 30%;
   display: flex;
   align-self: flex-start;
+  flex-wrap: wrap;
 }
 body main .orders .order .orderSections > li {
   min-height: 8rem;
@@ -260,13 +261,9 @@ body main .orders .order .orderSections > li {
   width: 33%;
   border-right: none;
 }
-body main .orders .order .orderSections > li:last-of-type {
-  border-right: 1px solid #c3c3c3;
-}
-body main .orders .order .orderSections > li:first-of-type {
-  border-left: none;
-}
 body main .orders .order .orderSections > li.deliveryMethod {
+  border-left: none;
+  border-bottom: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -302,15 +299,31 @@ body main .orders .order .orderSections > li.action p {
 body main .orders .order .orderSections > li.action:hover {
   cursor: pointer;
 }
+body main .orders .order .orderSections > li.addExtraTime.addExtraTime_15 {
+  border-left: none;
+}
+body main .orders .order .orderSections > li.addExtraTime.addExtraTime_60 {
+  border-right: 1px solid #c3c3c3;
+}
+body main .orders .order .orderSections > li.addExtraTime:hover, body main .orders .order .orderSections > li.addExtraTime.delayed {
+  background-color: gold;
+}
+body main .orders .order .orderSections > li.confirmOrder {
+  border-bottom: none;
+}
 body main .orders .order .orderSections > li.confirmOrder:hover {
   background-color: #68A25F;
   color: white;
+}
+body main .orders .order .orderSections > li.denyOrder {
+  border-right: 1px solid #c3c3c3;
+  border-bottom: none;
 }
 body main .orders .order .orderSections > li.denyOrder:hover {
   background-color: #e43a3a;
   color: white;
 }
-body main .createProductForm {
+body main .orders .order .createProductForm {
   padding: 4rem;
   margin-bottom: 3rem;
   width: 80%;
@@ -321,12 +334,12 @@ body main .createProductForm {
   margin-right: auto;
   box-sizing: border-box;
 }
-body main .createProductForm .input-row {
+body main .orders .order .createProductForm .input-row {
   display: flex;
   justify-content: space-between;
 }
-body main .createProductForm .input-row input[type=text],
-body main .createProductForm .input-row input[type=value] {
+body main .orders .order .createProductForm .input-row input[type=text],
+body main .orders .order .createProductForm .input-row input[type=value] {
   border: none;
   font-size: 1rem;
   padding: 0.4rem 0.8rem;
@@ -334,7 +347,7 @@ body main .createProductForm .input-row input[type=value] {
   font-weight: bold;
   box-sizing: border-box;
 }
-body main .createProductForm .input-row input[type=submit] {
+body main .orders .order .createProductForm .input-row input[type=submit] {
   width: 15%;
   font-weight: bold;
   border: none;
@@ -344,25 +357,25 @@ body main .createProductForm .input-row input[type=submit] {
   color: white;
   box-sizing: border-box;
 }
-body main .createProductForm .input-row input[type=submit]:hover {
+body main .orders .order .createProductForm .input-row input[type=submit]:hover {
   cursor: pointer;
   background-color: #528a4a;
   color: white;
 }
-body main .createProductForm .input-row .name {
+body main .orders .order .createProductForm .input-row .name {
   width: 60%;
 }
-body main .createProductForm .input-row .price {
+body main .orders .order .createProductForm .input-row .price {
   width: 20%;
 }
-body main .createProductForm .errors {
+body main .orders .order .createProductForm .errors {
   margin-top: 1rem;
 }
-body main .createProductForm .errors p {
+body main .orders .order .createProductForm .errors p {
   color: white;
   margin-bottom: 0.5rem;
 }
-body main .createProductForm .row .description {
+body main .orders .order .createProductForm .row .description {
   width: 100%;
   margin-top: 1.5rem;
   box-sizing: border-box;
@@ -373,10 +386,10 @@ body main .createProductForm .row .description {
   font-weight: bold;
   font-family: "poppins", sans-serif;
 }
-body main .createProductForm .row .description:focus {
+body main .orders .order .createProductForm .row .description:focus {
   outline: none;
 }
-body main .products {
+body main .orders .order .products {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -384,7 +397,7 @@ body main .products {
   margin-left: auto;
   margin-right: auto;
 }
-body main .products li {
+body main .orders .order .products li {
   box-sizing: border-box;
   width: 48%;
   margin-bottom: 3rem;
@@ -392,49 +405,49 @@ body main .products li {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
   border-radius: 0.3rem;
 }
-body main .products li > .row {
+body main .orders .order .products li > .row {
   display: flex;
   justify-content: space-between;
   font-size: 1.15rem;
   font-weight: bold;
   align-items: center;
 }
-body main .products li > .row.upper {
+body main .orders .order .products li > .row.upper {
   padding: 1.5rem;
   border-bottom: 1px solid #dadada;
 }
-body main .products li > .row.upper .name {
+body main .orders .order .products li > .row.upper .name {
   width: 75%;
 }
-body main .products li > .row.upper .price {
+body main .orders .order .products li > .row.upper .price {
   width: 20%;
   text-align: right;
 }
-body main .products li > .row.descriptionRow {
+body main .orders .order .products li > .row.descriptionRow {
   padding: 1.5rem;
   font-size: 0.9rem;
   color: grey;
   border-bottom: 1px solid #dadada;
 }
-body main .products li > .row.bottom {
+body main .orders .order .products li > .row.bottom {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   display: flex;
   justify-content: space-between;
   height: 5rem;
 }
-body main .products li > .row.bottom .orderable {
+body main .orders .order .products li > .row.bottom .orderable {
   padding: 1rem 0;
   width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-body main .products li > .row.bottom .orderable .info {
+body main .orders .order .products li > .row.bottom .orderable .info {
   font-size: 0.8rem;
   margin-bottom: 0.4rem;
 }
-body main .products li > .row.bottom button {
+body main .orders .order .products li > .row.bottom button {
   border: none;
   background-color: transparent;
   width: 30%;
@@ -443,26 +456,26 @@ body main .products li > .row.bottom button {
   height: 4rem;
   border-radius: 0.5rem;
 }
-body main .products li > .row.bottom button:hover {
+body main .orders .order .products li > .row.bottom button:hover {
   cursor: pointer;
 }
-body main .products li > .row.bottom button.edit:hover {
+body main .orders .order .products li > .row.bottom button.edit:hover {
   background-color: #e6e6e6;
   color: black;
 }
-body main .products li > .row.bottom button.remove:hover {
+body main .orders .order .products li > .row.bottom button.remove:hover {
   background-color: #e43a3a;
   color: white;
 }
-body main .products li form {
+body main .orders .order .products li form {
   padding: 1.5rem;
 }
-body main .products li form .row.inputValues {
+body main .orders .order .products li form .row.inputValues {
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: space-between;
 }
-body main .products li form .row.inputValues input {
+body main .orders .order .products li form .row.inputValues input {
   border: none;
   font-size: 1.15rem;
   font-weight: bold;
@@ -471,14 +484,14 @@ body main .products li form .row.inputValues input {
   padding: 0.2rem 0.4rem;
   box-sizing: border-box;
 }
-body main .products li form .row.inputValues input[type=text] {
+body main .orders .order .products li form .row.inputValues input[type=text] {
   width: 75%;
 }
-body main .products li form .row.inputValues input[type=value] {
+body main .orders .order .products li form .row.inputValues input[type=value] {
   width: 20%;
   text-align: right;
 }
-body main .products li form .row.descriptionValue textarea {
+body main .orders .order .products li form .row.descriptionValue textarea {
   width: 100%;
   box-sizing: border-box;
   border-radius: 0.3rem;
@@ -489,15 +502,15 @@ body main .products li form .row.descriptionValue textarea {
   font-weight: bold;
   font-family: "poppins", sans-serif;
 }
-body main .products li form .row.descriptionValue textarea:focus {
+body main .orders .order .products li form .row.descriptionValue textarea:focus {
   outline: none;
 }
-body main .products li form .row.buttons {
+body main .orders .order .products li form .row.buttons {
   display: flex;
   justify-content: space-between;
 }
-body main .products li form .row.buttons input[type=button],
-body main .products li form .row.buttons input[type=submit] {
+body main .orders .order .products li form .row.buttons input[type=button],
+body main .orders .order .products li form .row.buttons input[type=submit] {
   height: 2.5rem;
   padding: 0.3rem 1.5rem;
   border: none;
@@ -507,46 +520,46 @@ body main .products li form .row.buttons input[type=submit] {
   font-weight: bold;
   width: 48%;
 }
-body main .products li form .row.buttons input[type=button] {
+body main .orders .order .products li form .row.buttons input[type=button] {
   background-color: #eaeaea;
 }
-body main .products li form .row.buttons input[type=button]:hover {
+body main .orders .order .products li form .row.buttons input[type=button]:hover {
   background-color: #c7c7c7;
 }
-body main .products li form .row.buttons input[type=submit] {
+body main .orders .order .products li form .row.buttons input[type=submit] {
   background-color: #68A25F;
   color: white;
 }
-body main .products li form .row.buttons input[type=submit]:hover {
+body main .orders .order .products li form .row.buttons input[type=submit]:hover {
   background-color: #375f31;
 }
-body main .settings {
+body main .orders .order .settings {
   width: 65%;
   margin-left: auto;
   margin-right: auto;
 }
-body main .settings form {
+body main .orders .order .settings form {
   display: flex;
   flex-direction: column;
   margin-bottom: 8rem;
 }
-body main .settings form label {
+body main .orders .order .settings form label {
   margin-bottom: 0.5rem;
 }
-body main .settings form input[type=file],
-body main .settings form textarea {
+body main .orders .order .settings form input[type=file],
+body main .orders .order .settings form textarea {
   margin-bottom: 1rem;
 }
-body main .settings form textarea {
+body main .orders .order .settings form textarea {
   border-radius: 0.3rem;
   padding: 0.5rem 0.7rem;
   font-family: "Poppins", sans-serif;
   font-size: 1.1rem;
 }
-body main .settings form textarea:focus {
+body main .orders .order .settings form textarea:focus {
   outline: none;
 }
-body main .settings form img {
+body main .orders .order .settings form img {
   margin-bottom: 1rem;
   height: 10rem;
   object-fit: contain;
@@ -554,14 +567,14 @@ body main .settings form img {
   display: block;
   object-position: left;
 }
-body main .settings form img.square {
+body main .orders .order .settings form img.square {
   width: 10rem;
   object-fit: cover;
 }
-body main .settings form.bannerForm img.showBorder {
+body main .orders .order .settings form.bannerForm img.showBorder {
   border: 1px dashed lightgrey;
 }
-body main .settings form input[type=submit] {
+body main .orders .order .settings form input[type=submit] {
   background-color: #68A25F;
   color: white;
   border: none;
@@ -570,72 +583,71 @@ body main .settings form input[type=submit] {
   padding: 0.4rem 1rem;
   width: 8rem;
 }
-body main .settings form input[type=submit]:hover {
+body main .orders .order .settings form input[type=submit]:hover {
   filter: brightness(1.1);
   cursor: pointer;
 }
-body main .settings form p.error {
+body main .orders .order .settings form p.error {
   color: #e43a3a;
   font-weight: bold;
   font-size: 0.8rem;
   margin-top: 1rem;
 }
-body main .settings form.schedule > label {
+body main .orders .order .settings form.schedule > label {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
   color: #68A25F;
 }
-body main .settings form.schedule .row {
+body main .orders .order .settings form.schedule .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
-body main .settings form.schedule .row label {
+body main .orders .order .settings form.schedule .row label {
   margin: unset;
 }
-body main .settings form.schedule .row label:first-of-type {
+body main .orders .order .settings form.schedule .row label:first-of-type {
   width: 8rem;
 }
-body main .settings form.schedule .row label b {
+body main .orders .order .settings form.schedule .row label b {
   font-weight: bold;
 }
-body main .settings form.schedule .row select {
+body main .orders .order .settings form.schedule .row select {
   padding: 0.3rem 0.5rem;
   border-radius: 0.3rem;
 }
-body main .settings form.schedule .row select:hover {
+body main .orders .order .settings form.schedule .row select:hover {
   cursor: pointer;
   border-color: #68A25F;
 }
-body main .settings form.schedule .row select:focus {
+body main .orders .order .settings form.schedule .row select:focus {
   outline: none;
 }
-
-.switch {
+body main .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
-.switch input {
+body main .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-.switch input:checked + .slider {
+body main .switch input:checked + .slider {
   background-color: #68A25F;
 }
-.switch input:focus + .slider {
+body main .switch input:focus + .slider {
   box-shadow: 0 0 1px #68A25F;
 }
-.switch input:checked + .slider:before {
+body main .switch input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-.switch .slider {
+body main .switch .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -646,7 +658,7 @@ body main .settings form.schedule .row select:focus {
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
-.switch .slider:before {
+body main .switch .slider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -657,22 +669,19 @@ body main .settings form.schedule .row select:focus {
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
-.switch .slider.round {
+body main .switch .slider.round {
   border-radius: 34px;
 }
-.switch .slider.round:before {
+body main .switch .slider.round:before {
   border-radius: 50%;
 }
-
-input {
+body main input {
   font-family: "poppins", sans-serif;
 }
-
-.hidden {
+body main .hidden {
   display: none !important;
 }
-
-button {
+body main button {
   box-shadow: none !important;
 }
 

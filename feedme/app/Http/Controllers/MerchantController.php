@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderHasBeenDelayed;
 use App\Merchant;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -11,6 +12,7 @@ use App\Rules\Price;
 use App\User;
 use Exception;
 use DateTime;
+use Mail;
 
 
 
@@ -344,6 +346,28 @@ class MerchantController extends Controller
         return redirect("/manager/instellingen");
     }
 
+
+
+    function addTimeToOrder_15(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["extraTime" => 15]);
+        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+        return response()->json("ok");       
+    }
+
+    function addTimeToOrder_30(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["extraTime" => 30]);
+        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+        return response()->json("ok");       
+    }
+
+    function addTimeToOrder_60(Request $request){
+        $order = auth()->user()->merchant->orders->find($request->orderId);
+        $order->update(["extraTime" => 60]);
+        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+        return response()->json("ok");       
+    }
 
 
 

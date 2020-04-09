@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Traits\SharedMerchantTrait;
 use App\Mail\ConfirmOrder;
+use Mail;
 
 class CustomerController extends Controller
 {

@@ -54,6 +54,79 @@ function setEventListenersForOrder(order) {
                     promptError();
                 });
         });
+
+
+
+        order.querySelector(".orderSections .addExtraTime.addExtraTime_15").addEventListener("click", async function(e) {
+            console.log("Adding 15 minutes extra time to order...");
+            makeRequest("PUT", "/manager/orders/addTimeToOrder_15", {
+                    orderId: orderId
+                })
+                .then(res => {
+                    if (res == "ok") {
+                        removeAllDelaysFromExtraTimeButtons(order);
+                        order.querySelector(".orderSections .addExtraTime.addExtraTime_15").classList.add("delayed");
+                        Swal.fire(
+                            'Geslaagd!',
+                            'Het order werd met 15 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                            'success'
+                        );
+                    } else {
+                        throw (res);
+                    }
+                })
+                .catch(error => {
+                    console.log("error: ", error);
+                    promptError();
+                });
+        });
+        order.querySelector(".orderSections .addExtraTime.addExtraTime_30").addEventListener("click", async function(e) {
+            console.log("Adding 30 minutes extra time to order...");
+            makeRequest("PUT", "/manager/orders/addTimeToOrder_30", {
+                    orderId: orderId
+                })
+                .then(res => {
+                    if (res == "ok") {
+                        removeAllDelaysFromExtraTimeButtons(order);
+                        order.querySelector(".orderSections .addExtraTime.addExtraTime_30").classList.add("delayed");
+                        Swal.fire(
+                            'Geslaagd!',
+                            'Het order werd met 30 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                            'success'
+                        );
+                    } else {
+                        throw (res);
+                    }
+                })
+                .catch(error => {
+                    console.log("error: ", error);
+                    promptError();
+                });
+        });
+        order.querySelector(".orderSections .addExtraTime.addExtraTime_60").addEventListener("click", async function(e) {
+            console.log("Adding 60 minutes extra time to order...");
+            makeRequest("PUT", "/manager/orders/addTimeToOrder_60", {
+                    orderId: orderId
+                })
+                .then(res => {
+                    if (res == "ok") {
+                        removeAllDelaysFromExtraTimeButtons(order);
+                        order.querySelector(".orderSections .addExtraTime.addExtraTime_60").classList.add("delayed");
+                        Swal.fire(
+                            'Geslaagd!',
+                            'Het order werd met 60 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                            'success'
+                        );
+                    } else {
+                        throw (res);
+                    }
+                })
+                .catch(error => {
+                    console.log("error: ", error);
+                    promptError();
+                });
+        });
+
     }
 
 
@@ -141,3 +214,10 @@ function hideForm(productDOM_element) {
     productDOM_element.querySelector(".row.upper").classList.remove("hidden");
     productDOM_element.querySelector(".row.bottom").classList.remove("hidden");
 }
+
+function removeAllDelaysFromExtraTimeButtons(order) {
+    let extraTimeElements = order.querySelectorAll(".orderSections .addExtraTime");
+    for (let i = 0; i < extraTimeElements.length; i++) {
+        extraTimeElements[i].classList.remove("delayed");
+    }
+};

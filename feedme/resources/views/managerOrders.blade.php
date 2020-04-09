@@ -84,6 +84,9 @@
                     <li class="action confirmOrder"><span class="material-icons">check</span><p>Bevestig</p></li>
                     <li class="action denyOrder"><span class="material-icons">close</span><p>Weiger</p></li>
                 @endif
+                    <li class="action addExtraTime addExtraTime_15 {{$order->extratime === '15'?'delayed':''}}"><span class="material-icons">schedule</span><p>+15 min.</p></li>
+                    <li class="action addExtraTime addExtraTime_30 {{$order->extratime === '30'?'delayed':''}}"><span class="material-icons">schedule</span><p>+30 min.</p></li>
+                    <li class="action addExtraTime addExtraTime_60 {{$order->extratime === '60'?'delayed':''}}"><span class="material-icons">schedule</span><p>+60 min.</p></li>
                 </ul>
         </li>
         @endforeach
