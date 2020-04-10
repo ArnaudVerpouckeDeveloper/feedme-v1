@@ -1,8 +1,9 @@
+/*$mainGreen: #68A25F;*/
 body {
   font-family: "Poppins", sans-serif;
 }
 body.green-bg {
-  background-color: #68A25F;
+  background-color: #4CAF50;
 }
 body header {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -25,8 +26,8 @@ body header nav {
   justify-content: center;
 }
 body header nav a {
-  border: 2px solid #68A25F;
-  color: #68A25F;
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
   width: 10rem;
   height: 4rem;
   display: flex;
@@ -47,7 +48,7 @@ body header nav a .material-icons {
 }
 body header nav a.active,
 body header nav a:hover {
-  background-color: #68A25F;
+  background-color: #4CAF50;
   color: white;
 }
 body header .signOut {
@@ -81,7 +82,7 @@ body main.extended-screen {
   width: 1200px;
 }
 body main h1 {
-  color: #68A25F;
+  color: #4CAF50;
   font-weight: bold;
   text-align: center;
   font-size: 2rem;
@@ -115,7 +116,7 @@ body main .merchantAuthPanel .login label,
 body main .merchantAuthPanel .register label {
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #68A25F;
+  color: #4CAF50;
   margin-top: 2rem;
 }
 body main .merchantAuthPanel .login label:first-of-type,
@@ -142,7 +143,7 @@ body main .merchantAuthPanel .register input[type=submit] {
   margin-left: auto;
   margin-right: auto;
   font-size: 1rem;
-  background-color: #68A25F;
+  background-color: #4CAF50;
   color: white;
   border: none;
   padding: 0.7rem 2rem;
@@ -179,7 +180,7 @@ body main .merchantAuthPanel .register p {
 body main .merchantAuthPanel .login a,
 body main .merchantAuthPanel .register a {
   text-align: center;
-  color: #68A25F;
+  color: #4CAF50;
 }
 body main .merchantAuthPanel .login a:hover,
 body main .merchantAuthPanel .register a:hover {
@@ -204,7 +205,7 @@ body main .orders .order.accepted .orderSections .row > li, body main .orders .o
   */
 }
 body main .orders .order.accepted .orderOverview {
-  background-color: #68A25F;
+  background-color: #4CAF50;
 }
 body main .orders .order.accepted .orderSections .row > li {
   /*background-color: $mainGreen;*/
@@ -233,7 +234,7 @@ body main .orders .order .orderOverview > ul li .amount {
 }
 body main .orders .order .orderOverview .totalPrice {
   font-weight: bold;
-  color: #68A25F;
+  color: #4CAF50;
 }
 body main .orders .order .orderOverview div > .title {
   font-weight: bold;
@@ -345,7 +346,7 @@ body main .createProductForm {
   margin-bottom: 3rem;
   padding-bottom: 4rem;
   border-radius: 0.4rem;
-  background-color: #68A25F;
+  background-color: #4CAF50;
   box-sizing: border-box;
 }
 body main .createProductForm .input-row {
@@ -538,7 +539,7 @@ body main .products li form .row.buttons input[type=button]:hover {
   background-color: #c7c7c7;
 }
 body main .products li form .row.buttons input[type=submit] {
-  background-color: #68A25F;
+  background-color: #4CAF50;
   color: white;
 }
 body main .products li form .row.buttons input[type=submit]:hover {
@@ -581,7 +582,7 @@ body main .settings form.bannerForm img.showBorder {
   border: 1px dashed lightgrey;
 }
 body main .settings form input[type=submit] {
-  background-color: #68A25F;
+  background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 0.3rem;
@@ -603,7 +604,7 @@ body main .settings form.schedule > label {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #68A25F;
+  color: #4CAF50;
 }
 body main .settings form.schedule .row {
   display: flex;
@@ -626,7 +627,7 @@ body main .settings form.schedule .row select {
 }
 body main .settings form.schedule .row select:hover {
   cursor: pointer;
-  border-color: #68A25F;
+  border-color: #4CAF50;
 }
 body main .settings form.schedule .row select:focus {
   outline: none;
@@ -676,7 +677,7 @@ body main .dashboard .basic-metrics ul li {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background-color: #68A25F;
+  background-color: #4CAF50;
   border-radius: 0.3rem;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   color: white;
@@ -722,7 +723,7 @@ body main .dashboard .checklist ul li .instruction {
 }
 body main .dashboard .checklist ul li .location {
   width: 15%;
-  background-color: #68A25F;
+  background-color: #4CAF50;
   border-radius: 0.3rem;
   padding: 0.7rem 0.3rem;
   text-align: center;
@@ -743,10 +744,10 @@ body .switch input {
   height: 0;
 }
 body .switch input:checked + .slider {
-  background-color: #68A25F;
+  background-color: #4CAF50;
 }
 body .switch input:focus + .slider {
-  box-shadow: 0 0 1px #68A25F;
+  box-shadow: 0 0 1px #4CAF50;
 }
 body .switch input:checked + .slider:before {
   -webkit-transform: translateX(26px);
