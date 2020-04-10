@@ -30,7 +30,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ["sendBatchOfEmails",'logMerchantOut','verifyEmailNotice','logMerchantIn','login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
+        $this->middleware('auth:api', ['except' => ["resendConfirmEmail","sendBatchOfEmails",'logMerchantOut','verifyEmailNotice','logMerchantIn','login', 'registerCustomer', 'registerMerchant', 'previewApiNameFromMerchantName', 'confirmEmail']]);
     }
 
     /**
@@ -117,7 +117,7 @@ class AuthController extends Controller
         
         $user->merchant()->save($newMerchant);
 
-        return view("postRegistration");
+        return view("postRegistration")->with("userId", $user->id);
     }
     
 
@@ -232,6 +232,13 @@ class AuthController extends Controller
     }
 
 
+    public function resendConfirmEmail($userId){
+        $user = User::find($userId)->first();
+        Mail::to($user->email)->send(new ConfirmEmail($user));
+        return response()->json("ok");
+     }
+
+
 /*
     public function registerMerchant(Request $request){
         $validatedData = $request->validate([
@@ -260,7 +267,7 @@ class AuthController extends Controller
         $user->roles()->attach($customerRole);
 
         $user->customer()->save(new Customer());
-        return "ok";
+        return response()->json(["message" => "ok", "userId" => $user->id]);
      }
 
 
@@ -316,6 +323,7 @@ class AuthController extends Controller
         }
      }
 
+   
 
 
 
