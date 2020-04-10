@@ -14,6 +14,7 @@
                 name="Email"
                 prepend-icon="mdi-account"
                 type="email"
+                :rules="val.emailRules"
               ></v-text-field>
               <v-text-field
                 v-model="user.password"
@@ -22,6 +23,7 @@
                 name="password"
                 prepend-icon="mdi-lock"
                 type="password"
+                :rules="val.veldRules"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -48,6 +50,13 @@ export default {
       user: {
         email: null,
         password: null
+      },
+      val: {
+        emailRules: [
+          v => !!v || "E-mail is verplicht",
+          v => /.+@.+/.test(v) || "Gelieve een geldig email in te geven."
+        ],
+        veldRules: [v => !!v || "Wachtwoord is verplicht"]
       }
     };
   },

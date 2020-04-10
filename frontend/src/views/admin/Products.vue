@@ -61,7 +61,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   beforeRouteEnter(to, from, next) {
     const store = require("../../store");
-    store.default.dispatch("fetchProducts", to.params.id).then(() => {
+    store.default.dispatch("fetchMerchantAndProduct", to.params.id).then(() => {
       next();
     });
   },

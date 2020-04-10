@@ -6,66 +6,129 @@
       class="img-header"
       style="margin-top:-12px"
     />
-    <v-row :style="cardStyle">
+    <v-row class="merchant-info" :style="infoStyle">
+      <h1 class="col-8 col-md-10 col-lg-11">{{merchantDetail.name}}</h1>
+      <v-btn class="col-1" @click.stop="showDialog = true">
+        <v-icon>mdi-information-outline</v-icon>
+      </v-btn>
+    </v-row>
+    <v-row :style="cardStyle" class="merchant-products">
       <v-col cols="12" sm="6" v-for="product in products">
         <v-card elevation="1">
           <v-row>
             <v-col cols="8">
               <v-card-title>{{product.name}}</v-card-title>
               <v-card-subtitle v-if="product.description">€{{product.description}}</v-card-subtitle>
-              <v-card-subtitle>€{{product.price}}</v-card-subtitle>
+              <v-card-subtitle>€{{formatPrice(product.price)}}</v-card-subtitle>
             </v-col>
             <v-col cols="4" style="align-self: center;">
               <v-card-actions style="justify-content: flex-end;">
-                <v-btn text @click="removeProduct(product)">-</v-btn>
-                <v-btn text @click="addProduct(product)">+</v-btn>
+                <v-btn text @click="removeProduct(product)">
+                  <v-icon>mdi-minus</v-icon>
+                </v-btn>
+                <v-btn text @click="addProduct(product)">
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
               </v-card-actions>
             </v-col>
           </v-row>
         </v-card>
       </v-col>
     </v-row>
-    <ShoppingCart></ShoppingCart>
+    <ShoppingCart :merchant_id="merchantDetail.id" id="shoppingCart"></ShoppingCart>
     <CartButton></CartButton>
+    <v-dialog v-model="showDialog" max-width="440">
+      <v-card>
+        <v-card-title class="headline">{{merchantDetail.name}}</v-card-title>
+        <v-row class="dialog-content">
+          <v-col
+            cols="12"
+            class="dialog-content-address"
+          >{{merchantDetail.address_street}} {{merchantDetail.address_number}}</v-col>
+          <v-col
+            cols="12"
+            class="dialog-content-address"
+          >{{merchantDetail.address_zip}} {{merchantDetail.address_city}}</v-col>
+          <v-col cols="12" class="dialog-content-phone">{{merchantDetail.merchantPhone}}</v-col>
+        </v-row>
+        <v-divider inset style="margin: 0 auto;"></v-divider>
+
+        <div class="opening-hours">
+          <v-row
+            class="dialog-content"
+            v-for="(hour, dag) in merchantDetail.opening_hours.takeaway"
+          >
+            <v-col cols="4">{{numberToday(dag)}}:</v-col>
+            <v-col
+              cols="8"
+            >{{hour.from_1}} tot {{hour.till_1}} en {{hour.from_2}} tot {{hour.till_2}}</v-col>
+          </v-row>
+        </div>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
 import ShoppingCart from "../components/ShoppingCart";
 import CartButton from "../components/CartButton";
+import MerchantDialog from "../components/MerchantDialog";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   beforeRouteEnter(to, from, next) {
     const store = require("../store");
-    store.default.dispatch("fetchProducts", to.params.id).then(() => {
+    store.default.dispatch("fetchMerchantAndProduct", to.params.id).then(() => {
       next();
     });
   },
   components: {
     ShoppingCart,
-    CartButton
+    CartButton,
+    MerchantDialog
   },
   computed: {
     cardStyle() {
-      if (!this.isMobile) return "margin-right: 350px;";
-      else return "margin-right: -12px";
+      if (!this.isMobile) return "margin-right: 370px;";
+      else return "margin-right: -12px;";
     },
-    ...mapGetters(["products", "isMobile", "showCartButton"])
+    infoStyle() {
+      if (!this.isMobile) return "margin-right: 382px;";
+      else return "margin-right: 0px";
+    },
+    ...mapGetters(["products", "merchantDetail", "isMobile", "showCartButton"])
   },
   mounted() {},
-  data: () => ({}),
+  data: () => ({
+    showDialog: false
+  }),
   methods: {
     onChangeDrawer(bool) {
       this.$store.dispatch("onChangeDrawer", bool);
     },
     addProduct(product) {
-      this.addItemToCart(product);
+      let merchantId = this.merchantDetail.id;
+      let cartItem = { product, ...merchantId };
+      this.addItemToCart(cartItem);
     },
     removeProduct(product) {
       this.removeItemFromCart(product);
     },
-
+    numberToday(number) {
+      let days = {
+        0: "Maandag",
+        1: "Dinsdag",
+        2: "Woensdag",
+        3: "Donderdag",
+        4: "Vrijdag",
+        5: "Zaterdag",
+        6: "Zondag"
+      };
+      return days[number];
+    },
+    formatPrice(price) {
+      return price.toFixed(2);
+    },
     ...mapActions(["addItemToCart", "removeItemFromCart"])
   }
 };
@@ -91,4 +154,23 @@ export default {
   margin-right: 0px !important;
   color: #fff !important;
 }
+.merchant-info {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+.merchant-info button {
+  align-self: center;
+}
+.dialog-content {
+  margin: 0 12px;
+}
+.dialog-content-address,
+.dialog-content-phone {
+  padding-top: 0;
+}
+.opening-hours {
+  padding-bottom: 12px;
+}
+
 </style>
