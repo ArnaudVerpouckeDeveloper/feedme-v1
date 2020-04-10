@@ -201,6 +201,7 @@ class CustomerController extends Controller
 
         $order->requestedTime = $request->requestedTime;
         
+
         if ($this->productIdsAreValid($request->productIds, $merchant)){
             if($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime )){
                 $merchant->orders()->save($order);
@@ -255,11 +256,7 @@ class CustomerController extends Controller
     function productIdsAreValid($productIds, $merchant){
         foreach($productIds as $productId){
             $product = Product::find($productId);
-            if (
-                $product == null 
-                || $product->merchant->id != $merchant->id
-                || !$product->available 
-                ){
+            if ($product == null || $product->merchant->id != $merchant->id || !$product->orderable ){
                 return false; 
             }
         }

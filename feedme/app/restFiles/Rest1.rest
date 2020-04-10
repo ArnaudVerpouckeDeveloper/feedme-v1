@@ -1,4 +1,4 @@
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NjUyMjM5OSwiZXhwIjoxNTg2NTI1OTk5LCJuYmYiOjE1ODY1MjIzOTksImp0aSI6ImJWNHlhYjZMeERKSzdCQVUiLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.xIVKePSVsimpWa3kEevJh8DDAujIVWmAGKzT3aFrVFM
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NjUyNjY5NywiZXhwIjoxNTg2NTMwMjk3LCJuYmYiOjE1ODY1MjY2OTcsImp0aSI6IlYzbHRFNHlvVjlHdk85bGoiLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.ly4Er_Hka6-9fqNjv3bFkHmmsAY0emDB55z5jL93VFI
 
 
 
@@ -107,8 +107,8 @@ Authorization: Bearer {{token}}
     "addressNumber": 200,
     "addressZipCode": 8800,
     "addressCity": "Roeselare",
-    "productIds": [1,2,3],
-    "requestedTime": "{{$datetime 'YYYY-MM-DD H:m:s' 2 h}}"
+    "productIds": ["1","2","3"],
+    "requestedTime": "18:00"
 }
 
 ###
