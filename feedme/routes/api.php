@@ -52,7 +52,8 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth','auth.customer'],
+    //'middleware' => ['auth','auth.customer'],
+    'middleware' => ['auth:api','auth.customer'],
 ], function ($router) {
     Route::post('/placeOrder', 'CustomerController@placeOrder');
 });

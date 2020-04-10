@@ -91,6 +91,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'emma@test.com',
             'password' => bcrypt('123'),
             'verificationCode' => Str::random(128),
+            'email_verified_at' => now(),
             'mobilePhone' => "0479456321"
         ]);
         $customer1->roles()->attach($customerRole);

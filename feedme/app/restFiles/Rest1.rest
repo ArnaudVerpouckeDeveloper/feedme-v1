@@ -1,4 +1,4 @@
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NDU3MDE3MSwiZXhwIjoxNTg0NTczNzcxLCJuYmYiOjE1ODQ1NzAxNzEsImp0aSI6Ik9DYmdmenBkOTQySVlKWWYiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.7eun5VeSRmQboa-Rft4G3KDCljaWP9hITYm-942CVUE
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NjUyMjM5OSwiZXhwIjoxNTg2NTI1OTk5LCJuYmYiOjE1ODY1MjIzOTksImp0aSI6ImJWNHlhYjZMeERKSzdCQVUiLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.xIVKePSVsimpWa3kEevJh8DDAujIVWmAGKzT3aFrVFM
 
 
 
@@ -42,9 +42,9 @@ Accept: application/json
 {
     "firstName": "bob",
     "lastName": "achternaamabc",
-    "email": "arnaud@plenso.be",
-    "password": "Bob_2019",
-    "password_confirmation": "Bob_2019",
+    "email": "arnaud.verpoucke@plenso.be",
+    "password": "Arnaud_2019",
+    "password_confirmation": "Arnaud_2019",
     "mobilePhone": "0400 123 456"
 }
 

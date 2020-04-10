@@ -193,7 +193,8 @@ class CustomerController extends Controller
             }
         }
         else{
-            exit();
+            return response()->json("order not possible in shedule");
+            //exit();
         }
 
 
@@ -209,11 +210,15 @@ class CustomerController extends Controller
                     $order->products()->attach(Product::find($productId));
                 }
 
-                Mail::to(auth()->user()->email)->send(new confirmOrder($order));
+                //Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
+                return response()->json("ok");
+            }
+            else{
+                return response()->json("order not possible in shedule");
             }
         }
         else{
-            exit();
+            return response()->json("invalid products");
         }
         
     }
