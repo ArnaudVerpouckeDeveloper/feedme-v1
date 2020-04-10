@@ -28,7 +28,7 @@
 
             p{
                 text-align: center;
-                margin-bottom: 5rem;
+                margin-bottom: 1rem;
                 color: white;
             }
 
@@ -63,6 +63,14 @@
                 transform: translateY(-50%);
             }
 
+            #resendConfirmationEmail{
+                font-weight: bold;
+            }
+            #resendConfirmationEmail:hover{
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
 
             
         </style>
@@ -70,5 +78,38 @@
     <body>
         <h1>U bent geregistreerd.</h1>
         <p>Om verder te gaan dient u eerst uw e-mailadres te bevestigen. We hebben u een e-mail gestuurd.</p>
+        <p>Geen e-mail ontvangen? <span id="resendConfirmationEmail">Opnieuw versturen</span>. </p>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                document.querySelector("#resendConfirmationEmail").addEventListener("click", async function(){
+                    const response = await fetch("/api/resendConfirmEmail/"+{{$userId}}, {
+                        method: "GET",
+                        mode: 'cors',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    await response.json()
+                    .then(res => {
+                        console.log("ok", res);
+                        Swal.fire(
+                            'Geslaagd!',
+                            'We hebben de e-mail opnieuw verstuurd.',
+                            'success'
+                        );
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oei...',
+                            text: "Er liep is fout bij het opnieuw versturen van de e-mail."
+                        })
+                    });
+                });
+            })
+        </script>
     </body>
 </html>

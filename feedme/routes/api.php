@@ -72,5 +72,5 @@ Route::group([
 
 
 
-
+Route::get("/resendConfirmEmail/{userId}","AuthController@resendConfirmEmail");
 Route::get("/merchant/{merchantId}","CustomerController@getMerchant");
