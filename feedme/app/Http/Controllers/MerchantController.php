@@ -445,7 +445,8 @@ class MerchantController extends Controller
         return response()->json([
             "message" => "ok",
             "newTime" => date("H:i", strtotime("+60 minutes", strtotime($order->requestedTime)))
-        ]);      }
+        ]);      
+    }
 
 
 

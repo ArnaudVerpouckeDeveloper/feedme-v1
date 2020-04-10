@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Traits\SharedMerchantTrait;
 use App\Mail\ConfirmOrder;
+use App\Mail\WebForm;
 use Mail;
 
 class CustomerController extends Controller
@@ -258,5 +259,17 @@ class CustomerController extends Controller
             }
         }
         return true;
+    }
+
+
+    function sendContactForm(Request $request){
+        $validatedData = $request->validate([
+            'fullName' => 'required|string|min:1',
+            'email' => 'required|email',
+            'message' => 'required|min:1'
+        ]);   
+
+        Mail::to("info@speedmeal.be")->send(new webForm($validatedData));
+        return response()->json("ok");
     }
 }

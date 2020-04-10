@@ -113,6 +113,19 @@ Authorization: Bearer {{token}}
 
 ###
 
+POST http://localhost:8000/sendContactForm
+Content-Type: application/json
+Accept: application/json
+
+{
+    "fullName": "Arnaud Verpoucke",
+    "email": "arnaud.verpoucke@hotmail.com",
+    "message": "Hallo dit is een test. Bla Bla Bla. \n Testregel."
+}
+
+###
+
+
 GET http://localhost:8000/api/test/merchant-protected
 Content-Type: application/json
 Accept: application/json

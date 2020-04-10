@@ -72,3 +72,4 @@ Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");
 Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");
 
 Route::get("/{merchantApiName}", "CustomerController@showMerchantShop");
+Route::post("/sendContactForm", "CustomerController@sendContactForm");
