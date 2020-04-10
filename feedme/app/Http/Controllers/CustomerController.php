@@ -36,10 +36,7 @@ class CustomerController extends Controller
         $merchantObject = new \stdClass;
         $merchantObject->name = $merchant->name;
         $merchantObject->id = $merchant->id;
-        /* DEPRECATED, schedule should be used now
-        $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
-        $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
-        */
+
         $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
         $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
 
@@ -51,6 +48,10 @@ class CustomerController extends Controller
         $merchantObject->address_number = $merchant->address_number;
         $merchantObject->address_zip = $merchant->address_zip;
         $merchantObject->address_city = $merchant->address_city;
+        $merchantObject->bannerFileName = $merchant->bannerFileName;
+        $merchantObject->logoFileName = $merchant->logoFileName;
+
+
 
         $merchantObject->possibleTimes = $this->getPossibleRequestTimes($merchant);
 
