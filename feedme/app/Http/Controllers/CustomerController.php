@@ -209,9 +209,15 @@ class CustomerController extends Controller
                 $merchant->orders()->save($order);
                 auth()->user()->customer->orders()->save($order);
 
+                $totalPrice = 0;
                 foreach ($request->productIds as $productId){
-                    $order->products()->attach(Product::find($productId));
+                    $product = Product::find($productId);
+                    $order->products()->attach($product);
+                    $totalPrice = $totalPrice + $product->price;
                 }
+
+                $order->totalPrice = $totalPrice;
+                $order->save();
 
                 //Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
                 return response()->json("ok");
@@ -223,6 +229,10 @@ class CustomerController extends Controller
         else{
             return response()->json("invalid products");
         }
+
+
+
+
         
     }
 
