@@ -10,6 +10,7 @@ use App\Traits\SharedMerchantTrait;
 use App\Mail\ConfirmOrder;
 use App\Mail\WebForm;
 use Mail;
+use DateTime;
 
 class CustomerController extends Controller
 {
@@ -179,6 +180,8 @@ class CustomerController extends Controller
         */
 
 
+        
+
         if ($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime)){
             $order->deliveryMethod = $request->deliveryMethod;
             if ($request->deliveryMethod == "delivery"){
@@ -198,8 +201,7 @@ class CustomerController extends Controller
         }
 
 
-
-        $order->requestedTime = $request->requestedTime;
+        $order->requestedTime = DateTime::createFromFormat('H:i', $request->requestedTime);
         
 
         if ($this->productIdsAreValid($request->productIds, $merchant)){
