@@ -15,16 +15,24 @@ use Exception;
 use DateTime;
 use Mail;
 use stdClass;
+use App\Traits\SharedMerchantTrait;
+
 
 class MerchantController extends Controller
 {
+    use SharedMerchantTrait;
+
     function protected(Request $request){
         dd(auth()->user());
         return $request;
     }
 
     function getAllMerchants(Request $request){
-        return Merchant::all();
+        $allMerchants = Merchant::all();
+        foreach ($allMerchants as $merchant) {
+            $merchant["availableTimes"] = $this->getPossibleRequestTimes($merchant);
+        }
+        return $allMerchants;
     }
 
     

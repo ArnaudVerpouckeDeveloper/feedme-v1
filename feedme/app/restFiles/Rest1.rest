@@ -157,3 +157,8 @@ Authorization: Bearer {{token}}
     "price": "2,80",
     "available": true
 }
+
+###
+
+GET http://localhost:8000/api/merchant/all
+Accept: application/json
