@@ -14,6 +14,18 @@ class CustomerController extends Controller
 {
     use SharedMerchantTrait;
 
+    public function showMerchantShop($merchantApiName){
+        $merchant = Merchant::where("apiName", $merchantApiName)->first();
+        if ($merchant == null){
+            exit();
+        }
+        else{
+            $merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
+            //return redirect("/milat-zijn-url-van-de-shop");
+            return "here comes the redirect to the frontend from milat";
+        }
+    }
+
     function getMerchant($merchantId){
         $merchant = Merchant::find($merchantId);
         if ($merchant == null){

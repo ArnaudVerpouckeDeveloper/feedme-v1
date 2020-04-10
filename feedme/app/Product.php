@@ -11,8 +11,11 @@ class Product extends Model
         return $this->belongsTo("App\Merchant");
     }
 
+    protected $fillable = ['orderable'];
+
     protected $casts = [
         'available' => 'boolean',
+        "orderable" => 'boolean'
     ];
 
     public function order()

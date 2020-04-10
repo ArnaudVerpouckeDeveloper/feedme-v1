@@ -30,6 +30,8 @@ class CreateMerchantsTable extends Migration
             $table->integer("address_zip");
             $table->string("address_city");
             $table->string("tax_number");
+            $table->integer("amountOfVisitors")->default(0);
+
             $table->string("minimumWaitTime_takeaway",20)->default("00:30");
             $table->string("minimumWaitTime_delivery",20)->default("01:00");
 
@@ -91,6 +93,11 @@ class CreateMerchantsTable extends Migration
             $table->string("delivery_sunday_till_1",20)->default("13:30");
             $table->string("delivery_sunday_from_2",20)->default("17:30");
             $table->string("delivery_sunday_till_2",20)->default("21:30");
+
+            $table->boolean("hasSetDeliveryTimes")->default(false);
+            $table->boolean("hasSetTakeawayTimes")->default(false);
+            $table->boolean("hasSetMinimumWaitTimeForDelivery")->default(false);
+            $table->boolean("hasSetMinimumWaitTimeForTakeaway")->default(false);
 
         });
     }

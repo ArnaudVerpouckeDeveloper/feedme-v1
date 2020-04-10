@@ -13,8 +13,7 @@ use App\User;
 use Exception;
 use DateTime;
 use Mail;
-
-
+use stdClass;
 
 class MerchantController extends Controller
 {
@@ -86,18 +85,64 @@ class MerchantController extends Controller
     function showManagerDashboard(Request $request){
         $merchant = auth()->user()->merchant;
 
-        $amountOfProducts = $merchant->products()->count();
+        $amountOfProducts = $merchant->products()->where("orderable", true)->count();
         $amountOfOpenOrders = $merchant->orders()->where("completed",false)->count();
-        $amountOfClosedOrders = $merchant->orders()->where("completed",true)->count();
-        $amountOfToDos = 10;
+        $amountOfVisitors = $merchant->amountOfVisitors;
+
+        $checklist = [];
+
+
+        if(is_null($merchant->logoFileName)){
+            array_push($checklist, ["instruction" => "Stel een logo in voor uw pagina.", "location" => "settings"]);
+        }
+
+        if($amountOfProducts < 5){
+            array_push($checklist, ["instruction" => "Voeg minstens 5 (bestelbare) producten toe.", "location" => "products"]);
+        }
+
+        if(is_null($merchant->bannerFileName)){
+            array_push($checklist, ["instruction" => "Stel een banner in voor uw pagina. Dit is een langwerpige foto en smal in hoogte, de banner komt bovenaan uw pagina te staan. Bij instellingen kan u alvast een idee krijgen welke vorm de banner moet hebben.", "location" => "settings"]);
+        }
+
+        if(!$merchant->hasSetTakeawayTimes){
+            array_push($checklist, ["instruction" => "Stel de tijdstippen in waarop bestellingen afgehaald kunnen worden.", "location" => "settings"]);
+        }
+
+        if(!$merchant->hasSetDeliveryTimes){
+            array_push($checklist, ["instruction" => "Stel de tijdstippen in waarop bestellingen geleverd kunnen worden.", "location" => "settings"]);
+        }
+
+        if(!$merchant->hasSetMinimumWaitTimeForTakeaway){
+            array_push($checklist, ["instruction" => "Stel de minimale wachttijd in voor afhalingen.", "location" => "settings"]);
+        }
+
+        if(!$merchant->hasSetMinimumWaitTimeForDelivery){
+            array_push($checklist, ["instruction" => "Stel de minimale wachttijd in voor leveringen.", "location" => "settings"]);
+        }
+
+        if($merchant->orders->count() == 0){
+            array_push($checklist, ["instruction" => "Ontvang uw eerste order.", "location" => "orders"]);
+        }
+
+        if($merchant->orders->where("completed",true)->count() == 0){
+            array_push($checklist, ["instruction" => "Werk uw eerste order af.", "location" => "orders"]);
+        }
+        
+        $amountOfToDos = sizeof($checklist);
+        $checklistObject = new stdClass();
+        foreach ($checklist as $key => $value)
+        {
+            $checklistObject->$key = $value;
+        }
 
 
         return view("managerDashboard")
         ->with("merchant", $merchant)
         ->with("amountOfProducts", $amountOfProducts)
         ->with("amountOfOpenOrders", $amountOfOpenOrders)
-        ->with("amountOfClosedOrders", $amountOfClosedOrders)
-        ->with("amountOfToDos", $amountOfClosedOrders);
+        ->with("amountOfVisitors", $amountOfVisitors)
+        ->with("amountOfToDos", $amountOfToDos)
+        ->with("checklist", $checklistObject);
 
     }
 
@@ -210,7 +255,9 @@ class MerchantController extends Controller
             'minimumWaitTime_takeaway' => ['required', new ScheduleTime]
         ]);        
 
-        $merchant = auth()->user()->merchant()->update(["minimumWaitTime_takeaway" => $request->minimumWaitTime_takeaway]);
+        $merchant = auth()->user()->merchant()->update([
+            "minimumWaitTime_takeaway" => $request->minimumWaitTime_takeaway,
+            "hasSetMinimumWaitTimeForTakeaway" => true]);
         return redirect("/manager/instellingen");
     }
 
@@ -219,7 +266,9 @@ class MerchantController extends Controller
             'minimumWaitTime_delivery' => ['required', new ScheduleTime]
         ]);        
 
-        $merchant = auth()->user()->merchant()->update(["minimumWaitTime_delivery" => $request->minimumWaitTime_delivery]);
+        $merchant = auth()->user()->merchant()->update([
+            "minimumWaitTime_delivery" => $request->minimumWaitTime_delivery,
+            "hasSetMinimumWaitTimeForDelivery" => true]);
         return redirect("/manager/instellingen");
     }
 
@@ -287,7 +336,8 @@ class MerchantController extends Controller
             'takeaway_sunday_from_1' => $request->takeaway_sunday_from_1,
             'takeaway_sunday_till_1' => $request->takeaway_sunday_till_1,
             'takeaway_sunday_from_2' => $request->takeaway_sunday_from_2,
-            'takeaway_sunday_till_2' => $request->takeaway_sunday_till_2
+            'takeaway_sunday_till_2' => $request->takeaway_sunday_till_2,
+            "hasSetTakeawayTimes" => true
             ]);
 
 
@@ -359,7 +409,8 @@ class MerchantController extends Controller
             'delivery_sunday_from_1' => $request->delivery_sunday_from_1,
             'delivery_sunday_till_1' => $request->delivery_sunday_till_1,
             'delivery_sunday_from_2' => $request->delivery_sunday_from_2,
-            'delivery_sunday_till_2' => $request->delivery_sunday_till_2
+            'delivery_sunday_till_2' => $request->delivery_sunday_till_2,
+            "hasSetDeliveryTimes" => true
             ]);
 
 

@@ -636,11 +636,47 @@ body main .settings form.schedule .row select:hover {
 body main .settings form.schedule .row select:focus {
   outline: none;
 }
-body main .dashboard .basic-metrics {
+body main .dashboard {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body main .dashboard h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+body main .dashboard .intro {
+  margin-bottom: 4rem;
+}
+body main .dashboard .intro p {
+  line-height: 130%;
+}
+body main .dashboard .environmentLink {
+  margin-bottom: 4rem;
+}
+body main .dashboard .environmentLink p:first-of-type {
+  margin-bottom: 0.5rem;
+}
+body main .dashboard .environmentLink p.link {
+  background-color: lightyellow;
+  border: 1px solid goldenrod;
+  border-radius: 0.3rem;
+  padding: 1rem;
+}
+body main .dashboard .environmentLink p.link a {
+  color: black;
+  font-weight: bold;
+}
+body main .dashboard .basic-metrics > p {
+  margin-bottom: 1rem;
+}
+body main .dashboard .basic-metrics ul {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 4rem;
 }
-body main .dashboard .basic-metrics li {
+body main .dashboard .basic-metrics ul li {
   padding: 0.4rem;
   width: 22%;
   box-sizing: border-box;
@@ -651,28 +687,55 @@ body main .dashboard .basic-metrics li {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   color: white;
 }
-body main .dashboard .basic-metrics li .top {
+body main .dashboard .basic-metrics ul li .top {
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   font-weight: bold;
 }
-body main .dashboard .basic-metrics li .top .material-icons {
+body main .dashboard .basic-metrics ul li .top .material-icons {
   margin-right: 0.5rem;
 }
-body main .dashboard .basic-metrics li .value {
+body main .dashboard .basic-metrics ul li .value {
   margin-top: 0.5rem;
-  font-size: 4rem;
+  font-size: 2rem;
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
-body main .dashboard .basic-metrics li.warning {
+body main .dashboard .basic-metrics ul li.warning {
   background-color: #FCA326;
 }
-body main .dashboard .basic-metrics li.danger {
+body main .dashboard .basic-metrics ul li.danger {
   background-color: #e43a3a;
+}
+body main .dashboard .checklist > p {
+  margin-bottom: 1rem;
+}
+body main .dashboard .checklist ul li {
+  display: flex;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+body main .dashboard .checklist ul li .instruction {
+  width: 80%;
+  color: grey;
+}
+body main .dashboard .checklist ul li .location {
+  width: 15%;
+  background-color: #68A25F;
+  border-radius: 0.3rem;
+  padding: 0.7rem 0.3rem;
+  text-align: center;
+  color: white;
+}
+body main .dashboard .checklist ul li .location:hover {
+  filter: brightness(1.1);
 }
 body .switch {
   position: relative;

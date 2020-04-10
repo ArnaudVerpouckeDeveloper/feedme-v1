@@ -55,7 +55,11 @@
             <div class="group orderable">
                 <label class="info">Bestelbaar</label>
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    @if ($product->orderable)
+                        <input type="checkbox" checked>
+                    @else
+                        <input type="checkbox">
+                    @endif
                     <span class="slider round"></span>
                 </label>
             </div>
