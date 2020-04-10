@@ -41,6 +41,15 @@ class CustomerController extends Controller
         $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
         $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
 
+        $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
+        $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
+
+        $merchantObject->merchantPhone = $merchant->merchantPhone;
+        $merchantObject->address_street = $merchant->address_street;
+        $merchantObject->address_number = $merchant->address_number;
+        $merchantObject->address_zip = $merchant->address_zip;
+        $merchantObject->address_city = $merchant->address_city;
+
         $merchantObject->possibleTimes = $this->getPossibleRequestTimes($merchant);
 
         $merchantObject->products = $merchant->products()->get();
