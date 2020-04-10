@@ -18,6 +18,9 @@ body header .logo {
   margin-bottom: 1rem;
 }
 body header nav {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: center;
 }
@@ -70,9 +73,12 @@ body header .signOut a .material-icons:hover {
 }
 body main {
   padding-top: 3rem;
-  width: 70%;
+  width: 870px;
   margin-left: auto;
   margin-right: auto;
+}
+body main.extended-screen {
+  width: 1200px;
 }
 body main h1 {
   color: #68A25F;
@@ -212,7 +218,7 @@ body main .orders .order.denied .orderSections > li {
 body main .orders .order .orderOverview {
   border: 1px solid #c3c3c3;
   background-color: #fbfbfb;
-  width: 70%;
+  width: 65%;
   padding: 1rem;
 }
 body main .orders .order .orderOverview > ul {
@@ -249,7 +255,7 @@ body main .orders .order .orderOverview .deliveryDetails {
   margin-top: 2rem;
 }
 body main .orders .order .orderSections {
-  width: 30%;
+  width: 35%;
   display: flex;
   align-self: flex-start;
   flex-wrap: wrap;
@@ -337,12 +343,9 @@ body main .orders .order .orderSections .row > li.denyOrder:hover {
 body main .createProductForm {
   padding: 4rem;
   margin-bottom: 3rem;
-  width: 80%;
   padding-bottom: 4rem;
   border-radius: 0.4rem;
   background-color: #68A25F;
-  margin-left: auto;
-  margin-right: auto;
   box-sizing: border-box;
 }
 body main .createProductForm .input-row {
@@ -363,7 +366,7 @@ body main .createProductForm .input-row input[type=submit] {
   font-weight: bold;
   border: none;
   border-radius: 0.3rem;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   background-color: #375f31;
   color: white;
   box-sizing: border-box;
@@ -404,9 +407,6 @@ body main .products {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
 }
 body main .products li {
   box-sizing: border-box;
@@ -544,11 +544,6 @@ body main .products li form .row.buttons input[type=submit] {
 body main .products li form .row.buttons input[type=submit]:hover {
   background-color: #375f31;
 }
-body main .settings {
-  width: 65%;
-  margin-left: auto;
-  margin-right: auto;
-}
 body main .settings form {
   display: flex;
   flex-direction: column;
@@ -637,7 +632,6 @@ body main .settings form.schedule .row select:focus {
   outline: none;
 }
 body main .dashboard {
-  width: 65%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -795,6 +789,141 @@ body .hidden {
 }
 body button {
   box-shadow: none !important;
+}
+
+@media only screen and (max-width: 1400px) {
+  body main.extended-screen {
+    width: 90%;
+  }
+  body main.extended-screen .orders .orderOverview {
+    width: 55%;
+  }
+  body main.extended-screen .orders .orderSections {
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  body main.extended-screen .orders .order {
+    margin-bottom: 5rem;
+    flex-direction: column;
+  }
+  body main.extended-screen .orders .order .orderOverview {
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: none;
+  }
+  body main.extended-screen .orders .order .orderSections {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  body main.extended-screen .orders .order .orderSections .row > li {
+    width: 33.333%;
+  }
+  body main.extended-screen .orders .order .orderSections .row > li:first-of-type {
+    border-left: 1px solid #c3c3c3;
+  }
+}
+@media only screen and (max-width: 950px) {
+  body header nav {
+    flex-wrap: wrap;
+    width: 90%;
+  }
+  body main {
+    width: 90%;
+  }
+  body main .createProductForm .input-row {
+    flex-wrap: wrap;
+  }
+  body main .createProductForm .input-row .name {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  body main .createProductForm .input-row .price {
+    width: 48%;
+  }
+  body main .createProductForm .input-row input[type=submit] {
+    width: 48%;
+  }
+  body main .settings form.schedule .row {
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  body main .settings form.schedule .row label:nth-of-type(1) {
+    width: 20%;
+  }
+  body main .settings form.schedule .row label:nth-of-type(2) {
+    width: 10%;
+  }
+  body main .settings form.schedule .row select:nth-of-type(1) {
+    width: 30%;
+    margin-bottom: 0.5rem;
+  }
+  body main .settings form.schedule .row label:nth-of-type(3) {
+    width: 10%;
+    text-align: center;
+  }
+  body main .settings form.schedule .row select:nth-of-type(2) {
+    width: 30%;
+    margin-bottom: 0.5rem;
+  }
+  body main .settings form.schedule .row label:nth-of-type(4) {
+    width: 20%;
+  }
+  body main .settings form.schedule .row label:nth-of-type(5) {
+    width: 10%;
+  }
+  body main .settings form.schedule .row select:nth-of-type(3) {
+    width: 30%;
+  }
+  body main .settings form.schedule .row label:nth-of-type(6) {
+    width: 10%;
+    text-align: center;
+  }
+  body main .settings form.schedule .row select:nth-of-type(4) {
+    width: 30%;
+  }
+  body main .products li {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  body header {
+    padding-top: 6rem;
+  }
+  body header .signOut {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+@media only screen and (max-width: 750px) {
+  body main .createProductForm {
+    padding: 1.5rem;
+  }
+  body main .dashboard .basic-metrics ul {
+    flex-wrap: wrap;
+  }
+  body main .dashboard .basic-metrics ul li {
+    width: 48%;
+    margin-bottom: 1.5rem;
+  }
+  body main .dashboard .checklist ul li {
+    flex-direction: column;
+  }
+  body main .dashboard .checklist ul li p {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  body main .dashboard .checklist ul li p.instruction {
+    width: 100%;
+  }
+  body main .dashboard .checklist ul li .location {
+    width: 35%;
+  }
+}
+@media only screen and (max-width: 550px) {
+  body header nav a {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

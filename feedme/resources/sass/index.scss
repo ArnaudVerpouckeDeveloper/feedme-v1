@@ -23,6 +23,9 @@ body {
             margin-bottom: 1rem;
         }
         nav {
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
             display: flex;
             justify-content: center;
             a {
@@ -76,9 +79,12 @@ body {
     }
     main {
         padding-top: 3rem;
-        width: 70%;
+        width: 870px;
         margin-left: auto;
         margin-right: auto;
+        &.extended-screen {
+            width: 1200px;
+        }
         h1 {
             color: $mainGreen;
             font-weight: bold;
@@ -222,7 +228,7 @@ body {
                 .orderOverview {
                     border: 1px solid #c3c3c3;
                     background-color: #fbfbfb;
-                    width: 70%;
+                    width: 65%;
                     padding: 1rem;
                     >ul {
                         li {
@@ -261,7 +267,7 @@ body {
                     }
                 }
                 .orderSections {
-                    width: 30%;
+                    width: 35%;
                     display: flex;
                     align-self: flex-start;
                     flex-wrap: wrap;
@@ -363,12 +369,9 @@ body {
         .createProductForm {
             padding: 4rem;
             margin-bottom: 3rem;
-            width: 80%;
             padding-bottom: 4rem;
             border-radius: 0.4rem;
             background-color: $mainGreen;
-            margin-left: auto;
-            margin-right: auto;
             box-sizing: border-box;
             .input-row {
                 display: flex;
@@ -387,7 +390,7 @@ body {
                     font-weight: bold;
                     border: none;
                     border-radius: 0.3rem;
-                    padding: 0 1.5rem;
+                    padding: 0 1rem;
                     background-color: #375f31;
                     color: white;
                     box-sizing: border-box;
@@ -432,9 +435,6 @@ body {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
             li {
                 box-sizing: border-box;
                 width: 48%;
@@ -581,9 +581,6 @@ body {
             }
         }
         .settings {
-            width: 65%;
-            margin-left: auto;
-            margin-right: auto;
             form {
                 display: flex;
                 flex-direction: column;
@@ -679,7 +676,6 @@ body {
             }
         }
         .dashboard {
-            width: 65%;
             margin-left: auto;
             margin-right: auto;
             h2 {
@@ -846,5 +842,194 @@ body {
     }
     button {
         box-shadow: none !important;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    body {
+        main {
+            &.extended-screen {
+                width: 90%;
+                .orders {
+                    .orderOverview {
+                        width: 55%;
+                    }
+                    .orderSections {
+                        width: 45%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        main {
+            &.extended-screen {
+                .orders {
+                    .order {
+                        margin-bottom: 5rem;
+                        flex-direction: column;
+                        .orderOverview {
+                            width: 100%;
+                            box-sizing: border-box;
+                            border-bottom: none;
+                        }
+                        .orderSections {
+                            width: 100%;
+                            box-sizing: border-box;
+                            .row {
+                                >li {
+                                    width: 33.333%;
+                                    &:first-of-type {
+                                        border-left: 1px solid #c3c3c3;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    body {
+        header {
+            nav {
+                flex-wrap: wrap;
+                width: 90%;
+            }
+        }
+        main {
+            width: 90%;
+            .createProductForm {
+                .input-row {
+                    flex-wrap: wrap;
+                    .name {
+                        width: 100%;
+                        margin-bottom: 1.5rem;
+                    }
+                    .price {
+                        width: 48%;
+                    }
+                    input[type='submit'] {
+                        width: 48%;
+                    }
+                }
+            }
+            .settings {
+                form.schedule {
+                    .row {
+                        flex-wrap: wrap;
+                        margin-bottom: 2rem;
+                        label:nth-of-type(1) {
+                            width: 20%;
+                        }
+                        label:nth-of-type(2) {
+                            width: 10%;
+                        }
+                        select:nth-of-type(1) {
+                            width: 30%;
+                            margin-bottom: 0.5rem;
+                        }
+                        label:nth-of-type(3) {
+                            width: 10%;
+                            text-align: center;
+                        }
+                        select:nth-of-type(2) {
+                            width: 30%;
+                            margin-bottom: 0.5rem;
+                        }
+                        label:nth-of-type(4) {
+                            width: 20%;
+                        }
+                        label:nth-of-type(5) {
+                            width: 10%;
+                        }
+                        select:nth-of-type(3) {
+                            width: 30%;
+                        }
+                        label:nth-of-type(6) {
+                            width: 10%;
+                            text-align: center;
+                        }
+                        select:nth-of-type(4) {
+                            width: 30%;
+                        }
+                    }
+                }
+            }
+            .products {
+                li {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        header {
+            padding-top: 6rem;
+            .signOut {
+                right: 50%;
+                transform: translateX(50%);
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    body {
+        header {}
+        main {
+            .createProductForm {
+                padding: 1.5rem;
+            }
+            .dashboard {
+                .basic-metrics {
+                    ul {
+                        flex-wrap: wrap;
+                        li {
+                            width: 48%;
+                            margin-bottom: 1.5rem;
+                        }
+                    }
+                }
+                .checklist {
+                    ul {
+                        li {
+                            flex-direction: column;
+                            p {
+                                text-align: center;
+                                margin-bottom: 1rem;
+                                &.instruction {
+                                    width: 100%;
+                                }
+                            }
+                            .location {
+                                width: 35%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    body {
+        header {
+            nav {
+                a {
+                    width: 100%;
+                }
+            }
+        }
     }
 }

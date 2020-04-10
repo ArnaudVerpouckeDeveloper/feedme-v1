@@ -41,8 +41,7 @@
         </div>
         </header>
 
-        <main>  
-
+        <main class="{{ (request()->is('manager/orders')) ? 'extended-screen' : '' }}">  
             @yield('content')
         </main>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

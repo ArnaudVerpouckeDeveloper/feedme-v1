@@ -1,6 +1,6 @@
 @extends('./layouts/merchantManager')
 @section('content')
-<div class="dashboard">
+<div class="dashboard ">
     <div class="intro">
         <h2>Welkom op uw dashboard, {{$merchant->user->firstName}}!</h2>
         <p>Via bovenstaande knoppen: dashboard, orders, producten en instellingen kan je uw horecaomgeving volledig beheren.
