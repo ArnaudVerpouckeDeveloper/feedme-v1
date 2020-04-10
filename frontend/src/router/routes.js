@@ -15,14 +15,15 @@ import Faq from '../views/Faq.vue'
 
 export const routes = [
     { path: '/', name: 'home', component: Home, display: 'Home', icon: "mdi-home" },
-    { path: '/restaurant', name: 'Merchants', component: Merchants, display: 'Restaurants', icon: "mdi-store" },
-    { path: '/restaurant/:id', name: 'MerchantDetail', component: MerchantDetail, display: 'hide', icon: ""},
-    { path: '/about', name: 'about', component: About, display: 'Over ons', icon: "mdi-account-multiple" },
+    { path: '/restaurants', name: 'Merchants', component: Merchants, display: 'Restaurants', icon: "mdi-store" },
+    { path: '/restaurant/:id', name: 'MerchantDetail', component: MerchantDetail, display: 'hide', icon: "" },
+    { path: '/over', name: 'about', component: About, display: 'Over ons', icon: "mdi-account-multiple" },
     { path: '/faq', name: 'faq', component: Faq, display: 'Faq', icon: "mdi-frequently-asked-questions" },
     { path: '/contact', name: 'contact', component: Contact, display: 'Contact', icon: "mdi-email" },
-    { path: '/login', name: 'login', component: Login, display: 'hide', icon: "mdi-login-variant" },
-    { path: '/register', name: 'register', component: Register, display: 'hide', icon: "mdi-account-plus" },
-    { path: '/admin/products/:id', name: 'products', component: Products, display: 'hide', icon: "" },
-    { path: '/confirmorder', name: 'order', component: Order, display: 'hide', icon: "" },
-    { path: '/legal', name: 'legal', component: Legal, display: 'hide', icon: "" },
+    { path: '/aanmelden', name: 'login', component: Login, display: 'hide', icon: "mdi-login-variant" },
+    { path: '/registreer', name: 'register', component: Register, display: 'hide', icon: "mdi-account-plus" },
+    { path: '/bevestigbestelling', name: 'order', component: Order, display: 'hide', icon: "" },
+    { path: '/voorwaarden', name: 'legal', component: Legal, display: 'hide', icon: "" },
+    { path: '/manager/register', name: 'merchantRegister', display: 'hide', beforeEnter() { location.href = 'http://localhost:8000/manager/register' }
+    },
 ]

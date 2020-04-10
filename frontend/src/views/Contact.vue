@@ -6,23 +6,21 @@
           <v-toolbar color="green" dark flat>
             <v-toolbar-title>Contact</v-toolbar-title>
           </v-toolbar>
-          <v-form ref="form" v-model="valid" lazy-validation>
+          <v-form v-model="valid">
             <v-card-text>
-              <v-form>
-                <v-text-field v-model="contactForm.name" :rules="nameRules" label="Onderwerp" required></v-text-field>
-                <v-text-field
-                  v-model="contactForm.email"
-                  :rules="emailRules"
-                  label="E-mail"
-                  required
-                ></v-text-field>
-                <v-textarea
-                  v-model="contactForm.message"
-                  :rules="nameRules"
-                  label="Bericht"
-                  required
-                ></v-textarea>
-              </v-form>
+              <v-text-field
+                v-model="contactForm.fullName"
+                :rules="onderwerpRules"
+                label="Volledige naam"
+                required
+              ></v-text-field>
+              <v-text-field v-model="contactForm.email" :rules="emailRules" label="E-mail" required></v-text-field>
+              <v-textarea
+                v-model="contactForm.message"
+                :rules="messageRules"
+                label="Bericht"
+                required
+              ></v-textarea>
             </v-card-text>
           </v-form>
 
@@ -37,16 +35,22 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data: () => ({
     contactForm: {
-      name: "",
-      email: ""
+      fullName: "",
+      email: "",
+      message: ""
     },
-    valid: true,
-    nameRules: [v => !!v || "Deze veld is verplicht"],
+    valid: false,
+    onderwerpRules: [v => !!v || "Uw naam is verplicht"],
+    messageRules: [v => !!v || "Gelieve uw bericht in te vullen."],
     emailRules: [
-      v => !!v || "E-mail is verplicht",
+      v =>
+        !!v ||
+        "E-mail adres is verplicht, op deze manier kunnen wij u terug contacteren.",
       v =>
         /.+@.+\..+/.test(v) ||
         "Deze veld moet een geldige email adres bevatten."
@@ -54,8 +58,9 @@ export default {
   }),
   methods: {
     sendContact() {
-      this.$refs.form.validate();
-    }
+      if (this.valid) this.sendContactForm(this.contactForm);
+    },
+    ...mapActions(["sendContactForm"])
   }
 };
 </script>

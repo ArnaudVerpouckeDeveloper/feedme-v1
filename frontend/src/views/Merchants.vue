@@ -8,7 +8,7 @@
       <v-row>
         <v-col cols="12" sm="5">
           <v-img
-            class="col-4 white--text align-end"
+            class="white--text align-end"
             height="200px"
             src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
           />
@@ -19,7 +19,7 @@
             <div>{{merchant.message}}</div>
             <div>
                <v-icon class="merchants-icon">mdi-map-marker </v-icon>
-              <label>8000 Brugge</label>
+              <label>{{merchant.address_zip}} {{merchant.address_city}}</label>
             </div>
             <div v-if="merchant.deliveryMethod_delivery">
               <v-icon class="merchants-icon">mdi-moped</v-icon>

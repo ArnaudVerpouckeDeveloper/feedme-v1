@@ -22,7 +22,7 @@ export default {
     Footer
   },
   created() {
-    // this.$store.dispatch("fetchProducts", 1);
+    // this.$store.dispatch("fetchMerchantAndProduct", 1);
   },
   data: () => ({
     //
@@ -31,7 +31,7 @@ export default {
 </script>
 <style>
 /* shoppingCart button */
-.btn-wrapper > .theme--light.v-btn > span {
+.shoppingCartButton {
   color: #fff !important;
 }
 </style>

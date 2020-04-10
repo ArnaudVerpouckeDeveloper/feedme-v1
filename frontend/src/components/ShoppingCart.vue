@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
-    width="350px"
+    class="nav-drawer"
+    width="370px"
     absolute
     right
     bottom
@@ -16,12 +17,12 @@
     </v-list-item>
 
     <v-divider></v-divider>
-
-    <v-card elevation="0" v-for="product in cartItems" class="row">
-      <v-card-title class="col-7">x{{product.count}} {{product.name}}</v-card-title>
-      <v-card-title class="col-5 item-price">€{{totalItem(product)}}</v-card-title>
-    </v-card>
-
+    <div class="cart-items">
+      <v-card v-for="product in cartItemPerMerchant" elevation="0" class="row">
+        <v-card-title class="col-8 item-name">x{{product.count}} {{product.name}}</v-card-title>
+        <v-card-title class="col-4 item-price">€{{totalItem(product)}}</v-card-title>
+      </v-card>
+    </div>
     <v-divider></v-divider>
     <v-card elevation="0">
       <v-row>
@@ -34,7 +35,13 @@
       </v-row>
     </v-card>
     <div class="btn-wrapper" v-if="showOrderBtn">
-      <v-btn color="green" large  :to="{name:'order'}" >Bestellen</v-btn>
+      <v-btn
+        color="green"
+        large
+        @click="orderItems"
+        :disabled="disableButton"
+        class="shoppingCartButton"
+      >Bestellen</v-btn>
     </div>
   </v-navigation-drawer>
 </template>
@@ -44,21 +51,34 @@ import { mapGetters } from "vuex";
 
 export default {
   props: {
-    showOrderBtn:{
+    merchant_id: Number,
+    showOrderBtn: {
       default: true,
       type: Boolean
     }
   },
   computed: {
+    cartItemPerMerchant() {
+      return this.cartItems[this.merchant_id];
+    },
     totalCart() {
       this.totalPrice = 0;
-      this.cartItems.forEach(item => {
-        this.totalPrice += item.price * item.count;
-      });
-
+      if (this.cartItems[this.merchant_id] != null)
+        this.cartItems[this.merchant_id].forEach(item => {
+          this.totalPrice += item.price * item.count;
+        });
       return this.totalPrice;
     },
-
+    disableButton() {
+      if (this.cartItems[this.merchant_id] != null)
+        if (this.cartItems[this.merchant_id].length != 0) return false;
+        else return true;
+      else return false;
+    },
+    disableColor() {
+      if (this.disableButton) return "color: #a4a4a4";
+      else return "color: #ffffff";
+    },
     ...mapGetters(["isMobile", "cartIsOpen", "cartItems"])
   },
   mounted() {
@@ -72,16 +92,16 @@ export default {
     onChangeDrawer(bool) {
       this.$store.dispatch("onChangeDrawer", bool);
     },
-
     formatPrice(price) {
       return price.toFixed(2);
     },
-    totalItem(product){
-     return product.price * product.count;
+    totalItem(product) {
+      return (product.price * product.count).toFixed(2);
     },
-    orderItems(){
-      //TODDO: to="/confirmorder"
-      // this.router.push({ path: 'confirmorder' })
+    orderItems() {
+      if (this.cartItems.length != 0) {
+        this.$router.push({ name: "order" });
+      }
     }
   }
 };
@@ -94,6 +114,13 @@ export default {
 .row {
   margin-left: 0px;
   margin-right: 0px;
+}
+.cart-items {
+  max-height: 408px;
+  overflow-y: scroll;
+}
+.item-name {
+  font-size: 1em;
 }
 .item-price {
   justify-content: flex-end;
@@ -113,11 +140,15 @@ export default {
   text-align: center;
   padding: 10px;
 }
-.btn-wrapper > a {
+.btn-wrapper > button {
   width: 100%;
 }
-.theme--light.v-btn{
-  color: #4caf50 !important;
+.nav-drawer {
+  position: sticky !important;
 }
-
+@media only screen and (min-width: 999px) {
+  .nav-drawer {
+    position: absolute !important;
+  }
+}
 </style>

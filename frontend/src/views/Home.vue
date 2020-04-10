@@ -30,7 +30,7 @@ export default {
   name: "Home",
   computed: {
     overlayFilter() {
-      return "to top right, rgba(99, 162, 91, 0.33), rgba(4, 9, 0, 0.84)";
+      return "rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)";
     }
   }
 };
@@ -58,7 +58,7 @@ export default {
   height: 23em;
   margin: 0 auto;
   font-size: 1.6em;
-  background: #fff;
+  background: #ffffffdb;
   transition: all 0.2s ease;
   text-align: center;
   padding: 1em;
