@@ -6,7 +6,7 @@ import router from './router/router'
 
 Vue.use(Vuex)
 
-const apiUrl = 'http://127.0.0.1:8000/api';
+const apiUrl = 'https://speedmeal.be/api';
 
 const state = {
     user: {},
@@ -130,7 +130,7 @@ const actions = {
 
     async sendContactForm(context, data) {
         return await new Promise((resolve, reject) => {
-            axios.post(`http://127.0.0.1:8000/sendContactForm`, data)
+            axios.post(`https://speedmeal.be/sendContactForm`, data)
                 .then(res => {
                     resolve();
                     router.replace({ name: "home" });
