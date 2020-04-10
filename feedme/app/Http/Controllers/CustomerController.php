@@ -219,7 +219,7 @@ class CustomerController extends Controller
                 $order->totalPrice = $totalPrice;
                 $order->save();
 
-                //Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
+                Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
                 return response()->json("ok");
             }
             else{
