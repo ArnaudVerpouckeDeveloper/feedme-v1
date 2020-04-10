@@ -47,6 +47,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      routeToGo: "",
       user: {
         email: null,
         password: null

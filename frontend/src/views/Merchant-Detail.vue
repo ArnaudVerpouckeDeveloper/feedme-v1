@@ -8,12 +8,14 @@
     />
     <v-row class="merchant-info" :style="infoStyle">
       <h1 class="col-8 col-md-10 col-lg-11">{{merchantDetail.name}}</h1>
-      <v-btn class="col-1" @click.stop="showDialog = true">
-        <v-icon>mdi-information-outline</v-icon>
-      </v-btn>
+      <v-col cols="1">
+        <v-btn icon @click.stop="showDialog = true">
+          <v-icon color="grey darken-1" size="42">mdi-information-outline</v-icon>
+        </v-btn>
+      </v-col>
     </v-row>
     <v-row :style="cardStyle" class="merchant-products">
-      <v-col cols="12" sm="6" v-for="product in products">
+      <v-col cols="12" md="6" v-for="product in products">
         <v-card elevation="1">
           <v-row>
             <v-col cols="8">
@@ -88,6 +90,10 @@ export default {
     MerchantDialog
   },
   computed: {
+    bannerImage() {
+      if (merchantDetail.bannerFileName != null) return bannerFileName;
+      else return "/assets/images/placeholder/merchant_heading.jpg";
+    },
     cardStyle() {
       if (!this.isMobile) return "margin-right: 370px;";
       else return "margin-right: -12px;";
@@ -172,5 +178,4 @@ export default {
 .opening-hours {
   padding-bottom: 12px;
 }
-
 </style>

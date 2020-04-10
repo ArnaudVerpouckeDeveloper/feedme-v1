@@ -7,7 +7,7 @@
             <v-toolbar-title>Registeren</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form v-model="valid">
+            <v-form v-model="valid" ref="form">
               <v-text-field
                 v-model="user.firstName"
                 label="Voornaam"
@@ -83,6 +83,16 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-dialog v-model="dialog" max-width="390">
+      <v-card>
+        <v-card-title class="headline">Uw registratie is bijna voltooid!</v-card-title>
+        <v-card-text>Om verder te gaan dient u eerst uw e-mailadres te bevestigen. We hebben u een e-mail gestuurd.</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="registerDialog">Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -90,14 +100,13 @@
 import { mapActions } from "vuex";
 
 export default {
-  computed: {
-    isMerchant() {
-      if (this.user.isMerchant) return "ik ben een producent";
-      else return "ik ben een consument";
-    }
-  },
+  computed: {},
   data() {
     return {
+      dialog: false,
+      snackbar: false,
+      snackText:
+        "Om verder te gaan dient u eerst uw e-mailadres te bevestigen. We hebben u een e-mail gestuurd.",
       user: {
         firstname: null,
         lastname: null,
@@ -143,7 +152,18 @@ export default {
   },
   methods: {
     Postregister() {
-      if (this.valid) this.register(this.user);
+      if (this.valid) {
+        this.register(this.user)
+          .then(() => (this.user = {}, this.$refs.form.reset(), this.dialog = true))
+          .catch(message => {
+            this.snackbar = true;
+            this.snackText = Object.values(message)[0][0];
+          });
+      }
+    },
+    registerDialog() {
+      this.dialog = false;
+      this.$router.push("/aanmelden");
     },
     ...mapActions(["register"])
   }

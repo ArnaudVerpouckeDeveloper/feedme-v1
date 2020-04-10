@@ -16,9 +16,21 @@
         </p>
         <p class="landing-content-ps">- Gebouwd door studenten, voor zelfstandigen.</p>
         <div class="landing-cta">
-          <v-btn tile large color="green" class="landing-cta-customer">ETEN BESTELLEN</v-btn>
+          <v-btn
+            :to="{name: 'Merchants'}"
+            tile
+            large
+            color="green"
+            class="landing-cta-customer"
+          >ETEN BESTELLEN</v-btn>
           <span class="landing-cta-divider">of</span>
-          <v-btn tile large color="white" class="landing-cta-horeca">IK WIL MIJN ZAAK REGISTREREN</v-btn>
+          <v-btn
+            :to="{name: 'merchantRegister'}"
+            tile
+            large
+            color="white"
+            class="landing-cta-horeca"
+          >IK WIL MIJN ZAAK REGISTREREN</v-btn>
         </div>
       </article>
     </v-img>
@@ -47,8 +59,8 @@ export default {
   height: 81vh;
   background-image: linear-gradient(
     to top right,
-    rgba(100, 115, 201, 0.33),
-    rgba(25, 32, 72, 0.7)
+    rgba(76, 175, 80, 0.29),
+    rgba(76, 175, 80, 0.69)
   );
 }
 .landing-content {
@@ -58,7 +70,7 @@ export default {
   height: 23em;
   margin: 0 auto;
   font-size: 1.6em;
-  background: #ffffffdb;
+  background: #ffffffe0;
   transition: all 0.2s ease;
   text-align: center;
   padding: 1em;

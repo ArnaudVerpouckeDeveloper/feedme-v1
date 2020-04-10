@@ -29,7 +29,9 @@
     <v-app-bar app color="green" class="d-flex d-md-none">
       <v-app-bar-nav-icon color="white" @click="dialog = true"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <img class="nav-logo" src="/assets/images/logo.png" alt="SpeedMeal logo" />
+        <router-link :to="{name:'home'}">
+          <img class="nav-logo" src="/assets/images/logo.png" alt="SpeedMeal logo" />
+        </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">

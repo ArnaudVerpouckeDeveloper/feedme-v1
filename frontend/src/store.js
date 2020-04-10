@@ -107,14 +107,10 @@ const actions = {
     },
 
     async addOrder({ commit, getters }, data) {
-        console.log(data)
-        console.log(getters.token)
         return await new Promise((resolve, reject) => {
             axios.post(`${apiUrl}/placeOrder`, data,
                 { headers: { 'Authorization': "bearer " + getters.token } })
                 .then(res => {
-                    console.log("order:", res);
-                    localStorage.removeItem("cartItems");
                     commit('updateOrderDetail', res.data);
                     resolve();
                 })
@@ -132,12 +128,12 @@ const actions = {
         commit('removeItemCart', data)
     },
 
-    async sendContactForm(context) {
+    async sendContactForm(context, data) {
         return await new Promise((resolve, reject) => {
-            axios.post(`${apiUrl}/sendContactForm`)
+            axios.post(`http://127.0.0.1:8000/sendContactForm`, data)
                 .then(res => {
-                    context.commit('updateOrderDetail', res.data);
                     resolve();
+                    router.replace({ name: "home" });
                 })
                 .catch(error => {
                     console.error(error)
@@ -150,22 +146,23 @@ const actions = {
         await axios.post(`${apiUrl}/auth/login`, data)
             .then(res => {
                 context.commit('updateUser', res.data)
-                router.back();
+                router.replace({ name: "Merchants" });
             })
             .catch(error => {
                 console.error(error)
             })
     },
     async register(context, data) {
-        console.log(data)
-        await axios.post(`${apiUrl}/auth/registerCustomer`, data)
-            .then(res => {
-                console.log(res);
-                router.replace({ name: "login" });
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        return await new Promise((resolve, reject) => {
+            axios.post(`${apiUrl}/auth/registerCustomer`, data)
+                .then(res => {
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error.response.data.errors)
+                    console.error(error)
+                })
+        })
     },
     async authUser({ getters }) {
         return await new Promise((resolve, reject) => {
@@ -220,8 +217,9 @@ const mutations = {
     updateOrders(state, data) {
         state.orders = data
     },
-    updateOrdersDetail(state, data) {
-        state.OrdersDetail = data
+    updateOrderDetail(state, data) {
+        localStorage.removeItem("cartItems");
+        state.cartItems = [];
     },
     updateCart(state, data) {
         if (state.cartItems[data.merchant_id] === undefined) {
