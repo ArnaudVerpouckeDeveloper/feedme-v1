@@ -17,6 +17,9 @@ use App\Mail\ConfirmOrder;
 |
 */
 
+Route::get("/", function(){
+    return view("index");
+});
 Route::get('email/verify', "AuthController@verifyEmailNotice")->name('verification.notice');
 
 

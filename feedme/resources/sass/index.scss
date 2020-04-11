@@ -1024,6 +1024,31 @@ body {
     }
 }
 
+@media only screen and (max-width: 650px) {
+    body {
+        main {
+            .merchantAuthPanel {
+                width: 100%;
+                box-sizing: border-box;
+                margin-top: 0;
+                padding: 2rem;
+                .logo {
+                    margin-top: 2rem;
+                    margin-bottom: 2rem;
+                    width: 70%;
+                    object-fit: contain;
+                }
+                .register,
+                .login {
+                    input[type="submit"] {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 550px) {
     body {
         header {

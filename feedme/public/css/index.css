@@ -921,6 +921,24 @@ body button {
     width: 35%;
   }
 }
+@media only screen and (max-width: 650px) {
+  body main .merchantAuthPanel {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding: 2rem;
+  }
+  body main .merchantAuthPanel .logo {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 70%;
+    object-fit: contain;
+  }
+  body main .merchantAuthPanel .register input[type=submit],
+body main .merchantAuthPanel .login input[type=submit] {
+    width: 100%;
+  }
+}
 @media only screen and (max-width: 550px) {
   body header nav a {
     width: 100%;
