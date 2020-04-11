@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelector(".createProductForm input[type='submit']").addEventListener("click", function(e) {
         e.preventDefault();
-        makeRequest("POST", "/manager/producten/addProduct", {
+        makeRequest("POST", "/admin/producten/addProduct", {
                 name: document.querySelector(".createProductForm .name").value,
                 price: document.querySelector(".createProductForm .price").value,
                 description: document.querySelector(".createProductForm .description").value
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             'success'
                         )
                         .then(res => {
-                            window.location.href = "/manager/producten";
+                            window.location.href = "/admin/producten";
                         })
                 } else {
                     throw (res);
@@ -42,7 +42,7 @@ function setEventListenersForProduct(product) {
         const price = product.querySelector("form .inputValues .price").value;
         const description = product.querySelector("form .descriptionValue textarea").value;
 
-        makeRequest("PUT", "/manager/producten/updateProduct", {
+        makeRequest("PUT", "/admin/producten/updateProduct", {
                 productId: productId,
                 name: name,
                 price: price,
@@ -85,7 +85,7 @@ function setEventListenersForProduct(product) {
     });
 
     product.querySelector(".orderable input[type='checkbox']").addEventListener("click", async function(e) {
-        await makeRequest("PUT", "/manager/producten/toggleOrderable", { productId: productId })
+        await makeRequest("PUT", "/admin/producten/toggleOrderable", { productId: productId })
             .then(res => {
                 if (res !== "ok") throw (res);
             })
@@ -117,7 +117,7 @@ function setEventListenersForProduct(product) {
             })
             .then((result) => {
                 if (result.value) {
-                    makeRequest("DELETE", "/manager/producten/deleteProduct", { productId: productId })
+                    makeRequest("DELETE", "/admin/producten/deleteProduct", { productId: productId })
                         .then(res => {
                             console.log("res", res);
                             if (res == "ok") {

@@ -3,7 +3,7 @@
 
 
 
-<form class="createProductForm" method="POST" action="/manager/producten/addProduct">
+<form class="createProductForm" method="POST" action="/admin/producten/addProduct">
     <div class="input-row">
         <input type="text" name="name" placeholder="Productnaam" class="name" required/>
         <input type="value" name="price" placeholder="prijs" class="price" required/>

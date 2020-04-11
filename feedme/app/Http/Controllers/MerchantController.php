@@ -54,7 +54,7 @@ class MerchantController extends Controller
         $fileName = "logo-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
         $path = $file->move(public_path("/merchantLogos/"), $fileName);
         auth()->user()->merchant->update(['logoFileName' => $fileName]);
-        return redirect("/manager/instellingen");
+        return redirect("/admin/instellingen");
     }
 
     function updateBanner(Request $request){
@@ -65,7 +65,7 @@ class MerchantController extends Controller
         $fileName = "banner-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
         $path = $file->move(public_path("/merchantBanners/"), $fileName);
         auth()->user()->merchant->update(['bannerFileName' => $fileName]);
-        return redirect("/manager/instellingen");
+        return redirect("/admin/instellingen");
     }
 
 
@@ -76,7 +76,7 @@ class MerchantController extends Controller
             'message' => 'required'
         ]);
         auth()->user()->merchant->update(['message' => $request->message]);
-        return redirect("/manager/instellingen");
+        return redirect("/admin/instellingen");
     }
 
 
@@ -268,7 +268,7 @@ class MerchantController extends Controller
         $merchant = auth()->user()->merchant()->update([
             "minimumWaitTime_takeaway" => $request->minimumWaitTime_takeaway,
             "hasSetMinimumWaitTimeForTakeaway" => true]);
-        return redirect("/manager/instellingen");
+        return redirect("/admin/instellingen");
     }
 
     function updateMinimumWaitTimeForDelivery(Request $request){
@@ -279,7 +279,7 @@ class MerchantController extends Controller
         $merchant = auth()->user()->merchant()->update([
             "minimumWaitTime_delivery" => $request->minimumWaitTime_delivery,
             "hasSetMinimumWaitTimeForDelivery" => true]);
-        return redirect("/manager/instellingen");
+        return redirect("/admin/instellingen");
     }
 
 
@@ -351,7 +351,7 @@ class MerchantController extends Controller
             ]);
 
 
-        return redirect("/manager/instellingen");
+        return redirect("/admin/instellingen");
     }
 
 
@@ -424,7 +424,7 @@ class MerchantController extends Controller
             ]);
 
 
-        return redirect("/manager/instellingen");
+        return redirect("/admin/instellingen");
     }
 
 

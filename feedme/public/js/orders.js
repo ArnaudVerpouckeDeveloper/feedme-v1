@@ -13,7 +13,7 @@ function setEventListenersForOrder(order) {
     if (order.classList.contains("accepted") || order.classList.contains("denied")) {
         order.querySelector(".orderSections .completeOrder").addEventListener("click", async function(e) {
             console.log("completing order...");
-            makeRequest("PUT", "/manager/orders/completeOrder", {
+            makeRequest("PUT", "/admin/orders/completeOrder", {
                     orderId: orderId
                 })
                 .then(res => {
@@ -38,7 +38,7 @@ function setEventListenersForOrder(order) {
     } else {
         order.querySelector(".orderSections .acceptOrder").addEventListener("click", async function(e) {
             console.log("confirming order...");
-            makeRequest("PUT", "/manager/orders/acceptOrder", {
+            makeRequest("PUT", "/admin/orders/acceptOrder", {
                     orderId: orderId
                 })
                 .then(res => {
@@ -62,7 +62,7 @@ function setEventListenersForOrder(order) {
 
         order.querySelector(".orderSections .denyOrder").addEventListener("click", async function(e) {
             console.log("confirming order...");
-            makeRequest("PUT", "/manager/orders/denyOrder", {
+            makeRequest("PUT", "/admin/orders/denyOrder", {
                     orderId: orderId
                 })
                 .then(res => {
@@ -89,7 +89,7 @@ function setEventListenersForOrder(order) {
 
         order.querySelector(".orderSections .addExtraTime.addExtraTime_15").addEventListener("click", async function(e) {
             console.log("Adding 15 minutes extra time to order...");
-            makeRequest("PUT", "/manager/orders/addTimeToOrder_15", {
+            makeRequest("PUT", "/admin/orders/addTimeToOrder_15", {
                     orderId: orderId
                 })
                 .then(res => {
@@ -114,7 +114,7 @@ function setEventListenersForOrder(order) {
         });
         order.querySelector(".orderSections .addExtraTime.addExtraTime_30").addEventListener("click", async function(e) {
             console.log("Adding 30 minutes extra time to order...");
-            makeRequest("PUT", "/manager/orders/addTimeToOrder_30", {
+            makeRequest("PUT", "/admin/orders/addTimeToOrder_30", {
                     orderId: orderId
                 })
                 .then(res => {
@@ -140,7 +140,7 @@ function setEventListenersForOrder(order) {
         });
         order.querySelector(".orderSections .addExtraTime.addExtraTime_60").addEventListener("click", async function(e) {
             console.log("Adding 60 minutes extra time to order...");
-            makeRequest("PUT", "/manager/orders/addTimeToOrder_60", {
+            makeRequest("PUT", "/admin/orders/addTimeToOrder_60", {
                     orderId: orderId
                 })
                 .then(res => {
@@ -176,7 +176,7 @@ function setEventListenersForOrder(order) {
         });
 
         product.querySelector(".orderable input[type='checkbox']").addEventListener("click", async function(e) {
-            await makeRequest("PUT", "/manager/producten/toggleOrderable", { productId: productId })
+            await makeRequest("PUT", "/admin/producten/toggleOrderable", { productId: productId })
                 .then(res => {
                     if (res !== "ok") throw (res);
                 })
@@ -208,7 +208,7 @@ function setEventListenersForOrder(order) {
                 })
                 .then((result) => {
                     if (result.value) {
-                        makeRequest("DELETE", "/manager/producten/deleteProduct", { productId: productId })
+                        makeRequest("DELETE", "/admin/producten/deleteProduct", { productId: productId })
                             .then(res => {
                                 console.log("res", res);
                                 if (res == "ok") {

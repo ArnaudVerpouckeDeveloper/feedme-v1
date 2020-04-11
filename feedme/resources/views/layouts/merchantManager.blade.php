@@ -22,22 +22,22 @@
         <header>
             <img class="logo" src="{{asset('images/Logo_TP_Green.png')}}" alt="logo"/>
             <nav>
-                <a href="/manager/dashboard" class="{{ (request()->is('manager/dashboard')) ? 'active' : '' }}">
+                <a href="/admin/dashboard" class="{{ (request()->is('manager/dashboard')) ? 'active' : '' }}">
                     <span class="material-icons">dashboard</span>
                     Dashboard<span></span></a>
-                <a href="/manager/orders" class="{{ (request()->is('manager/orders')) ? 'active' : '' }}">
+                <a href="/admin/orders" class="{{ (request()->is('manager/orders')) ? 'active' : '' }}">
                     <span class="material-icons">receipt</span>
                     Orders</a>
-                <a href="/manager/producten" class="{{ (request()->is('manager/producten')) ? 'active' : '' }}">
+                <a href="/admin/producten" class="{{ (request()->is('manager/producten')) ? 'active' : '' }}">
                     <span class="material-icons">fastfood</span>
                     Producten</a>
-                <a href="/manager/instellingen" class="{{ (request()->is('manager/instellingen')) ? 'active' : '' }}">
+                <a href="/admin/instellingen" class="{{ (request()->is('manager/instellingen')) ? 'active' : '' }}">
                     <span class="material-icons">settings</span>
                     Instellingen</a>
             </nav>
         <div class="signOut">
             <p>{{auth()->user()->firstName}} {{auth()->user()->lastName}}</p>
-            <a href="/manager/logout"><span class="material-icons">power_settings_new</span></a>
+            <a href="/admin/logout"><span class="material-icons">power_settings_new</span></a>
         </div>
         </header>
 

@@ -72,7 +72,7 @@ class AuthController extends Controller
             if(!auth()->user()->hasAnyRole("merchant")){
                 return back()->withError('Het account is niet gekoppeld aan een horecazaak.');
             }
-            return redirect("/manager/dashboard");
+            return redirect("/admin/dashboard");
         }
         else{
             return back()->withError('Het opgegeven wachtwoord of e-mailadres is niet correct, probeer opnieuw.');
@@ -160,7 +160,7 @@ class AuthController extends Controller
 
     public function logMerchantOut(){
         auth()->logout();
-        return redirect("/manager/login");
+        return redirect("/admin/login");
     }
 
     /**

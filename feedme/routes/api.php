@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::post("/previewApiNameFromMerchantName", "AuthController@previewApiNameFromMerchantName");
+Route::get('/admin/all', 'MerchantController@getAllMerchants');
+Route::get("/resendConfirmEmail/{userId}","AuthController@resendConfirmEmail");
+Route::get("/admin/{merchantId}","CustomerController@getMerchant");
 
 Route::group([
     'prefix' => 'auth'
@@ -29,17 +30,9 @@ Route::group([
     Route::post("registerCustomer", "AuthController@registerCustomer");
 });
 
-
-Route::group([
-    'prefix' => 'merchant'
-], function ($router) {
-    Route::get('/all', 'MerchantController@getAllMerchants');
-});
-
-
 Route::group([
     'middleware' => ['auth',"auth.merchant"],
-    'prefix' => 'merchant'
+    'prefix' => 'admin'
 ], function ($router) {
     Route::get('/protected', 'MerchantController@protected');
     Route::post('/addProduct', 'MerchantController@addProduct');
@@ -49,16 +42,11 @@ Route::group([
     Route::post('/updateBanner', 'MerchantController@updateBanner');
 });
 
-
-
 Route::group([
-    //'middleware' => ['auth','auth.customer'],
     'middleware' => ['auth:api','auth.customer'],
 ], function ($router) {
     Route::post('/placeOrder', 'CustomerController@placeOrder');
 });
-
-
 
 Route::group([
     'middleware' => ['auth.customer'],
@@ -69,8 +57,3 @@ Route::group([
     });
 });
 
-
-
-
-Route::get("/resendConfirmEmail/{userId}","AuthController@resendConfirmEmail");
-Route::get("/merchant/{merchantId}","CustomerController@getMerchant");
