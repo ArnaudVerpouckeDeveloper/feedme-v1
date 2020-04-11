@@ -64,8 +64,19 @@
                 required
                 :rules="val.passwordConfirmRules"
               ></v-text-field>
-
-              <div style="text-align: center;">
+              <v-checkbox v-model="user.acceptsTermsAndConditions" :rules="val.legalRules">
+                <template v-slot:label>
+                  <div>
+                    Ik ga akkoord met de
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <router-link :to="{name:'legal'}">algemene voorwaarden</router-link>
+                      </template>
+                    </v-tooltip>
+                  </div>
+                </template>
+              </v-checkbox>
+              <div style="text-align: center; margin-top: 10px;">
                 <v-btn :to="{name: 'merchantRegister'}">
                   <v-icon>mdi-store</v-icon>Ik wil mijn zaak registeren.
                 </v-btn>
@@ -146,15 +157,25 @@ export default {
           v =>
             (!!v && v) === this.user.password ||
             "De wachtworden moeten overeen komen."
+        ],
+        legalRules: [
+          v =>
+            !!v ||
+            "Om u zo goed mogelijke service aan te bieden hebben wij u akkoord nodig."
         ]
       }
     };
   },
   methods: {
     Postregister() {
+      this.$refs.form.validate();
       if (this.valid) {
         this.register(this.user)
-          .then(() => (this.user = {}, this.$refs.form.reset(), this.dialog = true))
+          .then(
+            () => (
+              (this.user = {}), this.$refs.form.reset(), (this.dialog = true)
+            )
+          )
           .catch(message => {
             this.snackbar = true;
             this.snackText = Object.values(message)[0][0];
