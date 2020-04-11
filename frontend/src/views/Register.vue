@@ -222,6 +222,6 @@ export default {
   width: 100%;
 }
 .register-divider {
-  margin: 20px auto;
+  margin: 20px auto !important;
 }
 </style>
