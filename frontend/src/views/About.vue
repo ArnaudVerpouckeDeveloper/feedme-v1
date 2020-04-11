@@ -18,7 +18,7 @@
                   studenten van SpeedMeal het ideale moment om de horeca bij te springen met een oplossing die hen kan helpen doorheen en na deze crisis.
                 </p>
                 <p>
-                  Samen hebben Arnaud Verpoucke, Milat Omed, Arno Arzumanyan en Oksana Gorin in een recordtempo SpeedMeal opgericht, een gratis digitaal
+                  Samen hebben Arnaud Verpoucke, Milat Omed, Arno Arzumanyan en Oksana Gorin in een korte tijdsspanne SpeedMeal gebouwd, een gratis digitaal
                   bestelplatform voor de horeca om deze moeilijke coronaperiode te overbruggen.
                 </p>
               </v-card-text>
