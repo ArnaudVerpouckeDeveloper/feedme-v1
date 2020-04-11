@@ -70,7 +70,7 @@ export default {
   height: 23em;
   margin: 0 auto;
   font-size: 1.6em;
-  background: #ffffffe0;
+  background: rgba(255, 255, 255, 0.89);
   transition: all 0.2s ease;
   text-align: center;
   padding: 1em;

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="list-merchant-container">
+  <v-container fluid class="list-merchant-container" >
     <v-skeleton-loader
       v-if="merchants.length == 0"
       class="mx-auto"
