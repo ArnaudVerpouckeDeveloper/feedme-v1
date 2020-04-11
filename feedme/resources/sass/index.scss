@@ -1104,6 +1104,15 @@ body {
                     }
                 }
             }
+            .dashboard {
+                .environmentLink {
+                    .link {
+                        a {
+                            overflow-wrap: break-word;
+                        }
+                    }
+                }
+            }
         }
     }
 }

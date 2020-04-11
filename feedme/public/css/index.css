@@ -984,6 +984,9 @@ body main .merchantAuthPanel .login input[type=submit] {
   body main .settings form.schedule .row select:nth-of-type(4) {
     width: 35%;
   }
+  body main .dashboard .environmentLink .link a {
+    overflow-wrap: break-word;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */
