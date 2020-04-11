@@ -77,35 +77,45 @@
                   </div>
                 </template>
               </v-checkbox>
-              <div style="text-align: center; margin-top: 10px;">
+              <v-card-actions class="register-button">
+                <v-btn color="primary" @click="Postregister">Verzenden</v-btn>
+              </v-card-actions>
+              <v-divider inset class="register-divider"></v-divider>
+              <p class="register">
+                Hebt u al een account?
+                <router-link :to="{name:'login'}">Login hier.</router-link>
+              </p>
+              <div style="text-align: center; margin-top: 20px; margin-bottom: 18px;">
                 <v-btn :to="{name: 'merchantRegister'}">
                   <v-icon>mdi-store</v-icon>Ik wil mijn zaak registeren.
                 </v-btn>
               </div>
             </v-form>
           </v-card-text>
-          <p class="register">
-            Hebt u al een account?
-            <router-link :to="{name:'login'}">Login hier.</router-link>
-          </p>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" @click="Postregister">Verzenden</v-btn>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
     <v-dialog v-model="dialog" max-width="390">
       <v-card>
         <v-card-title class="headline">Uw registratie is bijna voltooid!</v-card-title>
-        <v-card-text>Om verder te gaan dient u eerst uw e-mailadres te bevestigen. We hebben u een e-mail gestuurd.</v-card-text>
+        <v-card-text>Om verder te gaan dient u eerst uw e-mailadres te bevestigen. We hebben u een email gestuurd.</v-card-text>
+        <v-card-text
+          v-if="canSendVerificationAgain"
+        >Als u na 1 minuut geen email van ons ontvangen hebt, kunt u deze opnieuw versturen.</v-card-text>
+        <v-card-text v-if="!canSendVerificationAgain">Verificatie email is opnieuw verstuurd.</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
+          <v-btn
+            v-if="canSendVerificationAgain"
+            color="green darken-1"
+            text
+            @click="reSendRegisterVerification"
+          >Email opnieuw versturen</v-btn>
           <v-btn color="green darken-1" text @click="registerDialog">Ok</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-snackbar color="#ff5252" v-model="snackbar" multi-line> 
+    <v-snackbar color="#ff5252" v-model="snackbar" multi-line>
       {{ snackText }}
       <v-btn text @click="snackbar = false">Ok</v-btn>
     </v-snackbar>
@@ -119,6 +129,8 @@ export default {
   computed: {},
   data() {
     return {
+      canSendVerificationAgain: true,
+      newUserId: 0,
       dialog: false,
       snackbar: false,
       snackText:
@@ -128,8 +140,7 @@ export default {
         lastname: null,
         email: null,
         password: null,
-        password_confirmation: null,
-        isMerchant: false
+        password_confirmation: null
       },
       valid: false,
       val: {
@@ -176,24 +187,41 @@ export default {
       this.$refs.form.validate();
       if (this.valid) {
         this.register(this.user)
-          .then(
-            () => (
-              (this.user = {}), this.$refs.form.reset(), (this.dialog = true)
-            )
-          )
+          .then(res => {
+            this.newUserId = res.userId;
+            this.user = {};
+            this.$refs.form.reset();
+            this.dialog = true;
+          })
           .catch(message => {
             this.snackbar = true;
             this.snackText = Object.values(message)[0][0];
           });
       }
     },
+    reSendRegisterVerification() {
+      if (this.canSendVerificationAgain) {
+        this.reSendVerification(this.newUserId).then(
+          () => (this.canSendVerificationAgain = false)
+        );
+      }
+    },
     registerDialog() {
       this.dialog = false;
       this.$router.push("/aanmelden");
     },
-    ...mapActions(["register"])
+    ...mapActions(["register", "reSendVerification"])
   }
 };
 </script>
 <style>
+.register-button {
+  flex-direction: column;
+}
+.register-button > button {
+  width: 100%;
+}
+.register-divider {
+  margin: 20px auto;
+}
 </style>
