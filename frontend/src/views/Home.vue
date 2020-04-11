@@ -108,7 +108,22 @@ export default {
 .landing-cta-horeca {
   color: #000 !important;
 }
-/* Small devices (portrait tablets and large phones, 600px and up) */
+
+/* super Small devices (portrait tablets and large phones */
+@media only screen and (max-width: 340px) {
+  .landing-content {
+    font-size: 1.4em;
+    padding: 0.6em !important;
+    height: 580px !important;
+  }
+  .landing-content-img {
+    width: 180px !important;
+  }
+  .v-btn.v-size--large {
+    font-size: 0.675rem !important;
+  }
+}
+
 @media only screen and (max-width: 400px) {
   .landing-content-img {
     width: 250px;
@@ -117,9 +132,11 @@ export default {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
+  .landing-illustration .landing-content {
+    padding: 1em;
+  }
   .landing-content {
     height: 23em;
-    padding: 1em !important;
   }
   .landing-content-paragraph {
     font-size: 0.8em;
@@ -131,7 +148,7 @@ export default {
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 992px) {
-  .landing-illustration{
+  .landing-illustration {
     height: 100%;
   }
 }
@@ -147,6 +164,9 @@ export default {
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1300px) {
+@media only screen and (min-width: 1930px) {
+  .landing-illustration {
+    height: 82.4vh;
+  }
 }
 </style>

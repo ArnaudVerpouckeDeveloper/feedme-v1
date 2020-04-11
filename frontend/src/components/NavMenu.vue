@@ -147,4 +147,10 @@ body {
 .v-toolbar__content {
   width: 100%;
 }
+
+@media only screen and (max-width: 280px) {
+  .nav-logo {
+    width: 7em;
+  }
+}
 </style>
