@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post("/previewApiNameFromMerchantName", "AuthController@previewApiNameFromMerchantName");
-Route::get('/admin/all', 'MerchantController@getAllMerchants');
+Route::get('/merchant/all', 'MerchantController@getAllMerchants');
 Route::get("/resendConfirmEmail/{userId}","AuthController@resendConfirmEmail");
 Route::get("/admin/{merchantId}","CustomerController@getMerchant");
 

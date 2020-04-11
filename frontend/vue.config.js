@@ -1,14 +1,14 @@
 module.exports = {
-  "transpileDependencies": [
-    "vuetify"
-  ]
+    "transpileDependencies": [
+        "vuetify"
+    ]
 }
 
 
 
-// const path = require("path");
+const path = require("path");
 
-// module.exports = {
-//     outputDir: path.resolve(__dirname, "../feedme/public/spa"),
-//     //assetsDir: "/"
-// }
+module.exports = {
+    outputDir: path.resolve(__dirname, "../feedme/public/spa"),
+    //assetsDir: "./"
+}
