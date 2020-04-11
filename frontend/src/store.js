@@ -160,7 +160,19 @@ const actions = {
         return await new Promise((resolve, reject) => {
             axios.post(`${apiUrl}/auth/registerCustomer`, data)
                 .then(res => {
-                    resolve();
+                    resolve(res.data);
+                })
+                .catch(error => {
+                    reject(error.response.data.errors)
+                    console.error(error)
+                })
+        })
+    },
+    async reSendVerification(context, id) {
+        return await new Promise((resolve, reject) => {
+            axios.get(`${apiUrl}/resendConfirmEmail/${id}`)
+                .then(res => {
+                    resolve(res.data);
                 })
                 .catch(error => {
                     reject(error.response.data.errors)
