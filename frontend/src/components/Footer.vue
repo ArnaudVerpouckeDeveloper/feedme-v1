@@ -1,5 +1,5 @@
 <template>
-  <v-footer padless color="#68A25F">
+  <v-footer padless>
     <v-card flat tile width="100%" class="green text-center">
       <v-card-text class="footer-logos">
         <v-tooltip bottom>

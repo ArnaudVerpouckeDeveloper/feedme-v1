@@ -143,14 +143,18 @@ const actions = {
     },
 
     async login(context, data) {
-        await axios.post(`${apiUrl}/auth/login`, data)
-            .then(res => {
-                context.commit('updateUser', res.data)
-                router.replace({ name: "Merchants" });
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        return await new Promise((resolve, reject) => {
+            axios.post(`${apiUrl}/auth/login`, data)
+                .then(res => {
+                    resolve();
+                    context.commit('updateUser', res.data)
+                    router.replace({ name: "Merchants" });
+                })
+                .catch(error => {
+                    reject();
+                    console.error(error)
+                })
+        })
     },
     async register(context, data) {
         return await new Promise((resolve, reject) => {

@@ -142,18 +142,21 @@ export default {
   }),
   methods: {
     placeOrder() {
-      let merchantId = this.merchantDetail.id;
-      let merchant = { merchantId };
-      let orders = {
-        productIds: this.cartItems[merchantId].map(({ id }) => id)
-      };
-      this.addOrder({
-        ...merchant,
-        ...this.orderForm,
-        ...orders
-      }).then(() => {
-        this.dialog = true;
-      });
+      this.$refs.form.validate();
+      if (this.valid) {
+        let merchantId = this.merchantDetail.id;
+        let merchant = { merchantId };
+        let orders = {
+          productIds: this.cartItems[merchantId].map(({ id }) => id)
+        };
+        this.addOrder({
+          ...merchant,
+          ...this.orderForm,
+          ...orders
+        }).then(() => {
+          this.dialog = true;
+        });
+      }
     },
     orderDialog() {
       this.orderForm = {};

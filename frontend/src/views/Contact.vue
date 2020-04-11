@@ -6,7 +6,7 @@
           <v-toolbar color="green" dark flat>
             <v-toolbar-title>Contact</v-toolbar-title>
           </v-toolbar>
-          <v-form v-model="valid">
+          <v-form v-model="valid" ref="form">
             <v-card-text>
               <v-text-field
                 v-model="contactForm.fullName"
@@ -58,6 +58,7 @@ export default {
   }),
   methods: {
     sendContact() {
+      this.$refs.form.validate();
       if (this.valid) this.sendContactForm(this.contactForm);
     },
     ...mapActions(["sendContactForm"])

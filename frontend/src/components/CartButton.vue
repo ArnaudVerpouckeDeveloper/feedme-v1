@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar v-model="showCartButton" :timeout="0" color="transparent">
+  <v-snackbar v-model="showCartButton" class="snack-cart-button" :timeout="0" color="transparent">
     <v-btn x-large class="cartBtn" color="green" @click="onChangeDrawer">Winkelmandje</v-btn>
   </v-snackbar>
 </template>

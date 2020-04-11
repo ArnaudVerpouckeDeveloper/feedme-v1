@@ -70,8 +70,9 @@
                     Ik ga akkoord met de
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on }">
-                        <router-link :to="{name:'legal'}">algemene voorwaarden</router-link>
+                        <router-link v-on="on" :to="{name:'legal'}">algemene voorwaarden</router-link>
                       </template>
+                      ""
                     </v-tooltip>
                   </div>
                 </template>
@@ -104,6 +105,10 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar color="#ff5252" v-model="snackbar" multi-line> 
+      {{ snackText }}
+      <v-btn text @click="snackbar = false">Ok</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 

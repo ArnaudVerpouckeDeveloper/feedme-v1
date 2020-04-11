@@ -7,7 +7,7 @@
             <v-toolbar-title>Login</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form>
+            <v-form v-model="valid" ref="form">
               <v-text-field
                 v-model="user.email"
                 label="Email"
@@ -38,6 +38,10 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-snackbar color="#ff5252" v-model="snackbar" vertical>
+      Er is iets misgegaan gelieve te controleren of uw email adres en wachtwoord correct is.
+      <v-btn text @click="snackbar = false">Ok</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -47,7 +51,8 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      routeToGo: "",
+      valid: false,
+      snackbar: false,
       user: {
         email: null,
         password: null
@@ -63,7 +68,14 @@ export default {
   },
   methods: {
     Postlogin() {
-      this.login(this.user);
+      this.$refs.form.validate();
+      if (this.valid) {
+        this.login(this.user)
+          .then()
+          .catch(message => {
+            this.snackbar = true;
+          });
+      }
     },
     ...mapActions(["login"])
   }

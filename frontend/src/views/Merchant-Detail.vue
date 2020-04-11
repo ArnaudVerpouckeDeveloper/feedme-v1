@@ -144,16 +144,13 @@ export default {
 .img-header {
   max-height: 12vw;
 }
-.v-snack__wrapper {
+.snack-cart-button .v-snack__wrapper {
   width: 100% !important;
   min-width: unset !important;
   max-width: unset !important;
   box-shadow: none !important;
 }
-.v-snack__content {
-  justify-content: center !important;
-  padding: 0 !important;
-}
+
 .cartBtn {
   width: 100% !important;
   margin-left: 0px !important;

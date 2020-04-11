@@ -18,11 +18,10 @@ export const routes = [
     { path: '/faq', name: 'faq', component: Faq, display: 'Faq', icon: "mdi-frequently-asked-questions" },
     { path: '/contact', name: 'contact', component: Contact, display: 'Contact', icon: "mdi-email" },
     { path: '/aanmelden', name: 'login', component: Login, display: 'hide', icon: "mdi-login-variant" },
-    { path: '/registreer', name: 'register', component: Register, display: 'hide', icon: "mdi-account-plus" },
+    { path: '/registreren', name: 'register', component: Register, display: 'hide', icon: "mdi-account-plus" },
     { path: '/bevestigbestelling', name: 'order', component: Order, display: 'hide', icon: "" },
     { path: '/voorwaarden', name: 'legal', component: Legal, display: 'hide', icon: "" },
-    { path: '/admin/register', name: 'merchantRegister', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/admin/register' }},
+    { path: '/admin/registreren', name: 'merchantRegister', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/admin/registreren' }},
     { path: 'https://www.instagram.com/speedmeal/', name: 'speedmealInsta', display: 'hide', beforeEnter() { location.href = 'https://www.instagram.com/speedmeal/' }},
     { path: 'https://www.facebook.com/speedmeal.be', name: 'speedmealFacebook', display: 'hide', beforeEnter() { location.href = 'https://www.facebook.com/speedmeal.be' }},
-
 ]
