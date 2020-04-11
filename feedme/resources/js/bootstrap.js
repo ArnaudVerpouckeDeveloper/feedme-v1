@@ -27,11 +27,4 @@ window.Echo = new Echo({
     wsHost: window.location.hostname,
     wsPort: 6001,
     disableStats: true,
-
-    auth: {
-        headers: {
-            Authorization: 'Bearer ' + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NDc5NDQ3OCwiZXhwIjoxNTg0Nzk4MDc4LCJuYmYiOjE1ODQ3OTQ0NzgsImp0aSI6IjI0SmU4eGJNanV4dFFtV3ciLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.lTzn0MOK4DpcJI9KklVR0nVBoFoTNsb_dhzwu3vo9GY"
-        }
-    }
-
 });
