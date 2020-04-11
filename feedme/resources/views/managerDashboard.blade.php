@@ -94,13 +94,13 @@
                 <p class="instruction">{{$todo["instruction"]}}</p>
                 @switch($todo["location"])
                     @case("settings")
-                        <a class="location" href="/manager/instellingen">Instellingen</a>
+                        <a class="location" href="/admin/instellingen">Instellingen</a>
                         @break
                     @case("orders")
-                        <a class="location" href="/manager/orders">Orders</a>
+                        <a class="location" href="/admin/orders">Orders</a>
                         @break
                     @case("products")
-                        <a class="location" href="/manager/producten">Producten</a>
+                        <a class="location" href="/admin/producten">Producten</a>
                         @break
                     @default
                 @endswitch

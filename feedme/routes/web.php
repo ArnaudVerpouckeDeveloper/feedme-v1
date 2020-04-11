@@ -25,61 +25,46 @@ Route::get("/contact", function(){return view("index");});
 Route::get("/aanmelden", function(){return view("index");});
 Route::get("/registreer", function(){return view("index");});
 
-
 Route::get('email/verify', "AuthController@verifyEmailNotice")->name('verification.notice');
-
-
-Route::get("/manager/login", function () {
-    return view("merchantLogin");
-})->name("login");
-Route::post("/manager/login", "AuthController@logMerchantIn");
-
-
-Route::get("/manager/register", function () {
-    return view("merchantRegister");
-});
-Route::post("/manager/register", "AuthController@registerMerchant");
-Route::get("/manager/logout", "AuthController@logMerchantOut");
-
+Route::get("/admin/login", function () {return view("merchantLogin");})->name("login");
+Route::post("/admin/login", "AuthController@logMerchantIn");
+Route::get("/admin/registreren", function () {return view("merchantRegister");});
+Route::post("/admin/registreren", "AuthController@registerMerchant");
+Route::get("/admin/afmelden", "AuthController@logMerchantOut");
 
 Route::group([
     'middleware' => ['auth', "auth.merchant", "verified"],
 ], function ($router) {
-    Route::get('/manager/dashboard', "MerchantController@showManagerDashboard");
-    Route::get('/manager/orders', "MerchantController@showManagerOrders");
-    Route::get('/manager/producten', "MerchantController@showManagerProducts");
-    Route::get('/manager/instellingen', "MerchantController@showManagerSettings");
-    Route::post('/manager/logout', "AuthController@showManagerSettings");
+    Route::get('/admin/dashboard', "MerchantController@showManagerDashboard");
+    Route::get('/admin/orders', "MerchantController@showManagerOrders");
+    Route::get('/admin/producten', "MerchantController@showManagerProducts");
+    Route::get('/admin/instellingen', "MerchantController@showManagerSettings");
+    Route::post('/admin/logout', "AuthController@showManagerSettings");
 
-    Route::post('/manager/producten/addProduct', "MerchantController@addProduct");
-    Route::put('/manager/producten/toggleOrderable', "MerchantController@toggleOrderable");
-    Route::put('/manager/producten/updateProduct', "MerchantController@updateProduct");
-    Route::delete('/manager/producten/deleteProduct', "MerchantController@deleteProduct");
+    Route::post('/admin/producten/addProduct', "MerchantController@addProduct");
+    Route::put('/admin/producten/toggleOrderable', "MerchantController@toggleOrderable");
+    Route::put('/admin/producten/updateProduct', "MerchantController@updateProduct");
+    Route::delete('/admin/producten/deleteProduct', "MerchantController@deleteProduct");
 
-    Route::put('/manager/orders/acceptOrder', "MerchantController@acceptOrder");
-    Route::put('/manager/orders/denyOrder', "MerchantController@denyOrder");
-    Route::put('/manager/orders/addTimeToOrder_15', "MerchantController@addTimeToOrder_15");
-    Route::put('/manager/orders/addTimeToOrder_30', "MerchantController@addTimeToOrder_30");
-    Route::put('/manager/orders/addTimeToOrder_60', "MerchantController@addTimeToOrder_60");
-    Route::put('/manager/orders/completeOrder', "MerchantController@completeOrder");
+    Route::put('/admin/orders/acceptOrder', "MerchantController@acceptOrder");
+    Route::put('/admin/orders/denyOrder', "MerchantController@denyOrder");
+    Route::put('/admin/orders/addTimeToOrder_15', "MerchantController@addTimeToOrder_15");
+    Route::put('/admin/orders/addTimeToOrder_30', "MerchantController@addTimeToOrder_30");
+    Route::put('/admin/orders/addTimeToOrder_60', "MerchantController@addTimeToOrder_60");
+    Route::put('/admin/orders/completeOrder', "MerchantController@completeOrder");
 
-    Route::put('/manager/settings/updateTakeawayHours', "MerchantController@updateTakeawayHours");
-    Route::put('/manager/settings/updateDeliveryHours', "MerchantController@updateDeliveryHours");
-    Route::put('/manager/settings/updateBanner', "MerchantController@updateBanner");
-    Route::put('/manager/settings/updateLogo', "MerchantController@updateLogo");
-    Route::put('/manager/settings/updateMessage', "MerchantController@updateMessage");
-    Route::put('/manager/settings/updateMinimumWaitTimeForTakeaway', "MerchantController@updateMinimumWaitTimeForTakeaway");
-    Route::put('/manager/settings/updateMinimumWaitTimeForDelivery', "MerchantController@updateMinimumWaitTimeForDelivery");
+    Route::put('/admin/settings/updateTakeawayHours', "MerchantController@updateTakeawayHours");
+    Route::put('/admin/settings/updateDeliveryHours', "MerchantController@updateDeliveryHours");
+    Route::put('/admin/settings/updateBanner', "MerchantController@updateBanner");
+    Route::put('/admin/settings/updateLogo', "MerchantController@updateLogo");
+    Route::put('/admin/settings/updateMessage', "MerchantController@updateMessage");
+    Route::put('/admin/settings/updateMinimumWaitTimeForTakeaway', "MerchantController@updateMinimumWaitTimeForTakeaway");
+    Route::put('/admin/settings/updateMinimumWaitTimeForDelivery', "MerchantController@updateMinimumWaitTimeForDelivery");
 
-    Route::get('/manager/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
-
-    });
+    Route::get('/admin/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
+});
 
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");
-
-
 Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");
-
 Route::get("/{merchantApiName}", "CustomerController@showMerchantShop");
 Route::post("/sendContactForm", "CustomerController@sendContactForm");
-

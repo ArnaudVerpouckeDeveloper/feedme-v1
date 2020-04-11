@@ -1,7 +1,7 @@
 @extends('./layouts/merchantManager')
 @section('content')
 <div class="settings screen-container">
-    <form method="POST" action="/manager/settings/updateBanner" enctype="multipart/form-data" class="bannerForm">
+    <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm">
         {{method_field('PUT')}}
         @csrf
 
@@ -18,7 +18,7 @@
         @enderror
     </form>
     
-    <form method="POST" action="/manager/settings/updateLogo" enctype="multipart/form-data" class="logoForm">
+    <form method="POST" action="/admin/settings/updateLogo" enctype="multipart/form-data" class="logoForm">
         {{method_field('PUT')}}
         @csrf
 
@@ -35,7 +35,7 @@
         @enderror
     </form>
     
-    <form method="POST" action="/manager/settings/updateMessage">
+    <form method="POST" action="/admin/settings/updateMessage">
         {{method_field('PUT')}}
         @csrf
 
@@ -47,7 +47,7 @@
         <input type="submit" value="Opslaan"/>
     </form>
 
-    <form method="POST" action="/manager/settings/updateTakeawayHours" class="schedule">
+    <form method="POST" action="/admin/settings/updateTakeawayHours" class="schedule">
         {{method_field('PUT')}}
         @csrf
 
@@ -1506,7 +1506,7 @@
 
 
 
-    <form method="POST" action="/manager/settings/updateDeliveryHours" class="schedule">
+    <form method="POST" action="/admin/settings/updateDeliveryHours" class="schedule">
         {{method_field('PUT')}}
         @csrf
 
@@ -2968,7 +2968,7 @@
 
 
 
-    <form method="POST" action="/manager/settings/updateMinimumWaitTimeForTakeaway" class="schedule">
+    <form method="POST" action="/admin/settings/updateMinimumWaitTimeForTakeaway" class="schedule">
         {{method_field('PUT')}}
         @csrf
         <label>Minimale wachttijd voor afhalingen:</label>
@@ -2991,7 +2991,7 @@
         <input type="submit" value="opslaan"/>
     </form>
 
-    <form method="POST" action="/manager/settings/updateMinimumWaitTimeForDelivery" class="schedule">
+    <form method="POST" action="/admin/settings/updateMinimumWaitTimeForDelivery" class="schedule">
         {{method_field('PUT')}}
         @csrf
         <label>Minimale wachttijd voor leveringen:</label>
