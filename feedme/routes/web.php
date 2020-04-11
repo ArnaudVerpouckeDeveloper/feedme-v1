@@ -17,6 +17,15 @@ use App\Mail\ConfirmOrder;
 |
 */
 
+Route::get("/", function(){return view("index");});
+Route::get("/restaurants", function(){return view("index");});
+Route::get("/over", function(){return view("index");});
+Route::get("/faq", function(){return view("index");});
+Route::get("/contact", function(){return view("index");});
+Route::get("/aanmelden", function(){return view("index");});
+Route::get("/registreer", function(){return view("index");});
+
+
 Route::get('email/verify', "AuthController@verifyEmailNotice")->name('verification.notice');
 
 
@@ -73,3 +82,4 @@ Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");
 
 Route::get("/{merchantApiName}", "CustomerController@showMerchantShop");
 Route::post("/sendContactForm", "CustomerController@sendContactForm");
+

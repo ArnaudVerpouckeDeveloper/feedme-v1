@@ -1,4 +1,6 @@
-$mainGreen: #68A25F;
+/*$mainGreen: #68A25F;*/
+
+$mainGreen: #4CAF50;
 $mainRed: #e43a3a;
 $mediumGrey: grey;
 $alt-orange: #FCA326;
@@ -1015,6 +1017,31 @@ body {
                                 width: 35%;
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    body {
+        main {
+            .merchantAuthPanel {
+                width: 100%;
+                box-sizing: border-box;
+                margin-top: 0;
+                padding: 2rem;
+                .logo {
+                    margin-top: 2rem;
+                    margin-bottom: 2rem;
+                    width: 70%;
+                    object-fit: contain;
+                }
+                .register,
+                .login {
+                    input[type="submit"] {
+                        width: 100%;
                     }
                 }
             }

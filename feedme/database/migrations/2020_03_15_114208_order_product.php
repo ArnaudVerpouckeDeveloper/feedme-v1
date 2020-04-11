@@ -17,14 +17,8 @@ class OrderProduct extends Migration
             $table->increments('id');
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
-
-            $table->foreign('order_id')->references('id')->on('orders')
-
-                ->onDelete('cascade');
-
-            $table->foreign('product_id')->references('id')->on('products')
-
-                ->onDelete('cascade');
+            //$table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            //$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
