@@ -28,7 +28,7 @@ Route::get("/registreer", function(){return view("index");});
 Route::get('email/verify', "AuthController@verifyEmailNotice")->name('verification.notice');
 Route::get("/admin/login", function () {return view("merchantLogin");})->name("login");
 Route::post("/admin/login", "AuthController@logMerchantIn");
-Route::get("/admin/register", function () {return view("merchantRegister");});
+Route::get("/admin/registreren", function () {return view("merchantRegister");});
 Route::post("/admin/registreren", "AuthController@registerMerchant");
 Route::get("/admin/afmelden", "AuthController@logMerchantOut");
 

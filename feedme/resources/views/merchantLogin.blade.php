@@ -37,7 +37,7 @@
                     <input type="submit" value="Aanmelden"/>
                     <hr>
                     <p>Nog geen account?</p>
-                    <a href="/admin/register">Registreren</a>
+                    <a href="/admin/registreren">Registreren</a>
                 </form>
             </div>
         </main>

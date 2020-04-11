@@ -37,7 +37,7 @@
             </nav>
         <div class="signOut">
             <p>{{auth()->user()->firstName}} {{auth()->user()->lastName}}</p>
-            <a href="/admin/logout"><span class="material-icons">power_settings_new</span></a>
+            <a href="/admin/afmelden"><span class="material-icons">power_settings_new</span></a>
         </div>
         </header>
 

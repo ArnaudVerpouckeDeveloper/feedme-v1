@@ -19,7 +19,7 @@
         <main>
             <div class="merchantAuthPanel">
                 <img class="logo" src="{{asset('images/Logo_TP_Green.png')}}" alt="logo"/>
-                <form class="register" method="POST" action="/admin/register">
+                <form class="register" method="POST" action="/admin/registreren">
                     @csrf
                     <label>E-mailadres</label>
                     <input type="email" name="email"   value="{{ old('email') }}"/>
