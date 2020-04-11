@@ -56,7 +56,7 @@ export default {
   align-self: center;
 }
 .landing-illustration {
-  height: 81vh;
+  height: 81.9vh;
   background-image: linear-gradient(
     to top right,
     rgba(76, 175, 80, 0.29),
@@ -109,21 +109,32 @@ export default {
   color: #000 !important;
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 400px) {
+  .landing-content-img {
+    width: 250px;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
   .landing-content {
-    height: 26em;
-    padding: 1.5em !important;
+    height: 23em;
+    padding: 1em !important;
+  }
+  .landing-content-paragraph {
+    font-size: 0.8em;
   }
   .landing-cta-customer,
   .landing-cta-horeca {
     width: 100%;
   }
 }
-
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  .landing-illustration{
+    height: 100%;
+  }
+}
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .landing-cta-customer,
