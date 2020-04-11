@@ -210,6 +210,27 @@ body main .merchantAuthPanel .login a:hover,
 body main .merchantAuthPanel .register a:hover {
   text-decoration: underline;
 }
+body main.orderHistory .orders .order.accepted .orderOverview, body main.orderHistory .orders .order.denied .orderOverview {
+  background-color: #fbfbfb;
+  color: black;
+}
+body main.orderHistory .orders .order.accepted .orderOverview .totalPrice, body main.orderHistory .orders .order.denied .orderOverview .totalPrice {
+  color: black;
+}
+body main.orderHistory .orders .order.accepted .orderOverview .status {
+  color: #4CAF50;
+}
+body main.orderHistory .orders .order.denied .orderOverview .status {
+  color: #e43a3a;
+}
+body main.orderHistory .orders .order .orderOverview {
+  width: 100%;
+}
+body main.orderHistory .orders .order .orderOverview .status {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
 body main .orders .order {
   margin-bottom: 2rem;
   display: flex;
@@ -364,6 +385,16 @@ body main .orders .order .orderSections .row > li.acceptOrder:hover, body main .
 body main .orders .order .orderSections .row > li.denyOrder:hover {
   background-color: #e43a3a;
   color: white;
+}
+body main .bottomLink {
+  color: grey;
+  text-align: center;
+  display: block;
+  margin-bottom: 6rem;
+  margin-top: 6rem;
+}
+body main .bottomLink:hover {
+  text-decoration: underline;
 }
 body main .createProductForm {
   padding: 4rem;

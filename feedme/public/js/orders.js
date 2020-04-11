@@ -3,10 +3,52 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < allOrderElements.length; i++) {
         setEventListenersForOrder(allOrderElements[i]);
     }
+    checkForOpenOrders(true);
+    setInterval(checkForOpenOrders, 30000);
 });
 
 
+function checkForOpenOrders(hasToConfirm = false) {
+    makeRequest("POST", "/admin/orders/checkForOpenOrders")
+        .then(res => {
+            if (Object.values(res).length > 0) {
+                if (orderIdIsMissing(Object.values(res))) {
+                    location.reload();
+                }
+                if (hasToConfirm) {
+                    Swal.fire(
+                        'U heeft openstaande orders.',
+                        '',
+                        'warning'
+                    )
+                } else {
+                    notificationSound.play();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'U heeft openstaande orders.',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            } else {
+                console.log("No open orders were found.", res);
+            }
+        })
+        .catch(error => {
+            console.log("Error:", error);
+        });
+}
 
+function orderIdIsMissing(allOrderIdsToCheck) {
+    for (let i = 0; i < allOrderIdsToCheck.length; i++) {
+        const orderIdToCheck = allOrderIdsToCheck[i].id;
+        if (!document.querySelector(".order[data-orderId='" + orderIdToCheck + "']")) { //notFound
+            return true;
+        }
+    }
+    return false;
+}
 
 function setEventListenersForOrder(order) {
     let orderId = order.dataset.orderid;
@@ -67,9 +109,19 @@ function setEventListenersForOrder(order) {
                 })
                 .then(res => {
                     if (res == "ok") {
+                        Swal.fire(
+                            'Geslaagd!',
+                            'Het order werd geweigerd, de klant zal hiervan een e-mail ontvangen.',
+                            'success'
+                        );
+                        $(".order[data-orderId='" + orderId + "']").fadeOut(400, "swing", function() {
+                            order.remove();
+                        });
+                        /*
                         order.classList.add("denied");
                         order.querySelector(".orderSections .acceptOrder").remove();
                         order.querySelector(".orderSections .denyOrder").remove();
+                        */
                     } else {
                         throw (res);
                     }

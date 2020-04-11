@@ -45,6 +45,11 @@ class MerchantController extends Controller
         return auth()->user()->orders()->get();
     }
 
+    function checkForOpenOrders(){
+        $openOrders = User::first()->merchant->orders->where("accepted", false)->where("denied",false);
+        return response()->json($openOrders);
+    }
+
 
     function updateLogo(Request $request){
         $request->validate([
@@ -168,6 +173,11 @@ class MerchantController extends Controller
     function showManagerSettings(Request $request){
         $merchant = auth()->user()->merchant;
         return view("managerSettings")->with("merchant", $merchant);
+    }
+
+    function showOrderHistory(Request $request){
+        $merchant = auth()->user()->merchant;
+        return view("managerOrderHistory")->with("merchant", $merchant);
     }
 
 

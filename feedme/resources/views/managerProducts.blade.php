@@ -1,4 +1,6 @@
 @extends('./layouts/merchantManager')
+@section("title", "Producten");
+
 @section('content')
 
 

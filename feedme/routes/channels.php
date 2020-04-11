@@ -32,10 +32,7 @@ Broadcast::channel('private-orders', function () {
 */
 
 
-Broadcast::channel('orders', function () {
-    return true;
-});
 
-Broadcast::channel('private-orders', function () {
+Broadcast::channel('orders', function ($user) {
     return true;
 });

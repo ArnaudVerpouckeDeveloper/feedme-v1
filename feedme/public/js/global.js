@@ -1,4 +1,4 @@
-async function makeRequest(method, url, data, success, error) {
+async function makeRequest(method, url, data = {}, success, error) {
     data._token = getCSRF_token();
     const response = await fetch(url, {
         method: method,

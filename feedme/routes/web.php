@@ -38,6 +38,7 @@ Route::group([
 ], function ($router) {
     Route::get('/admin/dashboard', "MerchantController@showManagerDashboard");
     Route::get('/admin/orders', "MerchantController@showManagerOrders");
+    Route::get("/admin/ordergeschiedenis", "MerchantController@showOrderHistory");
     Route::get('/admin/producten', "MerchantController@showManagerProducts");
     Route::get('/admin/instellingen', "MerchantController@showManagerSettings");
     Route::post('/admin/logout', "AuthController@showManagerSettings");
@@ -53,6 +54,7 @@ Route::group([
     Route::put('/admin/orders/addTimeToOrder_30', "MerchantController@addTimeToOrder_30");
     Route::put('/admin/orders/addTimeToOrder_60', "MerchantController@addTimeToOrder_60");
     Route::put('/admin/orders/completeOrder', "MerchantController@completeOrder");
+    Route::post('/admin/orders/checkForOpenOrders', "MerchantController@checkForOpenOrders");
 
     Route::put('/admin/settings/updateTakeawayHours', "MerchantController@updateTakeawayHours");
     Route::put('/admin/settings/updateDeliveryHours', "MerchantController@updateDeliveryHours");
@@ -69,4 +71,3 @@ Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");
 Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");
 Route::get("/{merchantApiName}", "CustomerController@showMerchantShop");
 Route::post("/sendContactForm", "CustomerController@sendContactForm");
-//Route::get("/sockets", function(){return view()});

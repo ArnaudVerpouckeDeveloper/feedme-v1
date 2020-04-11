@@ -25,6 +25,19 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'myKey',
     wsHost: window.location.hostname,
-    wsPort: 6001,
-    disableStats: true,
+    wsPort: 6005,
+    //disableStats: true,
 });
+
+
+
+
+/*
+var pusher = new Pusher('app_key', {
+  auth: {
+    params: {
+      CSRFToken: 'some_csrf_token'
+    }
+  }
+});
+*/

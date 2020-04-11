@@ -5,7 +5,7 @@
         @csrf
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Merchant login</title>
+        <title>Inloggen horeca</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">

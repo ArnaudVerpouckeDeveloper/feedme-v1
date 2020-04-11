@@ -200,6 +200,44 @@ body {
             }
             .register {}
         }
+        &.orderHistory {
+            .orders {
+                .order {
+                    &.accepted,
+                    &.denied {
+                        .orderOverview {
+                            background-color: #fbfbfb;
+                            color: black;
+                            .totalPrice {
+                                color: black;
+                            }
+                        }
+                    }
+                    &.accepted {
+                        .orderOverview {
+                            .status {
+                                color: $mainGreen;
+                            }
+                        }
+                    }
+                    &.denied {
+                        .orderOverview {
+                            .status {
+                                color: $mainRed;
+                            }
+                        }
+                    }
+                    .orderOverview {
+                        width: 100%;
+                        .status {
+                            font-weight: bold;
+                            font-size: 1.5rem;
+                            margin-bottom: 1rem;
+                        }
+                    }
+                }
+            }
+        }
         .orders {
             .order {
                 margin-bottom: 2rem;
@@ -386,6 +424,16 @@ body {
                         }
                     }
                 }
+            }
+        }
+        .bottomLink {
+            color: grey;
+            text-align: center;
+            display: block;
+            margin-bottom: 6rem;
+            margin-top: 6rem;
+            &:hover {
+                text-decoration: underline;
             }
         }
         .createProductForm {

@@ -29222,9 +29222,18 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: 'myKey',
   wsHost: window.location.hostname,
-  wsPort: 6001,
-  disableStats: true
+  wsPort: 6005 //disableStats: true,
+
 });
+/*
+var pusher = new Pusher('app_key', {
+  auth: {
+    params: {
+      CSRFToken: 'some_csrf_token'
+    }
+  }
+});
+*/
 
 /***/ }),
 

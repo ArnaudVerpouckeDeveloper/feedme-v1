@@ -1,4 +1,5 @@
 @extends('./layouts/merchantManager')
+@section("title", "Instellingen");
 @section('content')
 <div class="settings screen-container">
     <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm">
