@@ -27,7 +27,7 @@
                   <br />
                   <br />
 
-                  <p>*Aandacht: SpeedMeal is geen tussenpersoon bij de betalingen. Betalingen gebeuren van de koper rechtstreeks naar de horecazaak.</p>
+                  <p><strong>Aandacht:</strong> SpeedMeal is geen tussenpersoon bij de betalingen. Betalingen gebeuren van de koper rechtstreeks naar de horecazaak.</p>
                 </v-expansion-panel-content>
               </v-expansion-panel>
 
