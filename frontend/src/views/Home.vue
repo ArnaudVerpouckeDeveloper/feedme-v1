@@ -12,7 +12,7 @@
           ophouden door het coronavirus.
           SpeedMeal biedt u
           <strong>GRATIS</strong> een systeem
-          aan waarop gerechten besteld kunnen worden.
+          aan waarmee gerechten besteld kunnen worden.
         </p>
         <p class="landing-content-ps">- Gebouwd door studenten, voor zelfstandigen.</p>
         <div class="landing-cta">
@@ -90,7 +90,7 @@ export default {
   color: #000;
 }
 .landing-content-ps {
-  font-size: 0.8em;
+  font-size: 0.7em;
 }
 .landing-cta {
   font-size: 0.8em;
