@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-/*
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
@@ -24,18 +23,9 @@ Broadcast::channel('private-orders', function ($user) {
 });
 
 
-
-Broadcast::channel('private-orders', function () {
-    return "hello world (from routes)";
+/*
+Broadcast::channel('orders.{id}', function ($user, $id) {
+    return (int) $user->merchant->id === (int) $id;
     //return false;
 });
 */
-
-
-Broadcast::channel('orders', function () {
-    return true;
-});
-
-Broadcast::channel('private-orders', function () {
-    return true;
-});

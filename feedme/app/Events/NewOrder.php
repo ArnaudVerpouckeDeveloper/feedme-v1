@@ -13,18 +13,16 @@ use Illuminate\Queue\SerializesModels;
 class NewOrder implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    //public $order;
-    public $message;
+    public $order;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($order)
     {
-        //$this->order = $order;
-        $this->message = $message;
+        $this->order = $order;
     }
 
     /**
@@ -34,9 +32,7 @@ class NewOrder implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        //return new PrivateChannel('orders');
-        //return ("orders");
-        return new PrivateChannel("orders");
+        return new PrivateChannel('orders');
         //return new PrivateChannel('orders.'.$this->order->merchant->id);
     }
 }

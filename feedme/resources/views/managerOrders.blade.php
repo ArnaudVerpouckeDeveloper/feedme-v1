@@ -105,16 +105,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{{asset('js/mountaineer.js')}}"></script>
 <script src="{{asset('js/orders.js')}}"></script>
-<script src="{{asset('js/app.js')}}"></script>
-<script>
-    //let myToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NDcwMjQ0MywiZXhwIjoxNTg0NzA2MDQzLCJuYmYiOjE1ODQ3MDI0NDMsImp0aSI6InZ2SnNiQ0ZtNG9SSkxHRGwiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.Hyxuz_Xla5XJsi6AW8hg2unp0WirAS0VW6IsxMuWh08";
-    //Echo.private("orders."+"1")
-    document.addEventListener("DOMContentLoaded", function(){
-        Echo.private("orders")
-        .listen("NewOrder", (e) => {
-            console.log(e);
-        })
-    })
-    
-</script>
 @endsection
