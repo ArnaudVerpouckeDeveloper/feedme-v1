@@ -14,7 +14,7 @@
           <strong>GRATIS</strong> een systeem
           aan waarmee gerechten besteld kunnen worden.
         </p>
-        <p class="landing-content-ps">- Gebouwd door studenten, voor zelfstandigen.</p>
+        <p class="landing-content-ps">- Gebouwd door studenten, voor zelfstandigen. -</p>
         <div class="landing-cta">
           <v-btn
             :to="{name: 'Merchants'}"
