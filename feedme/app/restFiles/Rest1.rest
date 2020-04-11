@@ -42,10 +42,11 @@ Accept: application/json
 {
     "firstName": "Arnaud",
     "lastName": "Verpoucke",
-    "email": "arnaud@plenso.be",
+    "email": "arnaud.verpoucke@hotmail.com",
     "password": "Arnaud_2019",
     "password_confirmation": "Arnaud_2019",
-    "mobilePhone": "0400 123 456"
+    "mobilePhone": "0400 123 456",
+    "acceptsTermsAndConditions": "true"
 }
 
 

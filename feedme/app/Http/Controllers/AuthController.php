@@ -204,7 +204,8 @@ class AuthController extends Controller
             'email' => 'required|email:rfc,dns|unique:users',
             'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!$#%]).+$/', 'confirmed'],
             'password_confirmation' => 'required',
-            'mobilePhone' => "required"
+            'mobilePhone' => "required",
+            'acceptsTermsAndConditions' => "required|accepted"
         ]);
 
         //'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(@-!_?#|[^\w])).+$/']

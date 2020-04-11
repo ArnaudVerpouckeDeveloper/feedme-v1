@@ -24,6 +24,7 @@ Route::get("/faq", function(){return view("index");});
 Route::get("/contact", function(){return view("index");});
 Route::get("/aanmelden", function(){return view("index");});
 Route::get("/registreer", function(){return view("index");});
+Route::get("/voorwaarden", function(){return view("index");});
 
 Route::get('email/verify', "AuthController@verifyEmailNotice")->name('verification.notice');
 Route::get("/admin/login", function () {return view("merchantLogin");})->name("login");

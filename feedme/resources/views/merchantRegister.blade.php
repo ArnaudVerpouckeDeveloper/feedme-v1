@@ -101,6 +101,15 @@
                     <p class="error">{{ $message }}</p>
                     @enderror
 
+                    <div class="acceptsTermsAndConditions">
+                        <input type="checkbox" name="acceptsTermsAndConditions" required/>
+                        <label>Ik ga akkoord met de <a href="/voorwaarden" target="_blank">algemene voorwaarden</a></label>
+                    </div>
+                    @error("acceptsTermsAndConditions")
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                    
+
                     @if(Session::has('error'))
                     <p class="error">{{Session::get('error')}}</p>
                     @endif

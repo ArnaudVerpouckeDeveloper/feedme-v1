@@ -137,6 +137,30 @@ body main .merchantAuthPanel .register input[type=value] {
   margin-bottom: 0.5rem;
   border: 1px solid lightgrey;
 }
+body main .merchantAuthPanel .login .acceptsTermsAndConditions,
+body main .merchantAuthPanel .register .acceptsTermsAndConditions {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+body main .merchantAuthPanel .login .acceptsTermsAndConditions input[type=checkbox],
+body main .merchantAuthPanel .register .acceptsTermsAndConditions input[type=checkbox] {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 1rem;
+  background-color: blue;
+  min-width: 1.5rem;
+}
+body main .merchantAuthPanel .login .acceptsTermsAndConditions input[type=checkbox]:hover,
+body main .merchantAuthPanel .register .acceptsTermsAndConditions input[type=checkbox]:hover {
+  cursor: pointer;
+}
+body main .merchantAuthPanel .login .acceptsTermsAndConditions label,
+body main .merchantAuthPanel .register .acceptsTermsAndConditions label {
+  color: grey;
+  font-weight: normal;
+  margin-bottom: unset;
+}
 body main .merchantAuthPanel .login input[type=submit],
 body main .merchantAuthPanel .register input[type=submit] {
   width: 40%;
@@ -149,7 +173,7 @@ body main .merchantAuthPanel .register input[type=submit] {
   padding: 0.7rem 2rem;
   border-radius: 0.3rem;
   margin-bottom: 3rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 body main .merchantAuthPanel .login input[type=submit]:hover,
 body main .merchantAuthPanel .register input[type=submit]:hover {

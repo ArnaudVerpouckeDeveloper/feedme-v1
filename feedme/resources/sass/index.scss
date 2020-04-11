@@ -135,6 +135,26 @@ body {
                     margin-bottom: 0.5rem;
                     border: 1px solid lightgrey;
                 }
+                .acceptsTermsAndConditions {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 2rem;
+                    input[type="checkbox"] {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        margin-right: 1rem;
+                        background-color: blue;
+                        min-width: 1.5rem;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                    label {
+                        color: grey;
+                        font-weight: normal;
+                        margin-bottom: unset;
+                    }
+                }
                 input[type="submit"] {
                     width: 40%;
                     margin-left: auto;
@@ -146,7 +166,7 @@ body {
                     padding: 0.7rem 2rem;
                     border-radius: 0.3rem;
                     margin-bottom: 3rem;
-                    margin-top: 3rem;
+                    margin-top: 2rem;
                     &:hover {
                         cursor: pointer;
                         filter: brightness(1.1);
