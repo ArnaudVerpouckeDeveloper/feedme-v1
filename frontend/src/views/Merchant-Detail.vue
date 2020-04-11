@@ -8,7 +8,7 @@
     />
     <v-row class="merchant-info" :style="infoStyle">
       <h1 class="col-8 col-md-10 col-lg-11">{{merchantDetail.name}}</h1>
-      <v-col cols="1">
+      <v-col cols="1" style="text-align: end;">
         <v-btn icon @click.stop="showDialog = true">
           <v-icon color="grey darken-1" size="42">mdi-information-outline</v-icon>
         </v-btn>

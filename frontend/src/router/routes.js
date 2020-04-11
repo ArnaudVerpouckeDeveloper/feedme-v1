@@ -21,7 +21,8 @@ export const routes = [
     { path: '/registreer', name: 'register', component: Register, display: 'hide', icon: "mdi-account-plus" },
     { path: '/bevestigbestelling', name: 'order', component: Order, display: 'hide', icon: "" },
     { path: '/voorwaarden', name: 'legal', component: Legal, display: 'hide', icon: "" },
-    { path: '/manager/register', name: 'merchantRegister', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/manager/register' }},
+    { path: '/admin/register', name: 'merchantRegister', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/admin/register' }},
     { path: 'https://www.instagram.com/speedmeal/', name: 'speedmealInsta', display: 'hide', beforeEnter() { location.href = 'https://www.instagram.com/speedmeal/' }},
+    { path: 'https://www.facebook.com/speedmeal.be', name: 'speedmealFacebook', display: 'hide', beforeEnter() { location.href = 'https://www.facebook.com/speedmeal.be' }},
 
 ]

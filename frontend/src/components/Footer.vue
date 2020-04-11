@@ -1,18 +1,47 @@
 <template>
   <v-footer padless color="#68A25F">
     <v-card flat tile width="100%" class="green text-center">
-      <v-card-text>
-        <v-btn class="mx-4" icon :to="{name:'speedmealInsta'}" target="_blank">
-          <v-icon class="footer-icon" size="24px">mdi-instagram</v-icon>
-        </v-btn>
+      <v-card-text class="footer-logos">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn class="mx-4" v-on="on" icon :to="{name:'speedmealInsta'}" target="_blank">
+              <v-icon class="footer-icon" size="24px">mdi-instagram</v-icon>
+            </v-btn>
+          </template>
+          <span>@speedmeal</span>
+        </v-tooltip>
 
-        <v-btn :to="{name:'legal'}" text class="white--text">Algemene Voorwaarden</v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn class="mx-4" v-on="on" icon :to="{name:'speedmealFacebook'}" target="_blank">
+              <v-icon class="footer-icon" size="24px">mdi-facebook</v-icon>
+            </v-btn>
+          </template>
+          <span>/speedmeal.be</span>
+        </v-tooltip>
+
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn class="mx-4" v-on="on" icon href="mailto:info@speedmeal.be" target="_blank">
+              <v-icon class="footer-icon" size="24px">mdi-email</v-icon>
+            </v-btn>
+          </template>
+          <span>info@speedmeal.be</span>
+        </v-tooltip>
+
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn class="mx-4" icon :to="{name:'legal'}" v-on="on">
+              <v-icon class="footer-icon" size="24px">mdi-book-open-page-variant</v-icon>
+            </v-btn>
+          </template>
+          <span>Algemene voorwaarden</span>
+        </v-tooltip>
       </v-card-text>
-
-      <v-divider class="footer-middle-divider"></v-divider>
 
       <v-card-text class="white--text">
         {{ new Date().getFullYear() }} —
+        &copy;
         <strong>SpeedMeal</strong>
       </v-card-text>
     </v-card>
@@ -33,5 +62,8 @@ export default {
 }
 .footer-icon {
   color: #f1fff1 !important;
+}
+.footer-logos {
+  padding-bottom: 0;
 }
 </style>
