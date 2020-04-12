@@ -4,11 +4,10 @@
       src="/assets/images/placeholder/merchant_heading.jpg"
       alt="pizza hawai with chicken"
       class="img-header"
-      style="margin-top:-12px"
     />
     <v-row class="merchant-info" :style="infoStyle">
       <h1 class="col-8 col-md-10 col-lg-11">{{merchantDetail.name}}</h1>
-      <v-col cols="1" style="text-align: end;">
+      <v-col cols="col-2 col-sm-1" style="text-align: end;">
         <v-btn icon @click.stop="showDialog = true">
           <v-icon color="grey darken-1" size="42">mdi-information-outline</v-icon>
         </v-btn>
@@ -151,6 +150,8 @@ export default {
 <style>
 .img-header {
   max-height: 12vw;
+  margin-top: -12px;
+  margin-left: -12px;
 }
 .snack-cart-button .v-snack__wrapper {
   width: 100% !important;
@@ -182,5 +183,12 @@ export default {
 }
 .opening-hours {
   padding-bottom: 12px;
+}
+
+@media only screen and (max-width: 999px) {
+  .img-header {
+    margin-right: -12px;
+    max-width: unset;
+  }
 }
 </style>
