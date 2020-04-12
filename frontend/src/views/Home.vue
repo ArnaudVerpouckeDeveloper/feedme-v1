@@ -74,7 +74,7 @@ export default {
   flex-direction: column;
   height: 23em;
   margin: 0 auto;
-  font-size: 3vh;
+  font-size: 1.3em;
   background: rgba(255, 255, 255, 0.89);
   transition: all 0.2s ease;
   text-align: center;
