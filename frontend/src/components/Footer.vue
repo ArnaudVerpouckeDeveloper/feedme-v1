@@ -66,4 +66,5 @@ export default {
 .footer-logos {
   padding-bottom: 0;
 }
+
 </style>

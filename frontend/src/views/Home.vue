@@ -90,7 +90,7 @@ export default {
   color: #000;
 }
 .landing-content-ps {
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 .landing-cta {
   font-size: 0.8em;
@@ -109,18 +109,34 @@ export default {
   color: #000 !important;
 }
 
+@media only screen and (max-width: 234px) {
+  .landing-content {
+    font-size: 1em !important; 
+    height: 410px !important;
+  }
+  .landing-cta .landing-cta-horeca .v-btn__content{
+    font-size: 0.8em !important;
+  }
+}
+
 /* super Small devices (portrait tablets and large phones */
 @media only screen and (max-width: 340px) {
   .landing-content {
-    font-size: 1.4em;
-    padding: 0.6em !important;
-    height: 580px !important;
+    font-size: 1.2em;
+    padding: 0.5em !important;
+    height: 450px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .landing-content-img {
     width: 180px !important;
   }
   .v-btn.v-size--large {
     font-size: 0.675rem !important;
+  }
+  .landing-cta {
+    font-size: 0.8em;
+    margin-top: 0.8em;
   }
 }
 

@@ -148,6 +148,18 @@ body {
   width: 100%;
 }
 
+@media only screen and (max-width: 210px) {
+   .nav-logo {
+    width: 6em !important;
+  }
+}
+
+@media only screen and (max-width: 234px) {
+  .nav-logo {
+    margin-left: -20px;
+  }
+}
+
 @media only screen and (max-width: 280px) {
   .nav-logo {
     width: 7em;
