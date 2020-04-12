@@ -39,9 +39,10 @@
         color="green"
         large
         @click="orderItems"
-        :disabled="disableButton"
+        :disabled="disableButton || merchantIsClosed"
         class="shoppingCartButton"
       >Bestellen</v-btn>
+      <v-card-subtitle v-if="merchantIsClosed">Deze zaak is momenteel gesloten.</v-card-subtitle>
     </div>
   </v-navigation-drawer>
 </template>
@@ -51,6 +52,10 @@ import { mapGetters } from "vuex";
 
 export default {
   props: {
+    merchantIsClosed: {
+      default: false,
+      type: Boolean
+    },
     merchant_id: Number,
     showOrderBtn: {
       default: true,
@@ -73,7 +78,7 @@ export default {
       if (this.cartItems[this.merchant_id] != null)
         if (this.cartItems[this.merchant_id].length != 0) return false;
         else return true;
-      else return false;
+      else return true;
     },
     disableColor() {
       if (this.disableButton) return "color: #a4a4a4";

@@ -37,7 +37,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <ShoppingCart :merchant_id="merchantDetail.id" id="shoppingCart"></ShoppingCart>
+    <ShoppingCart :merchant_id="merchantDetail.id" id="shoppingCart" :merchantIsClosed="isClosed"></ShoppingCart>
     <CartButton></CartButton>
     <v-dialog v-model="showDialog" max-width="440">
       <v-card>
@@ -90,6 +90,14 @@ export default {
     MerchantDialog
   },
   computed: {
+    isClosed() {
+      if (
+        this.merchantDetail.possibleTimes.delivery.length == 0 ||
+        this.merchantDetail.possibleTimes.takeaway.length == 0
+      )
+        true;
+      else false;
+    },
     bannerImage() {
       if (merchantDetail.bannerFileName != null) return bannerFileName;
       else return "/assets/images/placeholder/merchant_heading.jpg";

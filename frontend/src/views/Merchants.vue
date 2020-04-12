@@ -73,7 +73,6 @@ export default {
       if (merchant.bannerFileName != null) return merchant.bannerFileName;
       else return "/assets/images/placeholder/mechants_card.png";
     },
-    isClosed(merchant) {}
   }
 };
 </script>

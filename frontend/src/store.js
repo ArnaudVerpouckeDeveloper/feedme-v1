@@ -68,7 +68,7 @@ const actions = {
 
     async fetchMerchantAndProduct(context, id) {
         return await new Promise((resolve, reject) => {
-            axios.get(`${apiUrl}/merchant/${id}`)
+            axios.get(`${apiUrl}/admin/${id}`)
                 .then(res => {
                     context.commit('updateMerchantDetail', res.data);
                     context.commit('updateProducts', res.data.products);
