@@ -49,6 +49,11 @@ export default {
 </script>
 <style>
 .landing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 100%;
   overflow: hidden;
 }
@@ -56,7 +61,7 @@ export default {
   align-self: center;
 }
 .landing-illustration {
-  height: 81.9vh;
+  height: 100%;
   background-image: linear-gradient(
     to top right,
     rgba(76, 175, 80, 0.29),
@@ -111,10 +116,10 @@ export default {
 
 @media only screen and (max-width: 234px) {
   .landing-content {
-    font-size: 1em !important; 
+    font-size: 1em !important;
     height: 410px !important;
   }
-  .landing-cta .landing-cta-horeca .v-btn__content{
+  .landing-cta .landing-cta-horeca .v-btn__content {
     font-size: 0.8em !important;
   }
 }
@@ -146,13 +151,14 @@ export default {
   }
 }
 
+
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
   .landing-illustration .landing-content {
     padding: 1em;
   }
   .landing-content {
-    height: 23em;
+    height: 21em;
   }
   .landing-content-paragraph {
     font-size: 0.8em;
@@ -164,9 +170,7 @@ export default {
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 992px) {
-  .landing-illustration {
-    height: 100%;
-  }
+
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
@@ -179,10 +183,4 @@ export default {
   }
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1930px) {
-  .landing-illustration {
-    height: 82.4vh;
-  }
-}
 </style>
