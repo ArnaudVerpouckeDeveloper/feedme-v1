@@ -46,6 +46,6 @@
         </main>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="{{asset('js/global.js')}}"></script>
-        @yield("scripts");
+        @yield("scripts")
     </body>
 </html>
