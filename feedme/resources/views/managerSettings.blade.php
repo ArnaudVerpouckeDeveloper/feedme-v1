@@ -1,5 +1,5 @@
 @extends('./layouts/merchantManager')
-@section("title", "Instellingen");
+@section("title", "Instellingen")
 @section('content')
 <div class="settings screen-container">
     <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm">
@@ -9,7 +9,7 @@
         <label>Banner (max 5MB)</label>
         <input type="file" accept="image/*" name="banner" />
         @if(isset($merchant->bannerFileName))
-            <img src="{{asset('merchantBanners/'.$merchant->bannerFileName)}}" alt="banner"/>
+            <img src="{{asset('uploads/'.$merchant->bannerFileName)}}" alt="banner"/>
         @else
             <img src="{{asset('images/placeholder_banner.png')}}" alt="banner"/>
         @endif
@@ -26,7 +26,7 @@
         <label>Logo (max 5MB)</label>
         <input type="file" accept="image/*" name="logo"/>
         @if(isset($merchant->logoFileName))
-            <img src="{{asset('merchantLogos/'.$merchant->logoFileName)}}" alt="logo" class="square"/>
+            <img src="{{asset('uploads/'.$merchant->logoFileName)}}" alt="logo" class="square"/>
         @else
             <img src="{{asset('images/placeholder_logo.png')}}" alt="logo" class="square"/>
         @endif

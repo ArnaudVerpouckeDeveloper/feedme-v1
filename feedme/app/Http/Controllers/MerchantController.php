@@ -57,8 +57,7 @@ class MerchantController extends Controller
         ]);
         $file = $request->file("logo");
         $fileName = "logo-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
-        $path = $file->move(public_path("/merchantLogos/"), $fileName);
-        auth()->user()->merchant->update(['logoFileName' => $fileName]);
+        auth()->user()->merchant->update(['logoFileName' => $file->storeAs('merchantLogos',$fileName,"public")]);
         return redirect("/admin/instellingen");
     }
 
@@ -68,8 +67,7 @@ class MerchantController extends Controller
         ]);
         $file = $request->file("banner");
         $fileName = "banner-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
-        $path = $file->move(public_path("/merchantBanners/"), $fileName);
-        auth()->user()->merchant->update(['bannerFileName' => $fileName]);
+        auth()->user()->merchant->update(['bannerFileName' => $file->storeAs('merchantBanners',$fileName,"public")]);
         return redirect("/admin/instellingen");
     }
 
