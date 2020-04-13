@@ -4,7 +4,7 @@
     <v-app-bar app elevate-on-scroll color="green" class="d-none d-md-flex">
       <v-toolbar-title>
         <router-link :to="{name:'home'}">
-          <img class="nav-logo" src="/assets/images/logo.png" alt="SpeedMeal logo" />
+          <img class="nav-logo" src="/assets/images/Logo.png" alt="SpeedMeal logo" />
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -30,7 +30,7 @@
       <v-app-bar-nav-icon color="white" @click="dialog = true"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <router-link :to="{name:'home'}">
-          <img class="nav-logo" src="/assets/images/logo.png" alt="SpeedMeal logo" />
+          <img class="nav-logo" src="/assets/images/Logo.png" alt="SpeedMeal logo" />
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
