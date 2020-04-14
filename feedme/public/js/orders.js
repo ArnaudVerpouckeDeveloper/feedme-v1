@@ -12,9 +12,6 @@ function checkForOpenOrders(hasToConfirm = false) {
     makeRequest("POST", "/admin/orders/checkForOpenOrders")
         .then(res => {
             if (Object.values(res).length > 0) {
-                if (orderIdIsMissing(Object.values(res))) {
-                    location.reload();
-                }
                 if (hasToConfirm) {
                     Swal.fire(
                         'U heeft openstaande orders.',
@@ -22,14 +19,21 @@ function checkForOpenOrders(hasToConfirm = false) {
                         'warning'
                     )
                 } else {
-                    notificationSound.play();
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'warning',
-                        title: 'U heeft openstaande orders.',
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
+                    if (orderIdIsMissing(Object.values(res))) {
+                        newOrderSound.play();
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        notificationSound.play();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'warning',
+                            title: 'U heeft openstaande orders.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
                 }
             } else {
                 console.log("No open orders were found.", res);

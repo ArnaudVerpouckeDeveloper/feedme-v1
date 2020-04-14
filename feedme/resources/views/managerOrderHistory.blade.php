@@ -1,5 +1,5 @@
 @extends('./layouts/merchantManager')
-@section("title", "Ordergeschiedenis");
+@section("title", "Ordergeschiedenis")
 @section('content')
     <ul class="orders">
         @foreach ($merchant->orders()->where("completed",true)->orWhere("denied",true)->orderBy("requestedTime", "desc")->get() as $order)

@@ -1,5 +1,5 @@
 @extends('./layouts/merchantManager')
-@section("title", "Orders");
+@section("title", "Orders")
 
 @section('content')
     <ul class="orders">
@@ -108,6 +108,8 @@
 <script src="{{asset('js/mountaineer.js')}}"></script>
 <script>
     let notificationSound = new Audio('{{asset("audio/notificationSound.mp3")}}');
+    let newOrderSound = new Audio('{{asset("audio/notificationSound_important.mp3")}}');
+
 </script>
 <script src="{{asset('js/orders.js')}}"></script>
 
