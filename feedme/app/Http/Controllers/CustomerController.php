@@ -11,6 +11,7 @@ use App\Mail\ConfirmOrder;
 use App\Mail\WebForm;
 use Mail;
 use DateTime;
+use Exception;
 
 class CustomerController extends Controller
 {
@@ -19,7 +20,7 @@ class CustomerController extends Controller
     public function showMerchantShop($merchantApiName){
         $merchant = Merchant::where("apiName", $merchantApiName)->first();
         if ($merchant == null){
-            exit();
+            return view("errors.404");
         }
         else{
             $merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
@@ -182,53 +183,62 @@ class CustomerController extends Controller
 
 
         
+        try {
 
-        if ($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime)){
-            $order->deliveryMethod = $request->deliveryMethod;
-            if ($request->deliveryMethod == "delivery"){
-                $order->addressStreet = $request->addressStreet;
-                $order->addressNumber = $request->addressNumber;
-                $order->addressZipCode = $request->addressZipCode;
-                $order->addressCity = $request->addressCity;
-                $order->deliveryMethod = "delivery";
+            if (!(strtotime(auth()->user()->customer->orders()->orderBy("created_at","desc")->first()->created_at) < strtotime("-30 seconds"))){
+                return response()->json("another order was recently sent", 406);
             }
-            else{
-                $order->deliveryMethod = "takeaway";
-            }
-        }
-        else{
-            return response()->json("order not possible in shedule");
-            //exit();
-        }
-
-
-        $order->requestedTime = DateTime::createFromFormat('H:i', $request->requestedTime);
-        
-
-        if ($this->productIdsAreValid($request->productIds, $merchant)){
-            if($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime )){
-                $merchant->orders()->save($order);
-                auth()->user()->customer->orders()->save($order);
-
-                $totalPrice = 0;
-                foreach ($request->productIds as $productId){
-                    $product = Product::find($productId);
-                    $order->products()->attach($product);
-                    $totalPrice = $totalPrice + $product->price;
+            
+            if ($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime)){
+                $order->deliveryMethod = $request->deliveryMethod;
+                if ($request->deliveryMethod == "delivery"){
+                    $order->addressStreet = $request->addressStreet;
+                    $order->addressNumber = $request->addressNumber;
+                    $order->addressZipCode = $request->addressZipCode;
+                    $order->addressCity = $request->addressCity;
+                    $order->deliveryMethod = "delivery";
                 }
-
-                $order->totalPrice = $totalPrice;
-                $order->save();
-
-                Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
-                return response()->json("ok");
+                else{
+                    $order->deliveryMethod = "takeaway";
+                }
             }
             else{
-                return response()->json("order not possible in shedule");
+                return response()->json("order not possible in shedule", 406);
             }
-        }
-        else{
-            return response()->json("invalid products");
+    
+    
+            $order->requestedTime = DateTime::createFromFormat('H:i', $request->requestedTime);
+            
+    
+            if ($this->productIdsAreValid($request->productIds, $merchant)){
+                if($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime )){
+                    $merchant->orders()->save($order);
+                    auth()->user()->customer->orders()->save($order);
+    
+                    $totalPrice = 0;
+                    foreach ($request->productIds as $productId){
+                        $product = Product::find($productId);
+                        $order->products()->attach($product);
+                        $totalPrice = $totalPrice + $product->price;
+                    }
+    
+                    $order->totalPrice = $totalPrice;
+                    $order->save();
+    
+                    Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
+                    return response()->json("ok");
+                }
+                else{
+                    return response()->json("order not possible in shedule", 406);
+                }
+            }
+            else{
+                return response()->json("invalid products", 406);
+            }
+    
+        } catch (Exception $e) {
+            $order->delete();
+            return response()->json($e->getMessage(), 406);
         }
 
 

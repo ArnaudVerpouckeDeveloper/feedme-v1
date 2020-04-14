@@ -46,6 +46,9 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         else{
+            if(auth("api")->user()->hasAnyRole("merchant")){
+                return response()->json("user is a merchant",401);
+            }
             if(auth("api")->user()->hasVerifiedEmail()){
                 return $this->respondWithToken($token);    
             }

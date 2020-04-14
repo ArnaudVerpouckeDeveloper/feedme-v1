@@ -1,4 +1,4 @@
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NjUzMTc0NSwiZXhwIjoxNTg2NTM1MzQ1LCJuYmYiOjE1ODY1MzE3NDUsImp0aSI6InF1V0xNMEdXMWZHTWxyMHciLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.5SyNI8UtIT2GY-DCU8OTlCtY5alUH7gd5HmTsKOE2-0
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NjgyMTUxNywiZXhwIjoxNTg2ODI1MTE3LCJuYmYiOjE1ODY4MjE1MTcsImp0aSI6Im9aNTBnQkllSGFQQ2t4UEciLCJzdWIiOjUsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.sq6VMYKCs7cfTwI3X9hF_nxFM6sI417aTcC8Qp0pP4A
 
 
 
@@ -80,6 +80,18 @@ Content-Type: application/json
 {
     "email": "emma@test.com",
     "password": "123"
+}
+
+
+###
+
+
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "arnaud.verpoucke@hotmail.com",
+    "password": "Arnaud_2019"
 }
 
 

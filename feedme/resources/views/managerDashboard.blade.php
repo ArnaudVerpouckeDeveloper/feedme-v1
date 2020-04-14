@@ -1,5 +1,5 @@
 @extends('./layouts/merchantManager')
-@section("title", "Dashboard");
+@section("title", "Dashboard")
 @section('content')
 <div class="dashboard ">
     <div class="intro">

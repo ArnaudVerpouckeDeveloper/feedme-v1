@@ -57,8 +57,7 @@ class MerchantController extends Controller
         ]);
         $file = $request->file("logo");
         $fileName = "logo-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
-        $path = $file->move(public_path("/merchantLogos/"), $fileName);
-        auth()->user()->merchant->update(['logoFileName' => $fileName]);
+        auth()->user()->merchant->update(['logoFileName' => $file->storeAs('merchantLogos',$fileName,"public")]);
         return redirect("/admin/instellingen");
     }
 
@@ -68,8 +67,7 @@ class MerchantController extends Controller
         ]);
         $file = $request->file("banner");
         $fileName = "banner-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
-        $path = $file->move(public_path("/merchantBanners/"), $fileName);
-        auth()->user()->merchant->update(['bannerFileName' => $fileName]);
+        auth()->user()->merchant->update(['bannerFileName' => $file->storeAs('merchantBanners',$fileName,"public")]);
         return redirect("/admin/instellingen");
     }
 
@@ -266,6 +264,29 @@ class MerchantController extends Controller
 
 
 
+
+    function updateMerchantDetails(Request $request){
+        $request->validate([
+            'name' => "required|min:1",
+            'merchantPhone' => "required",
+            'address_street' => "required",
+            'address_number' => "required",
+            'address_zip' => "required",
+            'address_city' => "required",
+            'tax_number' => "required"
+        ]);        
+
+        $merchant = auth()->user()->merchant()->update([
+            'name' => $request->name,
+            'merchantPhone' => $request->merchantPhone,
+            'address_street' => $request->address_street,
+            'address_number' => $request->address_number,
+            'address_zip' => $request->address_zip,
+            'address_city' => $request->address_city,
+            'tax_number' => $request->tax_number
+            ]);
+        return redirect("/admin/instellingen");
+    }
 
 
 

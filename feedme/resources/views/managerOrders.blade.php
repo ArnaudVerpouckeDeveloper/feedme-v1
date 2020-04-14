@@ -1,9 +1,9 @@
 @extends('./layouts/merchantManager')
-@section("title", "Orders");
+@section("title", "Orders")
 
 @section('content')
     <ul class="orders">
-        @foreach ($merchant->orders()->where("completed",false)->orderBy("requestedTime", "desc")->get() as $order)
+        @foreach ($merchant->orders()->where("completed",false)->where("denied", false)->orderBy("requestedTime", "desc")->get() as $order)
         @php $order->requestedTime = date("H:i", strtotime($order->requestedTime)); @endphp
         @if($order->accepted)
             <li class="order accepted" data-orderId="{{$order->id}}">
@@ -108,6 +108,8 @@
 <script src="{{asset('js/mountaineer.js')}}"></script>
 <script>
     let notificationSound = new Audio('{{asset("audio/notificationSound.mp3")}}');
+    let newOrderSound = new Audio('{{asset("audio/notificationSound_important.mp3")}}');
+
 </script>
 <script src="{{asset('js/orders.js')}}"></script>
 

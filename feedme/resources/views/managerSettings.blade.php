@@ -1,7 +1,65 @@
 @extends('./layouts/merchantManager')
-@section("title", "Instellingen");
+@section("title", "Instellingen")
 @section('content')
 <div class="settings screen-container">
+    <form method="POST" action="/admin/settings/updateMerchantDetails" enctype="multipart/form-data" class="merchantDetailsForm">
+        {{method_field('PUT')}}
+        @csrf
+
+        <label>Gegevens horecazaak:</label>
+        <div class="row">
+            <label>Naam</label>
+            <input type="text" placeholder="{{$merchant->name}}" value="{{$merchant->name}}" name="name"/>
+            @error("name")
+                <p class="error">{{$message}}</p>
+            @enderror
+        </div>
+
+        <div class="row">
+            <label>Telefoonnummer</label>
+            <input type="text" placeholder="{{$merchant->merchantPhone}}" value="{{$merchant->merchantPhone}}" name="merchantPhone"/>
+            @error("merchantPhone")
+                <p class="error">{{$message}}</p>
+            @enderror
+        </div>
+
+        <div class="row">
+            <label>Straat</label>
+            <input type="text" placeholder="{{$merchant->address_street}}" value="{{$merchant->address_street}}" name="address_street"/>
+            <label>Nummer</label>
+            <input type="text" placeholder="{{$merchant->address_number}}" value="{{$merchant->address_number}}" name="address_number"/>
+            @error("address_street")
+                <p class="error">{{$message}}</p>
+            @enderror
+            @error("address_number")
+                <p class="error">{{$message}}</p>
+            @enderror
+        </div>
+
+        <div class="row">
+            <label>Postcode</label>
+            <input type="text" placeholder="{{$merchant->address_zip}}" value="{{$merchant->address_zip}}" name="address_zip"/>
+            <label>Stad</label>
+            <input type="text" placeholder="{{$merchant->address_city}}" value="{{$merchant->address_city}}" name="address_city"/>
+            @error("address_zip")
+                <p class="error">{{$message}}</p>
+            @enderror
+            @error("address_city")
+                <p class="error">{{$message}}</p>
+            @enderror
+        </div>
+
+        <div class="row">
+            <label>BTW nummer</label>
+            <input type="text" placeholder="{{$merchant->tax_number}}" value="{{$merchant->tax_number}}" name="tax_number"/>
+            @error("tax_number")
+                <p class="error">{{$message}}</p>
+            @enderror
+        </div>
+        <input type="submit" value="opslaan"/>
+
+    </form>
+
     <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm">
         {{method_field('PUT')}}
         @csrf
@@ -9,7 +67,7 @@
         <label>Banner (max 5MB)</label>
         <input type="file" accept="image/*" name="banner" />
         @if(isset($merchant->bannerFileName))
-            <img src="{{asset('merchantBanners/'.$merchant->bannerFileName)}}" alt="banner"/>
+            <img src="{{asset('uploads/'.$merchant->bannerFileName)}}" alt="banner"/>
         @else
             <img src="{{asset('images/placeholder_banner.png')}}" alt="banner"/>
         @endif
@@ -26,7 +84,7 @@
         <label>Logo (max 5MB)</label>
         <input type="file" accept="image/*" name="logo"/>
         @if(isset($merchant->logoFileName))
-            <img src="{{asset('merchantLogos/'.$merchant->logoFileName)}}" alt="logo" class="square"/>
+            <img src="{{asset('uploads/'.$merchant->logoFileName)}}" alt="logo" class="square"/>
         @else
             <img src="{{asset('images/placeholder_logo.png')}}" alt="logo" class="square"/>
         @endif
