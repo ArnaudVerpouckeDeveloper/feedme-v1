@@ -683,6 +683,50 @@ body {
                         object-fit: cover;
                     }
                 }
+                &.merchantDetailsForm {
+                    >label {
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        margin-bottom: 1rem;
+                        color: #4CAF50;
+                    }
+                    >.row {
+                        margin-bottom: 0.5rem;
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        label {
+                            margin-bottom: unset;
+                        }
+                        >label:first-of-type {
+                            width: 20%;
+                        }
+                        >input[type="text"]:first-of-type {
+                            margin-right: 4rem;
+                        }
+                        >label:nth-of-type(2) {
+                            width: 10%;
+                        }
+                        >input[type="text"] {
+                            width: 25%;
+                            padding: 0.3rem 0.5rem;
+                            border-radius: 0.3rem;
+                            border: 1px solid #A9A9A9;
+                            &:hover {
+                                border-color: $mainGreen;
+                            }
+                        }
+                        .error {
+                            width: 100%;
+                            color: $mainRed;
+                            font-size: 0.8rem;
+                            font-weight: bold;
+                            &:last-of-type {
+                                margin-bottom: 2rem;
+                            }
+                        }
+                    }
+                }
                 &.bannerForm {
                     img {
                         &.showBorder {

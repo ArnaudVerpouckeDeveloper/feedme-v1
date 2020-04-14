@@ -64,7 +64,7 @@ Route::group([
     Route::put('/admin/settings/updateMessage', "MerchantController@updateMessage");
     Route::put('/admin/settings/updateMinimumWaitTimeForTakeaway', "MerchantController@updateMinimumWaitTimeForTakeaway");
     Route::put('/admin/settings/updateMinimumWaitTimeForDelivery', "MerchantController@updateMinimumWaitTimeForDelivery");
-
+    Route::put('/admin/settings/updateMerchantDetails', "MerchantController@updateMerchantDetails");
     Route::get('/admin/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
 });
 

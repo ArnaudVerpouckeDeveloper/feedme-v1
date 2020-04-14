@@ -265,6 +265,29 @@ class MerchantController extends Controller
 
 
 
+    function updateMerchantDetails(Request $request){
+        $request->validate([
+            'name' => "required|min:1",
+            'merchantPhone' => "required",
+            'address_street' => "required",
+            'address_number' => "required",
+            'address_zip' => "required",
+            'address_city' => "required",
+            'tax_number' => "required"
+        ]);        
+
+        $merchant = auth()->user()->merchant()->update([
+            'name' => $request->name,
+            'merchantPhone' => $request->merchantPhone,
+            'address_street' => $request->address_street,
+            'address_number' => $request->address_number,
+            'address_zip' => $request->address_zip,
+            'address_city' => $request->address_city,
+            'tax_number' => $request->tax_number
+            ]);
+        return redirect("/admin/instellingen");
+    }
+
 
 
     

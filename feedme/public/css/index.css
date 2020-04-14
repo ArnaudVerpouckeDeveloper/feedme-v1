@@ -633,6 +633,48 @@ body main .settings form img.square {
   width: 10rem;
   object-fit: cover;
 }
+body main .settings form.merchantDetailsForm > label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #4CAF50;
+}
+body main .settings form.merchantDetailsForm > .row {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+body main .settings form.merchantDetailsForm > .row label {
+  margin-bottom: unset;
+}
+body main .settings form.merchantDetailsForm > .row > label:first-of-type {
+  width: 20%;
+}
+body main .settings form.merchantDetailsForm > .row > input[type=text]:first-of-type {
+  margin-right: 4rem;
+}
+body main .settings form.merchantDetailsForm > .row > label:nth-of-type(2) {
+  width: 10%;
+}
+body main .settings form.merchantDetailsForm > .row > input[type=text] {
+  width: 25%;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  border: 1px solid #A9A9A9;
+}
+body main .settings form.merchantDetailsForm > .row > input[type=text]:hover {
+  border-color: #4CAF50;
+}
+body main .settings form.merchantDetailsForm > .row .error {
+  width: 100%;
+  color: #e43a3a;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+body main .settings form.merchantDetailsForm > .row .error:last-of-type {
+  margin-bottom: 2rem;
+}
 body main .settings form.bannerForm img.showBorder {
   border: 1px dashed lightgrey;
 }
