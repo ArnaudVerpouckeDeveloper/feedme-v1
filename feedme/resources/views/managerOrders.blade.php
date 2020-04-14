@@ -3,7 +3,7 @@
 
 @section('content')
     <ul class="orders">
-        @foreach ($merchant->orders()->where("completed",false)->orderBy("requestedTime", "desc")->get() as $order)
+        @foreach ($merchant->orders()->where("completed",false)->where("denied", false)->orderBy("requestedTime", "desc")->get() as $order)
         @php $order->requestedTime = date("H:i", strtotime($order->requestedTime)); @endphp
         @if($order->accepted)
             <li class="order accepted" data-orderId="{{$order->id}}">

@@ -59,166 +59,179 @@ function setEventListenersForOrder(order) {
     if (order.classList.contains("accepted") || order.classList.contains("denied")) {
         order.querySelector(".orderSections .completeOrder").addEventListener("click", async function(e) {
             console.log("completing order...");
-            makeRequest("PUT", "/admin/orders/completeOrder", {
-                    orderId: orderId
-                })
-                .then(res => {
-                    if (res == "ok") {
-                        Swal.fire(
-                            'Geslaagd!',
-                            'Het order werd succesvol afgerond.',
-                            'success'
-                        );
-                        $(".order[data-orderId='" + orderId + "']").fadeOut(400, "swing", function() {
-                            order.remove();
-                        });
-                    } else {
-                        throw (res);
-                    }
-                })
-                .catch(error => {
-                    console.log("error: ", error);
-                    promptError();
-                });
+            confirmAction("Order afronden?", null, "Afronden", function() {
+
+                makeRequest("PUT", "/admin/orders/completeOrder", {
+                        orderId: orderId
+                    })
+                    .then(res => {
+                        if (res == "ok") {
+                            Swal.fire(
+                                'Geslaagd!',
+                                'Het order werd succesvol afgerond.',
+                                'success'
+                            );
+                            $(".order[data-orderId='" + orderId + "']").fadeOut(400, "swing", function() {
+                                order.remove();
+                            });
+                        } else {
+                            throw (res);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("error: ", error);
+                        promptError();
+                    });
+            });
         });
     } else {
         order.querySelector(".orderSections .acceptOrder").addEventListener("click", async function(e) {
-            console.log("confirming order...");
-            makeRequest("PUT", "/admin/orders/acceptOrder", {
-                    orderId: orderId
-                })
-                .then(res => {
-                    if (res == "ok") {
-                        order.classList.add("accepted");
-                        order.querySelector(".orderSections .acceptOrder").remove();
-                        order.querySelector(".orderSections .denyOrder").remove();
-                        order.querySelector(".orderSections .deliveryMethod").insertAdjacentHTML("afterEnd", "<li class='action completeOrder'><span class='material-icons'>check</span><p>Voltooi</p></li>");
-                        setEventListenersForOrder(order);
-                    } else {
-                        throw (res);
-                    }
-                })
-                .catch(error => {
-                    console.log("error: ", error);
-                    promptError();
-                });
+            console.log("accepting order...");
+            confirmAction("Order accepteren?", null, "Accepteren", function() {
+
+                makeRequest("PUT", "/admin/orders/acceptOrder", {
+                        orderId: orderId
+                    })
+                    .then(res => {
+                        if (res == "ok") {
+                            order.classList.add("accepted");
+                            order.querySelector(".orderSections .acceptOrder").remove();
+                            order.querySelector(".orderSections .denyOrder").remove();
+                            order.querySelector(".orderSections .deliveryMethod").insertAdjacentHTML("afterEnd", "<li class='action completeOrder'><span class='material-icons'>check</span><p>Voltooi</p></li>");
+                            setEventListenersForOrder(order);
+                        } else {
+                            throw (res);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("error: ", error);
+                        promptError();
+                    });
+            });
         });
 
 
 
         order.querySelector(".orderSections .denyOrder").addEventListener("click", async function(e) {
             console.log("confirming order...");
-            makeRequest("PUT", "/admin/orders/denyOrder", {
-                    orderId: orderId
-                })
-                .then(res => {
-                    if (res == "ok") {
-                        Swal.fire(
-                            'Geslaagd!',
-                            'Het order werd geweigerd, de klant zal hiervan een e-mail ontvangen.',
-                            'success'
-                        );
-                        $(".order[data-orderId='" + orderId + "']").fadeOut(400, "swing", function() {
-                            order.remove();
-                        });
-                        /*
-                        order.classList.add("denied");
-                        order.querySelector(".orderSections .acceptOrder").remove();
-                        order.querySelector(".orderSections .denyOrder").remove();
-                        */
-                    } else {
-                        throw (res);
-                    }
-                })
-                .catch(error => {
-                    console.log("error: ", error);
-                    promptError();
-                });
+            confirmAction("Order weigeren?", null, "Weigeren", function() {
+                makeRequest("PUT", "/admin/orders/denyOrder", {
+                        orderId: orderId
+                    })
+                    .then(res => {
+                        if (res == "ok") {
+                            Swal.fire(
+                                'Geslaagd!',
+                                'Het order werd geweigerd, de klant zal hiervan een e-mail ontvangen.',
+                                'success'
+                            );
+                            $(".order[data-orderId='" + orderId + "']").fadeOut(400, "swing", function() {
+                                order.remove();
+                            });
+                            /*
+                            order.classList.add("denied");
+                            order.querySelector(".orderSections .acceptOrder").remove();
+                            order.querySelector(".orderSections .denyOrder").remove();
+                            */
+                        } else {
+                            throw (res);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("error: ", error);
+                        promptError();
+                    });
+            })
         });
-
-
-
-
 
 
 
 
         order.querySelector(".orderSections .addExtraTime.addExtraTime_15").addEventListener("click", async function(e) {
             console.log("Adding 15 minutes extra time to order...");
-            makeRequest("PUT", "/admin/orders/addTimeToOrder_15", {
-                    orderId: orderId
-                })
-                .then(res => {
-                    console.log(res);
-                    if (res.message == "ok") {
-                        removeAllDelaysFromExtraTimeButtons(order);
-                        showNewTime(order, res.newTime);
-                        order.querySelector(".orderSections .addExtraTime.addExtraTime_15").classList.add("delayed");
-                        Swal.fire(
-                            'Geslaagd!',
-                            'Het order werd met 15 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
-                            'success'
-                        );
-                    } else {
-                        throw (res);
-                    }
-                })
-                .catch(error => {
-                    console.log("error: ", error);
-                    promptError();
-                });
+            confirmAction("Order met 15 minuten uitstellen?", null, "Uitstellen", function() {
+                makeRequest("PUT", "/admin/orders/addTimeToOrder_15", {
+                        orderId: orderId
+                    })
+                    .then(res => {
+                        console.log(res);
+                        if (res.message == "ok") {
+                            removeAllDelaysFromExtraTimeButtons(order);
+                            showNewTime(order, res.newTime);
+                            order.querySelector(".orderSections .addExtraTime.addExtraTime_15").classList.add("delayed");
+                            Swal.fire(
+                                'Geslaagd!',
+                                'Het order werd met 15 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                                'success'
+                            );
+                        } else {
+                            throw (res);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("error: ", error);
+                        promptError();
+                    });
+            });
         });
+
         order.querySelector(".orderSections .addExtraTime.addExtraTime_30").addEventListener("click", async function(e) {
             console.log("Adding 30 minutes extra time to order...");
-            makeRequest("PUT", "/admin/orders/addTimeToOrder_30", {
-                    orderId: orderId
-                })
-                .then(res => {
-                    console.log(res);
+            confirmAction("Order met 30 minuten uitstellen?", null, "Uitstellen", function() {
 
-                    if (res.message == "ok") {
-                        removeAllDelaysFromExtraTimeButtons(order);
-                        showNewTime(order, res.newTime);
-                        order.querySelector(".orderSections .addExtraTime.addExtraTime_30").classList.add("delayed");
-                        Swal.fire(
-                            'Geslaagd!',
-                            'Het order werd met 30 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
-                            'success'
-                        );
-                    } else {
-                        throw (res);
-                    }
-                })
-                .catch(error => {
-                    console.log("error: ", error);
-                    promptError();
-                });
+                makeRequest("PUT", "/admin/orders/addTimeToOrder_30", {
+                        orderId: orderId
+                    })
+                    .then(res => {
+                        console.log(res);
+
+                        if (res.message == "ok") {
+                            removeAllDelaysFromExtraTimeButtons(order);
+                            showNewTime(order, res.newTime);
+                            order.querySelector(".orderSections .addExtraTime.addExtraTime_30").classList.add("delayed");
+                            Swal.fire(
+                                'Geslaagd!',
+                                'Het order werd met 30 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                                'success'
+                            );
+                        } else {
+                            throw (res);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("error: ", error);
+                        promptError();
+                    });
+            });
         });
         order.querySelector(".orderSections .addExtraTime.addExtraTime_60").addEventListener("click", async function(e) {
             console.log("Adding 60 minutes extra time to order...");
-            makeRequest("PUT", "/admin/orders/addTimeToOrder_60", {
-                    orderId: orderId
-                })
-                .then(res => {
-                    console.log(res);
+            confirmAction("Order met 60 minuten uitstellen?", null, "Uitstellen", function() {
 
-                    if (res.message == "ok") {
-                        removeAllDelaysFromExtraTimeButtons(order);
-                        showNewTime(order, res.newTime);
-                        order.querySelector(".orderSections .addExtraTime.addExtraTime_60").classList.add("delayed");
-                        Swal.fire(
-                            'Geslaagd!',
-                            'Het order werd met 60 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
-                            'success'
-                        );
-                    } else {
-                        throw (res);
-                    }
-                })
-                .catch(error => {
-                    console.log("error: ", error);
-                    promptError();
-                });
+                makeRequest("PUT", "/admin/orders/addTimeToOrder_60", {
+                        orderId: orderId
+                    })
+                    .then(res => {
+                        console.log(res);
+
+                        if (res.message == "ok") {
+                            removeAllDelaysFromExtraTimeButtons(order);
+                            showNewTime(order, res.newTime);
+                            order.querySelector(".orderSections .addExtraTime.addExtraTime_60").classList.add("delayed");
+                            Swal.fire(
+                                'Geslaagd!',
+                                'Het order werd met 60 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                                'success'
+                            );
+                        } else {
+                            throw (res);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("error: ", error);
+                        promptError();
+                    });
+            });
         });
 
     }
@@ -323,4 +336,28 @@ function showNewTime(order, newTime) {
     }
     order.querySelector(".time").insertAdjacentHTML("afterEnd", "<p class='timeDelay'>" + newTime + "</p>");
 
+}
+
+
+
+
+
+
+function confirmAction(title, subtitle, confirmButtonText, callBack) {
+    Swal.fire({
+            title: title,
+            text: subtitle,
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#dadada',
+            cancelButtonText: 'Annuleren',
+            confirmButtonColor: '#e43a3a',
+            confirmButtonText: confirmButtonText,
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.value) {
+                callBack();
+            }
+        });
 }
