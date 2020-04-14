@@ -20,7 +20,7 @@ class CustomerController extends Controller
     public function showMerchantShop($merchantApiName){
         $merchant = Merchant::where("apiName", $merchantApiName)->first();
         if ($merchant == null){
-            exit();
+            return view("errors.404");
         }
         else{
             $merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
