@@ -89,6 +89,12 @@ export default {
     MerchantDialog
   },
   computed: {
+    filteredProducts() {
+      orderable;
+      return this.merchantDetail.product.filter(product => {
+        if (product.orderable) return true;
+      });
+    },
     isClosed() {
       if (
         this.merchantDetail.possibleTimes.delivery.length == 0 ||

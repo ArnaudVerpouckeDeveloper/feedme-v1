@@ -126,6 +126,7 @@ export default {
 }
 .item-name {
   font-size: 1em;
+  font-weight: 400;
 }
 .item-price {
   justify-content: flex-end;

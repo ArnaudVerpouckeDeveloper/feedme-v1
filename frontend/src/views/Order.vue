@@ -72,15 +72,23 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="placeOrder()">Bevestig Bestelling</v-btn>
+            <v-btn
+              color="primary"
+              @click="placeOrder()"
+              :loading="loading"
+              :disabled="loading"
+            >Bevestig Bestelling</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
     <v-dialog v-model="dialog" persistent max-width="420">
       <v-card>
-        <v-card-title class="headline">Bedankt voor uw bestelling!</v-card-title>
-        <v-card-text>Uw bestelling werd doorgegeven. We sturen u dadelijk nog een bevestiging van uw bestelling naar uw e-mailadres.</v-card-text>
+        <v-card-title class="headline">
+          <v-icon size="35" :class="dialogToShow">{{dialogContent[dialogToShow].icon}}</v-icon>
+          {{dialogContent[dialogToShow].title}}
+        </v-card-title>
+        <v-card-text>{{dialogContent[dialogToShow].text}}</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="orderDialog">Ok</v-btn>
@@ -123,11 +131,12 @@ export default {
     },
     cardStyle() {
       if (!this.isMobile) return "margin-right: 350px;";
-      else return "margin-right: -12px";
+      else return "";
     },
     ...mapGetters(["isMobile", "cartItems", "merchantDetail"])
   },
   data: () => ({
+    loading: false,
     dialog: false,
     orderForm: {},
     valid: false,
@@ -138,12 +147,30 @@ export default {
         v => !!v || "E-mail is verplicht",
         v => /.+@.+/.test(v) || "Gelieve een geldig email in te geven."
       ]
+    },
+    dialogToShow: "orderSend",
+    dialogContent: {
+      orderSend: {
+        icon: "mdi-check",
+        title: "Bedankt voor uw bestelling!",
+        text:
+          "Uw bestelling werd doorgegeven. We sturen u dadelijk nog een bevestiging van uw bestelling naar uw e-mailadres."
+      },
+      orderNotSend: {
+        icon: "mdi-alert-circle-outline",
+        title: "Er iets fout gegaan.",
+        text:
+          "Gelieve na te kijken of u all uw gegevens correct hebt ingevuld en of de restaurant nog open is."
+      }
     }
   }),
   methods: {
     placeOrder() {
+      this.dialog = true;
+
       this.$refs.form.validate();
       if (this.valid) {
+        this.loading = true;
         let merchantId = this.merchantDetail.id;
         let merchant = { merchantId };
         let orders = {
@@ -153,16 +180,26 @@ export default {
           ...merchant,
           ...this.orderForm,
           ...orders
-        }).then(() => {
-          this.dialog = true;
-        });
+        })
+          .then(() => {
+            this.dialogToShow = "orderSend";
+            this.dialog = true;
+            this.loading = false;
+          })
+          .catch(() => {
+            this.dialogToShow = "orderNotSend";
+            this.dialog = true;
+            this.loading = false;
+          });
       }
     },
     orderDialog() {
-      this.orderForm = {};
-      this.$refs.form.reset();
-      this.dialog = false;
-      this.$router.push("/");
+      if (this.dialogToShow === "orderSend") {
+        this.orderForm = {};
+        this.$refs.form.reset();
+        this.dialog = false;
+        this.$router.push("/");
+      } else this.dialog = false;
     },
     ...mapActions(["addOrder"])
   }
@@ -170,4 +207,14 @@ export default {
 </script>
 
 <style scoped>
+.orderSend,
+.orderNotSend {
+  padding-right: 10px;
+}
+.orderSend {
+  color: #4caf50;
+}
+.orderNotSend {
+  color: #f44336;
+}
 </style>

@@ -6,7 +6,7 @@ import router from './router/router'
 
 Vue.use(Vuex)
 
-const apiUrl = 'https://speedmeal.be/api';
+const apiUrl = 'http://127.0.0.1:8000/api';
 
 const state = {
     user: {},
