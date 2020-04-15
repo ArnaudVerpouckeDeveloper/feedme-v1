@@ -24,8 +24,7 @@ class CustomerController extends Controller
         }
         else{
             $merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
-            //return redirect("/milat-zijn-url-van-de-shop");
-            return "here comes the redirect to the frontend from milat";
+            return redirect("/restaurant/".$merchant->id);
         }
     }
 
