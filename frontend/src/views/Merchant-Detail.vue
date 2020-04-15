@@ -98,8 +98,8 @@
         </v-tabs-items>
       </v-card>
     </v-dialog>
-    <v-snackbar color="#ff5252" multi-line v-model="snackbar" :v-bind="userLogout" right>
-      Deze restaurant is momenteel gesloten u kunt daarom geen producten toevoegen aan uw winkelmandje.
+    <v-snackbar color="#ff5252" multi-line v-model="snackbar" right>
+      {{ merchantDetail.name }} is momenteel gesloten u kunt daarom geen producten toevoegen aan uw winkelmandje.
       <v-btn text @click="snackbar = false">Ok</v-btn>
     </v-snackbar>
   </v-container>
@@ -117,6 +117,10 @@ export default {
     store.default.dispatch("fetchMerchantAndProduct", to.params.id).then(() => {
       next();
     });
+  },
+  beforeRouteLeave(to, from, next) {
+    history.pushState("null", "", `${this.merchantDetail.id}`);
+    next();
   },
   components: {
     ShoppingCart,
@@ -145,8 +149,8 @@ export default {
         this.merchantDetail.possibleTimes.delivery.length == 0 ||
         this.merchantDetail.possibleTimes.takeaway.length == 0
       )
-        true;
-      else false;
+        return true;
+      else return false;
     },
     bannerImage() {
       if (merchantDetail.bannerFileName != null) return bannerFileName;
@@ -166,7 +170,9 @@ export default {
     },
     ...mapGetters(["products", "merchantDetail", "isMobile", "showCartButton"])
   },
-  mounted() {},
+  created() {
+    history.pushState("null", "", `${this.merchantDetail.apiName}`);
+  },
   data: () => ({
     showDialog: false,
     snackbar: false,
