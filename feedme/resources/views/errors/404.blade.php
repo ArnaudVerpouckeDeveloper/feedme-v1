@@ -45,6 +45,41 @@
                 background-color: white;
                 color: #4CAF50;
             }
+            @media only screen and (max-width: 1000px) {
+                h1{
+                    font-size: 6rem;
+                    margin-bottom: 3rem
+                }
+                p{
+                    font-size: 1.3rem;
+                    margin-bottom: 3rem
+                }
+                a{
+                    font-size: 1rem;
+                    padding: 0.25rem 1rem;
+                    border: 2px solid white;
+                }
+            }
+
+            @media only screen and (max-width: 500px) {
+                h1{
+                    font-size: 5rem;
+                    margin-bottom: 3rem
+                }
+                p{
+                    font-size: 1rem;
+                    margin-bottom: 3rem;
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                a{
+                    font-size: 1rem;
+                    padding: 0.25rem 1rem;
+                    border: 2px solid white;
+                }
+            }
+
         </style>
     </head>
     <body class="green-bg">
