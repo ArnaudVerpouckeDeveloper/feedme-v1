@@ -115,7 +115,7 @@
                     @endif
 
 
-                    <input type="submit" value="Registreren"/>
+                    <input type="submit" value="Registreren als horecazaak"/>
                     <hr>
                     <p>Heeft u al een account?</p>
                     <a href="/admin/login">Aanmelden</a>

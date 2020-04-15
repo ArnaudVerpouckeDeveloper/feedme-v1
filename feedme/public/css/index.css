@@ -163,7 +163,7 @@ body main .merchantAuthPanel .register .acceptsTermsAndConditions label {
 }
 body main .merchantAuthPanel .login input[type=submit],
 body main .merchantAuthPanel .register input[type=submit] {
-  width: 40%;
+  /*width: 40%;*/
   margin-left: auto;
   margin-right: auto;
   font-size: 1rem;
@@ -468,7 +468,7 @@ body main .createProductForm .row.bottom-row .productCategory {
   width: 37.5%;
   border: none;
   font-size: 1rem;
-  padding: 0.4rem 0.5rem;
+  padding: 0.6rem 0.5rem;
   border-radius: 0.3rem;
   font-weight: bold;
   box-sizing: border-box;
@@ -1064,18 +1064,28 @@ body button {
   body main {
     width: 90%;
   }
-  body main .createProductForm .input-row {
+  body main .createProductForm .row.input-row {
     flex-wrap: wrap;
   }
-  body main .createProductForm .input-row .name {
+  body main .createProductForm .row.input-row .name {
     width: 100%;
     margin-bottom: 1.5rem;
   }
-  body main .createProductForm .input-row .price {
+  body main .createProductForm .row.input-row .price {
     width: 48%;
   }
-  body main .createProductForm .input-row input[type=submit] {
+  body main .createProductForm .row.input-row input[type=submit] {
     width: 48%;
+  }
+  body main .createProductForm .row.bottom-row {
+    flex-wrap: wrap;
+  }
+  body main .createProductForm .row.bottom-row .description {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  body main .createProductForm .row.bottom-row .productCategory {
+    width: 100%;
   }
   body main .settings form.schedule .row {
     flex-wrap: wrap;
@@ -1115,6 +1125,14 @@ body button {
   body main .settings form.schedule .row select:nth-of-type(4) {
     width: 30%;
   }
+  body main .productCategories .productCategoryList {
+    justify-content: space-between;
+  }
+  body main .productCategories .productCategoryList li {
+    width: 48%;
+    margin-bottom: 1.5rem;
+    margin-right: unset;
+  }
   body main .products li {
     width: 100%;
   }
@@ -1151,6 +1169,15 @@ body button {
   }
   body main .dashboard .checklist ul li .location {
     width: 35%;
+  }
+  body main .productCategories .newProductCategoryForm input[type=text] {
+    width: 65%;
+  }
+  body main .productCategories .newProductCategoryForm input[type=submit] {
+    width: 33%;
+  }
+  body main .productCategories .productCategoryList li {
+    width: 47%;
   }
 }
 @media only screen and (max-width: 650px) {
@@ -1218,6 +1245,21 @@ body main .merchantAuthPanel .login input[type=submit] {
   }
   body main .dashboard .environmentLink .link a {
     overflow-wrap: break-word;
+  }
+  body main .productCategories .newProductCategoryForm {
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+  body main .productCategories .newProductCategoryForm input[type=text] {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  body main .productCategories .newProductCategoryForm input[type=submit] {
+    width: 100%;
+    height: 2.5rem;
+  }
+  body main .productCategories .productCategoryList li {
+    width: 45%;
   }
 }
 

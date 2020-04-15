@@ -6,7 +6,7 @@
 
 
 <form class="createProductForm" method="POST" action="/admin/producten/addProduct">
-    <div class="input-row">
+    <div class="row input-row">
         <input type="text" name="name" placeholder="Productnaam" class="name" required/>
         <input type="value" name="price" placeholder="prijs" class="price" required/>
         <input type="submit" value="Toevoegen"/>
@@ -33,7 +33,7 @@
 <div class="productCategories">
     <h2>Productcategorieën</h2>
     <form class="newProductCategoryForm">
-        <input type="text"/>
+        <input type="text" placeholder="Nieuwe categorienaam"/>
         <input type="submit" value="Toevoegen"/>
     </form>
     <ul class="productCategoryList">

@@ -34,7 +34,7 @@
                     @if(Session::has('error'))
                     <p class="error">{{Session::get('error')}}</p>
                     @endif
-                    <input type="submit" value="Aanmelden"/>
+                    <input type="submit" value="Aanmelden als horecazaak"/>
                     <hr>
                     <p>Nog geen account?</p>
                     <a href="/admin/registreren">Registreren</a>
