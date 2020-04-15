@@ -7,6 +7,8 @@ use App\Order;
 use App\Role;
 use App\Merchant;
 use App\Customer;
+use App\ProductCategory;
+
 //use Faker\Generator as Faker;
 
 
@@ -126,13 +128,32 @@ class DatabaseSeeder extends Seeder
 
 
         foreach ($merchantUsers as $user) {
+            $user->merchant->productCategories()->saveMany([
+                new App\ProductCategory(['name' => 'categorie 1']),
+                new App\ProductCategory(['name' => 'categorie 2']),
+                new App\ProductCategory(['name' => 'categorie 3'])
+            ]);
+
             
             for ($i = 0; $i <= 6; $i++)
             {
                 $product = new Product();
                 $product->name = $faker->catchPhrase();
                 $product->price = $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 30);
-               
+                
+                $randomValue = rand(0,2);
+                if ($randomValue == 0){
+                    $product->productCategory()->associate($user->merchant->productCategories()->first());
+                }
+                elseif ($randomValue == 1){
+                    $product->productCategory()->associate($user->merchant->productCategories()->skip(1)->first());
+                }
+                else{
+                    $product->productCategory()->associate($user->merchant->productCategories()->skip(2)->first());
+                }
+                
+
+
                 $user->merchant->products()->save($product);
             }
             

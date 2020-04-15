@@ -48,6 +48,9 @@ Route::group([
     Route::put('/admin/producten/toggleOrderable', "MerchantController@toggleOrderable");
     Route::put('/admin/producten/updateProduct', "MerchantController@updateProduct");
     Route::delete('/admin/producten/deleteProduct', "MerchantController@deleteProduct");
+    Route::post('/admin/producten/addProductCategory', "MerchantController@addProductCategory");
+    Route::put('/admin/producten/editProductCategory', "MerchantController@editProductCategory");
+    Route::delete('/admin/producten/deleteProductCategory', "MerchantController@deleteProductCategory");
 
     Route::put('/admin/orders/acceptOrder', "MerchantController@acceptOrder");
     Route::put('/admin/orders/denyOrder', "MerchantController@denyOrder");

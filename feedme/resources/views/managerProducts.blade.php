@@ -11,8 +11,13 @@
         <input type="value" name="price" placeholder="prijs" class="price" required/>
         <input type="submit" value="Toevoegen"/>
     </div>
-    <div class="row">
+    <div class="row bottom-row">
         <textarea rows="3" placeholder="Productomschrijving (optioneel)" name="description" class="description"></textarea>
+        <select name="productCategory" class="productCategory">
+            @foreach ($merchant->productCategories as $productCategory)
+                <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+            @endforeach
+        </select>
     </div>
     <div class="row">
         @if(!$errors->isEmpty())
@@ -25,9 +30,51 @@
     </div>
 </form>
 
+<div class="productCategories">
+    <h2>Productcategorieën</h2>
+    <form class="newProductCategoryForm">
+        <input type="text"/>
+        <input type="submit" value="Toevoegen"/>
+    </form>
+    <ul class="productCategoryList">
+        @foreach ($merchant->productCategories as $productCategory)
+            <li data-productCategoryId="{{$productCategory->id}}">
+                <div class="upper-row">{{$productCategory->name}}</div>
+                <div class="bottom-row">
+                    <button class="edit"><span class="material-icons">edit</span></button>
+                    <button class="remove"><span class="material-icons">delete</span></button>        
+                </div>
+            </li>
+        @endforeach
+    </ul>
+    <!--
+    <div class="input-row">
+        <input type="text" name="name" placeholder="Productnaam" class="name" required/>
+        <input type="value" name="price" placeholder="prijs" class="price" required/>
+        <input type="submit" value="Toevoegen"/>
+    </div>
+    <div class="row">
+        <textarea rows="3" placeholder="Productomschrijving (optioneel)" name="description" class="description"></textarea>
+    </div>
+    <div class="row">
+        @if(!$errors->isEmpty())
+        <div class="errors">
+            @foreach ($errors->all() as $error)
+                <p>* {{$error}}</p>
+            @endforeach
+        </div>
+        @endif
+    </div>
+-->
+</div>
+
 <ul class="products">
     @foreach ($merchant->products as $product)
     <li data-id="{{$product->id}}">
+        <div class="row productCategoryRow">
+            <p>{{$product->productCategory->name}}</p>
+        </div>
+
         <div class="row upper">
             <p class="name">{{$product->name}}</p>
             <p class="price">€ {{str_replace(".", ",", number_format($product->price, 2, '.', ''))}}</p>
@@ -39,6 +86,8 @@
             </div>
         @endif
 
+        
+
         <form class="hidden">
             <div class="row inputValues">
                 <input type="text" name="name" placeholder="{{$product->name}}" class="name" value="{{$product->name}}"/>
@@ -46,6 +95,13 @@
             </div>
             <div class="row descriptionValue">
                 <textarea name="price" placeholder="Productomschrijving (optioneel)">{{$product->description}}</textarea>  
+            </div>
+            <div class="row productCategorySelection">
+                <select name="productCategory" class="productCategory">
+                    @foreach ($merchant->productCategories as $productCategory)
+                        <option value="{{$productCategory->id}}" {{ ($product->productCategory->id == $productCategory->id) ? 'selected' : '' }}>{{$productCategory->name}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="row buttons">
                 <input type="button" value="Annuleren" class="cancel-button"/>

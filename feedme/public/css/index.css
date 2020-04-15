@@ -445,9 +445,14 @@ body main .createProductForm .errors p {
   color: white;
   margin-bottom: 0.5rem;
 }
-body main .createProductForm .row .description {
-  width: 100%;
+body main .createProductForm .row.bottom-row {
   margin-top: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+body main .createProductForm .row.bottom-row .description {
+  width: 60%;
   box-sizing: border-box;
   border-radius: 0.3rem;
   border: none;
@@ -456,8 +461,110 @@ body main .createProductForm .row .description {
   font-weight: bold;
   font-family: "poppins", sans-serif;
 }
-body main .createProductForm .row .description:focus {
+body main .createProductForm .row.bottom-row .description:focus {
   outline: none;
+}
+body main .createProductForm .row.bottom-row .productCategory {
+  width: 37.5%;
+  border: none;
+  font-size: 1rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  color: grey;
+  cursor: pointer;
+}
+body main .createProductForm .row.bottom-row .productCategory:focus {
+  outline: none;
+  color: black;
+}
+body main .createProductForm .row.bottom-row .productCategory option {
+  height: 2rem;
+}
+body main .productCategories {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+}
+body main .productCategories > h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+body main .productCategories .newProductCategoryForm {
+  border-radius: 0.3rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+body main .productCategories .newProductCategoryForm input[type=text] {
+  border: 2px solid #4CAF50;
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  width: 83%;
+}
+body main .productCategories .newProductCategoryForm input[type=submit] {
+  width: 15%;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0 1rem;
+  background-color: #4CAF50;
+  color: white;
+  box-sizing: border-box;
+}
+body main .productCategories .newProductCategoryForm input[type=submit]:hover {
+  cursor: pointer;
+  background-color: #528a4a;
+  color: white;
+}
+body main .productCategories .productCategoryList {
+  display: flex;
+  flex-wrap: wrap;
+}
+body main .productCategories .productCategoryList li {
+  min-width: 20%;
+  border-radius: 0.3rem;
+  margin-right: 2rem;
+  border: 2px solid #4CAF50;
+  margin-bottom: 2rem;
+}
+body main .productCategories .productCategoryList li .upper-row {
+  padding-bottom: 0.5rem;
+  text-align: center;
+  padding-top: 0.5rem;
+  color: white;
+  font-weight: bold;
+  background-color: #4CAF50;
+  text-transform: capitalize;
+}
+body main .productCategories .productCategoryList li .bottom-row {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+body main .productCategories .productCategoryList li .bottom-row button {
+  background-color: transparent;
+  border: none;
+  color: #4CAF50;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  width: 47%;
+}
+body main .productCategories .productCategoryList li .bottom-row button.remove:hover {
+  background-color: #e43a3a;
+  color: white;
+}
+body main .productCategories .productCategoryList li .bottom-row button:hover {
+  cursor: pointer;
+  background-color: #e6e6e6;
+  color: black;
 }
 body main .products {
   display: flex;
@@ -495,6 +602,15 @@ body main .products li > .row.descriptionRow {
   font-size: 0.9rem;
   color: grey;
   border-bottom: 1px solid #dadada;
+}
+body main .products li > .row.productCategoryRow {
+  padding: 0.75rem 1.5rem;
+  background-color: #4CAF50;
+  color: white;
+  justify-content: center;
+}
+body main .products li > .row.productCategoryRow p {
+  text-align: center;
 }
 body main .products li > .row.bottom {
   padding-left: 1.5rem;
@@ -571,6 +687,25 @@ body main .products li form .row.descriptionValue textarea {
 }
 body main .products li form .row.descriptionValue textarea:focus {
   outline: none;
+}
+body main .products li form .row.productCategorySelection select {
+  width: 100%;
+  border: 2px solid lightgray;
+  font-size: 1rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  color: grey;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+body main .products li form .row.productCategorySelection select:focus {
+  outline: none;
+  color: black;
+}
+body main .products li form .row.productCategorySelection select option {
+  height: 2rem;
 }
 body main .products li form .row.buttons {
   display: flex;

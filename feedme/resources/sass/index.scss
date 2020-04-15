@@ -485,18 +485,127 @@ body {
                 }
             }
             .row {
-                .description {
-                    width: 100%;
+                &.bottom-row {
                     margin-top: 1.5rem;
-                    box-sizing: border-box;
-                    border-radius: 0.3rem;
-                    border: none;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    .description {
+                        width: 60%;
+                        box-sizing: border-box;
+                        border-radius: 0.3rem;
+                        border: none;
+                        font-size: 1rem;
+                        padding: 0.4rem 0.8rem;
+                        font-weight: bold;
+                        font-family: "poppins", sans-serif;
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                    .productCategory {
+                        width: 37.5%;
+                        border: none;
+                        font-size: 1rem;
+                        padding: 0.4rem 0.5rem;
+                        border-radius: 0.3rem;
+                        font-weight: bold;
+                        box-sizing: border-box;
+                        color: $mediumGrey;
+                        cursor: pointer;
+                        &:focus {
+                            outline: none;
+                            color: black;
+                        }
+                        option {
+                            height: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+        .productCategories {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-radius: 0.4rem;
+            box-sizing: border-box;
+            >h2 {
+                font-size: 1.3rem;
+                font-weight: bold;
+                color: $mainGreen;
+                margin-bottom: 1rem;
+            }
+            .newProductCategoryForm {
+                border-radius: 0.3rem;
+                margin-bottom: 1.5rem;
+                display: flex;
+                justify-content: space-between;
+                input[type="text"] {
+                    border: 2px solid $mainGreen;
                     font-size: 1rem;
                     padding: 0.4rem 0.8rem;
+                    border-radius: 0.3rem;
                     font-weight: bold;
-                    font-family: "poppins", sans-serif;
-                    &:focus {
-                        outline: none;
+                    box-sizing: border-box;
+                    width: 83%;
+                }
+                input[type="submit"] {
+                    width: 15%;
+                    font-weight: bold;
+                    border: none;
+                    border-radius: 0.3rem;
+                    padding: 0 1rem;
+                    background-color: $mainGreen;
+                    color: white;
+                    box-sizing: border-box;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #528a4a;
+                        color: white;
+                    }
+                }
+            }
+            .productCategoryList {
+                display: flex;
+                flex-wrap: wrap;
+                li {
+                    min-width: 20%;
+                    border-radius: 0.3rem;
+                    margin-right: 2rem;
+                    border: 2px solid $mainGreen;
+                    margin-bottom: 2rem;
+                    .upper-row {
+                        padding-bottom: 0.5rem;
+                        text-align: center;
+                        padding-top: 0.5rem;
+                        color: white;
+                        font-weight: bold;
+                        background-color: $mainGreen;
+                        text-transform: capitalize;
+                    }
+                    .bottom-row {
+                        padding: 0.5rem;
+                        display: flex;
+                        justify-content: space-between;
+                        button {
+                            background-color: transparent;
+                            border: none;
+                            color: $mainGreen;
+                            padding: 0.5rem;
+                            border-radius: 0.3rem;
+                            width: 47%;
+                            &.remove {
+                                &:hover {
+                                    background-color: $mainRed;
+                                    color: white;
+                                }
+                            }
+                            &:hover {
+                                cursor: pointer;
+                                background-color: #e6e6e6;
+                                color: black;
+                            }
+                        }
                     }
                 }
             }
@@ -534,6 +643,15 @@ body {
                         font-size: 0.9rem;
                         color: grey;
                         border-bottom: 1px solid #dadada;
+                    }
+                    &.productCategoryRow {
+                        padding: 0.75rem 1.5rem;
+                        background-color: $mainGreen;
+                        color: white;
+                        justify-content: center;
+                        p {
+                            text-align: center;
+                        }
                     }
                     &.bottom {
                         padding-left: 1.5rem;
@@ -615,6 +733,27 @@ body {
                                 font-family: "poppins", sans-serif;
                                 &:focus {
                                     outline: none;
+                                }
+                            }
+                        }
+                        &.productCategorySelection {
+                            select {
+                                width: 100%;
+                                border: 2px solid lightgray;
+                                font-size: 1rem;
+                                padding: 0.4rem 0.5rem;
+                                border-radius: 0.3rem;
+                                font-weight: bold;
+                                box-sizing: border-box;
+                                color: $mediumGrey;
+                                margin-bottom: 1.5rem;
+                                cursor: pointer;
+                                &:focus {
+                                    outline: none;
+                                    color: black;
+                                }
+                                option {
+                                    height: 2rem;
                                 }
                             }
                         }

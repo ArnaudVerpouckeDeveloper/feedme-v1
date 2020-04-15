@@ -24,6 +24,11 @@ class Merchant extends Model
         return $this->hasMany('App\Order');
     }
 
+    public function productCategories()
+    {
+        return $this->hasMany('App\ProductCategory');
+    }
+
     protected $casts = [
         'deliveryMethod_takeaway' => 'boolean',
         'deliveryMethod_delivery' => 'boolean',

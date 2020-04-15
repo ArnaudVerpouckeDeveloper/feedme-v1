@@ -16,7 +16,7 @@ use DateTime;
 use Mail;
 use stdClass;
 use App\Traits\SharedMerchantTrait;
-
+use App\ProductCategory;
 
 class MerchantController extends Controller
 {
@@ -207,22 +207,72 @@ class MerchantController extends Controller
 
 
 
+    function addProductCategory(Request $request){
+        $request->validate([
+            'name' => 'required|min:2',
+        ]);        
+
+        if (auth()->user()->merchant->productCategories->where("name", strtolower($request->name))->count() > 0){
+            return response()->json("category already exists", 409); 
+        }
+
+        $category = new ProductCategory();
+        $category->name = strtolower($request->name);
+        auth()->user()->merchant->productCategories()->save($category);
+        return response()->json("ok");
+    }
+
+    
+    function editProductCategory(Request $request){
+        $request->validate([
+            'name' => 'required|min:2',
+            'productCategoryId' => 'required'
+        ]);        
+
+        if (auth()->user()->merchant->productCategories->where('name', strtolower($request->name))->count() > 0){
+            return response()->json("category already exists", 409); 
+        }
+
+        $category = auth()->user()->merchant->productCategories->find($request->productCategoryId);
+        $category->update(["name" => strtolower($request->name)]);
+        return response()->json("ok");
+    }
+
+    function deleteProductCategory(Request $request){
+        $request->validate([
+            'productCategoryId' => 'required'
+        ]);       
+     
+        $category = auth()->user()->merchant->productCategories->find($request->productCategoryId);
+
+        if ($category->products->count() > 0){
+            return response()->json("category connected with products", 409); 
+        }
+
+        $category->delete();
+        return response()->json("ok");
+    }
 
     function addProduct(Request $request){
         $request->validate([
             'name' => 'required|min:2',
             'price' => ['required','min:0'],
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'productCategory' => 'required|min:1'
         ]);        
 
         $product = new Product();
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
+        $product->productCategory()->associate(auth()->user()->merchant->productCategories()->find($request->productCategory));
+
 
         auth()->user()->merchant->products()->save($product);
         return response()->json("ok");
     }
+
+    
 
     function toggleOrderable(Request $request){
 
@@ -236,12 +286,14 @@ class MerchantController extends Controller
         $request->price = str_replace(",",".",$request->price);
         $request->validate([
             'name' => 'required|min:2',
-            'price' => ['required', new Price]
+            'price' => ['required', new Price],
+            'productCategory' => 'required|min:1'
         ]);
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
+        $product->productCategory()->associate(auth()->user()->merchant->productCategories()->find($request->productCategory));
         $product->save();
         return response()->json("ok");
     }

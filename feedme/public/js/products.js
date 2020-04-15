@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
         makeRequest("POST", "/admin/producten/addProduct", {
                 name: document.querySelector(".createProductForm .name").value,
                 price: document.querySelector(".createProductForm .price").value,
-                description: document.querySelector(".createProductForm .description").value
+                description: document.querySelector(".createProductForm .description").value,
+                productCategory: document.querySelector(".createProductForm .productCategory").value
             })
             .then(res => {
                 if (res == "ok") {
@@ -30,7 +31,135 @@ document.addEventListener("DOMContentLoaded", function() {
                 promptError();
             })
     });
+
+    document.querySelector("form.newProductCategoryForm input[type='submit']").addEventListener("click", function(e) {
+        e.preventDefault();
+        makeRequest("POST", "/admin/producten/addProductCategory", {
+                name: document.querySelector("form.newProductCategoryForm input[type='text']").value,
+            })
+            .then(res => {
+                if (res == "ok") {
+                    Swal.fire(
+                            'Geslaagd!',
+                            'De productcategorie werd aangemaakt.',
+                            'success'
+                        )
+                        .then(res => {
+                            window.location.href = "/admin/producten";
+                        })
+                } else {
+                    throw (res);
+                }
+            })
+            .catch(error => {
+                console.log("error: ", error);
+                if (error == "category already exists") {
+                    promptError("Er bestaat al een categorie met deze naam.");
+                } else {
+                    promptError();
+                }
+            })
+    });
+
+    let allProductCategoryElements = document.querySelectorAll(".productCategoryList li");
+    for (let i = 0; i < allProductCategoryElements.length; i++) {
+        setEventListenersForProductCategory(allProductCategoryElements[i]);
+    }
 });
+
+function setEventListenersForProductCategory(productCategory) {
+    let productCategoryId = productCategory.dataset.productcategoryid;
+    productCategory.querySelector(".edit").addEventListener("click", function() {
+        Swal.fire({
+                title: 'Wijzig de categorienaam',
+                input: 'text',
+                inputValue: productCategory.querySelector(".upper-row").innerHTML,
+                inputPlaceholder: productCategory.querySelector(".upper-row").innerHTML,
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#dadada',
+                cancelButtonText: 'Annuleren',
+                confirmButtonColor: '#4CAF50',
+                confirmButtonText: 'Opslaan',
+                reverseButtons: true,
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+            .then(res => {
+                if (res.value) {
+                    makeRequest("PUT", "/admin/producten/editProductCategory", {
+                            name: res.value,
+                            productCategoryId: productCategoryId
+                        })
+                        .then(res => {
+                            if (res == "ok") {
+                                Swal.fire(
+                                        'Geslaagd!',
+                                        'De productcategorie werd aangepast.',
+                                        'success'
+                                    )
+                                    .then(res => {
+                                        window.location.href = "/admin/producten";
+                                    })
+                            } else {
+                                throw (res);
+                            }
+                        })
+                        .catch(error => {
+                            console.log("error: ", error);
+                            if (error == "category already exists") {
+                                promptError("Er bestaat al een categorie met deze naam.");
+                            } else {
+                                promptError();
+                            }
+                        })
+                }
+            })
+    });
+
+    productCategory.querySelector(".remove").addEventListener("click", function() {
+        Swal.fire({
+                title: 'Bent u zeker dat u de categorie wilt verwijderen?',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonColor: '#dadada',
+                cancelButtonText: 'Annuleren',
+                confirmButtonColor: '#e43a3a',
+                confirmButtonText: 'Verwijderen',
+                reverseButtons: true
+            })
+            .then(res => {
+                if (res.value) {
+                    makeRequest("DELETE", "/admin/producten/deleteProductCategory", {
+                            productCategoryId: productCategoryId
+                        })
+                        .then(res => {
+                            if (res == "ok") {
+                                Swal.fire(
+                                        'Geslaagd!',
+                                        'De productcategorie werd verwijderd.',
+                                        'success'
+                                    )
+                                    .then(res => {
+                                        window.location.href = "/admin/producten";
+                                    })
+                            } else {
+                                throw (res);
+                            }
+                        })
+                        .catch(error => {
+                            console.log("error: ", error);
+                            if (error == "category connected with products") {
+                                promptError("Er zijn producten gevonden in deze categorie. Verander de categorie van deze producten eerst.");
+                            } else {
+                                promptError();
+                            }
+                        })
+                }
+            });
+    });
+}
 
 function setEventListenersForProduct(product) {
     let productId = getClosest(product, "[data-id").dataset.id;
@@ -41,18 +170,20 @@ function setEventListenersForProduct(product) {
         const name = product.querySelector("form .inputValues .name").value;
         const price = product.querySelector("form .inputValues .price").value;
         const description = product.querySelector("form .descriptionValue textarea").value;
-
+        const productCategoryId = product.querySelector("form .productCategorySelection select").value;
         makeRequest("PUT", "/admin/producten/updateProduct", {
                 productId: productId,
                 name: name,
                 price: price,
-                description: description
+                description: description,
+                productCategory: productCategoryId
             })
             .then(res => {
                 if (res == "ok") {
                     hideForm(product);
                     product.querySelector(".row.upper .name").innerHTML = name;
                     product.querySelector(".row.upper .price").innerHTML = "€ " + addTrailZero(price, 2);
+                    product.querySelector(".row.productCategoryRow p").innerHTML = product.querySelector("form .productCategory option[value='" + productCategoryId + "']").innerHTML;
                     if (product.querySelector(".row.descriptionRow") && description != "") {
                         console.log("a");
                         product.querySelector(".row.descriptionRow p").innerHTML = description;
@@ -150,6 +281,7 @@ function setEventListenersForProduct(product) {
 
 function showForm(productDOM_element) {
     productDOM_element.querySelector("form").classList.remove("hidden");
+    productDOM_element.querySelector(".row.productCategoryRow").classList.add("hidden");
     productDOM_element.querySelector(".row.upper").classList.add("hidden");
     if (productDOM_element.querySelector(".row.descriptionRow")) { productDOM_element.querySelector(".row.descriptionRow").classList.add("hidden"); };
     productDOM_element.querySelector(".row.bottom").classList.add("hidden");
@@ -157,6 +289,7 @@ function showForm(productDOM_element) {
 
 function hideForm(productDOM_element) {
     productDOM_element.querySelector("form").classList.add("hidden");
+    productDOM_element.querySelector(".row.productCategoryRow").classList.remove("hidden");
     productDOM_element.querySelector(".row.upper").classList.remove("hidden");
     if (productDOM_element.querySelector(".row.descriptionRow")) { productDOM_element.querySelector(".row.descriptionRow").classList.remove("hidden"); };
     productDOM_element.querySelector(".row.bottom").classList.remove("hidden");
