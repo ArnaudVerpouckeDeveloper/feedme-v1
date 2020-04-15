@@ -17,6 +17,8 @@ use Mail;
 use stdClass;
 use App\Traits\SharedMerchantTrait;
 use App\ProductCategory;
+use Illuminate\Support\Facades\Storage;
+
 
 class MerchantController extends Controller
 {
@@ -256,19 +258,31 @@ class MerchantController extends Controller
     function addProduct(Request $request){
         $request->validate([
             'name' => 'required|min:2',
-            'price' => ['required','min:0'],
+            'price' => ['required', new Price],
             'description' => 'nullable',
-            'productCategory' => 'required|min:1'
+            'productCategory' => 'required|min:1',
+            'image' => 'nullable|max:5000|image'
         ]);        
 
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
-        $product->productCategory()->associate(auth()->user()->merchant->productCategories()->find($request->productCategory));
+        try{
+            $product = new Product();
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
+            $product->productCategory()->associate(auth()->user()->merchant->productCategories()->find($request->productCategory));
+            auth()->user()->merchant->products()->save($product);
 
+            if (isset($request->image)){
+                $file = $request->file("image");
+                $fileName = "productImage-".auth()->user()->merchant->apiName."-".$product->id.".".$file->getClientOriginalExtension();
+                $product->imageFileName = $file->storeAs('productImages',$fileName,"public");
+                $product->save();
+            }
+        } catch (Exception $e) {
+            $product->delete();
+            return response()->json($e->getMessage(), 406);
+        }
 
-        auth()->user()->merchant->products()->save($product);
         return response()->json("ok");
     }
 
@@ -287,8 +301,11 @@ class MerchantController extends Controller
         $request->validate([
             'name' => 'required|min:2',
             'price' => ['required', new Price],
-            'productCategory' => 'required|min:1'
+            'productCategory' => 'required|min:1',
+            'description' => 'nullable',
+            'newImage' => 'nullable|image|max:5000'
         ]);
+        //todo: hier geëindigd, moet nog getest worden
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->name = $request->name;
         $product->price = $request->price;
@@ -308,6 +325,10 @@ class MerchantController extends Controller
                     return response()->json("product found in orders");
                 }
             }
+        }
+        if (isset($productToDelete->imageFileName))
+        {
+            Storage::disk('public')->delete($productToDelete->imageFileName);
         }
         $productToDelete->delete();
         return response()->json("ok");

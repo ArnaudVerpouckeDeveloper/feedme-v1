@@ -5,7 +5,6 @@ async function makeRequest(method, url, data = {}, success, error) {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + getBearerToken(),
             'Accept': 'application/json'
         },
         redirect: 'follow',
@@ -18,9 +17,7 @@ function getCSRF_token() {
     return document.querySelector("[name='_token']").value;
 }
 
-function getBearerToken() {
-    return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NjAyMDkxMiwiZXhwIjoxNTg2MDI0NTEyLCJuYmYiOjE1ODYwMjA5MTIsImp0aSI6InVxTTRDQXFCNUJLUWtnTzciLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.cZOesS5FcyYl1zCzwQWxdk3QM9JKNLaehnxe0TPx8_g";
-}
+
 
 function promptError(text = "Er liep iets fout!") {
     Swal.fire({
@@ -28,4 +25,19 @@ function promptError(text = "Er liep iets fout!") {
         title: 'Oei...',
         text: text
     })
+}
+
+function readURL(input, DOM_preview_element, showBorder = true) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            DOM_preview_element.src = e.target.result;
+        }
+        if (showBorder) {
+            DOM_preview_element.classList.add("showBorder");
+        }
+
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
 }

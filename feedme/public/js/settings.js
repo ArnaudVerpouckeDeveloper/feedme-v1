@@ -7,16 +7,3 @@ document.addEventListener("DOMContentLoaded", function() {
         readURL(this, document.querySelector(".logoForm img"));
     });
 });
-
-function readURL(input, DOM_preview_element) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            DOM_preview_element.src = e.target.result;
-        }
-        DOM_preview_element.classList.add("showBorder");
-
-        reader.readAsDataURL(input.files[0]); // convert to base64 string
-    }
-}

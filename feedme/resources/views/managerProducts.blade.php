@@ -5,19 +5,26 @@
 
 
 
-<form class="createProductForm" method="POST" action="/admin/producten/addProduct">
+<form class="createProductForm" method="POST" action="/admin/producten/addProduct" enctype="multipart/form-data">
     <div class="row input-row">
         <input type="text" name="name" placeholder="Productnaam" class="name" required/>
         <input type="value" name="price" placeholder="prijs" class="price" required/>
         <input type="submit" value="Toevoegen"/>
     </div>
     <div class="row bottom-row">
+        <div class="productCategoryAndFileUpload">
+            <select name="productCategory" class="productCategory">
+                @foreach ($merchant->productCategories as $productCategory)
+                    <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                @endforeach
+            </select>
+            <button class="productImageUploadButton">Afbeelding uploaden (optioneel)</button>
+            <input type="file" class="hidden" name="image" accept="image/*"/>
+        </div>
         <textarea rows="3" placeholder="Productomschrijving (optioneel)" name="description" class="description"></textarea>
-        <select name="productCategory" class="productCategory">
-            @foreach ($merchant->productCategories as $productCategory)
-                <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
-            @endforeach
-        </select>
+    </div>
+    <div class="imagePreview hidden"/>
+        <img src="#" alt="preview"/>
     </div>
     <div class="row">
         @if(!$errors->isEmpty())
@@ -75,6 +82,12 @@
             <p>{{$product->productCategory->name}}</p>
         </div>
 
+        @if(isset($product->imageFileName))
+        <div class="productImage row">
+            <img src="{{asset('uploads/'.$product->imageFileName)}}" alt="Productafbeelding {{$product->name}}"/>
+        </div>
+        @endif
+
         <div class="row upper">
             <p class="name">{{$product->name}}</p>
             <p class="price">€ {{str_replace(".", ",", number_format($product->price, 2, '.', ''))}}</p>
@@ -102,6 +115,11 @@
                         <option value="{{$productCategory->id}}" {{ ($product->productCategory->id == $productCategory->id) ? 'selected' : '' }}>{{$productCategory->name}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="row newProductImage">
+                <button class="newProductImageUploadButton">nieuwe afbeelding</button>
+                <input type="file" class="hidden" name="newImage" accept="image/*"/>
+                <img src="#" class="hidden" alt="preview">
             </div>
             <div class="row buttons">
                 <input type="button" value="Annuleren" class="cancel-button"/>

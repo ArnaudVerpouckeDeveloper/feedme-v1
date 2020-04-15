@@ -484,12 +484,60 @@ body {
                     margin-bottom: 0.5rem;
                 }
             }
+            .imagePreview {
+                width: 100%;
+                margin-top: 1.5rem;
+                img {
+                    width: 100%;
+                    border-radius: 0.3rem;
+                }
+            }
             .row {
                 &.bottom-row {
                     margin-top: 1.5rem;
                     display: flex;
                     align-items: flex-start;
                     justify-content: space-between;
+                    .productCategoryAndFileUpload {
+                        display: flex;
+                        width: 37%;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-self: normal;
+                        .productCategory {
+                            width: 100%;
+                            border: none;
+                            font-size: 1rem;
+                            padding: 0.6rem 0.5rem;
+                            border-radius: 0.3rem;
+                            font-weight: bold;
+                            box-sizing: border-box;
+                            color: $mediumGrey;
+                            cursor: pointer;
+                            &:focus {
+                                outline: none;
+                                color: black;
+                            }
+                            option {
+                                height: 2rem;
+                            }
+                        }
+                        .productImageUploadButton {
+                            height: 2.5rem;
+                            background-color: $mainGreen;
+                            border: 2px solid white;
+                            color: white;
+                            border-radius: 0.3rem;
+                            font-size: 1rem;
+                            font-weight: bold;
+                            width: 100%;
+                            &:hover {
+                                background-color: white;
+                                color: $mainGreen;
+                                cursor: pointer;
+                            }
+                        }
+                    }
                     .description {
                         width: 60%;
                         box-sizing: border-box;
@@ -497,28 +545,11 @@ body {
                         border: none;
                         font-size: 1rem;
                         padding: 0.4rem 0.8rem;
+                        padding-bottom: 1.3rem;
                         font-weight: bold;
                         font-family: "poppins", sans-serif;
                         &:focus {
                             outline: none;
-                        }
-                    }
-                    .productCategory {
-                        width: 37.5%;
-                        border: none;
-                        font-size: 1rem;
-                        padding: 0.6rem 0.5rem;
-                        border-radius: 0.3rem;
-                        font-weight: bold;
-                        box-sizing: border-box;
-                        color: $mediumGrey;
-                        cursor: pointer;
-                        &:focus {
-                            outline: none;
-                            color: black;
-                        }
-                        option {
-                            height: 2rem;
                         }
                     }
                 }
@@ -631,11 +662,16 @@ body {
                         padding: 1.5rem;
                         border-bottom: 1px solid #dadada;
                         .name {
-                            width: 75%;
+                            width: 70%;
                         }
                         .price {
-                            width: 20%;
+                            width: 25%;
                             text-align: right;
+                        }
+                    }
+                    &.productImage {
+                        img {
+                            width: 100%;
                         }
                     }
                     &.descriptionRow {
@@ -755,6 +791,27 @@ body {
                                 option {
                                     height: 2rem;
                                 }
+                            }
+                        }
+                        &.newProductImage {
+                            button {
+                                width: 100%;
+                                background-color: white;
+                                border: 2px dashed lightgrey;
+                                font-size: 1rem;
+                                height: 2.3rem;
+                                color: $mediumGrey;
+                                border-radius: 0.3rem;
+                                margin-bottom: 1.5rem;
+                                &:hover {
+                                    cursor: pointer;
+                                    border-color: $mainGreen;
+                                    color: $mainGreen;
+                                }
+                            }
+                            img {
+                                width: 100%;
+                                margin-bottom: 1.5rem;
                             }
                         }
                         &.buttons {
@@ -1174,13 +1231,23 @@ body {
                         }
                     }
                     &.bottom-row {
+                        .productCategoryAndFileUpload {
+                            width: 100%;
+                            flex-direction: unset;
+                            .productCategory {
+                                width: 48%;
+                            }
+                            .productImageUploadButton {
+                                width: 48%;
+                            }
+                        }
                         flex-wrap: wrap;
                         .description {
                             width: 100%;
-                            margin-bottom: 1.5rem;
                         }
                         .productCategory {
                             width: 100%;
+                            margin-bottom: 1.5rem;
                         }
                     }
                 }
@@ -1330,6 +1397,38 @@ body {
                 .login {
                     input[type="submit"] {
                         width: 100%;
+                    }
+                }
+            }
+            .createProductForm {
+                .row {
+                    &.input-row {
+                        .price {
+                            width: 47%;
+                        }
+                        input[type='submit'] {
+                            width: 47%;
+                        }
+                    }
+                    &.bottom-row {
+                        .productCategoryAndFileUpload {
+                            flex-direction: column;
+                            .productCategory {
+                                width: 100%;
+                            }
+                            .productImageUploadButton {
+                                width: 100%;
+                                margin-bottom: 1.5rem;
+                            }
+                        }
+                        flex-wrap: wrap;
+                        .description {
+                            width: 100%;
+                        }
+                        .productCategory {
+                            width: 100%;
+                            margin-bottom: 1.5rem;
+                        }
                     }
                 }
             }

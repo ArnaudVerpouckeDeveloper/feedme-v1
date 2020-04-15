@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->boolean("orderable")->default(true);
             $table->string("merchant_id");
             $table->string("product_category_id");
+            $table->string("imageFileName")->nullable();
         });
     }
 

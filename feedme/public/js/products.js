@@ -4,14 +4,31 @@ document.addEventListener("DOMContentLoaded", function() {
         setEventListenersForProduct(allProductElements[i]);
     }
 
-    document.querySelector(".createProductForm input[type='submit']").addEventListener("click", function(e) {
+    document.querySelector(".createProductForm input[type='submit']").addEventListener("click", async function(e) {
         e.preventDefault();
-        makeRequest("POST", "/admin/producten/addProduct", {
-                name: document.querySelector(".createProductForm .name").value,
-                price: document.querySelector(".createProductForm .price").value,
-                description: document.querySelector(".createProductForm .description").value,
-                productCategory: document.querySelector(".createProductForm .productCategory").value
+
+        const formData = new FormData();
+        const imageFile = document.querySelector(".createProductForm input[name='image']").files[0];
+        if (imageFile !== undefined) {
+            formData.append('image', imageFile);
+        }
+        formData.append("name", document.querySelector(".createProductForm .name").value);
+        formData.append("price", document.querySelector(".createProductForm .price").value);
+        formData.append("description", document.querySelector(".createProductForm .description").value);
+        formData.append("productCategory", document.querySelector(".createProductForm .productCategory").value);
+        formData.append("_token", getCSRF_token());
+
+        await fetch("/admin/producten/addProduct", {
+                method: "POST",
+                mode: 'cors',
+                headers: {
+                    //'Content-Type': 'multipart/form-data', /*may not be defined when uploading a file*/
+                    'Accept': 'application/json',
+                },
+                redirect: 'follow',
+                body: formData
             })
+            .then(res => { return res.json() })
             .then(res => {
                 if (res == "ok") {
                     Swal.fire(
@@ -29,13 +46,14 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => {
                 console.log("error: ", error);
                 promptError();
-            })
+            });
     });
 
     document.querySelector("form.newProductCategoryForm input[type='submit']").addEventListener("click", function(e) {
         e.preventDefault();
+
         makeRequest("POST", "/admin/producten/addProductCategory", {
-                name: document.querySelector("form.newProductCategoryForm input[type='text']").value,
+                name: document.querySelector("form.newProductCategoryForm input[type='text']").value
             })
             .then(res => {
                 if (res == "ok") {
@@ -65,6 +83,16 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < allProductCategoryElements.length; i++) {
         setEventListenersForProductCategory(allProductCategoryElements[i]);
     }
+
+    document.querySelector(".createProductForm .productImageUploadButton").addEventListener("click", function(e) {
+        e.preventDefault();
+        document.querySelector(".createProductForm input[name='image']").click();
+    });
+
+    document.querySelector(".createProductForm input[name='image']").addEventListener("change", function() {
+        readURL(this, document.querySelector(".createProductForm .imagePreview img"), false);
+        document.querySelector(".createProductForm .imagePreview").classList.remove("hidden");
+    });
 });
 
 function setEventListenersForProductCategory(productCategory) {
@@ -165,19 +193,32 @@ function setEventListenersForProduct(product) {
     let productId = getClosest(product, "[data-id").dataset.id;
 
     product.querySelector("form .update-button").addEventListener("click", async function(e) {
-        console.log("saving...");
+        console.log("updating product...");
         e.preventDefault();
-        const name = product.querySelector("form .inputValues .name").value;
-        const price = product.querySelector("form .inputValues .price").value;
-        const description = product.querySelector("form .descriptionValue textarea").value;
-        const productCategoryId = product.querySelector("form .productCategorySelection select").value;
-        makeRequest("PUT", "/admin/producten/updateProduct", {
-                productId: productId,
-                name: name,
-                price: price,
-                description: description,
-                productCategory: productCategoryId
+
+
+        const formData = new FormData();
+        const imageFile = product.querySelector("form .newProductImage input[name='newImage']").files[0];
+        if (imageFile !== undefined) {
+            formData.append('newImage', imageFile);
+        }
+        formData.append("name", product.querySelector("form .inputValues .name").value);
+        formData.append("price", product.querySelector("form .inputValues .price").value);
+        formData.append("description", product.querySelector("form .descriptionValue textarea").value);
+        formData.append("productCategory", product.querySelector("form .productCategorySelection select").value);
+        formData.append("_token", getCSRF_token());
+
+        await fetch("/admin/producten/updateProduct", {
+                method: "PUT",
+                mode: 'cors',
+                headers: {
+                    //'Content-Type': 'multipart/form-data', /*may not be defined when uploading a file*/
+                    'Accept': 'application/json',
+                },
+                redirect: 'follow',
+                body: formData
             })
+            .then(res => { return res.json() })
             .then(res => {
                 if (res == "ok") {
                     hideForm(product);
@@ -208,6 +249,57 @@ function setEventListenersForProduct(product) {
                 e.target.checked = !e.target.checked;
                 promptError();
             });
+
+
+        /*
+                makeRequest("PUT", "/admin/producten/updateProduct", {
+                        productId: productId,
+                        name: name,
+                        price: price,
+                        description: description,
+                        productCategory: productCategoryId
+                    })
+                    .then(res => {
+                        if (res == "ok") {
+                            hideForm(product);
+                            product.querySelector(".row.upper .name").innerHTML = name;
+                            product.querySelector(".row.upper .price").innerHTML = "€ " + addTrailZero(price, 2);
+                            product.querySelector(".row.productCategoryRow p").innerHTML = product.querySelector("form .productCategory option[value='" + productCategoryId + "']").innerHTML;
+                            if (product.querySelector(".row.descriptionRow") && description != "") {
+                                console.log("a");
+                                product.querySelector(".row.descriptionRow p").innerHTML = description;
+                            } else {
+                                console.log("b");
+                                if (description != "") {
+                                    console.log("c");
+                                    product.querySelector(".row.upper").insertAdjacentHTML("afterEnd", '<div class="row descriptionRow"><p>' + description + '</p></div>');
+                                } else {
+                                    if (product.querySelector(".row.descriptionRow")) {
+                                        product.querySelector(".row.descriptionRow").remove();
+                                    }
+                                }
+                            }
+
+                        } else {
+                            throw (res);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("error: ", error);
+                        e.target.checked = !e.target.checked;
+                        promptError();
+                    });
+                    */
+    });
+
+    product.querySelector("form .newProductImage .newProductImageUploadButton").addEventListener("click", function(e) {
+        e.preventDefault();
+        product.querySelector("form .newProductImage input[name='newImage']").click();
+    });
+
+    product.querySelector("form .newProductImage input[name='newImage']").addEventListener("change", function() {
+        readURL(this, product.querySelector("form .newProductImage img"), false);
+        product.querySelector("form .newProductImage img").classList.remove("hidden");
     });
 
     product.querySelector("form .cancel-button").addEventListener("click", async function(e) {
@@ -282,6 +374,7 @@ function setEventListenersForProduct(product) {
 function showForm(productDOM_element) {
     productDOM_element.querySelector("form").classList.remove("hidden");
     productDOM_element.querySelector(".row.productCategoryRow").classList.add("hidden");
+    productDOM_element.querySelector(".row.productImage").classList.add("hidden");
     productDOM_element.querySelector(".row.upper").classList.add("hidden");
     if (productDOM_element.querySelector(".row.descriptionRow")) { productDOM_element.querySelector(".row.descriptionRow").classList.add("hidden"); };
     productDOM_element.querySelector(".row.bottom").classList.add("hidden");
@@ -290,6 +383,7 @@ function showForm(productDOM_element) {
 function hideForm(productDOM_element) {
     productDOM_element.querySelector("form").classList.add("hidden");
     productDOM_element.querySelector(".row.productCategoryRow").classList.remove("hidden");
+    productDOM_element.querySelector(".row.productImage").classList.remove("hidden");
     productDOM_element.querySelector(".row.upper").classList.remove("hidden");
     if (productDOM_element.querySelector(".row.descriptionRow")) { productDOM_element.querySelector(".row.descriptionRow").classList.remove("hidden"); };
     productDOM_element.querySelector(".row.bottom").classList.remove("hidden");
