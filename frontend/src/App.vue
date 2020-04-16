@@ -27,21 +27,18 @@ export default {
   },
   computed:{
     userLogout(){
-      if(this.token === null){
+      if(this.userLoggedOut){
         this.snackbar = true;
         return true
-      }else {
-        this.snackbar = false;
-        return false;
       }
     },
-    ...mapGetters(["token"])
+    ...mapGetters(["userLoggedOut"])
   },
   created() {
     
   },
   data: () => ({
-    snackbar: true
+    snackbar: false
   })
 };
 </script>

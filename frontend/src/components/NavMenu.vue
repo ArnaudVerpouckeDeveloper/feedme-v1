@@ -21,7 +21,7 @@
           v-if="LoggedIn"
           @click="logOutUser"
           class="white--text v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"
-        >Afmelden</a>
+        >{{user.firstName}}, Afmelden</a>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -69,24 +69,29 @@
                 </v-list-item-icon>
                 <v-list-item-title>Aanmelden</v-list-item-title>
               </v-list-item>
-
-              <a
-                v-if="LoggedIn"
-                @click="logOutUser"
-                class="v-list-item v-list-item--link theme--light"
-                tabindex="0"
-                role="listitem"
-                aria-selected="false"
-                key="logout"
-              >
-                <div class="v-list-item__icon">
-                  <i
-                    aria-hidden="true"
-                    class="v-icon notranslate mdi mdi-logout-variant theme--light"
-                  ></i>
-                </div>
-                <div class="v-list-item__title">Afmelden</div>
-              </a>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <a
+                    v-if="LoggedIn"
+                    @click="logOutUser"
+                    class="v-list-item v-list-item--link theme--light"
+                    tabindex="0"
+                    role="listitem"
+                    aria-selected="false"
+                    key="logout"
+                    v-on="on"
+                  >
+                    <div class="v-list-item__icon">
+                      <i
+                        aria-hidden="true"
+                        class="v-icon notranslate mdi mdi-logout-variant theme--light"
+                      ></i>
+                    </div>
+                    <div class="v-list-item__title">{{user.firstName}}, Afmelden</div>
+                  </a>
+                </template>
+                <span>Tooltip</span>
+              </v-tooltip>
             </v-list-item-group>
           </v-list>
         </v-card>
@@ -109,12 +114,18 @@ export default {
       });
     },
     LoggedIn() {
-      //Kan veeeeel beter, maar geen tijd voor serverside controle of de user echt ingelogd is.
-      if (!this.token) {
-        if (localStorage.getItem("user")) return true;
-        else return false;
-      }
-      return true;
+      if (this.token) {
+        const store = require("../store");
+        return store.default.dispatch("authUser")
+        .then(user => {
+          this.user = user;
+          return true;
+        })
+        .catch(() => {
+          this.logOutUser(); 
+          return false;
+        });
+      } else return false;
     },
     ...mapGetters(["token"])
   },
@@ -122,7 +133,10 @@ export default {
     return {
       dialog: false,
       routes,
-      userLogged: null
+      userLogged: null,
+      user: {
+        firstName: 'mij'
+      },
     };
   },
   methods: {
@@ -149,7 +163,7 @@ body {
 }
 
 @media only screen and (max-width: 210px) {
-   .nav-logo {
+  .nav-logo {
     width: 6em !important;
   }
 }

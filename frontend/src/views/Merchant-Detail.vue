@@ -1,18 +1,18 @@
 <template>
   <v-container fluid>
-    <v-img
-      src="/assets/images/placeholder/merchant_heading.jpg"
-      alt="pizza hawai with chicken"
-      class="img-header"
-    />
+    <v-img :src="headerImage" class="img-header" :style="headerStyle" />
     <div class="merchant-logo-wrapper" :style="logoStyle">
-      <v-img
-        class="merchant-logo"
-        src="/assets/images/placeholder/merchants_logo.png"
-        alt="restaurant logo"
-      />
+      <v-img class="merchant-logo" :src="logoImage" alt="restaurant logo" />
+      <v-col class="merchant-logo-message" cols="12" sm="3">
+        <p>{{merchantDetail.message}}</p>
+      </v-col>
     </div>
-    <v-row class="merchant-info" :style="infoStyle">
+
+    <v-row
+      class="merchant-info"
+      :style="infoStyle"
+      :class="{'margin-top' : !merchantDetail.message}"
+    >
       <v-col cols="12" sm="5" lg="5">
         <h1>{{merchantDetail.name}}</h1>
         <p
@@ -23,7 +23,7 @@
         >{{merchantDetail.address_zip}} {{merchantDetail.address_city}}</p>
         <p class="dialog-content-phone">{{merchantDetail.merchantPhone}}</p>
       </v-col>
-      <v-col cols="12" sm="4" style="text-align: end; margin-top: 5px;">
+      <v-col cols="12" sm="4" md="3" class="merchant-info-hours">
         <v-tooltip left>
           <template v-slot:activator="{ on }">
             <v-btn icon @click.stop="showDialog = true" v-on="on">
@@ -32,11 +32,11 @@
           </template>
           <span>Openingsuren</span>
         </v-tooltip>
-
         <p style="margin-top: 15px; margin-bottom:0;">Afhaling: {{takeawayPossible}}</p>
         <p>Levering: {{deliveryPossible}}</p>
       </v-col>
     </v-row>
+
     <v-row :style="cardStyle" class="merchant-products">
       <v-col cols="12" md="6" v-for="product in products">
         <v-card elevation="1">
@@ -128,6 +128,16 @@ export default {
     MerchantDialog
   },
   computed: {
+    headerImage(merchant) {
+      if (merchant.bannerFileName != null)
+        return `https://www.speedmeal.be/uploads/${merchant.bannerFileName}`;
+      else return "/assets/images/placeholder/mechants_card.png";
+    },
+    logoImage(merchant) {
+      if (merchant.logoFileName != null)
+        return `https://www.speedmeal.be/uploads/${merchant.logoFileName}`;
+      else return "/assets/images/placeholder/merchants_logo.png";
+    },
     deliveryPossible() {
       if (this.merchantDetail.opening_hours.delivery.length != 0)
         return "mogelijk";
@@ -167,6 +177,10 @@ export default {
     infoStyle() {
       if (!this.isMobile) return "margin-right: 359px;";
       else return "margin-right: 0px";
+    },
+    headerStyle() {
+      if (!this.isMobile) return "margin-right: 358px;";
+      else return "margin-right: -12px";
     },
     ...mapGetters(["products", "merchantDetail", "isMobile", "showCartButton"])
   },
@@ -215,6 +229,9 @@ export default {
 </script>
 
 <style>
+.margin-top {
+  margin-top: -65px !important;
+}
 .merchant-logo-wrapper {
   margin-top: -80px;
   height: 150px;
@@ -225,6 +242,11 @@ export default {
   height: 150px;
   border: 1px solid #d7d7d7;
   margin: 0 auto;
+}
+.merchant-logo-message {
+  margin: 0 auto;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 .img-header {
   max-height: 12vw;
@@ -241,6 +263,10 @@ export default {
 .merchant-info {
   margin-top: -65px;
   justify-content: space-between;
+}
+.merchant-info-hours {
+  text-align: end;
+  margin-top: 5px;
 }
 .merchant-info button {
   align-self: center;
@@ -264,6 +290,13 @@ export default {
   }
   .merchant-info {
     margin-top: 0;
+    text-align: center;
+  }
+  .merchant-info-hours {
+    text-align: center;
+  }
+  .merchant-logo-wrapper {
+    margin-bottom: 80px;
   }
 }
 

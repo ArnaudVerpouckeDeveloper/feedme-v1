@@ -9,40 +9,7 @@
           <v-card-text>
             <v-form v-model="valid" ref="form">
               <v-row>
-                <v-col cols="9">
-                  <v-text-field
-                    v-model="orderForm.addressStreet"
-                    label="Straat"
-                    required
-                    :rules="val.requiredRule"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                  <v-text-field
-                    v-model="orderForm.addressNumber"
-                    label="Nummer"
-                    required
-                    :rules="val.requiredRule"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="4">
-                  <v-text-field
-                    v-model="orderForm.addressZipCode"
-                    label="Postcode"
-                    type="number"
-                    required
-                    :rules="val.requiredRule"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="8">
-                  <v-text-field
-                    v-model="orderForm.addressCity"
-                    label="Stad"
-                    required
-                    :rules="val.requiredRule"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3" lg="2">
+                <v-col cols="5" sm="3" lg="2">
                   <v-radio-group v-model="orderForm.deliveryMethod" :mandatory="true">
                     <v-radio
                       v-if="merchantDetail.deliveryMethod_delivery"
@@ -56,7 +23,7 @@
                     ></v-radio>
                   </v-radio-group>
                 </v-col>
-                <v-col cols="6" md="4" xl="2" style="align-self: center;">
+                <v-col cols="7" sm="4" xl="3" style="align-self: center;">
                   <v-select
                     :items="merchantDetail.possibleTimes[orderForm.deliveryMethod]"
                     name="deliveryTime"
@@ -65,6 +32,57 @@
                     no-data-text="Deze horeca zaak is momenteel gesloten."
                     :rules="val.deliveryTimeRules"
                   ></v-select>
+                </v-col>
+                 <v-col cols="12" sm="5" lg="5" xl="4" style="align-self: center;">
+                  <v-text-field
+                    v-model="orderForm.mobilePhone"
+                    value="5"
+                    label="Telefoon"
+                    hint="Bij vragen of problemen zal u op deze nummer gecontacteerd worden."
+                    required
+                    :rules="val.requiredRule"
+                  ></v-text-field>
+                </v-col>
+                
+                <v-col cols="9" v-if="isDelivery">
+                  <v-text-field
+                    v-model="orderForm.addressStreet"
+                    label="Straat"
+                    required
+                    :rules="val.requiredRule"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" v-if="isDelivery">
+                  <v-text-field
+                    v-model="orderForm.addressNumber"
+                    label="Nummer"
+                    required
+                    :rules="val.requiredRule"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="4" v-if="isDelivery">
+                  <v-text-field
+                    v-model="orderForm.addressZipCode"
+                    label="Postcode"
+                    type="number"
+                    required
+                    :rules="val.requiredRule"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="8" v-if="isDelivery">
+                  <v-text-field
+                    v-model="orderForm.addressCity"
+                    label="Stad"
+                    required
+                    :rules="val.requiredRule"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-textarea
+                    v-model="orderForm.message"
+                    label="Opmerkingen voor het restaurant?"
+                    rows="3"
+                  ></v-textarea>
                 </v-col>
               </v-row>
             </v-form>
@@ -108,11 +126,12 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   beforeRouteEnter(to, from, next) {
     if (from.name === "MerchantDetail") {
-      const store = require("../store");
+      const store = require("../store");   
       store.default
         .dispatch("authUser")
-        .then(() => {
-          next();
+        .then(user => {
+          next(vm => vm.orderForm.mobilePhone = user.mobilePhone);
+          store.default.dispatch("toggleCart", false);
         })
         .catch(() => {
           next("/aanmelden");
@@ -124,6 +143,11 @@ export default {
     CartButton
   },
   computed: {
+    isDelivery(){
+      if(this.orderForm.deliveryMethod === "delivery")
+      return true;
+      else return false;
+    },
     deliveryTimeLabel() {
       if (this.orderForm.deliveryMethod === "delivery")
         return "Gewenste bezorgtijd";
@@ -138,7 +162,9 @@ export default {
   data: () => ({
     loading: false,
     dialog: false,
-    orderForm: {},
+    orderForm: {
+      mobilePhone: "",
+    },
     valid: false,
     val: {
       requiredRule: [v => !!v || "Deze veld is verplicht"],
@@ -166,8 +192,6 @@ export default {
   }),
   methods: {
     placeOrder() {
-      this.dialog = true;
-
       this.$refs.form.validate();
       if (this.valid) {
         this.loading = true;

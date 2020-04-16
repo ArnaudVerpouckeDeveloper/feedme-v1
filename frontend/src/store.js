@@ -6,7 +6,7 @@ import router from './router/router'
 
 Vue.use(Vuex)
 
-const apiUrl = 'http://127.0.0.1:8000/api';
+const apiUrl = 'https://www.speedmeal.be/api';
 
 const state = {
     user: {},
@@ -20,11 +20,15 @@ const state = {
     isMobile: false,
     cartIsOpen: false,
     cartItems: [],
+    userLoggedOut: false,
 }
 
 const getters = {
     token: (state) => {
         return state.token || localStorage.getItem("user");
+    },
+    userLoggedOut: (state) => {
+        return state.userLoggedOut;
     },
     merchants: (state) => {
         return state.merchants;
@@ -185,12 +189,12 @@ const actions = {
             axios.post(`${apiUrl}/auth/me`, null, { headers: { 'Authorization': "bearer " + getters.token } })
                 .then(res => {
                     if (res.status === 200)
-                        resolve();
+                        resolve(res.data);
                     else reject();
                 })
                 .catch(error => {
-                    console.error(error)
                     reject();
+                    console.error(error)  
                 })
         })
     },
@@ -285,9 +289,11 @@ const mutations = {
     updateUser(state, data) {
         localStorage.setItem("user", data.access_token);
         state.token = localStorage.getItem("user");
+        state.userLoggedOut = false;
     },
     logOut(state) {
         state.token = null;
+        state.userLoggedOut = true;
         localStorage.removeItem("user");
     },
     mobileWatcher(state, size) {
