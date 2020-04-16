@@ -20,6 +20,7 @@ use App\Mail\ConfirmOrder;
 Route::get("/", function(){return view("index");});
 Route::get("/restaurants", function(){return view("index");});
 Route::get("/restaurant/{id}", function(){return view("index");});
+//Route::get("/restaurant/{merchantApiName}", "CustomerController@showMerchantShop"); /*route to fix refresh error --- not working because we are already listening for an id*/ 
 Route::get("/over", function(){return view("index");});
 Route::get("/faq", function(){return view("index");});
 Route::get("/contact", function(){return view("index");});

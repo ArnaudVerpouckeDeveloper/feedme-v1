@@ -15,7 +15,7 @@
         <style>
             body{
                 font-family: Poppins, sans-serif;
-                background-color: #68A25F;
+                background-color: #4CAF50;
             }
 
             h1{

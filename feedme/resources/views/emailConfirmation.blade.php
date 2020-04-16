@@ -15,7 +15,7 @@
         <style>
             body{
                 font-family: Poppins, sans-serif;
-                background-color: #68A25F;
+                background-color: #4CAF50;
             }
 
             h1{
@@ -71,7 +71,7 @@
         <h1>Uw e-mailadres is bevestigd.</h1>
         <p>U kunt nu gebruik maken van SpeedMeal.</p>
         <p>
-            <a href="#">
+            <a href="/">
                 <span class="text">Ga verder</span>
                 <span class="material-icons">arrow_forward</span>
             </a>
