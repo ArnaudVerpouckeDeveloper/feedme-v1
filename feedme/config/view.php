@@ -15,7 +15,7 @@ return [
 
     'paths' => [
         resource_path('views'),
-        public_path('/spa')
+        public_path('/public/spa')
     ],
 
     /*

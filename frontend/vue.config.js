@@ -12,7 +12,7 @@ module.exports = {
     },
     css: {
         extract: {
-            filename: '[name].css',
+            filename: '[name].css'
         },
     },
 }

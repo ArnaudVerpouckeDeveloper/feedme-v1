@@ -13,8 +13,8 @@
     <link href="{{asset('spa/app.css')}}" rel=preload as=style>
     <link href="{{asset('spa/app.js')}}" rel=preload as=script>
     <link href="{{asset('spa/chunk-vendors.js')}}" rel=preload as=script>
-    <link href="{{asset('spa/css/chunk-vendors.04c04cc1.css')}}" rel=preload as=style>
-    <link href="{{asset('spa/css/chunk-vendors.04c04cc1.css')}}" rel=stylesheet>
+    <link href="{{asset('spa/css/chunk-vendors.css')}}" rel=preload as=style>
+    <link href="{{asset('spa/css/chunk-vendors.css')}}" rel=stylesheet>
     <link href="{{asset('spa/app.css')}}" rel=stylesheet>
 </head>
 
