@@ -202,14 +202,22 @@ function setEventListenersForProduct(product) {
         if (imageFile !== undefined) {
             formData.append('newImage', imageFile);
         }
-        formData.append("name", product.querySelector("form .inputValues .name").value);
-        formData.append("price", product.querySelector("form .inputValues .price").value);
-        formData.append("description", product.querySelector("form .descriptionValue textarea").value);
-        formData.append("productCategory", product.querySelector("form .productCategorySelection select").value);
+
+        const name = product.querySelector("form .inputValues .name").value;
+        const price = product.querySelector("form .inputValues .price").value;
+        const description = product.querySelector("form .descriptionValue textarea").value;
+        const productCategoryId = product.querySelector("form .productCategorySelection select").value;
+
+        formData.append("name", name);
+        formData.append("price", price);
+        formData.append("description", description);
+        formData.append("productCategory", productCategoryId);
         formData.append("_token", getCSRF_token());
+        formData.append("_method", "PUT");
+        formData.append("productId", productId);
 
         await fetch("/admin/producten/updateProduct", {
-                method: "PUT",
+                method: "POST",
                 mode: 'cors',
                 headers: {
                     //'Content-Type': 'multipart/form-data', /*may not be defined when uploading a file*/
@@ -220,18 +228,20 @@ function setEventListenersForProduct(product) {
             })
             .then(res => { return res.json() })
             .then(res => {
-                if (res == "ok") {
+                if (res.message == "ok") {
                     hideForm(product);
                     product.querySelector(".row.upper .name").innerHTML = name;
                     product.querySelector(".row.upper .price").innerHTML = "€ " + addTrailZero(price, 2);
                     product.querySelector(".row.productCategoryRow p").innerHTML = product.querySelector("form .productCategory option[value='" + productCategoryId + "']").innerHTML;
+
+                    if (imageFile !== undefined) {
+                        product.querySelector(".productImage img").src = "/uploads/" + res.imageFileName;
+
+                    }
                     if (product.querySelector(".row.descriptionRow") && description != "") {
-                        console.log("a");
                         product.querySelector(".row.descriptionRow p").innerHTML = description;
                     } else {
-                        console.log("b");
                         if (description != "") {
-                            console.log("c");
                             product.querySelector(".row.upper").insertAdjacentHTML("afterEnd", '<div class="row descriptionRow"><p>' + description + '</p></div>');
                         } else {
                             if (product.querySelector(".row.descriptionRow")) {

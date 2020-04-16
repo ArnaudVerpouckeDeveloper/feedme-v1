@@ -303,7 +303,8 @@ class MerchantController extends Controller
             'price' => ['required', new Price],
             'productCategory' => 'required|min:1',
             'description' => 'nullable',
-            'newImage' => 'nullable|image|max:5000'
+            'newImage' => 'nullable|image|max:5000',
+            'productId' => 'required'
         ]);
         //todo: hier geëindigd, moet nog getest worden
         $product = auth()->user()->merchant->products->find($request->productId);
@@ -311,8 +312,16 @@ class MerchantController extends Controller
         $product->price = $request->price;
         $product->description = $request->description;
         $product->productCategory()->associate(auth()->user()->merchant->productCategories()->find($request->productCategory));
+        
+        if (isset($request->newImage)){
+            $file = $request->file("newImage");
+            $fileName = "productImage-".auth()->user()->merchant->apiName."-".$product->id.".".$file->getClientOriginalExtension();
+            $product->imageFileName = $file->storeAs('productImages',$fileName,"public");
+            $product->save();
+        }
+        
         $product->save();
-        return response()->json("ok");
+        return response()->json(["message" => "ok", "imageFileName" => $product->imageFileName]);
     }
 
     function deleteProduct(Request $request){
