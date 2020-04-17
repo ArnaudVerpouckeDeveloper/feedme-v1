@@ -78,7 +78,12 @@
                 </template>
               </v-checkbox>
               <v-card-actions class="register-button">
-                <v-btn color="primary" @click="Postregister">Verzenden</v-btn>
+                <v-btn
+                  color="primary"
+                  @click="Postregister"
+                  :loading="loading"
+                  :disabled="loading"
+                >Verzenden</v-btn>
               </v-card-actions>
               <v-divider inset class="register-divider"></v-divider>
               <p class="register">
@@ -129,6 +134,7 @@ export default {
   computed: {},
   data() {
     return {
+      loading: false,
       canSendVerificationAgain: true,
       newUserId: 0,
       dialog: false,
@@ -186,16 +192,19 @@ export default {
     Postregister() {
       this.$refs.form.validate();
       if (this.valid) {
+        this.loading = true;
         this.register(this.user)
           .then(res => {
             this.newUserId = res.userId;
             this.user = {};
             this.$refs.form.reset();
             this.dialog = true;
+            this.loading = false;
           })
           .catch(message => {
             this.snackbar = true;
             this.snackText = Object.values(message)[0][0];
+            this.loading = false;
           });
       }
     },

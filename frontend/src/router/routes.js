@@ -22,6 +22,7 @@ export const routes = [
     { path: '/bevestigbestelling', name: 'order', component: Order, display: 'hide', icon: "" },
     { path: '/voorwaarden', name: 'legal', component: Legal, display: 'hide', icon: "" },
     { path: '/admin/registreren', name: 'merchantRegister', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/admin/registreren' }},
+    { path: '/admin/login', name: 'merchantLogin', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/admin/login' }},
     { path: 'https://www.instagram.com/speedmeal/', name: 'speedmealInsta', display: 'hide', beforeEnter() { location.href = 'https://www.instagram.com/speedmeal/' }},
     { path: 'https://www.facebook.com/speedmeal.be', name: 'speedmealFacebook', display: 'hide', beforeEnter() { location.href = 'https://www.facebook.com/speedmeal.be' }},
 ]

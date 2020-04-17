@@ -43,7 +43,7 @@
           <v-row>
             <v-col cols="8">
               <v-card-title>{{product.name}}</v-card-title>
-              <v-card-subtitle v-if="product.description">€{{product.description}}</v-card-subtitle>
+              <v-card-subtitle v-if="product.description">{{product.description}}</v-card-subtitle>
               <v-card-subtitle>€{{formatPrice(product.price)}}</v-card-subtitle>
             </v-col>
             <v-col cols="4" style="align-self: center;">
@@ -128,14 +128,14 @@ export default {
     MerchantDialog
   },
   computed: {
-    headerImage(merchant) {
-      if (merchant.bannerFileName != null)
-        return `https://www.speedmeal.be/uploads/${merchant.bannerFileName}`;
+    headerImage() {
+      if (this.merchantDetail.bannerFileName != null)
+        return `https://www.speedmeal.be/uploads/${this.merchantDetail.bannerFileName}`;
       else return "/assets/images/placeholder/mechants_card.png";
     },
-    logoImage(merchant) {
-      if (merchant.logoFileName != null)
-        return `https://www.speedmeal.be/uploads/${merchant.logoFileName}`;
+    logoImage() {
+      if (this.merchantDetail.logoFileName != null)
+        return `https://www.speedmeal.be/uploads/${this.merchantDetail.logoFileName}`;
       else return "/assets/images/placeholder/merchants_logo.png";
     },
     deliveryPossible() {

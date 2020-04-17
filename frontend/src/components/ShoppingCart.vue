@@ -19,8 +19,16 @@
     <v-divider></v-divider>
     <div class="cart-items">
       <v-card v-for="product in cartItemPerMerchant" elevation="0" class="row">
-        <v-card-title class="col-8 item-name">x{{product.count}} {{product.name}}</v-card-title>
-        <v-card-title class="col-4 item-price">€{{totalItem(product)}}</v-card-title>
+        <v-card-title class="col-5 item-name">x{{product.count}} {{product.name}}</v-card-title>
+        <v-col cols="4" class="item-buttons">
+          <v-btn @click="removeProduct(product)" outlined x-small style="margin-right: 10px;">
+            <v-icon size="12">mdi-minus</v-icon>
+          </v-btn>
+          <v-btn @click="addProduct(product)" outlined x-small>
+            <v-icon size="12">mdi-plus</v-icon>
+          </v-btn>
+        </v-col>
+        <v-card-title class="col-3 item-price">€{{totalItem(product)}}</v-card-title>
       </v-card>
     </div>
     <v-divider></v-divider>
@@ -48,7 +56,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
@@ -84,7 +92,13 @@ export default {
       if (this.disableButton) return "color: #a4a4a4";
       else return "color: #ffffff";
     },
-    ...mapGetters(["isMobile", "cartIsOpen", "cartItems"])
+    ...mapGetters([
+      "products",
+      "merchantDetail",
+      "isMobile",
+      "cartIsOpen",
+      "cartItems"
+    ])
   },
   mounted() {
     this.$store.dispatch("windowsResize");
@@ -94,6 +108,18 @@ export default {
     totalPrice: 0
   }),
   methods: {
+    addProduct(product) {
+      if (!this.merchantIsClosed) {
+        let merchantId = this.merchantDetail.id;
+        let cartItem = { product, ...merchantId };
+        this.addItemToCart(cartItem);
+      } else {
+        //this.snackbar = true;
+      }
+    },
+    removeProduct(product) {
+      this.removeItemFromCart(product);
+    },
     onChangeDrawer(bool) {
       this.$store.dispatch("onChangeDrawer", bool);
     },
@@ -107,7 +133,8 @@ export default {
       if (this.cartItems.length != 0) {
         this.$router.push({ name: "order" });
       }
-    }
+    },
+    ...mapActions(["addItemToCart", "removeItemFromCart"])
   }
 };
 </script>
@@ -125,13 +152,30 @@ export default {
   overflow-y: scroll;
 }
 .item-name {
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 400;
+}
+.item-buttons {
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+}
+.item-buttons button {
+  border: 1px solid #b4b4b4;
+  width: 25px !important;
+  height: 25px !important;
 }
 .item-price {
   justify-content: flex-end;
   color: rgba(0, 0, 0, 0.6);
-  font-size: 1rem;
+  font-size: 0.9em;
+}
+.item-count {
+  width: 21px;
+  margin-left: 8px;
+  align-items: center;
+  display: flex;
+  font-size: 0.9em;
 }
 .price,
 .total-price,
@@ -152,6 +196,16 @@ export default {
 .nav-drawer {
   position: sticky !important;
 }
+@media only screen and (max-width: 328px) {
+  .item-buttons {
+    flex-direction: column;
+  }
+  .item-buttons button {
+    margin-right: 0px !important;
+    margin-bottom: 10px;
+  }
+}
+
 @media only screen and (min-width: 999px) {
   .nav-drawer {
     position: absolute !important;

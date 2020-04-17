@@ -31,6 +31,9 @@
             Nog geen account?
             <router-link :to="{name:'register'}">Registreer u hier.</router-link>
           </p>
+          <p class="register">
+            <router-link :to="{name:'merchantLogin'}">Inloggen als zaak.</router-link>
+          </p>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="Postlogin">Login</v-btn>
