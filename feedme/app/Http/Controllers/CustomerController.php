@@ -153,9 +153,12 @@ class CustomerController extends Controller
     }
     //
     function placeOrder(Request $request){
+
         if(!$this->merchantIdExists($request->merchantId)){
             exit();
         }
+
+
         
         $merchant = Merchant::find($request->merchantId);
         $order = new Order();
@@ -184,9 +187,10 @@ class CustomerController extends Controller
 
         
         try {
-
-            if (!(strtotime(auth()->user()->customer->orders()->orderBy("created_at","desc")->first()->created_at) < strtotime("-30 seconds"))){
-                return response()->json("another order was recently sent", 406);
+            if(auth()->user()->customer->orders->count() != 0){
+                if (!(strtotime(auth()->user()->customer->orders()->orderBy("created_at","desc")->first()->created_at) < strtotime("-30 seconds"))){
+                    return response()->json("another order was recently sent", 406);
+                }
             }
             
             if ($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime)){
@@ -206,15 +210,18 @@ class CustomerController extends Controller
                 return response()->json("order not possible in shedule", 406);
             }
     
-    
+
             $order->requestedTime = DateTime::createFromFormat('H:i', $request->requestedTime);
-            
+
     
             if ($this->productIdsAreValid($request->productIds, $merchant)){
+
                 if($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime )){
+
                     $merchant->orders()->save($order);
                     auth()->user()->customer->orders()->save($order);
     
+
                     $totalPrice = 0;
                     foreach ($request->productIds as $productId){
                         $product = Product::find($productId);
@@ -225,6 +232,7 @@ class CustomerController extends Controller
                     $order->totalPrice = $totalPrice;
                     $order->save();
     
+
                     Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
                     return response()->json("ok");
                 }

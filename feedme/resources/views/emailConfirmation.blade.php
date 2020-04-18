@@ -33,7 +33,7 @@
             }
 
             p a{
-                color: #68A25F;
+                color: #4CAF50;
                 border: 2px solid white;
                 padding: 0.4rem 2.3rem 0.4rem 1rem;
                 text-decoration: none;
@@ -49,7 +49,7 @@
             }
 
             p a:hover{
-                background-color: #68A25F;
+                background-color: #4CAF50;
                 color: white;
             }
 

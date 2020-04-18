@@ -48,7 +48,7 @@ class MerchantController extends Controller
     }
 
     function checkForOpenOrders(){
-        $openOrders = User::first()->merchant->orders->where("accepted", false)->where("denied",false);
+        $openOrders = auth()->user()->merchant->orders->where("accepted", false)->where("denied",false);
         return response()->json($openOrders);
     }
 
@@ -110,8 +110,12 @@ class MerchantController extends Controller
             array_push($checklist, ["instruction" => "Stel een logo in voor uw pagina.", "location" => "settings"]);
         }
 
+        if($merchant->productCategories->count() == 0){
+            array_push($checklist, ["instruction" => "Maak een productcategorie aan. U heeft minstens één productcategorie nodig om producten aan te kunnen maken.", "location" => "products"]);
+        }
+
         if($amountOfProducts < 5){
-            array_push($checklist, ["instruction" => "Voeg minstens 5 (bestelbare) producten toe.", "location" => "products"]);
+            array_push($checklist, ["instruction" => "Voeg minstens 5 (bestelbare) producten toe. Hiervoor dient u eerst een productcategorie aangemaakt te hebben.", "location" => "products"]);
         }
 
         if(is_null($merchant->bannerFileName)){

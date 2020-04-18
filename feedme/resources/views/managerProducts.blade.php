@@ -4,7 +4,7 @@
 @section('content')
 
 
-
+@if($merchant->productCategories->count() > 0)
 <form class="createProductForm" method="POST" action="/admin/producten/addProduct" enctype="multipart/form-data">
     <div class="row input-row">
         <input type="text" name="name" placeholder="Productnaam" class="name" required/>
@@ -36,6 +36,7 @@
         @endif
     </div>
 </form>
+@endif
 
 <div class="productCategories">
     <h2>Productcategorieën</h2>

@@ -72,7 +72,7 @@ export default {
   methods: {
     cardImage(merchant) {
       if (merchant.bannerFileName != null)
-      return `https://www.speedmeal.be/uploads/${merchant.bannerFileName}`;
+      return `https://www.speedmeal.be/public/uploads/${merchant.bannerFileName}`;
       else return "/assets/images/placeholder/mechants_card.png";
     }
   }

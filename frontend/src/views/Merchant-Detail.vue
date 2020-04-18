@@ -130,12 +130,12 @@ export default {
   computed: {
     headerImage() {
       if (this.merchantDetail.bannerFileName != null)
-        return `https://www.speedmeal.be/uploads/${this.merchantDetail.bannerFileName}`;
+        return `https://www.speedmeal.be/public/uploads/${this.merchantDetail.bannerFileName}`;
       else return "/assets/images/placeholder/mechants_card.png";
     },
     logoImage() {
       if (this.merchantDetail.logoFileName != null)
-        return `https://www.speedmeal.be/uploads/${this.merchantDetail.logoFileName}`;
+        return `https://www.speedmeal.be/public/uploads/${this.merchantDetail.logoFileName}`;
       else return "/assets/images/placeholder/merchants_logo.png";
     },
     deliveryPossible() {

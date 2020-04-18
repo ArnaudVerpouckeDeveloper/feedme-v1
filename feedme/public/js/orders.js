@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
 function checkForOpenOrders(hasToConfirm = false) {
     makeRequest("POST", "/admin/orders/checkForOpenOrders")
         .then(res => {
+            console.log(res);
+
             if (Object.values(res).length > 0) {
                 if (hasToConfirm) {
                     Swal.fire(

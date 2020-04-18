@@ -4,50 +4,66 @@ document.addEventListener("DOMContentLoaded", function() {
         setEventListenersForProduct(allProductElements[i]);
     }
 
-    document.querySelector(".createProductForm input[type='submit']").addEventListener("click", async function(e) {
-        e.preventDefault();
+    if (document.querySelector(".createProductForm input[type='submit']")) {
 
-        const formData = new FormData();
-        const imageFile = document.querySelector(".createProductForm input[name='image']").files[0];
-        if (imageFile !== undefined) {
-            formData.append('image', imageFile);
-        }
-        formData.append("name", document.querySelector(".createProductForm .name").value);
-        formData.append("price", document.querySelector(".createProductForm .price").value);
-        formData.append("description", document.querySelector(".createProductForm .description").value);
-        formData.append("productCategory", document.querySelector(".createProductForm .productCategory").value);
-        formData.append("_token", getCSRF_token());
+        document.querySelector(".createProductForm input[type='submit']").addEventListener("click", async function(e) {
+            e.preventDefault();
 
-        await fetch("/admin/producten/addProduct", {
-                method: "POST",
-                mode: 'cors',
-                headers: {
-                    //'Content-Type': 'multipart/form-data', /*may not be defined when uploading a file*/
-                    'Accept': 'application/json',
-                },
-                redirect: 'follow',
-                body: formData
-            })
-            .then(res => { return res.json() })
-            .then(res => {
-                if (res == "ok") {
-                    Swal.fire(
-                            'Geslaagd!',
-                            'Uw product is toegevoegd.',
-                            'success'
-                        )
-                        .then(res => {
-                            window.location.href = "/admin/producten";
-                        })
-                } else {
-                    throw (res);
-                }
-            })
-            .catch(error => {
-                console.log("error: ", error);
-                promptError();
-            });
-    });
+            const formData = new FormData();
+            const imageFile = document.querySelector(".createProductForm input[name='image']").files[0];
+            if (imageFile !== undefined) {
+                formData.append('image', imageFile);
+            }
+            formData.append("name", document.querySelector(".createProductForm .name").value);
+            formData.append("price", document.querySelector(".createProductForm .price").value);
+            formData.append("description", document.querySelector(".createProductForm .description").value);
+            formData.append("productCategory", document.querySelector(".createProductForm .productCategory").value);
+            formData.append("_token", getCSRF_token());
+
+            await fetch("/admin/producten/addProduct", {
+                    method: "POST",
+                    mode: 'cors',
+                    headers: {
+                        //'Content-Type': 'multipart/form-data', /*may not be defined when uploading a file*/
+                        'Accept': 'application/json',
+                    },
+                    redirect: 'follow',
+                    body: formData
+                })
+                .then(res => { return res.json() })
+                .then(res => {
+                    if (res == "ok") {
+                        Swal.fire(
+                                'Geslaagd!',
+                                'Uw product is toegevoegd.',
+                                'success'
+                            )
+                            .then(res => {
+                                window.location.href = "/admin/producten";
+                            })
+                    } else {
+                        throw (res);
+                    }
+                })
+                .catch(error => {
+                    console.log("error: ", error);
+                    promptError();
+                });
+        });
+
+
+        document.querySelector(".createProductForm .productImageUploadButton").addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelector(".createProductForm input[name='image']").click();
+        });
+
+        document.querySelector(".createProductForm input[name='image']").addEventListener("change", function() {
+            readURL(this, document.querySelector(".createProductForm .imagePreview img"), false);
+            document.querySelector(".createProductForm .imagePreview").classList.remove("hidden");
+        });
+    }
+
+
 
     document.querySelector("form.newProductCategoryForm input[type='submit']").addEventListener("click", function(e) {
         e.preventDefault();
@@ -84,15 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setEventListenersForProductCategory(allProductCategoryElements[i]);
     }
 
-    document.querySelector(".createProductForm .productImageUploadButton").addEventListener("click", function(e) {
-        e.preventDefault();
-        document.querySelector(".createProductForm input[name='image']").click();
-    });
 
-    document.querySelector(".createProductForm input[name='image']").addEventListener("change", function() {
-        readURL(this, document.querySelector(".createProductForm .imagePreview img"), false);
-        document.querySelector(".createProductForm .imagePreview").classList.remove("hidden");
-    });
 });
 
 function setEventListenersForProductCategory(productCategory) {
