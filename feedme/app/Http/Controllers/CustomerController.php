@@ -17,16 +17,22 @@ class CustomerController extends Controller
 {
     use SharedMerchantTrait;
 
+    /* deprecated
     public function showMerchantShop($merchantApiName){
         $merchant = Merchant::where("apiName", $merchantApiName)->first();
         if ($merchant == null){
-            return view("errors.404");
+            //return redirect()->route('anythingElse',['query' => $merchantApiName]);
+            //return redirect()->route('index',['query' => $merchantApiName]);
+            return redirect($merchantApiName);
+
+            //return view("errors.404");
         }
         else{
             $merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
             return redirect("/restaurant/".$merchant->id);
         }
     }
+    */
 
     function getMerchant($merchantId){
         $merchant = Merchant::find($merchantId);
@@ -39,11 +45,16 @@ class CustomerController extends Controller
         $merchantObject->id = $merchant->id;
         $merchantObject->message = $merchant->message;
 
+        $merchantObject->minimumOrderValue = $merchant->minimumOrderValue;
+        $merchantObject->deliveryCost = $merchant->deliveryCost;
+
         $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
         $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
 
+        /* deprecated
         $merchantObject->deliveryMethod_takeaway = $merchant->deliveryMethod_takeaway;
         $merchantObject->deliveryMethod_delivery = $merchant->deliveryMethod_delivery;
+        */
 
         $merchantObject->merchantPhone = $merchant->merchantPhone;
         $merchantObject->address_street = $merchant->address_street;
@@ -150,7 +161,10 @@ class CustomerController extends Controller
             ];
 
 
-        return response()->json($merchantObject,200);
+            
+            $merchantObject->productCategories = $merchant->productCategories()->select("id","name")->get();
+
+            return response()->json($merchantObject,200);
     }
     //
     function placeOrder(Request $request){

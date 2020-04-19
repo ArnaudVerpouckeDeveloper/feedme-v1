@@ -60,7 +60,7 @@ class MerchantController extends Controller
         $file = $request->file("logo");
         $fileName = "logo-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
         auth()->user()->merchant->update(['logoFileName' => $file->storeAs('merchantLogos',$fileName,"public")]);
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-logo");
     }
 
     function updateBanner(Request $request){
@@ -70,7 +70,7 @@ class MerchantController extends Controller
         $file = $request->file("banner");
         $fileName = "banner-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
         auth()->user()->merchant->update(['bannerFileName' => $file->storeAs('merchantBanners',$fileName,"public")]);
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-banner");
     }
 
 
@@ -81,7 +81,7 @@ class MerchantController extends Controller
             'message' => 'required'
         ]);
         auth()->user()->merchant->update(['message' => $request->message]);
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-bericht");
     }
 
 
@@ -136,6 +136,14 @@ class MerchantController extends Controller
 
         if(!$merchant->hasSetMinimumWaitTimeForDelivery){
             array_push($checklist, ["instruction" => "Stel de minimale wachttijd in voor leveringen.", "location" => "settings"]);
+        }
+
+        if(!$merchant->hasSetMinimumOrderValue){
+            array_push($checklist, ["instruction" => "Stel de minimale prijs van een bestelling in.", "location" => "settings"]);
+        }
+
+        if(!$merchant->hasSetDeliveryCost){
+            array_push($checklist, ["instruction" => "Stel de extra kost van een levering in.", "location" => "settings"]);
         }
 
         if($merchant->orders->count() == 0){
@@ -260,6 +268,7 @@ class MerchantController extends Controller
     }
 
     function addProduct(Request $request){
+        $request->replace(array('price' => priceToFloat($request->price)));
         $request->validate([
             'name' => 'required|min:2',
             'price' => ['required', new Price],
@@ -272,7 +281,7 @@ class MerchantController extends Controller
             $product = new Product();
             $product->name = $request->name;
             $product->description = $request->description;
-            $product->price = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
+            $product->price = $request->price;
             $product->productCategory()->associate(auth()->user()->merchant->productCategories()->find($request->productCategory));
             auth()->user()->merchant->products()->save($product);
 
@@ -301,7 +310,7 @@ class MerchantController extends Controller
     }
 
     function updateProduct(Request $request){
-        $request->price = str_replace(",",".",$request->price);
+        $request->replace(array('price' => priceToFloat($request->price)));
         $request->validate([
             'name' => 'required|min:2',
             'price' => ['required', new Price],
@@ -310,7 +319,6 @@ class MerchantController extends Controller
             'newImage' => 'nullable|image|max:5000',
             'productId' => 'required'
         ]);
-        //todo: hier geëindigd, moet nog getest worden
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->name = $request->name;
         $product->price = $request->price;
@@ -371,7 +379,7 @@ class MerchantController extends Controller
             'address_city' => $request->address_city,
             'tax_number' => $request->tax_number
             ]);
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-gegevens-horeca-zaak");
     }
 
 
@@ -385,7 +393,7 @@ class MerchantController extends Controller
         $merchant = auth()->user()->merchant()->update([
             "minimumWaitTime_takeaway" => $request->minimumWaitTime_takeaway,
             "hasSetMinimumWaitTimeForTakeaway" => true]);
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-minimum-wachttijd-afhaling");
     }
 
     function updateMinimumWaitTimeForDelivery(Request $request){
@@ -396,7 +404,7 @@ class MerchantController extends Controller
         $merchant = auth()->user()->merchant()->update([
             "minimumWaitTime_delivery" => $request->minimumWaitTime_delivery,
             "hasSetMinimumWaitTimeForDelivery" => true]);
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-minimum-wachttijd-levering");
     }
 
 
@@ -468,7 +476,7 @@ class MerchantController extends Controller
             ]);
 
 
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-schema-afhaling");
     }
 
 
@@ -541,7 +549,7 @@ class MerchantController extends Controller
             ]);
 
 
-        return redirect("/admin/instellingen");
+        return redirect("/admin/instellingen#link-schema-levering");
     }
 
 
@@ -575,6 +583,35 @@ class MerchantController extends Controller
         ]);      
     }
 
+
+
+
+
+
+    function updateMinimumOrderValue(Request $request){
+        $request->replace(array('minimumOrderValue' => priceToFloat($request->minimumOrderValue)));
+        $request->validate([
+            'minimumOrderValue' => ['required', 'regex:/^\d*(\.\d{2})?$/']
+        ]);        
+        
+        $merchant = auth()->user()->merchant()->update([
+            "minimumOrderValue" => $request->minimumOrderValue,
+            "hasSetminimumOrderValue" => true]);
+        return redirect("/admin/instellingen#link-minimum-bedrag-bestelling");
+    }
+
+
+    function updateDeliveryCost(Request $request){
+        $request->replace(array('deliveryCost' => priceToFloat($request->deliveryCost)));
+        $request->validate([
+            'deliveryCost' => ['required', 'regex:/^\d*(\.\d{2})?$/']
+        ]);        
+
+        $merchant = auth()->user()->merchant()->update([
+            "deliveryCost" => $request->deliveryCost,
+            "hasSetDeliveryCost" => true]);
+        return redirect("/admin/instellingen#link-leveringskosten");
+    }
 
 
         

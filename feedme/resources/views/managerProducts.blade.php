@@ -8,7 +8,7 @@
 <form class="createProductForm" method="POST" action="/admin/producten/addProduct" enctype="multipart/form-data">
     <div class="row input-row">
         <input type="text" name="name" placeholder="Productnaam" class="name" required/>
-        <input type="value" name="price" placeholder="prijs" class="price" required/>
+        <input type="value" name="price" placeholder="Prijs" class="price" required/>
         <input type="submit" value="Toevoegen"/>
     </div>
     <div class="row bottom-row">
@@ -91,7 +91,7 @@
 
         <div class="row upper">
             <p class="name">{{$product->name}}</p>
-            <p class="price">€ {{str_replace(".", ",", number_format($product->price, 2, '.', ''))}}</p>
+            <p class="price">{{floatToPrice($product->price, true)}}</p>
         </div>
 
         @if(isset($product->description))
@@ -105,10 +105,10 @@
         <form class="hidden">
             <div class="row inputValues">
                 <input type="text" name="name" placeholder="{{$product->name}}" class="name" value="{{$product->name}}"/>
-                <input type="value" name="price" placeholder="{{$product->price}}" class="price" value="{{str_replace(".", ",", number_format($product->price, 2, '.', ''))}}"/>    
+                <input type="value" name="price" placeholder="{{floatToPrice($product->price, true)}}" class="price" value="{{floatToPrice($product->price, true)}}"/>    
             </div>
             <div class="row descriptionValue">
-                <textarea name="price" placeholder="Productomschrijving (optioneel)">{{$product->description}}</textarea>  
+                <textarea name="description" placeholder="Productomschrijving (optioneel)">{{$product->description}}</textarea>  
             </div>
             <div class="row productCategorySelection">
                 <select name="productCategory" class="productCategory">

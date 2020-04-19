@@ -71,7 +71,7 @@
         <h1>Uw e-mailadres is bevestigd.</h1>
         <p>U kunt nu gebruik maken van SpeedMeal.</p>
         <p>
-            <a href="/">
+            <a href="/aanmelden">
                 <span class="text">Ga verder</span>
                 <span class="material-icons">arrow_forward</span>
             </a>

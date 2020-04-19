@@ -37,7 +37,7 @@
                     @endforeach
                 </ul>
 
-                <p class="totalPrice">Totale prijs: € {{str_replace(".",",",$order->totalPrice)}}</p>
+                <p class="totalPrice">Totale prijs: {{floatToPrice($order->totalPrice, true)}}</p>
 
                 @if (isset($order->details))
                 <div class="remarks">

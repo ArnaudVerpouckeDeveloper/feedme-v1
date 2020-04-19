@@ -917,6 +917,24 @@ body main .settings form.schedule .row select:hover {
 body main .settings form.schedule .row select:focus {
   outline: none;
 }
+body main .settings form.simpleInputForm label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #4CAF50;
+}
+body main .settings form.simpleInputForm .row {
+  margin-bottom: 1rem;
+}
+body main .settings form.simpleInputForm .row input[type=text] {
+  width: 25%;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  border: 1px solid #A9A9A9;
+}
+body main .settings form.simpleInputForm .row input[type=text]:hover {
+  border-color: #4CAF50;
+}
 body main .dashboard {
   margin-left: auto;
   margin-right: auto;
