@@ -141,7 +141,7 @@ class MerchantController extends Controller
         }
 
         if($merchant->orders->count() == 0){
-            array_push($checklist, ["instruction" => "Ontvang uw eerste order.", "location" => "orders"]);
+            array_push($checklist, ["instruction" => "Ontvang uw eerste order. U kunt het best klanten naar uw omgeving brengen door bovenstaande link (www.speedmeal.be/".$merchant->apiName.") te delen via uw social media kanalen.", "location" => "orders"]);
         }
 
         if($merchant->orders->where("completed",true)->count() == 0){

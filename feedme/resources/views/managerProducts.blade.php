@@ -18,7 +18,7 @@
                     <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
                 @endforeach
             </select>
-            <button class="productImageUploadButton">Afbeelding uploaden (optioneel)</button>
+            <button class="productImageUploadButton">Afbeelding uploaden (aangeraden)</button>
             <input type="file" class="hidden" name="image" accept="image/*"/>
         </div>
         <textarea rows="3" placeholder="Productomschrijving (optioneel)" name="description" class="description"></textarea>
@@ -77,7 +77,7 @@
 </div>
 
 <ul class="products">
-    @foreach ($merchant->products as $product)
+    @foreach ($merchant->products()->orderBy("product_category_id","asc")->get() as $product)
     <li data-id="{{$product->id}}">
         <div class="row productCategoryRow">
             <p>{{$product->productCategory->name}}</p>

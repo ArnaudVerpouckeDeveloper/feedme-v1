@@ -533,7 +533,7 @@ body {
                             border: 2px solid white;
                             color: white;
                             border-radius: 0.3rem;
-                            font-size: 1rem;
+                            font-size: 0.85rem;
                             font-weight: bold;
                             width: 100%;
                             &:hover {
@@ -677,6 +677,8 @@ body {
                     &.productImage {
                         img {
                             width: 100%;
+                            height: 15rem;
+                            object-fit: cover;
                         }
                     }
                     &.descriptionRow {
