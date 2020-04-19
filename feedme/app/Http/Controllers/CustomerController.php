@@ -37,6 +37,7 @@ class CustomerController extends Controller
         $merchantObject->name = $merchant->name;
         $merchantObject->apiName = $merchant->apiName;
         $merchantObject->id = $merchant->id;
+        $merchantObject->message = $merchant->message;
 
         $merchantObject->minimumWaitTime_takeaway = $merchant->minimumWaitTime_takeaway;
         $merchantObject->minimumWaitTime_delivery = $merchant->minimumWaitTime_delivery;
