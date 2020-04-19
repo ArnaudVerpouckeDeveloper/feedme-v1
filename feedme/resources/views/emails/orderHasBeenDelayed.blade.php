@@ -4,9 +4,13 @@
   <title>Uw order werd uitgesteld</title>
 </head>
 <body style="font-family:Poppins,sans-serif;padding:2rem;">
-<h1 style="font-size: 2rem;color:#68A25F;margin-top:0;">Uw order werd met {{$order->extraTime}} minuten uitgesteld.</h1>
-
-<ul style="margin-bottom: 1rem; padding: 0;">
+<h1 style="font-size: 2rem;color:#4CAF50;margin-top:0;">Uw order werd met {{$order->extraTime}} minuten uitgesteld.</h1>
+@if($order->deliveryMethod == "takeaway")
+  <p style="margin-top: 1rem; margin-bottom: 1rem; color: #4CAF50">{{$order->merchant->name}} heeft uw order aanvaard, u kunt uw bestelling afhalen om {{date("H:i", strtotime("+".$order->extratime." minutes", strtotime($order->requestedTime)))}}.</p>
+@elseif($order->deliveryMethod == "delivery")
+  <p style="margin-top: 1rem; margin-bottom: 1rem; color: #4CAF50">{{$order->merchant->name}} heeft uw order aanvaard, uw bestelling zal omstreeks {{date("H:i", strtotime("+".$order->extratime." minutes", strtotime($order->requestedTime)))}} geleverd worden.</p>
+@endif
+  <ul style="margin-bottom: 1rem; padding: 0;">
   @php
        $productIdsInOrder = [];
        foreach ($order->products as $product){

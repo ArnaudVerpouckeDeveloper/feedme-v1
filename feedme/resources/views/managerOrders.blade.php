@@ -3,7 +3,7 @@
 
 @section('content')
     <ul class="orders">
-        @foreach ($merchant->orders()->where("completed",false)->where("denied", false)->orderBy("requestedTime", "desc")->get() as $order)
+        @foreach ($merchant->orders()->where("completed",false)->where("denied", false)->orderBy("accepted", "asc")->orderBy("requestedTime", "asc")->get() as $order)
         @php $order->requestedTime = date("H:i", strtotime($order->requestedTime)); @endphp
         @if($order->accepted)
             <li class="order accepted" data-orderId="{{$order->id}}">
@@ -67,33 +67,35 @@
             </div>
             <div class="orderSections">
                 <ul class="row">
-                <li class="deliveryMethod">
-                    @if($order->deliveryMethod == "delivery")
-                        <p class="type">leveren</p>
-                        <p class="time {{$order->extratime != null?'lineThrough':''}}">{{$order->requestedTime}}</p>
-                    @endif
-                    @if($order->deliveryMethod == "takeaway")
-                        <p class="type">afhalen</p>
-                        <p class="time {{$order->extratime != null?'lineThrough':''}}">{{$order->requestedTime}}</p>
-                    @endif
+                    <li class="deliveryMethod {{$order->extratime != null?'delayed':''}}">
+                        @if($order->deliveryMethod == "delivery")
+                            <p class="type">leveren</p>
+                            <p class="time {{$order->extratime != null?'lineThrough':''}}">{{$order->requestedTime}}</p>
+                        @endif
+                        @if($order->deliveryMethod == "takeaway")
+                            <p class="type">afhalen</p>
+                            <p class="time {{$order->extratime != null?'lineThrough':''}}">{{$order->requestedTime}}</p>
+                        @endif
 
-                    @if($order->extratime != "" || $order->extratime != null)
-                        <p class="timeDelay">{{date("H:i", strtotime("+".$order->extratime." minutes", strtotime($order->requestedTime)))}}</p>
-                    @endif                    
-                </li>
-                @if ($order->accepted || $order->denied)
-                    <li class="action completeOrder"><span class="material-icons">check</span><p>Voltooi</p></li>
-                @else
-                    <li class="action acceptOrder"><span class="material-icons">check</span><p>Accepteer</p></li>
-                    <li class="action denyOrder"><span class="material-icons">close</span><p>Weiger</p></li>
-                @endif
+                        @if($order->extratime != "" || $order->extratime != null)
+                            <p class="timeDelay">{{date("H:i", strtotime("+".$order->extratime." minutes", strtotime($order->requestedTime)))}}</p>
+                        @endif                    
+                    </li>
+                    @if ($order->accepted)
+                        <li class="action completeOrder"><span class="material-icons">check</span><p>Voltooi</p></li>
+                    @else
+                        <li class="action acceptOrder"><span class="material-icons">check</span><p>Accepteer</p></li>
+                        <li class="action denyOrder"><span class="material-icons">close</span><p>Weiger</p></li>
+                    @endif
             </ul>
 
-                <ul class="row">
+            @if (!$order->accepted)
+                <ul class="row delayActions">
                     <li class="action addExtraTime addExtraTime_15 {{$order->extratime === '15'?'delayed':''}}"><span class="material-icons">schedule</span><p>+15 min.</p></li>
                     <li class="action addExtraTime addExtraTime_30 {{$order->extratime === '30'?'delayed':''}}"><span class="material-icons">schedule</span><p>+30 min.</p></li>
                     <li class="action addExtraTime addExtraTime_60 {{$order->extratime === '60'?'delayed':''}}"><span class="material-icons">schedule</span><p>+60 min.</p></li>
                 </ul>
+            @endif
             </div>
         </li>
         @endforeach

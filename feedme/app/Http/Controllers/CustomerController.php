@@ -184,9 +184,8 @@ class CustomerController extends Controller
                 return $merchantObject;
             }
     }
-    //
+    
     function placeOrder(Request $request){
-
         if(!$this->merchantIdExists($request->merchantId)){
             exit();
         }
@@ -218,7 +217,7 @@ class CustomerController extends Controller
         */
 
 
-        
+
         try {
             if(auth()->user()->customer->orders->count() != 0){
                 if (!(strtotime(auth()->user()->customer->orders()->orderBy("created_at","desc")->first()->created_at) < strtotime("-30 seconds"))){

@@ -101,12 +101,13 @@ class DatabaseSeeder extends Seeder
 
 
         $customer2 = User::create([
-            'firstName' => 'Bart',
-            'lastName' => 'Geesens',
-            'email' => 'bart@test.com',
-            'password' => bcrypt('123'),
+            'firstName' => 'Michiel',
+            'lastName' => 'Van Steenlandt',
+            'email' => 'arnaud.verpoucke@hotmail.com',
+            'password' => bcrypt('Arnaud_2019'),
             'verificationCode' => Str::random(128),
-            'mobilePhone' => "0479456321"
+            'mobilePhone' => "0479456321",
+            'email_verified_at' => now(),
         ]);
         $customer2->roles()->attach($customerRole);
         $customer2->customer()->save(new Customer());
@@ -193,7 +194,13 @@ class DatabaseSeeder extends Seeder
                 
 
                 $user->merchant->orders()->save($order);
-                $customer1->customer->orders()->save($order);
+                if (rand(0,1) == 1){
+                    $customer1->customer->orders()->save($order);
+                }
+                else{
+                    $customer2->customer->orders()->save($order);
+
+                }
 
 
                 $productsInStock = Product::all();

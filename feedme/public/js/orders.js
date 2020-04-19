@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
 function checkForOpenOrders(hasToConfirm = false) {
     makeRequest("POST", "/admin/orders/checkForOpenOrders")
         .then(res => {
-            console.log(res);
-
             if (Object.values(res).length > 0) {
                 if (hasToConfirm) {
                     Swal.fire(
@@ -96,10 +94,8 @@ function setEventListenersForOrder(order) {
                     })
                     .then(res => {
                         if (res == "ok") {
-                            order.classList.add("accepted");
-                            order.querySelector(".orderSections .acceptOrder").remove();
-                            order.querySelector(".orderSections .denyOrder").remove();
-                            order.querySelector(".orderSections .deliveryMethod").insertAdjacentHTML("afterEnd", "<li class='action completeOrder'><span class='material-icons'>check</span><p>Voltooi</p></li>");
+                            removeDelayActions(order);
+                            removeAcceptAndDenyActionsAndCreateCompleteActionAndSetOrderClassToAccepted(order);
                             setEventListenersForOrder(order);
                         } else {
                             throw (res);
@@ -158,12 +154,20 @@ function setEventListenersForOrder(order) {
                     .then(res => {
                         console.log(res);
                         if (res.message == "ok") {
-                            removeAllDelaysFromExtraTimeButtons(order);
                             showNewTime(order, res.newTime);
+                            order.querySelector(".orderSections .deliveryMethod").classList.add("delayed");
+
+                            removeDelayActions(order);
+                            removeAcceptAndDenyActionsAndCreateCompleteActionAndSetOrderClassToAccepted(order);
+                            setEventListenersForOrder(order);
+
+                            /* 
+                            removeAllDelaysFromExtraTimeButtons(order);
                             order.querySelector(".orderSections .addExtraTime.addExtraTime_15").classList.add("delayed");
+                            */
                             Swal.fire(
                                 'Geslaagd!',
-                                'Het order werd met 15 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                                'Het order werd aanvaard met 15 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
                                 'success'
                             );
                         } else {
@@ -188,12 +192,18 @@ function setEventListenersForOrder(order) {
                         console.log(res);
 
                         if (res.message == "ok") {
-                            removeAllDelaysFromExtraTimeButtons(order);
+                            removeDelayActions(order);
+                            order.querySelector(".orderSections .deliveryMethod").classList.add("delayed");
+                            removeAcceptAndDenyActionsAndCreateCompleteActionAndSetOrderClassToAccepted(order);
+                            setEventListenersForOrder(order);
                             showNewTime(order, res.newTime);
+                            /*
+                            removeAllDelaysFromExtraTimeButtons(order);
                             order.querySelector(".orderSections .addExtraTime.addExtraTime_30").classList.add("delayed");
+                            */
                             Swal.fire(
                                 'Geslaagd!',
-                                'Het order werd met 30 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                                'Het order werd aanvaard en met 30 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
                                 'success'
                             );
                         } else {
@@ -217,12 +227,18 @@ function setEventListenersForOrder(order) {
                         console.log(res);
 
                         if (res.message == "ok") {
-                            removeAllDelaysFromExtraTimeButtons(order);
+                            removeDelayActions(order);
+                            removeAcceptAndDenyActionsAndCreateCompleteActionAndSetOrderClassToAccepted(order);
+                            order.querySelector(".orderSections .deliveryMethod").classList.add("delayed");
+                            setEventListenersForOrder(order);
                             showNewTime(order, res.newTime);
+                            /*
+                            removeAllDelaysFromExtraTimeButtons(order);
                             order.querySelector(".orderSections .addExtraTime.addExtraTime_60").classList.add("delayed");
+                            */
                             Swal.fire(
                                 'Geslaagd!',
-                                'Het order werd met 60 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
+                                'Het order werd aanvaard en met 60 minuten uitgesteld, de klant zal hiervan een e-mail ontvangen.',
                                 'success'
                             );
                         } else {
@@ -362,4 +378,17 @@ function confirmAction(title, subtitle, confirmButtonText, callBack, confirmButt
                 callBack();
             }
         });
+}
+
+
+function removeDelayActions(orderDomElement) {
+    orderDomElement.querySelector(".orderSections .delayActions").remove();
+}
+
+function removeAcceptAndDenyActionsAndCreateCompleteActionAndSetOrderClassToAccepted(orderDomElement) {
+    orderDomElement.classList.add("accepted");
+    orderDomElement.querySelector(".orderSections .acceptOrder").remove();
+    orderDomElement.querySelector(".orderSections .denyOrder").remove();
+    orderDomElement.querySelector(".orderSections .deliveryMethod").insertAdjacentHTML("afterEnd", "<li class='action completeOrder'><span class='material-icons'>check</span><p>Voltooi</p></li>");
+
 }

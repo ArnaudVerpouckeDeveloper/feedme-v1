@@ -367,6 +367,9 @@ body {
                                 flex-direction: column;
                                 align-items: center;
                                 justify-content: center;
+                                &.delayed {
+                                    background-color: gold;
+                                }
                                 p {
                                     font-weight: bold;
                                     &.type {

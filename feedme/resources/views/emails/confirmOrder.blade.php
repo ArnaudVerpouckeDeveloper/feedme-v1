@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bevestiging van uw order</title>
+  <title>Voorlopige bevestiging van uw order</title>
 </head>
 <body style="font-family:Poppins,sans-serif;padding:2rem;">
-<h1 style="font-size: 2rem;color:#68A25F;margin-top:0;">Bevestiging van uw order:</h1>
+<h1 style="font-size: 2rem;color:#4CAF50;margin-top:0;">Uw order werd voorlopig bevestigd:</h1>
+<p style="margin-bottom: 1rem; color: red; font-weight: bold;">{{$order->merchant->name}} dient uw bestelling eerst nog te aanvaarden. Zodra uw bestelling aanvaard werd, zult u hiervan een bevestiging per e-mail ontvangen. Let op: het door u gekozen tijdstip ({{$order->requestedTime->format("H:i")}}) kan tot 60 minuten uitgesteld worden. Indien {{$order->merchant->name}} uw order uitstelt, zult u dit ook in de e-mail kunnen raadplegen.</p>
 
 <ul style="margin-bottom: 1rem; padding: 0;">
   @php
@@ -47,7 +48,6 @@
     <li style="display: flex;"><p style="width: 12rem; margin:0;"></p><p style="margin:0;">{{$order->addressZipCode}} {{$order->addressCity}}</p></li>  
   @endif
 </ul>
-
 
 <p style="margin-bottom: 0;">Indien er zich een probleem zou voordoen dient u contact op te nemen met {{$order->merchant->name}}, dit kan via {{$order->merchant->merchantPhone}}.</p>
 <p style="margin-bottom: 2rem;margin-top:0;">Gelieve de veiligheidsmaatregelen i.v.m. corona te respecteren! #staysafe</p>

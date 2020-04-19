@@ -31,7 +31,7 @@ class ConfirmOrder extends Mailable
      */
     public function build()
     {        
-        return $this->from('noreply@speedmeal.be')->subject("Bevestiging order")
+        return $this->from('noreply@speedmeal.be')->subject("Voorlopige bevestiging order")
                 ->view('emails.confirmOrder');
     }
 }

@@ -4,7 +4,7 @@
   <title>Uw order werd geweigerd</title>
 </head>
 <body style="font-family:Poppins,sans-serif;padding:2rem;">
-<h1 style="font-size: 2rem;color:#68A25F;margin-top:0;">Uw order werd geweigerd.</h1>
+<h1 style="font-size: 2rem;color:#4CAF50;margin-top:0;">Uw order werd geweigerd.</h1>
 <p style="color: #e43a3a; margin-bottom: 1rem;">Onderstaand order werd door {{$order->merchant->name}} geweigerd:</p>
 
 <ul style="margin-bottom: 1rem; padding: 0;">

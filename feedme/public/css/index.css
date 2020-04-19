@@ -344,6 +344,9 @@ body main .orders .order .orderSections .row > li.deliveryMethod {
   align-items: center;
   justify-content: center;
 }
+body main .orders .order .orderSections .row > li.deliveryMethod.delayed {
+  background-color: gold;
+}
 body main .orders .order .orderSections .row > li.deliveryMethod p {
   font-weight: bold;
 }

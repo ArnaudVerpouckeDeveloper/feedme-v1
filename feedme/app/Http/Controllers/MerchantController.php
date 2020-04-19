@@ -193,23 +193,40 @@ class MerchantController extends Controller
 
     function acceptOrder(Request $request){
         $order = auth()->user()->merchant->orders->find($request->orderId);
-        $order->update(["accepted" => true]);
-        return response()->json("ok");
+        if ($order->denied == false && $order->accepted == false){
+            $order->update(["accepted" => true]);
+            return response()->json("ok");
+        }
+        else{
+            exit();
+        }
+        
     }
 
 
     function denyOrder(Request $request){
         $order = auth()->user()->merchant->orders->find($request->orderId);
-        $order->update(["denied" => true]);
-        Mail::to($order->customer->user->email)->send(new OrderHasBeenDenied($order));
-        return response()->json("ok");
+        if ($order->accepted == false){
+            $order->update(["denied" => true]);
+            Mail::to($order->customer->user->email)->send(new OrderHasBeenDenied($order));
+            return response()->json("ok");
+        }
+        else{
+            exit();
+        }
     }
 
 
     function completeOrder(Request $request){
         $order = auth()->user()->merchant->orders->find($request->orderId);
-        $order->update(["completed" => true]);
-        return response()->json("ok");
+        if ($order->accepted == true){
+            $order->update(["completed" => true]);
+            return response()->json("ok");
+        }
+        else{
+            exit();
+        }
+        
     }
 
 
@@ -616,31 +633,39 @@ class MerchantController extends Controller
 
     function addTimeToOrder_15(Request $request){
         $order = auth()->user()->merchant->orders->find($request->orderId);
-        $order->update(["extraTime" => 15]);
-        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
-        return response()->json([
-            "message" => "ok",
-            "newTime" => date("H:i", strtotime("+15 minutes", strtotime($order->requestedTime)))
-        ]);       
+        if (!$order->accepted){
+            $order->update(["extraTime" => 15, "accepted" => true]);
+            Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+            return response()->json([
+                "message" => "ok",
+                "newTime" => date("H:i", strtotime("+15 minutes", strtotime($order->requestedTime)))
+            ]);       
+        }
+        
     }
 
     function addTimeToOrder_30(Request $request){
         $order = auth()->user()->merchant->orders->find($request->orderId);
-        $order->update(["extraTime" => 30]);
-        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
-        return response()->json([
-            "message" => "ok",
-            "newTime" => date("H:i", strtotime("+30 minutes", strtotime($order->requestedTime)))
-        ]);      }
+        if (!$order->accepted){
+            $order->update(["extraTime" => 30, "accepted" => true]);
+            Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+            return response()->json([
+                "message" => "ok",
+                "newTime" => date("H:i", strtotime("+30 minutes", strtotime($order->requestedTime)))
+            ]);      
+        }
+    }
 
     function addTimeToOrder_60(Request $request){
         $order = auth()->user()->merchant->orders->find($request->orderId);
-        $order->update(["extraTime" => 60]);
-        Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
-        return response()->json([
-            "message" => "ok",
-            "newTime" => date("H:i", strtotime("+60 minutes", strtotime($order->requestedTime)))
-        ]);      
+        if (!$order->accepted){
+            $order->update(["extraTime" => 60, "accepted" => true]);
+            Mail::to($order->customer->user->email)->send(new OrderHasBeenDelayed($order));
+            return response()->json([
+                "message" => "ok",
+                "newTime" => date("H:i", strtotime("+60 minutes", strtotime($order->requestedTime)))
+            ]);      
+        }
     }
 
 
