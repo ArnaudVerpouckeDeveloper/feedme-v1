@@ -66,20 +66,24 @@
     <v-dialog v-model="showDialog" max-width="440">
       <v-card>
         <v-tabs v-model="tab" background-color="primary" dark grow>
-          <v-tab>Afhaling</v-tab>
           <v-tab>Levering</v-tab>
+          <v-tab>Afhaling</v-tab>
         </v-tabs>
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <div class="opening-hours">
               <v-row
                 class="dialog-content"
-                v-for="(hour, dag) in merchantDetail.opening_hours.takeaway"
+                v-for="(hour, dag) in refactoredDelivery"
               >
                 <v-col cols="4">{{numberToday(dag)}}:</v-col>
-                <v-col
-                  cols="8"
-                >{{hour.from_1}} tot {{hour.till_1}} en {{hour.from_2}} tot {{hour.till_2}}</v-col>
+                <v-col cols="8" v-if="!hour.isClosed">
+                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot </span>
+                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en </span>
+                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot </span>
+                  <span v-if="refactorHours(hour.till_2)">{{hour.till_2}}</span>
+                </v-col>
+                <v-col cols="8" v-if="hour.isClosed">niet mogelijk</v-col>
               </v-row>
             </div>
           </v-tab-item>
@@ -87,12 +91,16 @@
             <div class="opening-hours">
               <v-row
                 class="dialog-content"
-                v-for="(hour, dag) in merchantDetail.opening_hours.takeaway"
+                v-for="(hour, dag) in refactoredTakeAway"
               >
                 <v-col cols="4">{{numberToday(dag)}}:</v-col>
-                <v-col
-                  cols="8"
-                >{{hour.from_1}} tot {{hour.till_1}} en {{hour.from_2}} tot {{hour.till_2}}</v-col>
+                <v-col cols="8" v-if="!hour.isClosed">
+                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot </span>
+                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en </span>
+                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot </span>
+                  <span v-if="refactorHours(hour.till_2)">{{hour.till_2}}</span>
+                </v-col>
+                <v-col cols="8" v-if="hour.isClosed">niet mogelijk</v-col>
               </v-row>
             </div>
           </v-tab-item>
@@ -120,7 +128,7 @@ export default {
     });
   },
   beforeRouteLeave(to, from, next) {
-    history.pushState("null", "", `${this.merchantDetail.id}`);
+    history.replaceState("null", "", `${this.merchantDetail.id}`);
     next();
   },
   components: {
@@ -129,6 +137,25 @@ export default {
     MerchantDialog
   },
   computed: {
+    refactoredDelivery() {
+      const deliveryDays = this.merchantDetail.opening_hours.delivery;
+      const delivery = deliveryDays.map(day => {
+        const hour = Object.values(day);
+        day.isClosed = hour.every((val, i, arr) => val === arr[0])
+        return day;
+      });
+      return delivery;
+    },
+     refactoredTakeAway() {
+      const takeAwayDays = this.merchantDetail.opening_hours.takeaway;
+      const takeaway = takeAwayDays.map(day => {
+        const hour = Object.values(day);
+        day.isClosed = hour.every((val, i, arr) => val === arr[0])
+        return day;
+      });
+      return takeaway;
+    },
+
     headerImage() {
       if (this.merchantDetail.bannerFileName != null)
         return `https://www.speedmeal.be/public/uploads/${this.merchantDetail.bannerFileName}`;
@@ -186,7 +213,7 @@ export default {
     ...mapGetters(["products", "merchantDetail", "isMobile", "showCartButton"])
   },
   created() {
-    history.pushState("null", "", `${this.merchantDetail.apiName}`);
+    history.replaceState("null", "", `${this.merchantDetail.apiName}`);
   },
   data: () => ({
     showDialog: false,
@@ -194,6 +221,12 @@ export default {
     tab: null
   }),
   methods: {
+    refactorHours(hour) {
+      if (hour === "not-possible") {
+        return false;
+      } else return true;
+    },
+
     onChangeDrawer(bool) {
       this.$store.dispatch("onChangeDrawer", bool);
     },
@@ -241,7 +274,7 @@ export default {
   border-radius: 50%;
   width: 150px;
   height: 150px;
-  border: 1px solid #d7d7d7;
+  border: 4px solid #e6e6e6;
   margin: 0 auto;
 }
 .merchant-logo-message {

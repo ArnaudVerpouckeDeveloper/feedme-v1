@@ -180,7 +180,7 @@ export default {
         icon: "mdi-check",
         title: "Bedankt voor uw bestelling!",
         text:
-          "Uw bestelling werd doorgegeven. We sturen u dadelijk nog een bevestiging van uw bestelling naar uw e-mailadres."
+          "Een bevestiging van uw bestelling werd naar uw e-mailadres gestuurd."
       },
       orderNotSend: {
         icon: "mdi-alert-circle-outline",
