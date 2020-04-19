@@ -262,7 +262,7 @@ class MerchantController extends Controller
     }
 
     function addProduct(Request $request){
-        $request->replace(array('price' => priceToFloat($request->price)));
+        $request->merge(array('price' => priceToFloat($request->price)));
         $request->validate([
             'name' => 'required|min:2',
             'price' => ['required', new Price],
@@ -304,9 +304,7 @@ class MerchantController extends Controller
     }
 
     function updateProduct(Request $request){
-        $request->replace(array('price' => priceToFloat($request->price)));
-        return response()->json($request);
-
+        $request->merge(array('price' => priceToFloat($request->price)));
         $request->validate([
             'name' => 'required|min:2',
             'price' => ['required', new Price],
@@ -585,7 +583,7 @@ class MerchantController extends Controller
 
 
     function updateMinimumOrderValue(Request $request){
-        $request->replace(array('minimumOrderValue' => priceToFloat($request->minimumOrderValue)));
+        $request->merge(array('minimumOrderValue' => priceToFloat($request->minimumOrderValue)));
         $request->validate([
             'minimumOrderValue' => ['required', 'regex:/^\d*(\.\d{2})?$/']
         ]);        
@@ -598,7 +596,7 @@ class MerchantController extends Controller
 
 
     function updateDeliveryCost(Request $request){
-        $request->replace(array('deliveryCost' => priceToFloat($request->deliveryCost)));
+        $request->merge(array('deliveryCost' => priceToFloat($request->deliveryCost)));
         $request->validate([
             'deliveryCost' => ['required', 'regex:/^\d*(\.\d{2})?$/']
         ]);        

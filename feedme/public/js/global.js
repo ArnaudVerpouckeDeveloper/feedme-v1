@@ -41,3 +41,16 @@ function readURL(input, DOM_preview_element, showBorder = true) {
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
 }
+
+
+function inputToFormattedPrice(input, withCurrency) {
+    formattedPrice = input.replace("€", "");
+    formattedPrice = formattedPrice.replace(",", ".");
+    formattedPrice = formattedPrice.trim();
+    formattedPrice = Number(formattedPrice).toFixed(2);
+    if (withCurrency) {
+        formattedPrice = "€ " + formattedPrice;
+    }
+    formattedPrice = formattedPrice.replace(".", ",");
+    return formattedPrice;
+}

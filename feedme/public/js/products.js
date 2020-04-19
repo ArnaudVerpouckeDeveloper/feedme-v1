@@ -239,8 +239,10 @@ function setEventListenersForProduct(product) {
                 if (res.message == "ok") {
                     hideForm(product);
                     product.querySelector(".row.upper .name").innerHTML = name;
-                    product.querySelector(".row.upper .price").innerHTML = "€ " + addTrailZero(price, 2);
+                    product.querySelector(".row.upper .price").innerHTML = inputToFormattedPrice(price, true);
                     product.querySelector(".row.productCategoryRow p").innerHTML = product.querySelector("form .productCategory option[value='" + productCategoryId + "']").innerHTML;
+
+                    product.querySelector("form .inputValues .price").value = inputToFormattedPrice(price, true);
 
                     if (imageFile !== undefined) {
                         product.querySelector(".productImage img").src = "/uploads/" + res.imageFileName;
