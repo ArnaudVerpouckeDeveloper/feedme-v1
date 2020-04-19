@@ -97,6 +97,6 @@ Route::get("/restaurant/{merchantApiName}", function($merchantApiName) {
 Route::post("/sendContactForm", "CustomerController@sendContactForm");
 
 //Altijd de index.html tonen.
-Route::get('{path}',function (){return view('index');})->where('path','([A-z\d-\/_.]+)?');
+Route::get('{query}',function (){return view('index');});
 
 
