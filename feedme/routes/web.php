@@ -5,7 +5,7 @@ use App\Mail\ConfirmEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Mail\ConfirmOrder;
-
+use App\Merchant;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,16 +17,20 @@ use App\Mail\ConfirmOrder;
 |
 */
 
+
 Route::get("/", function(){return view("index");});
+
+/*
 Route::get("/restaurants", function(){return view("index");});
 Route::get("/restaurant/{id}", function(){return view("index");});
-//Route::get("/restaurant/{merchantApiName}", "CustomerController@showMerchantShop"); /*route to fix refresh error --- not working because we are already listening for an id*/ 
+//Route::get("/restaurant/{merchantApiName}", "CustomerController@showMerchantShop"); //route to fix refresh error --- not working because we are already listening for an id
 Route::get("/over", function(){return view("index");});
 Route::get("/faq", function(){return view("index");});
 Route::get("/contact", function(){return view("index");});
 Route::get("/aanmelden", function(){return view("index");});
 Route::get("/registreer", function(){return view("index");});
 Route::get("/voorwaarden", function(){return view("index");});
+*/
 
 
 Route::get('email/verify', "AuthController@verifyEmailNotice")->name('verification.notice');
@@ -72,9 +76,36 @@ Route::group([
     Route::put('/admin/settings/updateMinimumWaitTimeForDelivery', "MerchantController@updateMinimumWaitTimeForDelivery");
     Route::put('/admin/settings/updateMerchantDetails', "MerchantController@updateMerchantDetails");
     Route::get('/admin/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
+    Route::put('/admin/settings/updateDeliveryCost', "MerchantController@updateDeliveryCost");
+    Route::put('/admin/settings/updateMinimumOrderValue', "MerchantController@updateMinimumOrderValue");    
 });
 
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");
 Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");
-Route::get("/{merchantApiName}", "CustomerController@showMerchantShop");
+Route::get("/restaurant/{merchantApiName}", function($merchantApiName) { 
+    $merchant = Merchant::where("apiName", $merchantApiName)->first();
+        if ($merchant == null){
+            return view("index");
+        }
+        else{
+            //$merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
+            return redirect("/restaurant/".$merchant->id);
+        }
+});
 Route::post("/sendContactForm", "CustomerController@sendContactForm");
+
+
+Route::any('{query}', function($query) { 
+    $merchant = Merchant::where("apiName", $query)->first();
+        if ($merchant == null){
+            return view("index");
+        }
+        else{
+            $merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
+            return redirect("/restaurant/".$merchant->id);
+        }
+})->where('query', '.*');
+
+
+
+

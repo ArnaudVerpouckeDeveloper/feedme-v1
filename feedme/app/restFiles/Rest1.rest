@@ -1,4 +1,4 @@
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NjgyMTUxNywiZXhwIjoxNTg2ODI1MTE3LCJuYmYiOjE1ODY4MjE1MTcsImp0aSI6Im9aNTBnQkllSGFQQ2t4UEciLCJzdWIiOjUsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.sq6VMYKCs7cfTwI3X9hF_nxFM6sI417aTcC8Qp0pP4A
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NzIyNjY4OSwiZXhwIjoxNTg3MjMwMjg5LCJuYmYiOjE1ODcyMjY2ODksImp0aSI6Ijdub3NjdFJIamJXSjJXajkiLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.Epm70NA6TxJs7f4Fqw4-q-q7HVrUeso_XYiAOFc6Rtg
 
 
 
@@ -115,7 +115,7 @@ Authorization: Bearer {{token}}
 
 {
     "merchantId": 1,
-    "deliveryMethod": "delivery",
+    "deliveryMethod": "takeaway",
     "addressStreet": "Vijfwegenstraat",
     "addressNumber": 200,
     "addressZipCode": 8800,

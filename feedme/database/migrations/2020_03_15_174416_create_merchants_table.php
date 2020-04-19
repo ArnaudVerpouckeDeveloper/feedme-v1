@@ -35,6 +35,9 @@ class CreateMerchantsTable extends Migration
             $table->string("minimumWaitTime_takeaway",20)->default("00:30");
             $table->string("minimumWaitTime_delivery",20)->default("01:00");
 
+            $table->float("minimumOrderValue",20)->default("0.00");
+            $table->float("deliveryCost",20)->default("0.00");
+
             $table->string("takeaway_monday_from_1",20)->default("11:30");
             $table->string("takeaway_monday_till_1",20)->default("13:30");
             $table->string("takeaway_monday_from_2",20)->default("17:30");
@@ -98,6 +101,10 @@ class CreateMerchantsTable extends Migration
             $table->boolean("hasSetTakeawayTimes")->default(false);
             $table->boolean("hasSetMinimumWaitTimeForDelivery")->default(false);
             $table->boolean("hasSetMinimumWaitTimeForTakeaway")->default(false);
+            $table->boolean("hasSetMinimumOrderValue")->default(false);
+            $table->boolean("hasSetDeliveryCost")->default(false);
+
+            
 
         });
     }

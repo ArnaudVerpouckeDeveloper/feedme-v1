@@ -29,7 +29,7 @@
       <li style="display: flex;"><p class="amount" style="width: 3rem; margin: 0;">{{$amountOfThisProduct}} x</p><p style="margin: 0;"> {{$processedProduct->name}}</p></li>
   @endforeach
 </ul>
-<p style="margin-bottom: 3rem; font-weight: bold;">Totaalprijs: €{{str_replace(".",",",number_format($order->totalPrice, 2, '.', ''))}}</p>
+<p style="margin-bottom: 3rem; font-weight: bold;">Totaalprijs: {{floatToPrice($order->totalPrice, true)}}</p>
 
 
 <ul style="margin-bottom: 3rem; padding: 0;">

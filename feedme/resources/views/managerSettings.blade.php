@@ -2,7 +2,7 @@
 @section("title", "Instellingen")
 @section('content')
 <div class="settings screen-container">
-    <form method="POST" action="/admin/settings/updateMerchantDetails" enctype="multipart/form-data" class="merchantDetailsForm">
+    <form method="POST" action="/admin/settings/updateMerchantDetails" enctype="multipart/form-data" class="merchantDetailsForm" id="link-gegevens-horeca-zaak">
         {{method_field('PUT')}}
         @csrf
 
@@ -60,7 +60,7 @@
 
     </form>
 
-    <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm">
+    <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm" id="link-banner">
         {{method_field('PUT')}}
         @csrf
 
@@ -77,7 +77,7 @@
         @enderror
     </form>
     
-    <form method="POST" action="/admin/settings/updateLogo" enctype="multipart/form-data" class="logoForm">
+    <form method="POST" action="/admin/settings/updateLogo" enctype="multipart/form-data" class="logoForm" id="link-logo">
         {{method_field('PUT')}}
         @csrf
 
@@ -94,7 +94,7 @@
         @enderror
     </form>
     
-    <form method="POST" action="/admin/settings/updateMessage">
+    <form method="POST" action="/admin/settings/updateMessage" id="link-bericht">
         {{method_field('PUT')}}
         @csrf
 
@@ -106,7 +106,25 @@
         <input type="submit" value="Opslaan"/>
     </form>
 
-    <form method="POST" action="/admin/settings/updateTakeawayHours" class="schedule">
+    <form method="POST" action="/admin/settings/updateMinimumOrderValue" class="simpleInputForm" id="link-minimum-bedrag-bestelling">
+        {{method_field('PUT')}}
+        @csrf
+        <label>Minimaal bedrag per bestelling:</label>
+        <div class="row">
+        <input type="text" name="minimumOrderValue" required value="{{floatToPrice($merchant->minimumOrderValue, true)}}" placeholder="{{floatToPrice($merchant->minimumOrderValue, true)}}"/>
+        </div>
+        @error("minimumOrderValue")
+            <p>Het ingegeven formaat van de prijs bleek niet geldig te zijn.</p>
+        @enderror
+        <input type="submit" value="opslaan"/>
+    </form>
+
+
+
+
+
+
+    <form method="POST" action="/admin/settings/updateTakeawayHours" class="schedule" id="link-schema-afhaling">
         {{method_field('PUT')}}
         @csrf
 
@@ -1564,8 +1582,35 @@
     </form>
 
 
+    <form method="POST" action="/admin/settings/updateMinimumWaitTimeForTakeaway" class="schedule" id="link-minimum-wachttijd-afhaling">
+        {{method_field('PUT')}}
+        @csrf
+        <label>Minimale wachttijd voor afhalingen:</label>
+        <div class="row">
+            <select name="minimumWaitTime_takeaway">
+                <option value='00:15'>00:15</option>
+                <option value='00:30'>00:30</option>
+                <option value='00:45'>00:45</option>
+                <option value='01:00'>01:00</option>
+                <option value='01:15'>01:15</option>
+                <option value='01:30'>01:30</option>
+                <option value='01:45'>01:45</option>
+                <option value='02:00'>02:00</option>
+                <option value='02:15'>02:15</option>
+                <option value='02:30'>02:30</option>
+                <option value='02:45'>02:45</option>
+                <option value='03:00'>03:00</option>
+            </select>
+        </div>
+        <input type="submit" value="opslaan"/>
+    </form>
 
-    <form method="POST" action="/admin/settings/updateDeliveryHours" class="schedule">
+
+
+
+
+
+    <form method="POST" action="/admin/settings/updateDeliveryHours" class="schedule" id="link-schema-levering">
         {{method_field('PUT')}}
         @csrf
 
@@ -3022,35 +3067,7 @@
      <input type="submit" value="opslaan"/>
     </form>
 
-
-
-
-
-
-    <form method="POST" action="/admin/settings/updateMinimumWaitTimeForTakeaway" class="schedule">
-        {{method_field('PUT')}}
-        @csrf
-        <label>Minimale wachttijd voor afhalingen:</label>
-        <div class="row">
-            <select name="minimumWaitTime_takeaway">
-                <option value='00:15'>00:15</option>
-                <option value='00:30'>00:30</option>
-                <option value='00:45'>00:45</option>
-                <option value='01:00'>01:00</option>
-                <option value='01:15'>01:15</option>
-                <option value='01:30'>01:30</option>
-                <option value='01:45'>01:45</option>
-                <option value='02:00'>02:00</option>
-                <option value='02:15'>02:15</option>
-                <option value='02:30'>02:30</option>
-                <option value='02:45'>02:45</option>
-                <option value='03:00'>03:00</option>
-            </select>
-        </div>
-        <input type="submit" value="opslaan"/>
-    </form>
-
-    <form method="POST" action="/admin/settings/updateMinimumWaitTimeForDelivery" class="schedule">
+    <form method="POST" action="/admin/settings/updateMinimumWaitTimeForDelivery" class="schedule" id="link-minimum-wachttijd-levering">
         {{method_field('PUT')}}
         @csrf
         <label>Minimale wachttijd voor leveringen:</label>
@@ -3072,6 +3089,33 @@
         </div>
         <input type="submit" value="opslaan"/>
     </form>
+
+    <form method="POST" action="/admin/settings/updateDeliveryCost" class="simpleInputForm" id="link-leveringskosten">
+        {{method_field('PUT')}}
+        @csrf
+        <label>Kosten per levering:</label>
+        <div class="row">
+        <input type="text" name="deliveryCost" required value="{{floatToPrice($merchant->deliveryCost, true)}}" placeholder="{{floatToPrice($merchant->deliveryCost, true)}}" />
+        </div>
+        @error("deliveryCost")
+            <p>Het ingegeven formaat van de prijs bleek niet geldig te zijn.</p>
+        @enderror
+        <input type="submit" value="opslaan"/>
+    </form>
+
+
+
+
+
+   
+
+    
+
+
+
+
+
+
 </div>
 @endsection
 
