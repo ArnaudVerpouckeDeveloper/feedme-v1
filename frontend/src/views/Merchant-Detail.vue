@@ -33,7 +33,8 @@
           <span>Openingsuren</span>
         </v-tooltip>
         <p style="margin-top: 15px; margin-bottom:0;">Afhaling: {{takeawayPossible}}</p>
-        <p>Levering: {{deliveryPossible}}</p>
+        <p style="margin-bottom:0;">Levering: {{deliveryPossible}}</p>
+        <p>Contacteer de zaak i.v.m. allergieën.</p>
       </v-col>
     </v-row>
 

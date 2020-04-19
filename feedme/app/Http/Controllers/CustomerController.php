@@ -43,6 +43,7 @@ class CustomerController extends Controller
         $merchantObject->name = $merchant->name;
         $merchantObject->apiName = $merchant->apiName;
         $merchantObject->id = $merchant->id;
+        $merchantObject->message = $merchant->message;
 
         $merchantObject->minimumOrderValue = $merchant->minimumOrderValue;
         $merchantObject->deliveryCost = $merchant->deliveryCost;
