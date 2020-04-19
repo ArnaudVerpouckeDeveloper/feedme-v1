@@ -403,7 +403,41 @@ class MerchantController extends Controller
 
 
     function updateTakeawayHours(Request $request){
-        
+        if (isset($request->takeawayNotPossible)){
+            $merchant = auth()->user()->merchant();
+            $merchant->update([
+                'takeaway_monday_from_1' => "not-possible",
+                'takeaway_monday_from_2' => "not-possible",
+                'takeaway_monday_till_1' => "not-possible",
+                'takeaway_monday_till_2' => "not-possible",
+                'takeaway_tuesday_from_1' => "not-possible",
+                'takeaway_tuesday_till_1' => "not-possible",
+                'takeaway_tuesday_from_2' => "not-possible",
+                'takeaway_tuesday_till_2' => "not-possible",
+                'takeaway_wednesday_from_1' => "not-possible",
+                'takeaway_wednesday_till_1' => "not-possible",
+                'takeaway_wednesday_from_2' => "not-possible",
+                'takeaway_wednesday_till_2' => "not-possible",
+                'takeaway_thursday_from_1' => "not-possible",
+                'takeaway_thursday_till_1' => "not-possible",
+                'takeaway_thursday_from_2' => "not-possible",
+                'takeaway_thursday_till_2' => "not-possible",
+                'takeaway_friday_from_1' => "not-possible",
+                'takeaway_friday_till_1' => "not-possible",
+                'takeaway_friday_from_2' => "not-possible",
+                'takeaway_friday_till_2' => "not-possible",
+                'takeaway_saturday_from_1' => "not-possible",
+                'takeaway_saturday_till_1' => "not-possible",
+                'takeaway_saturday_from_2' => "not-possible",
+                'takeaway_saturday_till_2' => "not-possible",
+                'takeaway_sunday_from_1' => "not-possible",
+                'takeaway_sunday_till_1' => "not-possible",
+                'takeaway_sunday_from_2' => "not-possible",
+                'takeaway_sunday_till_2' => "not-possible",
+                "hasSetTakeawayTimes" => true
+                ]);
+        }
+        else{  
         $request->validate([
             'takeaway_monday_from_1' => ['required', new ScheduleTime],
             'takeaway_monday_till_1' => ['required', new ScheduleTime],
@@ -435,7 +469,6 @@ class MerchantController extends Controller
             'takeaway_sunday_till_2' => ['required', new ScheduleTime]
             ]);
         
-
         $merchant = auth()->user()->merchant();
         $merchant->update([
             'takeaway_monday_from_1' => $request->takeaway_monday_from_1,
@@ -468,15 +501,49 @@ class MerchantController extends Controller
             'takeaway_sunday_till_2' => $request->takeaway_sunday_till_2,
             "hasSetTakeawayTimes" => true
             ]);
-
-
+        }
+        
         return redirect("/admin/instellingen#link-schema-afhaling");
     }
 
 
     
     function updateDeliveryHours(Request $request){
-        
+        if (isset($request->deliveryNotPossible)){
+            $merchant = auth()->user()->merchant();
+            $merchant->update([
+                'delivery_monday_from_1' => "not-possible",
+                'delivery_monday_from_2' => "not-possible",
+                'delivery_monday_till_1' => "not-possible",
+                'delivery_monday_till_2' => "not-possible",
+                'delivery_tuesday_from_1' => "not-possible",
+                'delivery_tuesday_till_1' => "not-possible",
+                'delivery_tuesday_from_2' => "not-possible",
+                'delivery_tuesday_till_2' => "not-possible",
+                'delivery_wednesday_from_1' => "not-possible",
+                'delivery_wednesday_till_1' => "not-possible",
+                'delivery_wednesday_from_2' => "not-possible",
+                'delivery_wednesday_till_2' => "not-possible",
+                'delivery_thursday_from_1' => "not-possible",
+                'delivery_thursday_till_1' => "not-possible",
+                'delivery_thursday_from_2' => "not-possible",
+                'delivery_thursday_till_2' => "not-possible",
+                'delivery_friday_from_1' => "not-possible",
+                'delivery_friday_till_1' => "not-possible",
+                'delivery_friday_from_2' => "not-possible",
+                'delivery_friday_till_2' => "not-possible",
+                'delivery_saturday_from_1' => "not-possible",
+                'delivery_saturday_till_1' => "not-possible",
+                'delivery_saturday_from_2' => "not-possible",
+                'delivery_saturday_till_2' => "not-possible",
+                'delivery_sunday_from_1' => "not-possible",
+                'delivery_sunday_till_1' => "not-possible",
+                'delivery_sunday_from_2' => "not-possible",
+                'delivery_sunday_till_2' => "not-possible",
+                "hasSetTakeawayTimes" => true
+                ]);
+        }
+        else{  
         $request->validate([
             'delivery_monday_from_1' => ['required', new ScheduleTime],
             'delivery_monday_till_1' => ['required', new ScheduleTime],
@@ -541,9 +608,8 @@ class MerchantController extends Controller
             'delivery_sunday_till_2' => $request->delivery_sunday_till_2,
             "hasSetDeliveryTimes" => true
             ]);
-
-
-        return redirect("/admin/instellingen#link-schema-levering");
+        }
+            return redirect("/admin/instellingen#link-schema-levering");
     }
 
 

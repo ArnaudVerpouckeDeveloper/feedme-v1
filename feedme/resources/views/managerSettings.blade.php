@@ -1582,8 +1582,10 @@
                 <option value='23:00'>23:00</option>
                 <option value='23:30'>23:30</option></select>
         </div>
-        
-     <input type="submit" value="opslaan"/>
+        <div class="buttonRow">
+            <input type="submit" value="opslaan"/>
+            <input type="submit" value="Afhalen niet mogelijk" name="takeawayNotPossible" class="extraAction"/>
+        </div>
     </form>
 
 
@@ -3069,7 +3071,10 @@
                 <option value='23:30'>23:30</option></select>
         </div>
         
-     <input type="submit" value="opslaan"/>
+        <div class="buttonRow">
+            <input type="submit" value="opslaan"/>
+            <input type="submit" value="Leveren niet mogelijk" name="deliveryNotPossible" class="extraAction"/>
+        </div>
     </form>
 
     <form method="POST" action="/admin/settings/updateMinimumWaitTimeForDelivery" class="schedule" id="link-minimum-wachttijd-levering">

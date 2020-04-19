@@ -1013,6 +1013,16 @@ body {
                             }
                         }
                     }
+                    .buttonRow {
+                        input[type="submit"] {
+                            margin-right: 1rem;
+                        }
+                        input[type="submit"].extraAction {
+                            background-color: $mainRed;
+                            color: white;
+                            width: auto;
+                        }
+                    }
                 }
                 &.simpleInputForm {
                     label {
@@ -1538,6 +1548,11 @@ body {
                         }
                         select:nth-of-type(4) {
                             width: 35%;
+                        }
+                    }
+                    .buttonRow {
+                        input[type='submit'] {
+                            margin-bottom: 1rem;
                         }
                     }
                 }

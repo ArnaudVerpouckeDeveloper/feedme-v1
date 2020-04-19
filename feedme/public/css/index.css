@@ -949,6 +949,14 @@ body main .settings form.schedule .row select:hover {
 body main .settings form.schedule .row select:focus {
   outline: none;
 }
+body main .settings form.schedule .buttonRow input[type=submit] {
+  margin-right: 1rem;
+}
+body main .settings form.schedule .buttonRow input[type=submit].extraAction {
+  background-color: #e43a3a;
+  color: white;
+  width: auto;
+}
 body main .settings form.simpleInputForm label {
   font-size: 1.2rem;
   font-weight: bold;
@@ -1381,6 +1389,9 @@ body main .merchantAuthPanel .login input[type=submit] {
   }
   body main .settings form.schedule .row select:nth-of-type(4) {
     width: 35%;
+  }
+  body main .settings form.schedule .buttonRow input[type=submit] {
+    margin-bottom: 1rem;
   }
   body main .dashboard .environmentLink .link a {
     overflow-wrap: break-word;
