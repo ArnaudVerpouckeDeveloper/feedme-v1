@@ -83,6 +83,8 @@ Route::group([
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");
 Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");
 Route::get("/restaurant/{merchantApiName}", function($merchantApiName) { 
+    //Als je amountOfVisitors wil aanpassen zonder de reload erbij te nemen,
+    //kijk naar je request van welke path die komt. Indien van zelfde path tel je die niet mee anders wel.
     $merchant = Merchant::where("apiName", $merchantApiName)->first();
         if ($merchant == null){
             return view("index");
@@ -94,18 +96,7 @@ Route::get("/restaurant/{merchantApiName}", function($merchantApiName) {
 });
 Route::post("/sendContactForm", "CustomerController@sendContactForm");
 
-
-Route::any('{query}', function($query) { 
-    $merchant = Merchant::where("apiName", $query)->first();
-        if ($merchant == null){
-            return view("index");
-        }
-        else{
-            $merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
-            return redirect("/restaurant/".$merchant->id);
-        }
-})->where('query', '.*');
-
-
+//Altijd de index.html tonen.
+Route::get('{path}',function (){return view('index');})->where('path','([A-z\d-\/_.]+)?');
 
 
