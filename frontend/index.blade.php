@@ -16,6 +16,15 @@
     <link href="{{asset('spa/css/chunk-vendors.css')}}" rel=preload as=style>
     <link href="{{asset('spa/css/chunk-vendors.css')}}" rel=stylesheet>
     <link href="{{asset('spa/app.css')}}" rel=stylesheet>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163996040-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-163996040-1');
+    </script>
 </head>
 
 <body><noscript><strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
