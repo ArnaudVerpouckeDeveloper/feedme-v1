@@ -60,22 +60,7 @@
 
     </form>
 
-    <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm" id="link-banner">
-        {{method_field('PUT')}}
-        @csrf
-
-        <label>Banner (max 5MB)</label>
-        <input type="file" accept="image/*" name="banner" />
-        @if(isset($merchant->bannerFileName))
-            <img src="{{asset('uploads/'.$merchant->bannerFileName)}}" alt="banner"/>
-        @else
-            <img src="{{asset('images/placeholder_banner.png')}}" alt="banner"/>
-        @endif
-        <input type="submit" value="uploaden"/>
-        @error("banner")
-            <p class="error">De banner kon niet geüpload worden, controleer of het bestand kleiner dan 5MB is.</p>
-        @enderror
-    </form>
+ 
     
     <form method="POST" action="/admin/settings/updateLogo" enctype="multipart/form-data" class="logoForm" id="link-logo">
         {{method_field('PUT')}}
@@ -93,6 +78,26 @@
             <p class="error">Het logo kon niet geüpload worden, controleer of het bestand kleiner dan 5MB is.</p>
         @enderror
     </form>
+
+
+    <form method="POST" action="/admin/settings/updateBanner" enctype="multipart/form-data" class="bannerForm" id="link-banner">
+        {{method_field('PUT')}}
+        @csrf
+
+        <label>Banner (max 5MB)</label>
+        <p class="information">Een banner is langwerpig en smal in hoogte. Deze afbeelding zal helemaal bovenaan uw bestelpagina komen te staan.</p>
+        <input type="file" accept="image/*" name="banner" />
+        @if(isset($merchant->bannerFileName))
+            <img src="{{asset('uploads/'.$merchant->bannerFileName)}}" alt="banner"/>
+        @else
+            <img src="{{asset('images/placeholder_banner.png')}}" alt="banner"/>
+        @endif
+        <input type="submit" value="uploaden"/>
+        @error("banner")
+            <p class="error">De banner kon niet geüpload worden, controleer of het bestand kleiner dan 5MB is.</p>
+        @enderror
+    </form>
+
     
     <form method="POST" action="/admin/settings/updateMessage" id="link-bericht">
         {{method_field('PUT')}}

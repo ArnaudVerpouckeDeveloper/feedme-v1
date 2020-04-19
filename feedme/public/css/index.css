@@ -180,6 +180,12 @@ body main .merchantAuthPanel .register input[type=submit]:hover {
   cursor: pointer;
   filter: brightness(1.1);
 }
+body main .merchantAuthPanel .login p.information,
+body main .merchantAuthPanel .register p.information {
+  color: darkgrey;
+  font-size: 0.8rem;
+  text-align: left;
+}
 body main .merchantAuthPanel .login p.error,
 body main .merchantAuthPanel .register p.error {
   color: #e43a3a;
@@ -793,8 +799,17 @@ body main .settings form {
   flex-direction: column;
   margin-bottom: 8rem;
 }
-body main .settings form label {
-  margin-bottom: 0.5rem;
+body main .settings form > label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #4CAF50;
+}
+body main .settings form p.information {
+  color: darkgrey;
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: 1rem;
 }
 body main .settings form input[type=file],
 body main .settings form textarea {
@@ -862,6 +877,14 @@ body main .settings form.merchantDetailsForm > .row .error {
 }
 body main .settings form.merchantDetailsForm > .row .error:last-of-type {
   margin-bottom: 2rem;
+}
+body main .settings form.logoForm img {
+  object-position: center;
+  border-radius: 50%;
+  border: 3px solid lightgrey;
+}
+body main .settings form.bannerForm img {
+  border: 1px dashed lightgrey;
 }
 body main .settings form.bannerForm img.showBorder {
   border: 1px dashed lightgrey;

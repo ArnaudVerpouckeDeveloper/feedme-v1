@@ -22,81 +22,82 @@
                 <form class="register" method="POST" action="/admin/registreren">
                     @csrf
                     <label>E-mailadres</label>
-                    <input type="email" name="email"   value="{{ old('email') }}"/>
+                    <input type="email" name="email" required value="{{ old('email') }}"/>
                     @error("email")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
 
                     <label>Wachtwoord</label>
-                    <input type="password" name="password" />
+                    <input type="password" required name="password" />
+                    <p class="information">Minstens 1 hoofdletter, minstens 1 teken, minstens 1 cijfer en een minimumlengte van 8 tekens.</p>
                     @error("password")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
 
                     <label>Herhaal wachtwoord</label>
-                    <input type="password" name="password_confirmation"/>
+                    <input type="password" required name="password_confirmation"/>
                     @error("password_confirmation")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Voornaam</label>
-                    <input type="text" name="firstName"  value="{{ old('firstName') }}"/>
+                    <input type="text" name="firstName" required value="{{ old('firstName') }}"/>
                     @error("firstName")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Naam</label>
-                    <input type="text" name="lastName" value="{{ old('lastName') }}"/>
+                    <input type="text" name="lastName" required value="{{ old('lastName') }}"/>
                     @error("lastName")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Persoonlijk GSM-nummer</label>
-                    <input type="text" name="mobilePhone" value="{{ old('mobilePhone') }}"/>
+                    <input type="text" name="mobilePhone" required value="{{ old('mobilePhone') }}"/>
                     @error("mobilePhone")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Naam horecazaak</label>
-                    <input type="text" name="merchantName" value="{{ old('merchantName') }}"/>
+                    <input type="text" name="merchantName" required value="{{ old('merchantName') }}"/>
                     @error("merchantName")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Straat</label>
-                    <input type="text" name="address_street" value="{{ old('address_street') }}"/>
+                    <input type="text" name="address_street" required value="{{ old('address_street') }}"/>
                     @error("address_street")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Nummer</label>
-                    <input type="text" name="address_number" value="{{ old('address_number') }}"/>
+                    <input type="text" name="address_number" required value="{{ old('address_number') }}"/>
                     @error("address_number")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Postcode</label>
-                    <input type="value" name="address_zip" value="{{ old('address_zip') }}"/>
+                    <input type="value" name="address_zip" required value="{{ old('address_zip') }}"/>
                     @error("address_zip")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Stad</label>
-                    <input type="text" name="address_city" value="{{ old('address_city') }}"/>
+                    <input type="text" name="address_city" required value="{{ old('address_city') }}"/>
                     @error("address_city")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>Telefoonnummer horecazaak</label>
-                    <input type="text" name="merchantPhone" value="{{ old('merchantPhone') }}"/>
+                    <input type="text" name="merchantPhone" required value="{{ old('merchantPhone') }}"/>
                     @error("merchantPhone")
                     <p class="error">{{ $message }}</p>
                     @enderror
 
                     <label>BTW nummer</label>
-                    <input type="text" name="tax_number" value="{{ old('tax_number') }}"/>
+                    <input type="text" name="tax_number" required value="{{ old('tax_number') != null ? old('tax_number') : "BE 0000.000.000" }}" placeholder="BE 0000.000.000"/>
                     @error("tax_number")
                     <p class="error">{{ $message }}</p>
                     @enderror

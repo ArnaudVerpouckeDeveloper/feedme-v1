@@ -172,6 +172,11 @@ body {
                         filter: brightness(1.1);
                     }
                 }
+                p.information {
+                    color: darkgrey;
+                    font-size: 0.8rem;
+                    text-align: left;
+                }
                 p.error {
                     color: $mainRed;
                     font-weight: bold;
@@ -851,8 +856,17 @@ body {
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 8rem;
-                label {
-                    margin-bottom: 0.5rem;
+                >label {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-bottom: 1rem;
+                    color: #4CAF50;
+                }
+                p.information {
+                    color: darkgrey;
+                    font-size: 1rem;
+                    text-align: left;
+                    margin-bottom: 1rem;
                 }
                 input[type="file"],
                 textarea {
@@ -923,8 +937,16 @@ body {
                         }
                     }
                 }
+                &.logoForm {
+                    img {
+                        object-position: center;
+                        border-radius: 50%;
+                        border: 3px solid lightgrey;
+                    }
+                }
                 &.bannerForm {
                     img {
+                        border: 1px dashed lightgrey;
                         &.showBorder {
                             border: 1px dashed lightgrey;
                         }
