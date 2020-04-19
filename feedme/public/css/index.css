@@ -410,6 +410,13 @@ body main .createProductForm {
   background-color: #4CAF50;
   box-sizing: border-box;
 }
+body main .createProductForm > label {
+  font-weight: bold;
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
 body main .createProductForm .input-row {
   display: flex;
   justify-content: space-between;

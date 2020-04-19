@@ -6,6 +6,7 @@
 
 @if($merchant->productCategories->count() > 0)
 <form class="createProductForm" method="POST" action="/admin/producten/addProduct" enctype="multipart/form-data">
+    <label>Nieuw product aanmaken:</label>
     <div class="row input-row">
         <input type="text" name="name" placeholder="Productnaam" class="name" required/>
         <input type="value" name="price" placeholder="Prijs" class="price" required/>
@@ -41,7 +42,7 @@
 <div class="productCategories">
     <h2>Productcategorieën</h2>
     <form class="newProductCategoryForm">
-        <input type="text" placeholder="Nieuwe categorienaam"/>
+        <input type="text" placeholder="Nieuwe categorienaam, bijvoorbeeld: 'vleesgerechten'"/>
         <input type="submit" value="Toevoegen"/>
     </form>
     <ul class="productCategoryList">
