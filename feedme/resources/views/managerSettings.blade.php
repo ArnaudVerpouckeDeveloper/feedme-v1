@@ -88,7 +88,7 @@
         <p class="information">Een banner is langwerpig en smal in hoogte. Deze afbeelding zal helemaal bovenaan uw bestelpagina komen te staan.</p>
         <input type="file" accept="image/*" name="banner" />
         @if(isset($merchant->bannerFileName))
-            <img src="{{asset('uploads/'.$merchant->bannerFileName)}}" alt="banner"/>
+            <img src="{{asset('uploads/'.$merchant->bannerFileName)}}" alt="banner" class="showBorder"/>
         @else
             <img src="{{asset('images/placeholder_banner.png')}}" alt="banner"/>
         @endif
@@ -102,8 +102,8 @@
     <form method="POST" action="/admin/settings/updateMessage" id="link-bericht">
         {{method_field('PUT')}}
         @csrf
-
         <label>Bericht (bovenaan pagina)</label>
+        <p class="information">Plaats hier belangrijke informatie die de klant moet weten. Bijvoorbeeld: betaalmogelijkheden, gebieden waar er geleverd kan worden, speciale voorzorgsmaatregelen en afspraken omtrent corona,...</p>
         <textarea rows="4" name="message">{{$merchant->message}}</textarea>
         @error("message")
             <p>{{message}}</p>
