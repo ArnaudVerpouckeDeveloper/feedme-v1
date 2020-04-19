@@ -29,13 +29,7 @@ class MerchantController extends Controller
         return $request;
     }
 
-    function getAllMerchants(Request $request){
-        $allMerchants = Merchant::all();
-        foreach ($allMerchants as $merchant) {
-            $merchant["availableTimes"] = $this->getPossibleRequestTimes($merchant);
-        }
-        return $allMerchants;
-    }
+
 
     
 

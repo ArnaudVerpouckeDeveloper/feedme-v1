@@ -34,7 +34,20 @@ class CustomerController extends Controller
     }
     */
 
-    function getMerchant($merchantId){
+
+
+    function getAllMerchants(){
+        $allMerchantsRaw = Merchant::all();
+        $allMerchantsToReturn = [];
+        foreach ($allMerchantsRaw as $merchant) {
+            $allMerchantsToReturn[] = $this->getMerchant($merchant->id, false);
+        }
+        return $allMerchantsToReturn;
+    }
+
+
+
+    function getMerchant($merchantId, $returnAsJsonResponse = true){
         $merchant = Merchant::find($merchantId);
         if ($merchant == null){
             exit();
@@ -164,7 +177,12 @@ class CustomerController extends Controller
             
             $merchantObject->productCategories = $merchant->productCategories()->select("id","name")->get();
 
-            return response()->json($merchantObject,200);
+            if ($returnAsJsonResponse){
+                return response()->json($merchantObject,200);
+            }
+            else{
+                return $merchantObject;
+            }
     }
     //
     function placeOrder(Request $request){
