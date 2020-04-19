@@ -26,7 +26,6 @@
           <v-col cols="12" sm="7">
             <v-card-title>{{merchant.name}}</v-card-title>
             <v-card-text class="text--primary">
-              <div>{{merchant.message}}</div>
               <div>
                 <v-icon class="merchants-icon">mdi-map-marker</v-icon>
                 <label>{{merchant.address_zip}} {{merchant.address_city}}</label>
@@ -64,6 +63,11 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
+    // filteredMerchants(){
+    //   return this.merchants.filter(merchant => {
+    //     if(merchants.por)
+    //   }
+    // },
     ...mapGetters(["merchants"])
   },
   created() {
