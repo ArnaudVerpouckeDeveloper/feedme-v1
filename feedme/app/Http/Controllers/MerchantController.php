@@ -94,7 +94,7 @@ class MerchantController extends Controller
         $merchant = auth()->user()->merchant;
 
         $amountOfProducts = $merchant->products()->where("orderable", true)->count();
-        $amountOfOpenOrders = $merchant->orders()->where("completed",false)->count();
+        $amountOfOpenOrders = $merchant->orders()->where("completed",false)->where("denied", false)->count();
         $amountOfVisitors = $merchant->amountOfVisitors;
 
         $checklist = [];
