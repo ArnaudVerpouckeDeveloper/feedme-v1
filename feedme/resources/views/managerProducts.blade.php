@@ -83,11 +83,13 @@
             <p>{{$product->productCategory->name}}</p>
         </div>
 
-        @if(isset($product->imageFileName))
         <div class="productImage row">
-            <img src="{{asset('uploads/'.$product->imageFileName)}}" alt="Productafbeelding {{$product->name}}"/>
+            @if(isset($product->imageFileName))
+                <img src="{{asset('uploads/'.$product->imageFileName)}}" alt="Productafbeelding {{$product->name}}"/>
+            @else
+                <img src="{{asset('images/16-9_placeholder.png')}}" alt="Productafbeelding {{$product->name}}"/>
+            @endif
         </div>
-        @endif
 
         <div class="row upper">
             <p class="name">{{$product->name}}</p>

@@ -305,6 +305,8 @@ class MerchantController extends Controller
 
     function updateProduct(Request $request){
         $request->replace(array('price' => priceToFloat($request->price)));
+        return response()->json($request);
+
         $request->validate([
             'name' => 'required|min:2',
             'price' => ['required', new Price],
