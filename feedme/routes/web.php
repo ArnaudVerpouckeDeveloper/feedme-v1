@@ -82,6 +82,18 @@ Route::group([
 
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");
 Route::get('/sendBatchOfEmails', "AuthController@sendBatchOfEmails");
+Route::get("/{merchantApiName}", function($merchantApiName) { 
+    //Als je amountOfVisitors wil aanpassen zonder de reload erbij te nemen,
+    //kijk naar je request van welke path die komt. Indien van zelfde path tel je die niet mee anders wel.
+    $merchant = Merchant::where("apiName", $merchantApiName)->first();
+        if ($merchant == null){
+            return view("index");
+        }
+        else{
+            //$merchant->update(["amountOfVisitors" => $merchant->amountOfVisitors +1]);
+            return redirect("/restaurant/".$merchant->id);
+        }
+});
 Route::get("/restaurant/{merchantApiName}", function($merchantApiName) { 
     //Als je amountOfVisitors wil aanpassen zonder de reload erbij te nemen,
     //kijk naar je request van welke path die komt. Indien van zelfde path tel je die niet mee anders wel.
