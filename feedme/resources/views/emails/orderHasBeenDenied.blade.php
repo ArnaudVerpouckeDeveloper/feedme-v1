@@ -39,11 +39,11 @@
   <li style="display: flex; margin-bottom:1rem;"><p style="width: 12rem; margin:0;">GSM-nummer:</p><p style="margin:0;">{{$customer->mobilePhone}}</p></li>
   
   @if($order->deliveryMethod == "takeaway")
-<li style="display: flex; margin-bottom:1rem;"><p style="width: 12rem; margin:0;">Tijdstip:</p><p style="margin:0;">Afhalen om {{date("H:i", strtotime($order->requestedTime))}} <span style="font-weight:bold;color:#e43a3a;">+{{$order->extraTime}} min. uitgesteld</span></p></li>
+    <li style="display: flex; margin-bottom:1rem;"><p style="width: 12rem; margin:0;">Tijdstip:</p><p style="margin:0;">Afhalen om {{date("H:i", strtotime($order->requestedTime))}}</p></li>
     <li style="display: flex;"><p style="width: 12rem; margin:0;">Afhaaladres:</p><p style="margin:0;">{{$order->merchant->address_street}} {{$order->merchant->address_number}}</p></li>
     <li style="display: flex;"><p style="width: 12rem; margin:0;"></p><p style="margin:0;">{{$order->merchant->address_zip}} {{$order->merchant->address_city}}</p></li>  
   @elseif($order->deliveryMethod == "delivery")
-    <li style="display: flex; margin-bottom:1rem;"><p style="width: 12rem; margin:0;">Tijdstip:</p><p style="margin:0;">Leveren om {{date("H:i", strtotime($order->requestedTime))}}  <span style="font-weight:bold;color:#e43a3a;">+{{$order->extraTime}} min. uitgesteld</span></p></li>
+    <li style="display: flex; margin-bottom:1rem;"><p style="width: 12rem; margin:0;">Tijdstip:</p><p style="margin:0;">Leveren om {{date("H:i", strtotime($order->requestedTime))}}</p></li>
     <li style="display: flex;"><p style="width: 12rem; margin:0;">Adres:</p><p style="margin:0;">{{$order->addressStreet}} {{$order->addressNumber}}</p></li>
     <li style="display: flex;"><p style="width: 12rem; margin:0;"></p><p style="margin:0;">{{$order->addressZipCode}} {{$order->addressCity}}</p></li>  
   @endif

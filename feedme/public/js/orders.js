@@ -109,7 +109,7 @@ function setEventListenersForOrder(order) {
                         console.log("error: ", error);
                         promptError();
                     });
-            });
+            }, "#4CAF50");
         });
 
 
@@ -345,7 +345,7 @@ function showNewTime(order, newTime) {
 
 
 
-function confirmAction(title, subtitle, confirmButtonText, callBack) {
+function confirmAction(title, subtitle, confirmButtonText, callBack, confirmButtonColor = "#e43a3a") {
     Swal.fire({
             title: title,
             text: subtitle,
@@ -353,7 +353,7 @@ function confirmAction(title, subtitle, confirmButtonText, callBack) {
             showCancelButton: true,
             cancelButtonColor: '#dadada',
             cancelButtonText: 'Annuleren',
-            confirmButtonColor: '#e43a3a',
+            confirmButtonColor: confirmButtonColor,
             confirmButtonText: confirmButtonText,
             reverseButtons: true
         })
