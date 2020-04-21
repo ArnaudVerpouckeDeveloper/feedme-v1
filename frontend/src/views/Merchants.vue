@@ -30,22 +30,22 @@
                 <v-icon class="merchants-icon">mdi-map-marker</v-icon>
                 <label>{{merchant.address_zip}} {{merchant.address_city}}</label>
               </div>
-              <div v-if="merchant.deliveryMethod_delivery">
+              <div v-if="deliveryPossible(merchant.possibleTimes.delivery)">
                 <v-icon class="merchants-icon">mdi-moped</v-icon>
                 <label>Levering aan huis mogelijk.</label>
               </div>
-              <div v-if="merchant.deliveryMethod_takeaway">
+              <div v-if="takeawayPossible(merchant.possibleTimes.takeaway)">
                 <v-icon class="merchants-icon">mdi-store</v-icon>
                 <label>Afhaling mogelijk.</label>
               </div>
               <div
-                v-if="merchant.availableTimes.delivery.length == 0 || merchant.availableTimes.takeaway.length == 0"
+                v-if="!deliveryPossible(merchant.possibleTimes.delivery) || !takeawayPossible(merchant.possibleTimes.takeaway)"
               >
                 <v-icon class="merchants-icon">mdi-door-closed-lock</v-icon>
                 <label>Deze zaak is momenteel gesloten.</label>
               </div>
               <div
-                v-if="merchant.availableTimes.delivery.length != 0 || merchant.availableTimes.takeaway.length != 0"
+                v-if="deliveryPossible(merchant.possibleTimes.delivery) || takeawayPossible(merchant.possibleTimes.takeaway)"
               >
                 <v-icon class="merchants-icon">mdi-door-open</v-icon>
                 <label>Open</label>
@@ -74,9 +74,17 @@ export default {
     this.$store.dispatch("fetchMerchants");
   },
   methods: {
+    deliveryPossible(delivery) {
+    if (delivery.length != 0) return true;
+      else return false;
+    },
+    takeawayPossible(takeaway) {
+      if (takeaway.length != 0) return true;
+      else return false;
+    },
     cardImage(merchant) {
       if (merchant.bannerFileName != null)
-      return `https://www.speedmeal.be/public/uploads/${merchant.bannerFileName}`;
+        return `https://www.speedmeal.be/public/uploads/${merchant.bannerFileName}`;
       else return "/assets/images/placeholder/mechants_card.png";
     }
   }

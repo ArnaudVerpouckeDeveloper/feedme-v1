@@ -38,16 +38,30 @@
       </v-col>
     </v-row>
 
-    <v-row :style="cardStyle" class="merchant-products">
-      <v-col cols="12" md="6" v-for="product in products">
-        <v-card elevation="1">
+    <v-row :style="cardStyle" class="merchant-products" v-for="c in refactoredProductCategory">
+      <v-col cols="12">
+        <v-sheet class="product-category">{{c.name}}</v-sheet>
+      </v-col>
+      <v-col
+        cols="12"
+        md="12"
+        lg="6"
+        xl="6"
+        v-for="product in products"
+        class="d-flex flex-column"
+        v-if="product.product_category_id == c.id"
+      >
+        <v-card elevation="1" class="merchant-product flex d-flex flex-column">
           <v-row>
-            <v-col cols="8">
-              <v-card-title>{{product.name}}</v-card-title>
-              <v-card-subtitle v-if="product.description">{{product.description}}</v-card-subtitle>
-              <v-card-subtitle>€{{formatPrice(product.price)}}</v-card-subtitle>
+            <v-col cols="12" sm="4" class="product-image">
+              <v-img :src="productImage(product.imageFileName)"></v-img>
             </v-col>
-            <v-col cols="4" style="align-self: center;">
+            <v-col cols="8" sm="6" style="align-self: center">
+              <v-card-title class="product-name">{{product.name}}</v-card-title>
+              <v-card-subtitle v-if="product.description">{{product.description}}</v-card-subtitle>
+              <v-card-subtitle class="product-price">€{{formatPrice(product.price)}}</v-card-subtitle>
+            </v-col>
+            <v-col cols="4" sm="2" style="align-self: center;">
               <v-card-actions style="justify-content: flex-end;">
                 <v-btn text @click="removeProduct(product)">
                   <v-icon>mdi-minus</v-icon>
@@ -61,7 +75,15 @@
         </v-card>
       </v-col>
     </v-row>
-    <ShoppingCart :merchant_id="merchantDetail.id" id="shoppingCart" :merchantIsClosed="isClosed"></ShoppingCart>
+    <ShoppingCart
+      :merchant_id="merchantDetail.id"
+      id="shoppingCart"
+      :merchantIsClosed="isClosed"
+      :deliveryCost="merchantDetail.deliveryCost"
+      :minimumOrderValue="merchantDetail.minimumOrderValue"
+      :merchant_name="merchantDetail.name"
+      @TotalCartPrice="updateCartPrice"
+    ></ShoppingCart>
     <CartButton></CartButton>
     <v-dialog v-model="showDialog" max-width="440">
       <v-card>
@@ -72,15 +94,12 @@
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <div class="opening-hours">
-              <v-row
-                class="dialog-content"
-                v-for="(hour, dag) in refactoredDelivery"
-              >
+              <v-row class="dialog-content" v-for="(hour, dag) in refactoredDelivery">
                 <v-col cols="4">{{numberToday(dag)}}:</v-col>
                 <v-col cols="8" v-if="!hour.isClosed">
-                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot </span>
-                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en </span>
-                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot </span>
+                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot</span>
+                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en</span>
+                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot</span>
                   <span v-if="refactorHours(hour.till_2)">{{hour.till_2}}</span>
                 </v-col>
                 <v-col cols="8" v-if="hour.isClosed">niet mogelijk</v-col>
@@ -89,15 +108,12 @@
           </v-tab-item>
           <v-tab-item>
             <div class="opening-hours">
-              <v-row
-                class="dialog-content"
-                v-for="(hour, dag) in refactoredTakeAway"
-              >
+              <v-row class="dialog-content" v-for="(hour, dag) in refactoredTakeAway">
                 <v-col cols="4">{{numberToday(dag)}}:</v-col>
                 <v-col cols="8" v-if="!hour.isClosed">
-                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot </span>
-                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en </span>
-                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot </span>
+                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot</span>
+                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en</span>
+                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot</span>
                   <span v-if="refactorHours(hour.till_2)">{{hour.till_2}}</span>
                 </v-col>
                 <v-col cols="8" v-if="hour.isClosed">niet mogelijk</v-col>
@@ -137,20 +153,25 @@ export default {
     MerchantDialog
   },
   computed: {
+    refactoredProductCategory() {
+      return this.merchantDetail.productCategories.filter(c => {
+        return this.products.filter(p => p.product_category_id == c.id);
+      });
+    },
     refactoredDelivery() {
       const deliveryDays = this.merchantDetail.opening_hours.delivery;
       const delivery = deliveryDays.map(day => {
         const hour = Object.values(day);
-        day.isClosed = hour.every((val, i, arr) => val === arr[0])
+        day.isClosed = hour.every((val, i, arr) => val === arr[0]);
         return day;
       });
       return delivery;
     },
-     refactoredTakeAway() {
+    refactoredTakeAway() {
       const takeAwayDays = this.merchantDetail.opening_hours.takeaway;
       const takeaway = takeAwayDays.map(day => {
         const hour = Object.values(day);
-        day.isClosed = hour.every((val, i, arr) => val === arr[0])
+        day.isClosed = hour.every((val, i, arr) => val === arr[0]);
         return day;
       });
       return takeaway;
@@ -167,12 +188,12 @@ export default {
       else return "/assets/images/placeholder/merchants_logo.png";
     },
     deliveryPossible() {
-      if (this.merchantDetail.opening_hours.delivery.length != 0)
+      if (this.merchantDetail.possibleTimes.delivery.length != 0)
         return "mogelijk";
       else return "niet mogelijk";
     },
     takeawayPossible() {
-      if (this.merchantDetail.opening_hours.takeaway.length != 0)
+      if (this.merchantDetail.possibleTimes.takeaway.length != 0)
         return "mogelijk";
       else return "niet mogelijk";
     },
@@ -218,7 +239,8 @@ export default {
   data: () => ({
     showDialog: false,
     snackbar: false,
-    tab: null
+    tab: null,
+    totalPriceCart: 0
   }),
   methods: {
     refactorHours(hour) {
@@ -226,21 +248,28 @@ export default {
         return false;
       } else return true;
     },
-
     onChangeDrawer(bool) {
       this.$store.dispatch("onChangeDrawer", bool);
     },
     addProduct(product) {
-      if (!this.isClosed) {
+      if (this.isClosed) {
+        this.snackbar = true;
+      } else if (this.totalPriceCart >= this.merchantDetail.minimumOrderValue) {
         let merchantId = this.merchantDetail.id;
         let cartItem = { product, ...merchantId };
         this.addItemToCart(cartItem);
-      } else {
-        this.snackbar = true;
       }
+    },
+    updateCartPrice(price) {
+      this.totalPriceCart = price;
     },
     removeProduct(product) {
       this.removeItemFromCart(product);
+    },
+    productImage(imageFile) {
+      if (imageFile != null)
+        return `https://www.speedmeal.be/public/uploads/${imageFile}`;
+      else return "/assets/images/placeholder/merchants_logo.png";
     },
     numberToday(number) {
       let days = {
@@ -317,7 +346,41 @@ export default {
   padding-top: 12px;
   padding-bottom: 12px;
 }
+.product-name {
+  font-size: 1.2em;
+}
+.product-image {
+  padding-top: 0;
+  padding-bottom: 0;
+  position: relative;
+}
+.product-image > .v-image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.product-price {
+  color: #4caf50 !important;
+  font-weight: 500 !important;
+}
+.merchant-products {
+  margin-bottom: 40px;
+}
 
+.merchant-product {
+  overflow: hidden;
+  padding-left: 12px;
+}
+.product-category {
+  padding: 15px 20px;
+  background: #4caf50 !important;
+  color: white !important;
+  font-size: 1.4em;
+}
 @media only screen and (max-width: 599px) {
   .img-header {
     max-height: 125px !important;
@@ -328,9 +391,14 @@ export default {
   }
   .merchant-info-hours {
     text-align: center;
+    margin-top: 0;
+    padding-top: 0;
   }
   .merchant-logo-wrapper {
     margin-bottom: 80px;
+  }
+  .product-image {
+    height: 112px;
   }
 }
 
@@ -343,6 +411,9 @@ export default {
   .img-header {
     margin-right: -12px;
     max-width: unset;
+  }
+  .product-name {
+    font-size: 1em;
   }
 }
 </style>

@@ -33,7 +33,7 @@
                     :rules="val.deliveryTimeRules"
                   ></v-select>
                 </v-col>
-                 <v-col cols="12" sm="5" lg="5" xl="4" style="align-self: center;">
+                <v-col cols="12" sm="5" lg="5" xl="4" style="align-self: center;">
                   <v-text-field
                     v-model="orderForm.mobilePhone"
                     value="5"
@@ -43,7 +43,7 @@
                     :rules="val.requiredRule"
                   ></v-text-field>
                 </v-col>
-                
+
                 <v-col cols="9" v-if="isDelivery">
                   <v-text-field
                     v-model="orderForm.addressStreet"
@@ -126,7 +126,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   beforeRouteEnter(to, from, next) {
     if (from.name === "MerchantDetail") {
-      const store = require("../store");   
+      const store = require("../store");
       store.default
         .dispatch("authUser")
         .then(user => {
@@ -143,9 +143,8 @@ export default {
     CartButton
   },
   computed: {
-    isDelivery(){
-      if(this.orderForm.deliveryMethod === "delivery")
-      return true;
+    isDelivery() {
+      if (this.orderForm.deliveryMethod === "delivery") return true;
       else return false;
     },
     deliveryTimeLabel() {
@@ -163,7 +162,7 @@ export default {
     loading: false,
     dialog: false,
     orderForm: {
-      mobilePhone: "",
+      mobilePhone: ""
     },
     valid: false,
     val: {
@@ -198,7 +197,10 @@ export default {
         let merchantId = this.merchantDetail.id;
         let merchant = { merchantId };
         let orders = {
-          productIds: this.cartItems[merchantId].map(({ id }) => id)
+          products: this.cartItems[merchantId].map(p => ({
+            id: p.id,
+            count: p.count
+          }))
         };
         this.addOrder({
           ...merchant,

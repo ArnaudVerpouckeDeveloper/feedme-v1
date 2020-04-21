@@ -37,7 +37,7 @@
         <v-card-text class="col-6">Subtotaal</v-card-text>
         <v-card-text class="col-6 price">€ {{formatPrice(totalCart)}}</v-card-text>
         <v-card-text class="col-6">Bezorgkosten</v-card-text>
-        <v-card-text class="col-6 delivery-price">Gratis</v-card-text>
+        <v-card-text class="col-6 delivery-price">{{deliveryCostFormat}}</v-card-text>
         <v-card-text class="col-6 total-text">Totaal</v-card-text>
         <v-card-text class="col-6 total-price">€ {{formatPrice(totalPrice)}}</v-card-text>
       </v-row>
@@ -47,10 +47,10 @@
         color="green"
         large
         @click="orderItems"
-        :disabled="disableButton || merchantIsClosed"
+        :disabled="disableButton || merchantIsClosed || !minOrderValueReached"
         class="shoppingCartButton"
       >Bestellen</v-btn>
-      <v-card-subtitle v-if="merchantIsClosed">Deze zaak is momenteel gesloten.</v-card-subtitle>
+      <v-card-subtitle>{{orderbtnMsg}}</v-card-subtitle>
     </div>
   </v-navigation-drawer>
 </template>
@@ -68,9 +68,27 @@ export default {
     showOrderBtn: {
       default: true,
       type: Boolean
-    }
+    },
+    deliveryCost: Number,
+    minimumOrderValue: Number,
+    merchant_name: String
   },
   computed: {
+    orderbtnMsg() {
+      if (this.merchantIsClosed) return "Deze zaak is momenteel gesloten.";
+      else if (this.minimumOrderValue != 0 && !this.minOrderValueReached)
+        return `U kunt helaas nog niet bestellen. ${this.merchant_name} 
+      hanteert een minimum bestelbedrag van: € ${this.minimumOrderValue} (excl. bezorgkosten)`;
+      else return;
+    },
+    minOrderValueReached() {
+      if (this.totalCart >= this.minimumOrderValue) return true;
+      else false;
+    },
+    deliveryCostFormat() {
+      if (this.deliveryCost === 0) return "Gratis";
+      else return this.deliveryCost;
+    },
     cartItemPerMerchant() {
       return this.cartItems[this.merchant_id];
     },
@@ -80,7 +98,7 @@ export default {
         this.cartItems[this.merchant_id].forEach(item => {
           this.totalPrice += item.price * item.count;
         });
-      return this.totalPrice;
+      return (this.totalPrice + this.deliveryCost);
     },
     disableButton() {
       if (this.cartItems[this.merchant_id] != null)
@@ -110,6 +128,7 @@ export default {
   methods: {
     addProduct(product) {
       if (!this.merchantIsClosed) {
+        this.$emit('TotalCartPrice', this.totalPrice);
         let merchantId = this.merchantDetail.id;
         let cartItem = { product, ...merchantId };
         this.addItemToCart(cartItem);
