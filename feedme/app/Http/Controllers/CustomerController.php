@@ -80,6 +80,7 @@ class CustomerController extends Controller
 
 
         $merchantObject->possibleTimes = $this->getPossibleRequestTimes($merchant);
+        //return response()->json($this->getPossibleRequestTimes($merchant));
 
         $merchantObject->products = $merchant->products()->get();
 
@@ -252,8 +253,6 @@ class CustomerController extends Controller
                     array_push($allProductIds, $product["id"]);
                 }
             }
-
-            return response()->json($allProductIds);
 
 
     

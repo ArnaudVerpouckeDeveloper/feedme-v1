@@ -1,0 +1,179 @@
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LnNwZWVkbWVhbC5iZVwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NzU4MzMyNCwiZXhwIjoxNTg3NTg2OTI0LCJuYmYiOjE1ODc1ODMzMjQsImp0aSI6IlNBaGZXQnZSRmEzWUlnb04iLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.x099c9xqKeVY3esVc6wPxGRAzn0cAJxP-fNNfRUNubc
+
+
+
+POST https://www.speedmeal.be/api/previewApiNameFromMerchantName
+Content-Type: application/json
+Accept: application/json
+
+{
+    "fullName": "dit-iseenmerchantapiname aaa"
+}
+
+###
+
+POST https://www.speedmeal.be/api/auth/registerMerchant
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Ditiseenvoornaam",
+    "lastName": "Ditiseenachternaam",
+    "email": "arnaud.verpoucke@hotmail.com",
+    "password": "Arnaud_2019",
+    "password_confirmation": "Arnaud_2019",
+    "merchantName": "ditiseenmerchantapiname",
+    "mobilePhone": "0400 123 456",
+    "address_street": "Ergenslaan",
+    "address_number": "22b",
+    "address_zip": "8520",
+    "address_city": "Kuurne",
+    "tax_number": "BE 1234.567.890",
+    "merchantPhone": "0479 333 222"
+}
+
+
+###
+
+POST https://www.speedmeal.be/api/auth/registerCustomer
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Arnaud",
+    "lastName": "Verpoucke",
+    "email": "arnaud.verpoucke@hotmail.com",
+    "password": "Arnaud_2019",
+    "password_confirmation": "Arnaud_2019",
+    "mobilePhone": "0400 123 456",
+    "acceptsTermsAndConditions": "true"
+}
+
+
+###
+
+POST https://www.speedmeal.be/admin/login
+Content-Type: application/json
+
+{
+    "email": "arnaud.verpoucke@hotmail.com",
+    "password": "Arnaud_2019"
+}
+
+
+###
+
+POST https://www.speedmeal.be/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "arnaud@test.com",
+    "password": "123"
+}
+
+###
+
+
+POST https://www.speedmeal.be/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "emma@test.com",
+    "password": "123"
+}
+
+
+###
+
+
+POST https://www.speedmeal.be/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "arnaud.verpoucke@hotmail.com",
+    "password": "Arnaud_2019"
+}
+
+
+###
+
+
+POST https://www.speedmeal.be/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "arnaud@plenso.be",
+    "password": "Bob_2019"
+}
+
+###
+
+POST https://www.speedmeal.be/api/placeOrder
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+    "merchantId": 3,
+    "deliveryMethod": "delivery",
+    "addressStreet": "Vijfwegenstraat",
+    "addressNumber": 200,
+    "addressZipCode": 8800,
+    "addressCity": "Roeselare",
+    "products": [
+        {"count": 3,"id": 15}
+    ],
+    "requestedTime": "22:30"
+}
+
+###
+
+POST https://www.speedmeal.be/sendContactForm
+Content-Type: application/json
+Accept: application/json
+
+{
+    "fullName": "Arnaud Verpoucke",
+    "email": "arnaud.verpoucke@hotmail.com",
+    "message": "Hallo dit is een test. Bla Bla Bla. \n Testregel."
+}
+
+###
+
+
+GET https://www.speedmeal.be/api/test/merchant-protected
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+POST https://www.speedmeal.be/api/auth/me
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+###
+
+GET https://www.speedmeal.be/api/merchant/3
+Accept: application/json
+
+###
+
+
+POST https://www.speedmeal.be/api/merchant/addProduct
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "French fries",
+    "price": "2,80",
+    "available": true
+}
+
+###
+
+GET https://www.speedmeal.be/api/merchant/all
+Accept: application/json

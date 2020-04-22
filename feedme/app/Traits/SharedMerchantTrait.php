@@ -29,7 +29,6 @@ trait SharedMerchantTrait
                     $method_today_till_2 = $merchant->delivery_monday_till_2;
                 }          
                 break;
-                break;
             case 2:
                 //tuesday
                 if($orderDeliveryMethod == "takeaway"){
@@ -286,7 +285,7 @@ trait SharedMerchantTrait
         }
         
         foreach($testTimes as $testTime){
-            if($this->orderPossibleInSchedule($merchant, "takeaway", $testTime)){
+            if($this->orderPossibleInSchedule($merchant, "delivery", $testTime)){
                 array_push($possibleRequestTimes_delivery, $testTime);
             }
         }
