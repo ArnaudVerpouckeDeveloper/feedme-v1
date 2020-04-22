@@ -151,6 +151,11 @@ export default {
   }
 }
 
+@media only screen and (max-width: 599px) {
+  .landing-content{
+    height: 100% !important;
+  }
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
