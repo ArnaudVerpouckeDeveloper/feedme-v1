@@ -103,9 +103,7 @@ export default {
 .merchant-list > .row > div {
   padding: 0;
 }
-.merchant-list > .row .v-image {
-  margin-left: 12px;
-}
+
 .merchants-icon {
   padding-right: 5px;
   color: rgb(76, 175, 80) !important;

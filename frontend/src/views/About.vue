@@ -2,7 +2,7 @@
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 md10 lg9>
-        <v-card class="elevation-3">
+        <v-card class="elevation-3" style="overflow: hidden;">
           <v-row>
             <v-col cols="12" md="6" class="about-img">
               <v-img class="align-end" src="/assets/images/SpeedMeal_Team.jpg" />

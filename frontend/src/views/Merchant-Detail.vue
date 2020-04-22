@@ -56,7 +56,7 @@
             <v-col cols="12" sm="4" class="product-image">
               <v-img :src="productImage(product.imageFileName)"></v-img>
             </v-col>
-            <v-col cols="8" sm="6" style="align-self: center">
+            <v-col cols="8" sm="6" class="product-content">
               <v-card-title class="product-name">{{product.name}}</v-card-title>
               <v-card-subtitle v-if="product.description">{{product.description}}</v-card-subtitle>
               <v-card-subtitle class="product-price">€{{formatPrice(product.price)}}</v-card-subtitle>
@@ -381,6 +381,9 @@ export default {
   color: white !important;
   font-size: 1.4em;
 }
+.product-content {
+  align-self: center;
+}
 @media only screen and (max-width: 599px) {
   .img-header {
     max-height: 125px !important;
@@ -399,6 +402,15 @@ export default {
   }
   .product-image {
     height: 112px;
+  }
+  .merchant-products > div {
+    padding-bottom: 0px;
+  }
+  .product-category {
+    padding: 10px 15px;
+  }
+  .product-content {
+    padding-left: 0;
   }
 }
 
