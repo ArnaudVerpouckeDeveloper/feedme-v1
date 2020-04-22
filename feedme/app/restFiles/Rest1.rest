@@ -1,4 +1,4 @@
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NzMyNDU1NCwiZXhwIjoxNTg3MzI4MTU0LCJuYmYiOjE1ODczMjQ1NTQsImp0aSI6InRhSzdWNXU1bExmdzY4MkgiLCJzdWIiOjQsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.BBqHMLJQiPwrxZDb_axwIujKFovSdct5seP7iUNiIhQ
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NzU3NTc2NiwiZXhwIjoxNTg3NTc5MzY2LCJuYmYiOjE1ODc1NzU3NjYsImp0aSI6InY3SWhtS0Eyc1VydE1ua3giLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.GJlu4S-eBj39ShqWT02KyWLvdi7pyLk2BGYmF8Fn9hA
 
 
 
@@ -120,8 +120,12 @@ Authorization: Bearer {{token}}
     "addressNumber": 200,
     "addressZipCode": 8800,
     "addressCity": "Roeselare",
-    "productIds": ["1","2","3"],
-    "requestedTime": "22:30"
+    "products": [
+        {"count": 3,"id": 1},
+        {"count": 2,"id": 2},
+        {"count": 1,"id": 3}
+    ],
+    "requestedTime": "20:30"
 }
 
 ###
