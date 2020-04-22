@@ -381,6 +381,9 @@ export default {
   color: white !important;
   font-size: 1.4em;
 }
+.product-category:first-letter {
+    text-transform: uppercase;
+}
 .product-content {
   align-self: center;
 }
