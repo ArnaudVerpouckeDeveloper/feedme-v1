@@ -29,7 +29,7 @@
                     name="deliveryTime"
                     :label="deliveryTimeLabel"
                     v-model="orderForm.requestedTime"
-                    no-data-text="Deze horeca zaak is momenteel gesloten."
+                    no-data-text="Deze horecazaak is momenteel gesloten."
                     :rules="val.deliveryTimeRules"
                   ></v-select>
                 </v-col>

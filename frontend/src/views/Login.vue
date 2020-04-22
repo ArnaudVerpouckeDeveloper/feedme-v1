@@ -31,7 +31,7 @@
             Nog geen account?
             <router-link :to="{name:'register'}">Registreer u hier.</router-link>
           </p>
-          <p class="register">
+          <p class="register signInAsRestaurant">
             <router-link :to="{name:'merchantLogin'}">Inloggen als zaak</router-link>
           </p>
           <v-card-actions>
@@ -92,5 +92,28 @@ export default {
 .register a {
   text-decoration: none;
   border-bottom: 2px solid #4caf50;
+}
+
+.register.signInAsRestaurant{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5rem;
+
+}
+.register.signInAsRestaurant a:hover{
+  background-color: #EBEBEB;
+}
+
+.register.signInAsRestaurant a{
+  transition: all 250ms;
+  color: black;
+  border: none;
+  padding: 0.8rem 2rem;
+  text-transform: uppercase;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.0892857143em;
 }
 </style>
