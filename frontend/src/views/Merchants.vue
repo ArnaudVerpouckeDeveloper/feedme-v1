@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     deliveryPossible(delivery) {
-    if (delivery.length != 0) return true;
+      if (delivery.length != 0) return true;
       else return false;
     },
     takeawayPossible(takeaway) {
@@ -98,11 +98,14 @@ export default {
 .merchant-list {
   margin-bottom: 2em;
   max-width: 52em;
+  overflow: hidden;
 }
 .merchant-list > .row > div {
   padding: 0;
 }
-
+.merchant-list > .row .v-image {
+  margin-left: 12px;
+}
 .merchants-icon {
   padding-right: 5px;
   color: rgb(76, 175, 80) !important;
