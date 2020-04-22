@@ -39,7 +39,7 @@
                 <label>Afhaling mogelijk.</label>
               </div>
               <div
-                v-if="!deliveryPossible(merchant.possibleTimes.delivery) || !takeawayPossible(merchant.possibleTimes.takeaway)"
+                v-if="!deliveryPossible(merchant.possibleTimes.delivery) && !takeawayPossible(merchant.possibleTimes.takeaway)"
               >
                 <v-icon class="merchants-icon">mdi-door-closed-lock</v-icon>
                 <label>Deze zaak is momenteel gesloten.</label>
