@@ -12,12 +12,12 @@
                 <v-col cols="5" sm="3" lg="2">
                   <v-radio-group v-model="orderForm.deliveryMethod" :mandatory="true">
                     <v-radio
-                      v-if="merchantDetail.deliveryMethod_delivery"
+                      v-if="deliveryPossible"
                       label="Leveren"
                       value="delivery"
                     ></v-radio>
                     <v-radio
-                      v-if="merchantDetail.deliveryMethod_takeaway"
+                      v-if="takeawayPossible"
                       label="Afhalen"
                       value="takeaway"
                     ></v-radio>
@@ -143,6 +143,14 @@ export default {
     CartButton
   },
   computed: {
+    deliveryPossible() {
+      if (this.merchantDetail.possibleTimes.delivery.length != 0) return true;
+      else return false;
+    },
+    takeawayPossible() {
+      if (this.merchantDetail.possibleTimes.takeaway.length != 0) return true;
+      else return false;
+    },
     isDelivery() {
       if (this.orderForm.deliveryMethod === "delivery") return true;
       else return false;
