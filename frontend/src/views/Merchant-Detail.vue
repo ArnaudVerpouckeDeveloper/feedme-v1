@@ -205,8 +205,8 @@ export default {
     },
     isClosed() {
       if (
-        this.merchantDetail.possibleTimes.delivery.length == 0 ||
-        this.merchantDetail.possibleTimes.takeaway.length == 0
+        this.merchantDetail.possibleTimes.delivery.length === 0 &&
+        this.merchantDetail.possibleTimes.takeaway.length === 0
       )
         return true;
       else return false;
@@ -254,7 +254,7 @@ export default {
     addProduct(product) {
       if (this.isClosed) {
         this.snackbar = true;
-      } else if (this.totalPriceCart >= this.merchantDetail.minimumOrderValue) {
+      } else {
         let merchantId = this.merchantDetail.id;
         let cartItem = { product, ...merchantId };
         this.addItemToCart(cartItem);

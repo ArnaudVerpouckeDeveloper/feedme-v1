@@ -78,7 +78,7 @@ export default {
       if (this.merchantIsClosed) return "Deze zaak is momenteel gesloten.";
       else if (this.minimumOrderValue != 0 && !this.minOrderValueReached)
         return `U kunt helaas nog niet bestellen. ${this.merchant_name} 
-      hanteert een minimum bestelbedrag van: € ${this.minimumOrderValue} (excl. bezorgkosten)`;
+      hanteert een minimum bestelbedrag van: €${this.minimumOrderValue} (excl. bezorgkosten)`;
       else return;
     },
     minOrderValueReached() {
@@ -149,7 +149,7 @@ export default {
       return (product.price * product.count).toFixed(2);
     },
     orderItems() {
-      if (this.cartItems.length != 0) {
+      if (this.cartItems.length != 0 && this.totalPrice >= this.minimumOrderValue) {
         this.$router.push({ name: "order" });
       }
     },
