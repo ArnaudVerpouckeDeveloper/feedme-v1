@@ -186,6 +186,7 @@ class CustomerController extends Controller
     }
     
     function placeOrder(Request $request){
+
         if(!$this->merchantIdExists($request->merchantId)){
             exit();
         }
@@ -245,8 +246,18 @@ class CustomerController extends Controller
 
             $order->requestedTime = DateTime::createFromFormat('H:i', $request->requestedTime);
 
+            $allProductIds = [];
+            foreach ($request->products as $product) {
+                for($i = 0; $i < $product["count"]; $i++){
+                    array_push($allProductIds, $product["id"]);
+                }
+            }
+
+            return response()->json($allProductIds);
+
+
     
-            if ($this->productIdsAreValid($request->productIds, $merchant)){
+            if ($this->productIdsAreValid($allProductIds, $merchant)){
 
                 if($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime )){
 
@@ -255,7 +266,7 @@ class CustomerController extends Controller
     
 
                     $totalPrice = 0;
-                    foreach ($request->productIds as $productId){
+                    foreach ($allProductIds as $productId){
                         $product = Product::find($productId);
                         $order->products()->attach($product);
                         $totalPrice = $totalPrice + $product->price;
