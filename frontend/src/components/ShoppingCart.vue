@@ -19,8 +19,8 @@
     <v-divider></v-divider>
     <div class="cart-items">
       <v-card v-for="product in cartItemPerMerchant" elevation="0" class="row">
-        <v-card-title class="col-5 item-name">x{{product.count}} {{product.name}}</v-card-title>
-        <v-col cols="4" class="item-buttons">
+        <v-card-title class="col-5 item-name" :class="{'col-9': !canEdit}">x{{product.count}} {{product.name}}</v-card-title>
+        <v-col cols="4" class="item-buttons" v-if="canEdit">
           <v-btn @click="removeProduct(product)" outlined x-small style="margin-right: 10px;">
             <v-icon size="12">mdi-minus</v-icon>
           </v-btn>
@@ -42,7 +42,7 @@
         <v-card-text class="col-6 total-price">€ {{formatPrice(totalPrice)}}</v-card-text>
       </v-row>
     </v-card>
-    <div class="btn-wrapper" v-if="showOrderBtn">
+    <div class="btn-wrapper" v-if="canEdit">
       <v-btn
         color="green"
         large
@@ -65,13 +65,13 @@ export default {
       type: Boolean
     },
     merchant_id: Number,
-    showOrderBtn: {
+    canEdit: {
       default: true,
       type: Boolean
     },
     deliveryCost: Number,
     minimumOrderValue: Number,
-    merchant_name: String
+    merchant_name: String,
   },
   computed: {
     orderbtnMsg() {

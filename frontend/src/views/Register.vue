@@ -169,8 +169,8 @@ export default {
         passwordRules: [
           v => !!v || "Wachtwoord is verplicht",
           v =>
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!$#%]).+$/.test(v) ||
-            "Wachtwoord moet minstens een hoofdletter, speciale teken en een cijfer hebben.",
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(v) ||
+            "Wachtwoord moet minstens een hoofdletter en een cijfer hebben.",
           v =>
             (v && v.length >= 8) ||
             "Wachtwoord moet minstens 8 characters lang zijn."

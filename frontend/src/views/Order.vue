@@ -11,16 +11,8 @@
               <v-row>
                 <v-col cols="5" sm="3" lg="2">
                   <v-radio-group v-model="orderForm.deliveryMethod" :mandatory="true">
-                    <v-radio
-                      v-if="deliveryPossible"
-                      label="Leveren"
-                      value="delivery"
-                    ></v-radio>
-                    <v-radio
-                      v-if="takeawayPossible"
-                      label="Afhalen"
-                      value="takeaway"
-                    ></v-radio>
+                    <v-radio v-if="deliveryPossible" label="Leveren" value="delivery"></v-radio>
+                    <v-radio v-if="takeawayPossible" label="Afhalen" value="takeaway"></v-radio>
                   </v-radio-group>
                 </v-col>
                 <v-col cols="7" sm="4" xl="3" style="align-self: center;">
@@ -113,7 +105,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <ShoppingCart :showOrderBtn="false" :merchant_id="merchantDetail.id"></ShoppingCart>
+    <ShoppingCart
+      :canEdit="false"
+      :merchant_id="merchantDetail.id"
+      :deliveryCost="merchantDetail.deliveryCost"
+      :minimumOrderValue="merchantDetail.minimumOrderValue"
+      :merchant_name="merchantDetail.name"
+    ></ShoppingCart>
     <CartButton></CartButton>
   </v-container>
 </template>
@@ -124,20 +122,20 @@ import CartButton from "../components/CartButton";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  beforeRouteEnter(to, from, next) {
-    if (from.name === "MerchantDetail") {
-      const store = require("../store");
-      store.default
-        .dispatch("authUser")
-        .then(user => {
-          next(vm => vm.orderForm.mobilePhone = user.mobilePhone);
-          store.default.dispatch("toggleCart", false);
-        })
-        .catch(() => {
-          next("/aanmelden");
-        });
-    } else next("/restaurants");
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   if (from.name === "MerchantDetail") {
+  //     const store = require("../store");
+  //     store.default
+  //       .dispatch("authUser")
+  //       .then(user => {
+  //         next(vm => vm.orderForm.mobilePhone = user.mobilePhone);
+  //         store.default.dispatch("toggleCart", false);
+  //       })
+  //       .catch(() => {
+  //         next("/aanmelden");
+  //       });
+  //   } else next("/restaurants");
+  // },
   components: {
     ShoppingCart,
     CartButton
