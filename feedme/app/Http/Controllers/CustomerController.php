@@ -246,6 +246,7 @@ class CustomerController extends Controller
     
 
             $order->requestedTime = DateTime::createFromFormat('H:i', $request->requestedTime);
+            $order->details = $request->message;
 
             $allProductIds = [];
             foreach ($request->products as $product) {

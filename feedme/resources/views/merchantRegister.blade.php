@@ -30,7 +30,7 @@
 
                     <label>Wachtwoord</label>
                     <input type="password" required name="password" />
-                    <p class="information">Minstens 1 hoofdletter, minstens 1 teken, minstens 1 cijfer en een minimumlengte van 8 tekens.</p>
+                    <p class="information">Minstens 1 hoofdletter, minstens 1 cijfer en een minimumlengte van 8 tekens.</p>
                     @error("password")
                     <p class="error">{{ $message }}</p>
                     @enderror

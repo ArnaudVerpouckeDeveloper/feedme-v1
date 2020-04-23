@@ -205,7 +205,7 @@ class AuthController extends Controller
             'firstName' => 'required|min:1|string',
             'lastName' => 'required|min:1|string',
             'email' => 'required|email:rfc,dns|unique:users',
-            'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!$#%]).+$/', 'confirmed'],
+            'password' => ['required','min:8','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
             'password_confirmation' => 'required',
             'mobilePhone' => "required",
             'acceptsTermsAndConditions' => "required|accepted"
@@ -223,6 +223,7 @@ class AuthController extends Controller
             Minstens 8 tekens
         */
 
+        
         $user = User::create([
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
@@ -231,6 +232,7 @@ class AuthController extends Controller
             'verificationCode' => Str::random(128),
             'mobilePhone' => $request->mobilePhone
         ]);
+        
         Mail::to($user->email)->send(new ConfirmEmail($user));
         return $user;
     }
