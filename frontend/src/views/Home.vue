@@ -114,7 +114,7 @@ export default {
   color: #000 !important;
 }
 
-@media only screen and (max-width: 234px) {
+@media only screen and (max-height: 535px) and (max-width: 320px) {
   .landing-content {
     font-size: 1em !important;
     height: 410px !important;
@@ -128,7 +128,7 @@ export default {
 @media only screen and (max-width: 340px) {
   .landing-content {
     font-size: 1.2em;
-    padding: 0.5em !important;
+    padding: 0.6em !important;
     height: 450px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -141,7 +141,10 @@ export default {
   }
   .landing-cta {
     font-size: 0.8em;
-    margin-top: 0.8em;
+    margin-top: 0;
+  }
+  .landing-cta .v-btn  {
+   height: 34px !important;
   }
 }
 

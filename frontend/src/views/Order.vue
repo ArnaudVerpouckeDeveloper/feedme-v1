@@ -122,20 +122,20 @@ import CartButton from "../components/CartButton";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  // beforeRouteEnter(to, from, next) {
-  //   if (from.name === "MerchantDetail") {
-  //     const store = require("../store");
-  //     store.default
-  //       .dispatch("authUser")
-  //       .then(user => {
-  //         next(vm => vm.orderForm.mobilePhone = user.mobilePhone);
-  //         store.default.dispatch("toggleCart", false);
-  //       })
-  //       .catch(() => {
-  //         next("/aanmelden");
-  //       });
-  //   } else next("/restaurants");
-  // },
+  beforeRouteEnter(to, from, next) {
+    if (from.name === "MerchantDetail") {
+      const store = require("../store");
+      store.default
+        .dispatch("authUser")
+        .then(user => {
+          next(vm => vm.orderForm.mobilePhone = user.mobilePhone);
+          store.default.dispatch("toggleCart", false);
+        })
+        .catch(() => {
+          next("/aanmelden");
+        });
+    } else next("/restaurants");
+  },
   components: {
     ShoppingCart,
     CartButton
