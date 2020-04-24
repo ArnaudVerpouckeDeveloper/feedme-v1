@@ -114,7 +114,7 @@ export default {
   color: #000 !important;
 }
 
-@media only screen and (max-height: 535px) and (max-width: 320px) {
+@media only screen and (max-height: 600px) and (max-width: 435px) {
   .landing-content {
     font-size: 1em !important;
     height: 410px !important;
