@@ -156,7 +156,7 @@ const actions = {
                 .then(res => {
                     resolve();
                     context.commit('updateUser', res.data)
-                    router.replace({ name: "Merchants" });
+                    router.replace({ path: data.route });
                 })
                 .catch(error => {
                     reject();
