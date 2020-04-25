@@ -114,13 +114,28 @@ export default {
   color: #000 !important;
 }
 
-@media only screen and (max-height: 600px) and (max-width: 435px) {
+@media only screen and (max-height: 600px) and (max-width: 450px) {
   .landing-content {
     font-size: 1em !important;
-    height: 410px !important;
+    padding: 0.6em !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .landing-cta .landing-cta-horeca .v-btn__content {
     font-size: 0.8em !important;
+  }
+  .landing-content-img {
+    width: 180px !important;
+  }
+  .v-btn.v-size--large {
+    font-size: 0.675rem !important;
+  }
+  .landing-cta {
+    font-size: 0.8em;
+    margin-top: 0;
+  }
+  .landing-cta .v-btn {
+    height: 34px !important;
   }
 }
 
@@ -143,8 +158,8 @@ export default {
     font-size: 0.8em;
     margin-top: 0;
   }
-  .landing-cta .v-btn  {
-   height: 34px !important;
+  .landing-cta .v-btn {
+    height: 34px !important;
   }
 }
 
@@ -155,7 +170,7 @@ export default {
 }
 
 @media only screen and (max-width: 599px) {
-  .landing-content{
+  .landing-content {
     height: 100% !important;
   }
 }
@@ -178,7 +193,6 @@ export default {
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 992px) {
-
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
@@ -190,5 +204,4 @@ export default {
     width: 14em !important;
   }
 }
-
 </style>
