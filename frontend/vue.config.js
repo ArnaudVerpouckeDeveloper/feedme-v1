@@ -10,9 +10,13 @@ module.exports = {
         config.output.filename = '[name].js'
         config.output.chunkFilename = '[name].js'
     },
+
     css: {
         extract: {
-            filename: '[name].css'
+            filename: '[name].css',
+            chunkFilename: "/[name].css"
         },
     },
+
+
 }
