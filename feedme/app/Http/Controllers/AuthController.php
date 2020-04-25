@@ -239,7 +239,7 @@ class AuthController extends Controller
 
 
     public function resendConfirmEmail($userId){
-        $user = User::find($userId)->first();
+        $user = User::find($userId);
         Mail::to($user->email)->send(new ConfirmEmail($user));
         return response()->json("ok");
      }
@@ -291,6 +291,7 @@ class AuthController extends Controller
         $merchantApiName = strtolower($merchantName);
         $merchantApiName = trim($merchantApiName);
         $merchantApiName = str_replace(' ', '', $merchantApiName);
+        $merchantApiName = str_replace('&', 'en', $merchantApiName);
         $merchantApiName = preg_replace("/[^a-zA-Z0-9-]/", "", $merchantApiName);
         $merchantApiName = str_replace('/', '', $merchantApiName);
         $merchantApiName = str_replace('-', '', $merchantApiName);
@@ -318,7 +319,9 @@ class AuthController extends Controller
             "faq",
             "contact",
             "register",
-            "signup"
+            "signup",
+            "home",
+            "startpagina"
         ];
 
         $counter = 1;

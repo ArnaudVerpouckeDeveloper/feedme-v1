@@ -1,2 +1,17 @@
 User-agent: *
-Disallow:
+Disallow: /admin/dashboard
+Disallow: /admin/producten
+Disallow: /admin/orders
+Disallow: /admin/instellingen
+Disallow: /api/*
+Allow: /
+Allow: /restaurants
+Allow: /restaurants/*
+Allow: /over
+Allow: /faq
+Allow: /contact
+Allow: /aanmelden
+Allow: /registreren
+Allow: /admin/login
+Allow: /admin/registreren
+Allow: /vporwaarden

@@ -1,4 +1,4 @@
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LnNwZWVkbWVhbC5iZVwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NzU4MzMyNCwiZXhwIjoxNTg3NTg2OTI0LCJuYmYiOjE1ODc1ODMzMjQsImp0aSI6IlNBaGZXQnZSRmEzWUlnb04iLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.x099c9xqKeVY3esVc6wPxGRAzn0cAJxP-fNNfRUNubc
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LnNwZWVkbWVhbC5iZVwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU4NzgyNTAxOCwiZXhwIjoxNTg3ODI4NjE4LCJuYmYiOjE1ODc4MjUwMTgsImp0aSI6IkpVbzhOeklzeGd3MjR3MVgiLCJzdWIiOjksInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.Vup4qXok5AsOkwsSjzXXhekBH_Lb8MKEIzP40ua7RSE
 
 
 
@@ -102,8 +102,8 @@ POST https://www.speedmeal.be/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "arnaud@plenso.be",
-    "password": "Bob_2019"
+    "email": "iemand4@gmail.com",
+    "password": "Arnaud_2019"
 }
 
 ###
@@ -114,16 +114,16 @@ Accept: application/json
 Authorization: Bearer {{token}}
 
 {
-    "merchantId": 3,
+    "merchantId": 4,
     "deliveryMethod": "delivery",
     "addressStreet": "Vijfwegenstraat",
     "addressNumber": 200,
     "addressZipCode": 8800,
     "addressCity": "Roeselare",
     "products": [
-        {"count": 3,"id": 15}
+        {"count": 3,"id": 16}
     ],
-    "requestedTime": "22:30"
+    "requestedTime": "20:00"
 }
 
 ###
@@ -156,7 +156,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-GET https://www.speedmeal.be/api/merchant/3
+GET https://www.speedmeal.be/api/merchant/4
 Accept: application/json
 
 ###

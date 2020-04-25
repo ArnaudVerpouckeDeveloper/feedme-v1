@@ -42,7 +42,7 @@
       </v-flex>
     </v-layout>
     <v-snackbar color="#ff5252" v-model="snackbar" vertical>
-      Er is iets misgegaan gelieve te controleren of uw email adres en wachtwoord correct is.
+      SpeedMeal kon u niet aanmelden als klant, controleer of het ingevulde emailadres en wachtwoord correct is.
       <v-btn text @click="snackbar = false">Ok</v-btn>
     </v-snackbar>
   </v-container>

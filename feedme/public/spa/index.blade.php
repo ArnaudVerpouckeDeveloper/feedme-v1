@@ -16,7 +16,7 @@
     <link href="{{asset('spa/chunk-vendors.css')}}" rel=preload as=style>
     <link href="{{asset('spa/chunk-vendors.css')}}" rel=stylesheet>
     <link href="{{asset('spa/app.css')}}" rel=stylesheet>
-
+    <META NAME="Description" CONTENT="SpeedMeal biedt restauranten een gratis systeem aan waarmee online eten besteld kan worden.">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163996040-1"></script>
     <script>

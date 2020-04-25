@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\OrderHasBeenDelayed;
 use App\Mail\OrderHasBeenDenied;
+use App\Mail\OrderHasBeenAccepted;
 use App\Merchant;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -195,6 +196,7 @@ class MerchantController extends Controller
         $order = auth()->user()->merchant->orders->find($request->orderId);
         if ($order->denied == false && $order->accepted == false){
             $order->update(["accepted" => true]);
+            Mail::to($order->customer->user->email)->send(new OrderHasBeenAccepted($order));
             return response()->json("ok");
         }
         else{

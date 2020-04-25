@@ -87,8 +87,8 @@
               </v-card-actions>
               <v-divider inset class="register-divider"></v-divider>
               <p class="register">
-                Hebt u al een account?
-                <router-link :to="{name:'login'}">Login hier.</router-link>
+                Heeft u al een account?
+                <router-link :to="{name:'login'}">Hier aanmelden.</router-link>
               </p>
               <div style="text-align: center; margin-top: 20px; margin-bottom: 18px;">
                 <v-btn :to="{name: 'merchantRegister'}">
@@ -106,8 +106,8 @@
         <v-card-text>Om verder te gaan dient u eerst uw e-mailadres te bevestigen. We hebben u een email gestuurd.</v-card-text>
         <v-card-text
           v-if="canSendVerificationAgain"
-        >Als u na 1 minuut geen email van ons ontvangen hebt, kunt u deze opnieuw versturen.</v-card-text>
-        <v-card-text v-if="!canSendVerificationAgain">Verificatie email is opnieuw verstuurd.</v-card-text>
+        >Mocht u na 1 minuut geen email van ons ontvangen hebben, dan kunt u deze opnieuw versturen.</v-card-text>
+        <v-card-text v-if="!canSendVerificationAgain">De bevestigingsemail werd opnieuw verstuurd.</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -183,7 +183,7 @@ export default {
         legalRules: [
           v =>
             !!v ||
-            "Om u zo goed mogelijke service aan te bieden hebben wij u akkoord nodig."
+            "Om u een goed service aan te bieden dient u akkoord te gaan."
         ]
       }
     };

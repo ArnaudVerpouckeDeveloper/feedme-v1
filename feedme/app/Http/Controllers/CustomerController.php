@@ -261,9 +261,9 @@ class CustomerController extends Controller
 
                 if($this->orderPossibleInSchedule($merchant, $request->deliveryMethod, $request->requestedTime )){
 
+                    
                     $merchant->orders()->save($order);
                     auth()->user()->customer->orders()->save($order);
-    
 
                     $totalPrice = 0;
                     foreach ($allProductIds as $productId){
@@ -271,6 +271,13 @@ class CustomerController extends Controller
                         $order->products()->attach($product);
                         $totalPrice = $totalPrice + $product->price;
                     }
+
+                    if ($totalPrice < $merchant->minimumOrderValue){
+                        throw new Exception('total price from order is below minimum value');
+                    }
+
+                    
+    
     
                     $order->totalPrice = $totalPrice;
                     $order->save();
@@ -280,11 +287,13 @@ class CustomerController extends Controller
                     return response()->json("ok");
                 }
                 else{
-                    return response()->json("order not possible in shedule", 406);
+                    //return response()->json("order not possible in shedule", 406);
+                    throw new Exception('order not possible in shedule');
                 }
             }
             else{
-                return response()->json("invalid products", 406);
+                //return response()->json("invalid products", 406);
+                throw new Exception('invalid products');
             }
     
         } catch (Exception $e) {
@@ -330,8 +339,14 @@ class CustomerController extends Controller
     function productIdsAreValid($productIds, $merchant){
         foreach($productIds as $productId){
             $product = Product::find($productId);
-            if ($product == null || $product->merchant->id != $merchant->id || !$product->orderable ){
+            if ($product == null){
                 return false; 
+            }
+            if ($product->merchant->id != $merchant->id){
+                return false;
+            }
+            if (!$product->orderable){
+                return false;
             }
         }
         return true;

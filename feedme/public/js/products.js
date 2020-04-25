@@ -245,7 +245,7 @@ function setEventListenersForProduct(product) {
                     product.querySelector("form .inputValues .price").value = inputToFormattedPrice(price, true);
 
                     if (imageFile !== undefined) {
-                        product.querySelector(".productImage img").src = "/uploads/" + res.imageFileName;
+                        product.querySelector(".productImage img").src = "/public/uploads/" + res.imageFileName;
 
                     }
                     if (product.querySelector(".row.descriptionRow") && description != "") {

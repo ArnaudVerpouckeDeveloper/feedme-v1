@@ -47,6 +47,9 @@
     <li style="display: flex;"><p style="width: 12rem; margin:0;">Adres:</p><p style="margin:0;">{{$order->addressStreet}} {{$order->addressNumber}}</p></li>
     <li style="display: flex;"><p style="width: 12rem; margin:0;"></p><p style="margin:0;">{{$order->addressZipCode}} {{$order->addressCity}}</p></li>  
   @endif
+  @if(isset($order->details))
+    <li style="display: flex; margin-bottom:1rem; margin-top: 1rem;"><p style="width: 12rem; margin:0;">Opmerkingen:</p><p style="margin:0;">{{$order->details}}</p></li>
+  @endif
 </ul>
 
 <p style="margin-bottom: 0;">Indien er zich een probleem zou voordoen dient u contact op te nemen met {{$order->merchant->name}}, dit kan via {{$order->merchant->merchantPhone}}.</p>

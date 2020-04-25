@@ -24,7 +24,7 @@ Route::group([
 ], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
+    //Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::post("registerMerchant", "AuthController@registerMerchant");
     Route::post("registerCustomer", "AuthController@registerCustomer");
@@ -48,6 +48,8 @@ Route::group([
     Route::post('/placeOrder', 'CustomerController@placeOrder');
 });
 
+
+/*
 Route::group([
     'middleware' => ['auth.customer'],
     'prefix' => 'test'
@@ -56,4 +58,4 @@ Route::group([
         return "ok";
     });
 });
-
+*/

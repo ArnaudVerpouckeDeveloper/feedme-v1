@@ -30,7 +30,7 @@
                     v-model="orderForm.mobilePhone"
                     value="5"
                     label="Telefoon"
-                    hint="Bij vragen of problemen zal u op deze nummer gecontacteerd worden."
+                    hint="Bij vragen of problemen zal u op dit nummer gecontacteerd worden."
                     required
                     :rules="val.requiredRule"
                   ></v-text-field>

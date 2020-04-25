@@ -4,8 +4,8 @@
   <title>Uw order werd geweigerd</title>
 </head>
 <body style="font-family:Poppins,sans-serif;padding:2rem;">
-<h1 style="font-size: 2rem;color:#4CAF50;margin-top:0;">Uw order werd geweigerd.</h1>
-<p style="color: #e43a3a; margin-bottom: 1rem;">Onderstaand order werd door {{$order->merchant->name}} geweigerd:</p>
+<h1 style="font-size: 2rem;color:#e43a3a;margin-top:0;">Uw order werd geweigerd.</h1>
+<p style="color: #e43a3a; margin-bottom: 1rem; font-weight:bold;">Onderstaand order werd door {{$order->merchant->name}} geweigerd:</p>
 
 <ul style="margin-bottom: 1rem; padding: 0;">
   @php
@@ -46,6 +46,9 @@
     <li style="display: flex; margin-bottom:1rem;"><p style="width: 12rem; margin:0;">Tijdstip:</p><p style="margin:0;">Leveren om {{date("H:i", strtotime($order->requestedTime))}}</p></li>
     <li style="display: flex;"><p style="width: 12rem; margin:0;">Adres:</p><p style="margin:0;">{{$order->addressStreet}} {{$order->addressNumber}}</p></li>
     <li style="display: flex;"><p style="width: 12rem; margin:0;"></p><p style="margin:0;">{{$order->addressZipCode}} {{$order->addressCity}}</p></li>  
+  @endif
+  @if(isset($order->details))
+    <li style="display: flex; margin-bottom:1rem; margin-top: 1rem;"><p style="width: 12rem; margin:0;">Opmerkingen:</p><p style="margin:0;">{{$order->details}}</p></li>
   @endif
 </ul>
 

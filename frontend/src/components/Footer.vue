@@ -8,7 +8,7 @@
               <v-icon class="footer-icon" size="24px">mdi-instagram</v-icon>
             </v-btn>
           </template>
-          <span>@speedmeal</span>
+          <span>Instagram</span>
         </v-tooltip>
 
         <v-tooltip bottom>
@@ -17,7 +17,7 @@
               <v-icon class="footer-icon" size="24px">mdi-facebook</v-icon>
             </v-btn>
           </template>
-          <span>/speedmeal.be</span>
+          <span>Facebook</span>
         </v-tooltip>
 
         <v-tooltip bottom>

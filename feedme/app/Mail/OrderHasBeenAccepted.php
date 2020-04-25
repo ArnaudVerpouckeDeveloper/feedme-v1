@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Order;
 
 
-class ConfirmOrder extends Mailable
+class OrderHasBeenAccepted extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,8 +30,8 @@ class ConfirmOrder extends Mailable
      * @return $this
      */
     public function build()
-    {        
-        return $this->from('noreply@speedmeal.be')->subject("Voorlopige bevestiging van uw order")
-                ->view('emails.confirmOrder');
+    {
+        return $this->from('noreply@speedmeal.be')->subject("Order aanvaard")
+                ->view('emails.orderHasBeenAccepted');
     }
 }
