@@ -63,7 +63,11 @@ const actions = {
     async fetchMerchants(context) {
         await axios.get(`${apiUrl}/merchant/all`)
             .then(res => {
-                context.commit('updateMerchants', res.data);
+                let testMerchants = ["arnaudsrestaurant", "qaisandfresh"]
+                let merchants = res.data.filter(m => { 
+                    return !testMerchants.includes(m.apiName)
+                })
+                context.commit('updateMerchants', merchants);
             })
             .catch(error => {
                 console.error(error)
@@ -194,7 +198,7 @@ const actions = {
                 })
                 .catch(error => {
                     reject();
-                    console.error(error)  
+                    console.error(error)
                 })
         })
     },
