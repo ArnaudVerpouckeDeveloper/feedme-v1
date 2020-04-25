@@ -24,7 +24,7 @@
         </div>
         <textarea rows="3" placeholder="Productomschrijving (optioneel)" name="description" class="description"></textarea>
     </div>
-    <div class="imagePreview hidden"/>
+    <div class="imagePreview hidden">
         <img src="#" alt="preview"/>
     </div>
     <div class="row">

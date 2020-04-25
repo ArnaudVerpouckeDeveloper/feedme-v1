@@ -77,7 +77,11 @@ Route::group([
     Route::put('/admin/settings/updateMerchantDetails', "MerchantController@updateMerchantDetails");
     Route::get('/admin/settings/orderPossibleInSchedule', "MerchantController@orderPossibleInSchedule");
     Route::put('/admin/settings/updateDeliveryCost', "MerchantController@updateDeliveryCost");
-    Route::put('/admin/settings/updateMinimumOrderValue', "MerchantController@updateMinimumOrderValue");    
+    Route::put('/admin/settings/updateMinimumOrderValue', "MerchantController@updateMinimumOrderValue");  
+    Route::put('/admin/settings/toggleHideMerchantFromSpeedmeal', "MerchantController@toggleHideMerchantFromSpeedmeal");  
+    Route::put('/admin/settings/toggleReceiveEmailsForNewOrders', "MerchantController@toggleReceiveEmailsForNewOrders");  
+
+    
 });
 
 Route::get('/confirm-email/{verificationCode}', "AuthController@confirmEmail");

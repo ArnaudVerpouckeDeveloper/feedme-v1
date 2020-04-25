@@ -3113,6 +3113,30 @@
         <input type="submit" value="opslaan"/>
     </form>
 
+    <form id="receiveEmailsForNewOrdersForm">
+        <label>Stuur mij een e-mail wanneer er een nieuw order ontvangen werd:</label>
+        <label class="switch">
+            @if ($merchant->receiveEmailsForNewOrders)
+                <input type="checkbox" checked>
+            @else
+                <input type="checkbox">
+            @endif
+            <span class="slider round"></span>
+        </label>
+    </form>
+
+    <form id="hideMerchantFromSpeedmealForm">
+        <label>Mijn zaak publiek toegankelijk maken:</label>
+        <label class="switch">
+            @if ($merchant->hideMerchantFromSpeedmeal)
+                <input type="checkbox">
+            @else
+                <input type="checkbox" checked>
+            @endif
+            <span class="slider round"></span>
+        </label>
+    </form>
+
 
 
 

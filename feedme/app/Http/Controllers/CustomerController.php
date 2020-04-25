@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Traits\SharedMerchantTrait;
 use App\Mail\ConfirmOrder;
 use App\Mail\WebForm;
+use App\Mail\NewOrderNotification;
 use Mail;
 use DateTime;
 use Exception;
@@ -40,7 +41,10 @@ class CustomerController extends Controller
         $allMerchantsRaw = Merchant::all();
         $allMerchantsToReturn = [];
         foreach ($allMerchantsRaw as $merchant) {
-            $allMerchantsToReturn[] = $this->getMerchant($merchant->id, false);
+            $fetchedMerchant = $this->getMerchant($merchant->id, false);
+            if ($fetchedMerchant != null){
+                $allMerchantsToReturn[] = $fetchedMerchant;
+            }
         }
         return $allMerchantsToReturn;
     }
@@ -51,6 +55,9 @@ class CustomerController extends Controller
         $merchant = Merchant::find($merchantId);
         if ($merchant == null){
             exit();
+        }
+        if ($merchant->hideMerchantFromSpeedmeal){
+            return null;
         }
         $merchantObject = new \stdClass;
         $merchantObject->name = $merchant->name;
@@ -284,6 +291,10 @@ class CustomerController extends Controller
     
 
                     Mail::to(auth()->user()->email)->send(new confirmOrder($order));//todo: this could give an error, check if it shouldn't need to be auth("api")
+                    if ($merchant->receiveEmailsForNewOrders){
+                        Mail::to($merchant->user->email)->send(new newOrderNotification($order));
+                    }
+
                     return response()->json("ok");
                 }
                 else{

@@ -104,6 +104,8 @@ class CreateMerchantsTable extends Migration
             $table->boolean("hasSetMinimumOrderValue")->default(false);
             $table->boolean("hasSetDeliveryCost")->default(false);
 
+            $table->boolean("receiveEmailsForNewOrders")->default(true);
+            $table->boolean("hideMerchantFromSpeedmeal")->default(false);
             
 
         });

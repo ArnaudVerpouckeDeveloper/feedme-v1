@@ -315,7 +315,6 @@ class MerchantController extends Controller
     
 
     function toggleOrderable(Request $request){
-
         $product = auth()->user()->merchant->products->find($request->productId);
         $product->orderable = !$product->orderable;
         $product->save();
@@ -702,6 +701,24 @@ class MerchantController extends Controller
 
 
         
+
+
+
+
+
+    function toggleHideMerchantFromSpeedmeal(){
+        $merchant = auth()->user()->merchant;
+        $merchant->hideMerchantFromSpeedmeal = !$merchant->hideMerchantFromSpeedmeal;
+        $merchant->save();
+        return response()->json("ok");
+    }
+
+    function toggleReceiveEmailsForNewOrders(){
+        $merchant = auth()->user()->merchant;
+        $merchant->receiveEmailsForNewOrders = !$merchant->receiveEmailsForNewOrders;
+        $merchant->save();
+        return response()->json("ok");
+    }
 
 
 }
