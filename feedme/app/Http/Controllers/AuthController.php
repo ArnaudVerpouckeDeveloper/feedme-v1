@@ -292,9 +292,37 @@ class AuthController extends Controller
         $merchantApiName = trim($merchantApiName);
         $merchantApiName = str_replace(' ', '', $merchantApiName);
         $merchantApiName = preg_replace("/[^a-zA-Z0-9-]/", "", $merchantApiName);
+        $merchantApiName = str_replace('/', '', $merchantApiName);
+        $merchantApiName = str_replace('-', '', $merchantApiName);
+        $merchantApiName = str_replace('?', '', $merchantApiName);
+        $merchantApiName = str_replace('#', '', $merchantApiName);
+        $merchantApiName = str_replace('%', '', $merchantApiName);
+        $merchantApiName = str_replace('@', '', $merchantApiName);
+        $merchantApiName = str_replace(':', '', $merchantApiName);
+        $merchantApiName = str_replace('.', '', $merchantApiName);
+
+
+        $forbiddenNames = [
+            "restaurant",
+            "restaurants",
+            "aanmelden",
+            "registreren",
+            "admin",
+            "administrator",
+            "home",
+            "speedmeal",
+            "horecazaak",
+            "horecazaken",
+            "over",
+            "over-ons",
+            "faq",
+            "contact",
+            "register",
+            "signup"
+        ];
 
         $counter = 1;
-        while (Merchant::where("apiName", $merchantApiName)->exists()){
+        while (Merchant::where("apiName", $merchantApiName)->exists() || in_array($merchantApiName, $forbiddenNames)){
            $merchantApiName = $merchantApiName . $counter;
            $counter++; 
         }

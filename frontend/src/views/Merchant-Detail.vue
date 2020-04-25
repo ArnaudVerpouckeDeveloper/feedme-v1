@@ -269,7 +269,7 @@ export default {
     productImage(imageFile) {
       if (imageFile != null)
         return `https://www.speedmeal.be/public/uploads/${imageFile}`;
-      else return "/assets/images/placeholder/merchants_logo.png";
+      else return "/assets/images/placeholder/placeholder_1x1_grey.png";
     },
     numberToday(number) {
       let days = {
