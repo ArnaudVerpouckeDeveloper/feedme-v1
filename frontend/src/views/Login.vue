@@ -52,8 +52,14 @@
 import { mapActions } from "vuex";
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    if (from.name === "MerchantDetail") {
+      next(vm => vm.loginFrom.route = from.fullPath);
+    } else next(vm => vm.loginFrom.route = "/");
+  },
   data() {
     return {
+      loginFrom:{ route: "/" },
       valid: false,
       snackbar: false,
       user: {
@@ -73,7 +79,7 @@ export default {
     Postlogin() {
       this.$refs.form.validate();
       if (this.valid) {
-        this.login(this.user)
+        this.login({ ...this.user, ...this.loginFrom})
           .then()
           .catch(message => {
             this.snackbar = true;
@@ -94,23 +100,23 @@ export default {
   border-bottom: 2px solid #4caf50;
 }
 
-.register.signInAsRestaurant{
+.register.signInAsRestaurant {
   margin-left: auto;
   margin-right: auto;
   margin-top: 2.5rem;
-
 }
-.register.signInAsRestaurant a:hover{
-  background-color: #EBEBEB;
+.register.signInAsRestaurant a:hover {
+  background-color: #ebebeb;
 }
 
-.register.signInAsRestaurant a{
+.register.signInAsRestaurant a {
   transition: all 250ms;
   color: black;
   border: none;
   padding: 0.8rem 2rem;
   text-transform: uppercase;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 500;

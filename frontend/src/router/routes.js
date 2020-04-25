@@ -8,7 +8,7 @@ import Legal from '../views/TermsAndConditions.vue'
 import Contact from '../views/Contact.vue'
 import About from '../views/About.vue'
 import Faq from '../views/Faq.vue'
-
+import PageNotFound from '../views/PageNotFound.vue'
 
 export const routes = [
     { path: '/', name: 'home', component: Home, display: 'Home', icon: "mdi-home" },
@@ -25,4 +25,5 @@ export const routes = [
     { path: '/admin/login', name: 'merchantLogin', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/admin/login' }},
     { path: 'https://www.instagram.com/speedmeal/', name: 'speedmealInsta', display: 'hide', beforeEnter() { location.href = 'https://www.instagram.com/speedmeal/' }},
     { path: 'https://www.facebook.com/speedmeal.be', name: 'speedmealFacebook', display: 'hide', beforeEnter() { location.href = 'https://www.facebook.com/speedmeal.be' }},
+    { path: '*', name: '404', display: 'hide', component: PageNotFound},
 ]
