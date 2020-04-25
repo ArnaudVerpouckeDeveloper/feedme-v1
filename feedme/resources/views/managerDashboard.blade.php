@@ -12,7 +12,7 @@
     
     <div class="environmentLink">
         <h2>Uw persoonlijke link</h2>
-        <p>Deze link kan u delen met al uw social media kanalen. Wanneer iemand op deze link klinkt, komt hij/zij terecht op de online webomgeving van "{{$merchant->name}}", hierop kan de klant vervolgens een bestelling op maken.</p>
+        <p>Deze link kan u delen met al uw social media kanalen. Wanneer iemand op deze link klinkt, komt hij/zij terecht op de online webomgeving van "{{$merchant->name}}", hierop kan de klant vervolgens een bestelling op plaatsen. <br><br>Extra tip: op Facebook hebben we een kader gepubliceerd, die u (tijdelijk) boven uw profielfoto kunt instellen. Ga naar uw profielfoto, klik op 'bijwerken', daarna op 'kader toevoegen' en zoek naar 'SpeedMeal - bestel online'.</p>
         <p class="link"><a href="https://www.speedmeal.be/{{$merchant->apiName}}">https://www.speedmeal.be/{{$merchant->apiName}}</a></p>
     </div>
 
