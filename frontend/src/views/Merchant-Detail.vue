@@ -139,12 +139,18 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   beforeRouteEnter(to, from, next) {
     const store = require("../store");
-    store.default.dispatch("fetchMerchantAndProduct", to.params.id).then(() => {
-      next();
-    });
+    store.default
+      .dispatch("fetchMerchantAndProduct", to.params.id)
+      .then(() => {
+        next();
+      })
+      .catch(() => {
+        next({ path: "RestaurantNietGevonden" });
+      });
   },
   beforeRouteLeave(to, from, next) {
-    history.replaceState("null", "", `${this.merchantDetail.id}`);
+    if (this.merchantDetail.id)
+      history.replaceState("null", "", `${this.merchantDetail.id}`);
     next();
   },
   components: {
@@ -241,7 +247,8 @@ export default {
     ...mapGetters(["products", "merchantDetail", "isMobile", "showCartButton"])
   },
   created() {
-    history.replaceState("null", "", `${this.merchantDetail.apiName}`);
+    if (this.merchantDetail.apiName)
+      history.replaceState("null", "", `${this.merchantDetail.apiName}`);
   },
   data: () => ({
     showDialog: false,
