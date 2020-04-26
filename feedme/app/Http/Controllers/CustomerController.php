@@ -89,7 +89,7 @@ class CustomerController extends Controller
         $merchantObject->possibleTimes = $this->getPossibleRequestTimes($merchant);
         //return response()->json($this->getPossibleRequestTimes($merchant));
 
-        $merchantObject->products = $merchant->products()->get();
+        $merchantObject->products = $merchant->products()->where("orderable", true)->get();
 
         $merchantObject->opening_hours = [
             "takeaway" => [
