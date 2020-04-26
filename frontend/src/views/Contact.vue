@@ -6,7 +6,7 @@
           <v-toolbar color="green" dark flat>
             <v-toolbar-title>Contact</v-toolbar-title>
           </v-toolbar>
-          <v-form v-model="valid" ref="form">
+          <v-form v-model="valid" ref="form" @submit.prevent="sendContact" >
             <v-card-text>
               <v-text-field
                 v-model="contactForm.fullName"
@@ -22,12 +22,11 @@
                 required
               ></v-textarea>
             </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" type="submit">Verzenden</v-btn>
+            </v-card-actions>
           </v-form>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" @click="sendContact">Verzenden</v-btn>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

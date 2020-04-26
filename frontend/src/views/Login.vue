@@ -7,7 +7,7 @@
             <v-toolbar-title>Login</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form v-model="valid" ref="form">
+            <v-form v-model="valid" ref="form" @submit.prevent="Postlogin">
               <v-text-field
                 v-model="user.email"
                 label="Email"
@@ -25,19 +25,20 @@
                 type="password"
                 :rules="val.veldRules"
               ></v-text-field>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" style="padding: 0 25px;" type="submit">Login</v-btn>
+              </v-card-actions>
             </v-form>
           </v-card-text>
+          <v-divider inset class="login-divider"></v-divider>
           <p class="register">
             Nog geen account?
             <router-link :to="{name:'register'}">Registreer u hier.</router-link>
           </p>
-          <p class="register signInAsRestaurant">
-            <router-link :to="{name:'merchantLogin'}">Inloggen als zaak</router-link>
-          </p>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" @click="Postlogin">Login</v-btn>
-          </v-card-actions>
+          <div style="text-align:center; padding-bottom: 17px;">
+            <v-btn :to="{name:'merchantLogin'}">Inloggen als zaak</v-btn>
+          </div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -54,12 +55,12 @@ import { mapActions } from "vuex";
 export default {
   beforeRouteEnter(to, from, next) {
     if (from.name === "MerchantDetail") {
-      next(vm => vm.loginFrom.route = from.fullPath);
-    } else next(vm => vm.loginFrom.route = "/");
+      next(vm => (vm.loginFrom.route = from.fullPath));
+    } else next(vm => (vm.loginFrom.route = "/"));
   },
   data() {
     return {
-      loginFrom:{ route: "/" },
+      loginFrom: { route: "/" },
       valid: false,
       snackbar: false,
       user: {
@@ -79,7 +80,7 @@ export default {
     Postlogin() {
       this.$refs.form.validate();
       if (this.valid) {
-        this.login({ ...this.user, ...this.loginFrom})
+        this.login({ ...this.user, ...this.loginFrom })
           .then()
           .catch(message => {
             this.snackbar = true;
@@ -99,27 +100,7 @@ export default {
   text-decoration: none;
   border-bottom: 2px solid #4caf50;
 }
-
-.register.signInAsRestaurant {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2.5rem;
-}
-.register.signInAsRestaurant a:hover {
-  background-color: #ebebeb;
-}
-
-.register.signInAsRestaurant a {
-  transition: all 250ms;
-  color: black;
-  border: none;
-  padding: 0.8rem 2rem;
-  text-transform: uppercase;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.0892857143em;
+.login-divider {
+    margin: 0px auto 19px auto !important;
 }
 </style>
