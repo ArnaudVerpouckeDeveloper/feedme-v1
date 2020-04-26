@@ -7,19 +7,16 @@
   <meta name=viewport content="width=device-width,initial-scale=1">
   <!-- Primary Meta Tags -->
   <title>Speed Meal</title>
-  <META NAME="Description"
-    CONTENT="SpeedMeal biedt restauranten een gratis systeem aan waarmee online eten besteld kan worden.">
-
   <meta name="title" content="Speed Meal">
   <meta name="description"
-    content="SpeedMeal biedt restauranten een gratis systeem aan waarmee online eten besteld kan worden.">
+    content="SpeedMeal biedt restaurants een gratis platform aan waarmee online eten besteld kan worden.">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.speedmeal.be/">
   <meta property="og:title" content="Speed Meal">
   <meta property="og:description"
-    content="SpeedMeal biedt restauranten een gratis systeem aan waarmee online eten besteld kan worden.">
+    content="SpeedMeal biedt restaurants een gratis platform aan waarmee online eten besteld kan worden.">
   <meta property="og:image" content="{{asset('spa/assets/images/linkpreview.png')}}">
 
   <!-- Twitter -->
@@ -27,7 +24,7 @@
   <meta property="twitter:url" content="https://www.speedmeal.be/">
   <meta property="twitter:title" content="Speed Meal">
   <meta property="twitter:description"
-    content="SpeedMeal biedt restauranten een gratis systeem aan waarmee online eten besteld kan worden.">
+    content="SpeedMeal biedt restaurants een gratis platform aan waarmee online eten besteld kan worden.">
   <meta property="twitter:image" content="{{asset('spa/assets/images/linkpreview.png')}}">
 
   <link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">

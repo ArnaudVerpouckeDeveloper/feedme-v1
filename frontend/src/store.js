@@ -63,7 +63,7 @@ const actions = {
     async fetchMerchants(context) {
         await axios.get(`${apiUrl}/merchant/all`)
             .then(res => {
-                let testMerchants = ["arnaudsrestaurant", "qaisandfresh"]
+                let testMerchants = ["arnaudsrestaurant", "qaisandfresh", "testrestaurant"]
                 let merchants = res.data.filter(m => { 
                     return !testMerchants.includes(m.apiName)
                 })

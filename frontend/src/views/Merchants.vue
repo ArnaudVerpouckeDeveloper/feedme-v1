@@ -63,11 +63,6 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    // filteredMerchants(){
-    //   return this.merchants.filter(merchant => {
-    //     if(merchants.por)
-    //   }
-    // },
     ...mapGetters(["merchants"])
   },
   created() {
