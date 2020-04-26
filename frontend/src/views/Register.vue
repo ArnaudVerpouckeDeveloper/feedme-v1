@@ -7,7 +7,7 @@
             <v-toolbar-title>Registeren</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form v-model="valid" ref="form">
+            <v-form v-model="valid" ref="form" @submit.prevent="Postregister">
               <v-text-field
                 v-model="user.firstName"
                 label="Voornaam"
@@ -80,7 +80,7 @@
               <v-card-actions class="register-button">
                 <v-btn
                   color="primary"
-                  @click="Postregister"
+                  type="submit"
                   :loading="loading"
                   :disabled="loading"
                 >Verzenden</v-btn>
