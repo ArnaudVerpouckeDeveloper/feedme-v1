@@ -22,16 +22,16 @@
         <header>
             <img class="logo" src="{{asset('images/Logo_TP_Green.png')}}" alt="logo"/>
             <nav>
-                <a href="/admin/dashboard" class="{{ (request()->is('manager/dashboard')) ? 'active' : '' }}">
+                <a href="/admin/dashboard" class="{{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
                     <span class="material-icons">dashboard</span>
                     Dashboard<span></span></a>
-                <a href="/admin/orders" class="{{ (request()->is('manager/orders')) ? 'active' : '' }}">
+                <a href="/admin/orders" class="{{ (request()->is('admin/orders')) ? 'active' : '' }}">
                     <span class="material-icons">receipt</span>
                     Orders</a>
-                <a href="/admin/producten" class="{{ (request()->is('manager/producten')) ? 'active' : '' }}">
+                <a href="/admin/producten" class="{{ (request()->is('admin/producten')) ? 'active' : '' }}">
                     <span class="material-icons">fastfood</span>
                     Producten</a>
-                <a href="/admin/instellingen" class="{{ (request()->is('manager/instellingen')) ? 'active' : '' }}">
+                <a href="/admin/instellingen" class="{{ (request()->is('admin/instellingen')) ? 'active' : '' }}">
                     <span class="material-icons">settings</span>
                     Instellingen</a>
             </nav>

@@ -16,6 +16,10 @@
         <p class="link"><a href="https://www.speedmeal.be/{{$merchant->apiName}}">https://www.speedmeal.be/{{$merchant->apiName}}</a></p>
     </div>
 
+    <div style="margin-bottom:4rem;">
+        <h2>Contacteer ons</h2>
+        <p>Dit project werd ontwikkeld door een team studenten. Wij trachtten een goed product te ontwikkelen om u als horecazaak te steunen. Echter is er altijd ruimte voor verbetering. Mocht u vragen hebben, problemen ondervinden, uitbreidingsverzoeken hebben, positieve of negatieve feedback hebben, dan kan u ons contacteren via ons e-mailadres: <a href="mailto:info@speedmeal.be" style="color: black;">info@speedmeal.be</a></p>
+    </div>
         
     <div class="basic-metrics">
         <h2>Prestatieparameters</h2>
