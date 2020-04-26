@@ -19,7 +19,7 @@ use stdClass;
 use App\Traits\SharedMerchantTrait;
 use App\ProductCategory;
 use Illuminate\Support\Facades\Storage;
-
+use Image;
 
 class MerchantController extends Controller
 {
@@ -54,7 +54,13 @@ class MerchantController extends Controller
         ]);
         $file = $request->file("logo");
         $fileName = "logo-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
-        auth()->user()->merchant->update(['logoFileName' => $file->storeAs('merchantLogos',$fileName,"public")]);
+
+        $image = \Image::make($file);
+        $image->orientate();
+        $image->save(public_path("/uploads/merchantLogos/").$fileName);
+        auth()->user()->merchant->update(['logoFileName' => 'merchantLogos/'.$fileName]);
+
+        //auth()->user()->merchant->update(['logoFileName' => $file->storeAs('merchantLogos',$fileName,"public")]);
         return redirect("/admin/instellingen#link-logo");
     }
 
@@ -64,7 +70,16 @@ class MerchantController extends Controller
         ]);
         $file = $request->file("banner");
         $fileName = "banner-".auth()->user()->merchant->apiName.".".$file->getClientOriginalExtension();
-        auth()->user()->merchant->update(['bannerFileName' => $file->storeAs('merchantBanners',$fileName,"public")]);
+
+
+
+        $image = \Image::make($file);
+        $image->orientate();
+        $image->save(public_path("/uploads/merchantBanners/").$fileName);
+        auth()->user()->merchant->update(['bannerFileName' => 'merchantBanners/'.$fileName]);
+
+
+        //auth()->user()->merchant->update(['bannerFileName' => $file->storeAs('merchantBanners',$fileName,"public")]);
         return redirect("/admin/instellingen#link-banner");
     }
 
@@ -301,7 +316,14 @@ class MerchantController extends Controller
             if (isset($request->image)){
                 $file = $request->file("image");
                 $fileName = "productImage-".auth()->user()->merchant->apiName."-".$product->id.".".$file->getClientOriginalExtension();
-                $product->imageFileName = $file->storeAs('productImages',$fileName,"public");
+                //$product->imageFileName = $file->storeAs('productImages',$fileName,"public");
+                //$this->image_fix_orientation(asset('uploads/'.$product->imageFileName));
+
+                $image = \Image::make($file);
+                $image->orientate();
+                $image->save(public_path("/uploads/productImages/").$fileName);
+                $product->imageFileName = "productImages/".$fileName;
+
                 $product->save();
             }
         } catch (Exception $e) {
@@ -340,8 +362,11 @@ class MerchantController extends Controller
         if (isset($request->newImage)){
             $file = $request->file("newImage");
             $fileName = "productImage-".auth()->user()->merchant->apiName."-".$product->id.".".$file->getClientOriginalExtension();
-            $product->imageFileName = $file->storeAs('productImages',$fileName,"public");
-            $product->save();
+                  
+            $image = \Image::make($file);
+            $image->orientate();
+            $image->save(public_path("/uploads/productImages/").$fileName);
+            $product->imageFileName = "productImages/".$fileName;
         }
         
         $product->save();
@@ -719,6 +744,5 @@ class MerchantController extends Controller
         $merchant->save();
         return response()->json("ok");
     }
-
 
 }
