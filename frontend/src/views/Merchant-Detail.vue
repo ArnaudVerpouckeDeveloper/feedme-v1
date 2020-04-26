@@ -97,9 +97,9 @@
               <v-row class="dialog-content" v-for="(hour, dag) in refactoredDelivery">
                 <v-col cols="4">{{numberToday(dag)}}:</v-col>
                 <v-col cols="8" v-if="!hour.isClosed">
-                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot</span>
-                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en</span>
-                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot</span>
+                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot </span>
+                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en </span>
+                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot </span>
                   <span v-if="refactorHours(hour.till_2)">{{hour.till_2}}</span>
                 </v-col>
                 <v-col cols="8" v-if="hour.isClosed">niet mogelijk</v-col>
@@ -111,9 +111,9 @@
               <v-row class="dialog-content" v-for="(hour, dag) in refactoredTakeAway">
                 <v-col cols="4">{{numberToday(dag)}}:</v-col>
                 <v-col cols="8" v-if="!hour.isClosed">
-                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot</span>
-                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en</span>
-                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot</span>
+                  <span v-if="refactorHours(hour.from_1)">{{hour.from_1}} tot </span>
+                  <span v-if="refactorHours(hour.till_1)">{{hour.till_1}} en </span>
+                  <span v-if="refactorHours(hour.from_2)">{{hour.from_2}} tot </span>
                   <span v-if="refactorHours(hour.till_2)">{{hour.till_2}}</span>
                 </v-col>
                 <v-col cols="8" v-if="hour.isClosed">niet mogelijk</v-col>
