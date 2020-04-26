@@ -67,7 +67,7 @@ const actions = {
                 let merchants = res.data.filter(m => { 
                     return !testMerchants.includes(m.apiName)
                 })
-                context.commit('updateMerchants', merchants);
+                context.commit('updateMerchants', res.data);
             })
             .catch(error => {
                 console.error(error)
