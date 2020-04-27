@@ -14,7 +14,6 @@
       max-width="700"
       type="list-item-avatar-three-line"
     ></v-skeleton-loader>
-      <p style="text-align:center">Nog geen restaurants, kom binnenkort terug.</p>
     <v-hover v-slot:default="{ hover }" v-for="merchant in merchants">
       <v-card
         class="mx-auto merchant-list"
