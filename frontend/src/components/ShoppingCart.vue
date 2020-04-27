@@ -82,7 +82,7 @@ export default {
       else return;
     },
     minOrderValueReached() {
-      if (this.totalCart >= this.minimumOrderValue) return true;
+      if (this.totalPrice >= this.minimumOrderValue) return true;
       else false;
     },
     deliveryCostFormat() {
