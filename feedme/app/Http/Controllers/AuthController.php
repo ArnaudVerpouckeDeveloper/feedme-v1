@@ -12,6 +12,7 @@ use App\Merchant;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\ConfirmEmail;
 use App\Mail\confirmEmail_v2;
+use App\Mail\NewMerchantNotification;
 use Illuminate\Support\Facades\Mail;
 use Str;
 
@@ -120,6 +121,7 @@ class AuthController extends Controller
         
         $user->merchant()->save($newMerchant);
 
+        Mail::to("info@speedmeal.be")->send(new NewMerchantNotification($user));
         return view("postRegistration")->with("userId", $user->id);
     }
     
@@ -301,6 +303,7 @@ class AuthController extends Controller
         $merchantApiName = str_replace('@', '', $merchantApiName);
         $merchantApiName = str_replace(':', '', $merchantApiName);
         $merchantApiName = str_replace('.', '', $merchantApiName);
+        $merchantApiName = str_replace("'", '', $merchantApiName);
 
 
         $forbiddenNames = [
