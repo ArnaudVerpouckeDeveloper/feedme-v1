@@ -35,11 +35,11 @@
     <v-card elevation="0">
       <v-row>
         <v-card-text class="col-6">Subtotaal</v-card-text>
-        <v-card-text class="col-6 price">€ {{formatPrice(totalCart)}}</v-card-text>
+        <v-card-text class="col-6 price">€ {{formatPrice(totalPrice)}}</v-card-text>
         <v-card-text class="col-6">Bezorgkosten</v-card-text>
         <v-card-text class="col-6 delivery-price">{{deliveryCostFormat}}</v-card-text>
         <v-card-text class="col-6 total-text">Totaal</v-card-text>
-        <v-card-text class="col-6 total-price">€ {{formatPrice(totalPrice)}}</v-card-text>
+        <v-card-text class="col-6 total-price">€ {{formatPrice(totalCart)}}</v-card-text>
       </v-row>
     </v-card>
     <div class="btn-wrapper" v-if="canEdit">
@@ -87,7 +87,7 @@ export default {
     },
     deliveryCostFormat() {
       if (this.deliveryCost === 0) return "Gratis";
-      else return this.deliveryCost;
+      else return `€ ${this.deliveryCost.toFixed(2)}`;
     },
     cartItemPerMerchant() {
       return this.cartItems[this.merchant_id];
@@ -123,7 +123,7 @@ export default {
     if (!this.isMobile) this.onChangeDrawer(true);
   },
   data: () => ({
-    totalPrice: 0
+    totalPrice: 0,
   }),
   methods: {
     addProduct(product) {
