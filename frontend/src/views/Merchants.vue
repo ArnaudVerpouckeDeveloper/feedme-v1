@@ -5,7 +5,8 @@
       class="mx-auto"
       max-width="700"
       type="list-item-avatar-three-line"
-    ></v-skeleton-loader>
+    >
+    </v-skeleton-loader>
     <v-spacer></v-spacer>
     <v-skeleton-loader
       v-if="merchants.length == 0"
@@ -13,6 +14,7 @@
       max-width="700"
       type="list-item-avatar-three-line"
     ></v-skeleton-loader>
+      <p style="text-align:center">Nog geen restaurants, kom binnenkort terug.</p>
     <v-hover v-slot:default="{ hover }" v-for="merchant in merchants">
       <v-card
         class="mx-auto merchant-list"
