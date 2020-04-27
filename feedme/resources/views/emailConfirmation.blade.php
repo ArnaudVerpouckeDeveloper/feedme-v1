@@ -23,7 +23,7 @@
                 font-weight: 100;
                 text-align: center;
                 margin-top: 30vh;
-                line-height: 1rem;
+                line-height: 120%;
             }
 
             p{
