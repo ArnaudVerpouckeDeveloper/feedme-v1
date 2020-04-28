@@ -318,6 +318,7 @@ export default {
   height: 150px;
   border: 4px solid #e6e6e6;
   margin: 0 auto;
+  background-color:#fff;
 }
 .merchant-logo-message {
   margin: 0 auto;

@@ -19,7 +19,10 @@
     <v-divider></v-divider>
     <div class="cart-items">
       <v-card v-for="product in cartItemPerMerchant" elevation="0" class="row">
-        <v-card-title class="col-5 item-name" :class="{'col-9': !canEdit}">x{{product.count}} {{product.name}}</v-card-title>
+        <v-card-title
+          class="col-5 item-name"
+          :class="{'col-9': !canEdit}"
+        >x{{product.count}} {{product.name}}</v-card-title>
         <v-col cols="4" class="item-buttons" v-if="canEdit">
           <v-btn @click="removeProduct(product)" outlined x-small style="margin-right: 10px;">
             <v-icon size="12">mdi-minus</v-icon>
@@ -72,6 +75,10 @@ export default {
     deliveryCost: Number,
     minimumOrderValue: Number,
     merchant_name: String,
+    isDelivery: {
+      default: true,
+      type: Boolean
+    }
   },
   computed: {
     orderbtnMsg() {
@@ -98,7 +105,9 @@ export default {
         this.cartItems[this.merchant_id].forEach(item => {
           this.totalPrice += item.price * item.count;
         });
-      return (this.totalPrice + this.deliveryCost);
+      if (this.canEdit || !this.isDelivery) return this.totalPrice;
+      else if (!this.canEdit && this.isDelivery)
+        return this.totalPrice + this.deliveryCost;
     },
     disableButton() {
       if (this.cartItems[this.merchant_id] != null)
@@ -123,12 +132,12 @@ export default {
     if (!this.isMobile) this.onChangeDrawer(true);
   },
   data: () => ({
-    totalPrice: 0,
+    totalPrice: 0
   }),
   methods: {
     addProduct(product) {
       if (!this.merchantIsClosed) {
-        this.$emit('TotalCartPrice', this.totalPrice);
+        this.$emit("TotalCartPrice", this.totalPrice);
         let merchantId = this.merchantDetail.id;
         let cartItem = { product, ...merchantId };
         this.addItemToCart(cartItem);
@@ -149,7 +158,10 @@ export default {
       return (product.price * product.count).toFixed(2);
     },
     orderItems() {
-      if (this.cartItems.length != 0 && this.totalPrice >= this.minimumOrderValue) {
+      if (
+        this.cartItems.length != 0 &&
+        this.totalPrice >= this.minimumOrderValue
+      ) {
         this.$router.push({ name: "order" });
       }
     },
