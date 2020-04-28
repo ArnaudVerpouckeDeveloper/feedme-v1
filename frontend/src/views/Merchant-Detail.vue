@@ -3,11 +3,7 @@
     <v-img :src="headerImage" class="img-header" :style="headerStyle" />
     <div class="merchant-logo-wrapper" :style="logoStyle">
       <v-img class="merchant-logo" :src="logoImage" alt="restaurant logo" />
-      <v-col class="merchant-logo-message" cols="12" sm="3">
-        <p>{{merchantDetail.message}}</p>
-      </v-col>
     </div>
-
     <v-row
       class="merchant-info"
       :style="infoStyle"
@@ -23,7 +19,7 @@
         >{{merchantDetail.address_zip}} {{merchantDetail.address_city}}</p>
         <p class="dialog-content-phone">{{merchantDetail.merchantPhone}}</p>
       </v-col>
-      <v-col cols="12" sm="4" md="3" class="merchant-info-hours">
+      <v-col cols="12" sm="5" class="merchant-info-hours">
         <v-tooltip left>
           <template v-slot:activator="{ on }">
             <v-btn icon @click.stop="showDialog = true" v-on="on">
@@ -35,6 +31,9 @@
         <p style="margin-top: 15px; margin-bottom:0;">Afhaling: {{takeawayPossible}}</p>
         <p style="margin-bottom:0;">Levering: {{deliveryPossible}}</p>
         <p>Contacteer de zaak i.v.m. allergieën.</p>
+      </v-col>
+      <v-col class="merchant-logo-message" cols="12">
+        <p>{{merchantDetail.message}}</p>
       </v-col>
     </v-row>
 
@@ -319,6 +318,7 @@ export default {
   height: 150px;
   border: 4px solid #e6e6e6;
   margin: 0 auto;
+  background-color:#fff;
 }
 .merchant-logo-message {
   margin: 0 auto;
@@ -413,9 +413,6 @@ export default {
     text-align: center;
     margin-top: 0;
     padding-top: 0;
-  }
-  .merchant-logo-wrapper {
-    margin-bottom: 80px;
   }
   .product-image {
     height: 112px;

@@ -5,7 +5,8 @@
       class="mx-auto"
       max-width="700"
       type="list-item-avatar-three-line"
-    ></v-skeleton-loader>
+    >
+    </v-skeleton-loader>
     <v-spacer></v-spacer>
     <v-skeleton-loader
       v-if="merchants.length == 0"
@@ -13,7 +14,7 @@
       max-width="700"
       type="list-item-avatar-three-line"
     ></v-skeleton-loader>
-    <v-hover v-slot:default="{ hover }" v-for="merchant in merchants">
+    <v-hover v-slot:default="{ hover }" v-for="merchant in filteredMerchants">
       <v-card
         class="mx-auto merchant-list"
         :elevation="hover ? 16 : 2"
@@ -63,6 +64,9 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
+    filteredMerchants(){
+      return this.merchants.filter(m => m.products.length != 0)
+    },
     ...mapGetters(["merchants"])
   },
   created() {

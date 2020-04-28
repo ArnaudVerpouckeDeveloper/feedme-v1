@@ -111,6 +111,7 @@
       :deliveryCost="merchantDetail.deliveryCost"
       :minimumOrderValue="merchantDetail.minimumOrderValue"
       :merchant_name="merchantDetail.name"
+      :isDelivery="isDelivery"
     ></ShoppingCart>
     <CartButton></CartButton>
   </v-container>

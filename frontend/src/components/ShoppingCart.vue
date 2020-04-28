@@ -19,7 +19,10 @@
     <v-divider></v-divider>
     <div class="cart-items">
       <v-card v-for="product in cartItemPerMerchant" elevation="0" class="row">
-        <v-card-title class="col-5 item-name" :class="{'col-9': !canEdit}">x{{product.count}} {{product.name}}</v-card-title>
+        <v-card-title
+          class="col-5 item-name"
+          :class="{'col-9': !canEdit}"
+        >x{{product.count}} {{product.name}}</v-card-title>
         <v-col cols="4" class="item-buttons" v-if="canEdit">
           <v-btn @click="removeProduct(product)" outlined x-small style="margin-right: 10px;">
             <v-icon size="12">mdi-minus</v-icon>
@@ -35,11 +38,11 @@
     <v-card elevation="0">
       <v-row>
         <v-card-text class="col-6">Subtotaal</v-card-text>
-        <v-card-text class="col-6 price">€ {{formatPrice(totalCart)}}</v-card-text>
+        <v-card-text class="col-6 price">€ {{formatPrice(totalPrice)}}</v-card-text>
         <v-card-text class="col-6">Bezorgkosten</v-card-text>
         <v-card-text class="col-6 delivery-price">{{deliveryCostFormat}}</v-card-text>
         <v-card-text class="col-6 total-text">Totaal</v-card-text>
-        <v-card-text class="col-6 total-price">€ {{formatPrice(totalPrice)}}</v-card-text>
+        <v-card-text class="col-6 total-price">€ {{formatPrice(totalCart)}}</v-card-text>
       </v-row>
     </v-card>
     <div class="btn-wrapper" v-if="canEdit">
@@ -72,6 +75,10 @@ export default {
     deliveryCost: Number,
     minimumOrderValue: Number,
     merchant_name: String,
+    isDelivery: {
+      default: true,
+      type: Boolean
+    }
   },
   computed: {
     orderbtnMsg() {
@@ -82,12 +89,12 @@ export default {
       else return;
     },
     minOrderValueReached() {
-      if (this.totalCart >= this.minimumOrderValue) return true;
+      if (this.totalPrice >= this.minimumOrderValue) return true;
       else false;
     },
     deliveryCostFormat() {
       if (this.deliveryCost === 0) return "Gratis";
-      else return this.deliveryCost;
+      else return `€ ${this.deliveryCost.toFixed(2)}`;
     },
     cartItemPerMerchant() {
       return this.cartItems[this.merchant_id];
@@ -98,7 +105,9 @@ export default {
         this.cartItems[this.merchant_id].forEach(item => {
           this.totalPrice += item.price * item.count;
         });
-      return (this.totalPrice + this.deliveryCost);
+      if (this.canEdit || !this.isDelivery) return this.totalPrice;
+      else if (!this.canEdit && this.isDelivery)
+        return this.totalPrice + this.deliveryCost;
     },
     disableButton() {
       if (this.cartItems[this.merchant_id] != null)
@@ -128,7 +137,7 @@ export default {
   methods: {
     addProduct(product) {
       if (!this.merchantIsClosed) {
-        this.$emit('TotalCartPrice', this.totalPrice);
+        this.$emit("TotalCartPrice", this.totalPrice);
         let merchantId = this.merchantDetail.id;
         let cartItem = { product, ...merchantId };
         this.addItemToCart(cartItem);
@@ -149,7 +158,10 @@ export default {
       return (product.price * product.count).toFixed(2);
     },
     orderItems() {
-      if (this.cartItems.length != 0 && this.totalPrice >= this.minimumOrderValue) {
+      if (
+        this.cartItems.length != 0 &&
+        this.totalPrice >= this.minimumOrderValue
+      ) {
         this.$router.push({ name: "order" });
       }
     },
