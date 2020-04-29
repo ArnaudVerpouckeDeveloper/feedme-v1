@@ -25,5 +25,6 @@ export const routes = [
     { path: '/admin/login', name: 'merchantLogin', display: 'hide', beforeEnter() { location.href = 'https://speedmeal.be/admin/login' }},
     { path: 'https://www.instagram.com/speedmeal/', name: 'speedmealInsta', display: 'hide', beforeEnter() { location.href = 'https://www.instagram.com/speedmeal/' }},
     { path: 'https://www.facebook.com/speedmeal.be', name: 'speedmealFacebook', display: 'hide', beforeEnter() { location.href = 'https://www.facebook.com/speedmeal.be' }},
+    { path: '/handleiding-voor-horecazaken', name: 'handleiding', display: 'hide', beforeEnter() { location.href = 'https://www.speedmeal.be/handleiding-voor-horecazaken' }},
     { path: '*', name: '404', display: 'hide', component: PageNotFound},
 ]
