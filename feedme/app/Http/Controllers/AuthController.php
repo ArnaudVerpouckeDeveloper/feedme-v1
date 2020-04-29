@@ -359,7 +359,11 @@ class AuthController extends Controller
         else{
             $user->email_verified_at = now();
             $user->save();
-            return view("emailConfirmation");
+            $isMerchant = false;
+            if($user->hasAnyRole("merchant")){
+                $isMerchant = true;
+            }
+            return view("emailConfirmation")->with("isMerchant", $isMerchant);
         }
      }
 
