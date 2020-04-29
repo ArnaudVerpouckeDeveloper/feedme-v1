@@ -38,7 +38,9 @@
           <span>Algemene voorwaarden</span>
         </v-tooltip>
       </v-card-text>
-
+      <v-card-text class="footer-merchant">
+        <v-btn to="handleiding-voor-horecazaken" outlined small>Informatie voor horecazaken</v-btn>
+      </v-card-text>
       <v-card-text class="white--text">
         {{ new Date().getFullYear() }} —
         &copy;
@@ -66,5 +68,10 @@ export default {
 .footer-logos {
   padding-bottom: 0;
 }
-
+.footer-merchant {
+  padding-bottom: 0 !important;
+}
+.footer-merchant > a {
+   color: #fff !important;
+}
 </style>
