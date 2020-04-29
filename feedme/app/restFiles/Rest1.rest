@@ -43,7 +43,7 @@ Accept: application/json
 {
     "firstName": "Arnaud",
     "lastName": "Verpoucke",
-    "email": "someone@hotmail.com",
+    "email": "arnaud.verpoucke@student.howest.be",
     "password": "Arnaud2019",
     "password_confirmation": "Arnaud2019",
     "mobilePhone": "0400 123 456",

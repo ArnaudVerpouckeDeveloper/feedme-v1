@@ -104,7 +104,7 @@ class AuthController extends Controller
             'merchantPhone' => "required"
             ]);
 
-        $user = $this->registerUser($request);
+        $user = $this->registerUser($request, true);
         $merchantRole = Role::where("name", "merchant")->get();
         $user->roles()->attach($merchantRole);
 
@@ -202,7 +202,7 @@ class AuthController extends Controller
 
 
 
-    public function registerUser($request){
+    public function registerUser($request, $showManualSectionInEmail = false){
         $request->validate([
             'firstName' => 'required|min:1|string',
             'lastName' => 'required|min:1|string',
@@ -235,7 +235,7 @@ class AuthController extends Controller
             'mobilePhone' => $request->mobilePhone
         ]);
         
-        Mail::to($user->email)->send(new ConfirmEmail($user));
+        Mail::to($user->email)->send(new ConfirmEmail($user, $showManualSectionInEmail));
         return $user;
     }
 

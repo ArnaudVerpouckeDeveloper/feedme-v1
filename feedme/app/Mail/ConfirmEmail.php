@@ -13,14 +13,16 @@ class ConfirmEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+    public $showManualSectionInEmail;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, $showManualSectionInEmail)
     {
         $this->user = $user;
+        $this->showManualSectionInEmail = $showManualSectionInEmail;
     }
 
     /**
