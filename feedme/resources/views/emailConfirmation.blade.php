@@ -71,7 +71,11 @@
         <h1>Uw e-mailadres is bevestigd.</h1>
         <p>U kunt nu gebruik maken van SpeedMeal.</p>
         <p>
-            <a href="/aanmelden">
+            @if($isMerchant)
+                <a href="/admin/login">
+            @else
+                <a href="/aanmelden">
+            @endif
                 <span class="text">Ga verder</span>
                 <span class="material-icons">arrow_forward</span>
             </a>
