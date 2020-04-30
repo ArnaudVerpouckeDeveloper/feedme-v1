@@ -185,6 +185,16 @@ class CustomerController extends Controller
             
             $merchantObject->productCategories = $merchant->productCategories()->select("id","name")->get();
 
+
+
+
+            $merchantObject->infoDeliveryPossible = $this->merchantOrderMethodPossibleToday($merchant, "delivery");
+            $merchantObject->infoTakeawayPossible = $this->merchantOrderMethodPossibleToday($merchant, "takeaway");
+            $merchantObject->infoCurrentlyOpen = $this->merchantIsCurrentlyOpen($merchant);
+
+
+
+
             if ($returnAsJsonResponse){
                 return response()->json($merchantObject,200);
             }

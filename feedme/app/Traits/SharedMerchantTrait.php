@@ -297,4 +297,156 @@ trait SharedMerchantTrait
             
         
     }
+
+
+
+
+
+
+
+
+
+
+
+    
+    public function merchantIsCurrentlyOpen($merchant){
+        $takeaway_today_from_1 = null;
+        $takeaway_today_till_1 = null;
+        $takeaway_today_from_2 = null;
+        $takeaway_today_till_2 = null;
+
+        $delivery_today_from_1 = null;
+        $delivery_today_till_1 = null;
+        $delivery_today_from_2 = null;
+        $delivery_today_till_2 = null;
+
+        switch (date('w')) {
+            case 1:
+                //monday
+                    $takeaway_today_from_1 = $merchant->takeaway_monday_from_1;
+                    $takeaway_today_till_1 = $merchant->takeaway_monday_till_1;
+                    $takeaway_today_from_2 = $merchant->takeaway_monday_from_2;
+                    $takeaway_today_till_2 = $merchant->takeaway_monday_till_2;
+                    $delivery_today_from_1 = $merchant->delivery_monday_from_1;
+                    $delivery_today_till_1 = $merchant->delivery_monday_till_1;
+                    $delivery_today_from_2 = $merchant->delivery_monday_from_2;
+                    $delivery_today_till_2 = $merchant->delivery_monday_till_2;
+                break;
+            case 2:
+                //tuesday
+                    $takeaway_today_from_1 = $merchant->takeaway_tuesday_from_1;
+                    $takeaway_today_till_1 = $merchant->takeaway_tuesday_till_1;
+                    $takeaway_today_from_2 = $merchant->takeaway_tuesday_from_2;
+                    $takeaway_today_till_2 = $merchant->takeaway_tuesday_till_2;
+                    $delivery_today_from_1 = $merchant->delivery_tuesday_from_1;
+                    $delivery_today_till_1 = $merchant->delivery_tuesday_till_1;
+                    $delivery_today_from_2 = $merchant->delivery_tuesday_from_2;
+                    $delivery_today_till_2 = $merchant->delivery_tuesday_till_2;
+                break;
+            case 3:
+                //wednesday
+                    $takeaway_today_from_1 = $merchant->takeaway_wednesday_from_1;
+                    $takeaway_today_till_1 = $merchant->takeaway_wednesday_till_1;
+                    $takeaway_today_from_2 = $merchant->takeaway_wednesday_from_2;
+                    $takeaway_today_till_2 = $merchant->takeaway_wednesday_till_2;
+                    $delivery_today_from_1 = $merchant->delivery_wednesday_from_1;
+                    $delivery_today_till_1 = $merchant->delivery_wednesday_till_1;
+                    $delivery_today_from_2 = $merchant->delivery_wednesday_from_2;
+                    $delivery_today_till_2 = $merchant->delivery_wednesday_till_2;
+                break;
+            case 4:
+                //thursday
+                    $takeaway_today_from_1 = $merchant->takeaway_thursday_from_1;
+                    $takeaway_today_till_1 = $merchant->takeaway_thursday_till_1;
+                    $takeaway_today_from_2 = $merchant->takeaway_thursday_from_2;
+                    $takeaway_today_till_2 = $merchant->takeaway_thursday_till_2;
+                    $delivery_today_from_1 = $merchant->delivery_thursday_from_1;
+                    $delivery_today_till_1 = $merchant->delivery_thursday_till_1;
+                    $delivery_today_from_2 = $merchant->delivery_thursday_from_2;
+                    $delivery_today_till_2 = $merchant->delivery_thursday_till_2;
+                break;
+            case 5:
+                //friday
+                    $takeaway_today_from_1 = $merchant->takeaway_friday_from_1;
+                    $takeaway_today_till_1 = $merchant->takeaway_friday_till_1;
+                    $takeaway_today_from_2 = $merchant->takeaway_friday_from_2;
+                    $takeaway_today_till_2 = $merchant->takeaway_friday_till_2;
+                    $delivery_today_from_1 = $merchant->delivery_friday_from_1;
+                    $delivery_today_till_1 = $merchant->delivery_friday_till_1;
+                    $delivery_today_from_2 = $merchant->delivery_friday_from_2;
+                    $delivery_today_till_2 = $merchant->delivery_friday_till_2;
+                break;
+            case 6:
+                //saturday
+                    $takeaway_today_from_1 = $merchant->takeaway_saturday_from_1;
+                    $takeaway_today_till_1 = $merchant->takeaway_saturday_till_1;
+                    $takeaway_today_from_2 = $merchant->takeaway_saturday_from_2;
+                    $takeaway_today_till_2 = $merchant->takeaway_saturday_till_2;
+                    $delivery_today_from_1 = $merchant->delivery_saturday_from_1;
+                    $delivery_today_till_1 = $merchant->delivery_saturday_till_1;
+                    $delivery_today_from_2 = $merchant->delivery_saturday_from_2;
+                    $delivery_today_till_2 = $merchant->delivery_saturday_till_2;
+                break;
+            case 0:
+                //sunday
+                    $takeaway_today_from_1 = $merchant->takeaway_sunday_from_1;
+                    $takeaway_today_till_1 = $merchant->takeaway_sunday_till_1;
+                    $takeaway_today_from_2 = $merchant->takeaway_sunday_from_2;
+                    $takeaway_today_till_2 = $merchant->takeaway_sunday_till_2;
+                    $delivery_today_from_1 = $merchant->delivery_sunday_from_1;
+                    $delivery_today_till_1 = $merchant->delivery_sunday_till_1;
+                    $delivery_today_from_2 = $merchant->delivery_sunday_from_2;
+                    $delivery_today_till_2 = $merchant->delivery_sunday_till_2;
+                break;
+            default:
+                break;
+        }
+
+        $currentTime = DateTime::createFromFormat('H:i', date("H:i"));
+        $takeaway_today_from_1 = DateTime::createFromFormat('H:i', $takeaway_today_from_1);
+        $takeaway_today_till_1 = DateTime::createFromFormat('H:i', $takeaway_today_till_1);
+        $takeaway_today_from_2 = DateTime::createFromFormat('H:i', $takeaway_today_from_2);
+        $takeaway_today_till_2 = DateTime::createFromFormat('H:i', $takeaway_today_till_2);
+        $delivery_today_from_1 = DateTime::createFromFormat('H:i', $delivery_today_from_1);
+        $delivery_today_till_1 = DateTime::createFromFormat('H:i', $delivery_today_till_1);
+        $delivery_today_from_2 = DateTime::createFromFormat('H:i', $delivery_today_from_2);
+        $delivery_today_till_2 = DateTime::createFromFormat('H:i', $delivery_today_till_2);
+
+
+        if (
+            ($currentTime > $takeaway_today_from_1 && $currentTime < $takeaway_today_till_1)
+            || ($currentTime > $takeaway_today_from_2 && $currentTime < $takeaway_today_till_2)
+            || ($currentTime > $delivery_today_from_1 && $currentTime < $delivery_today_till_1)
+            || ($currentTime > $delivery_today_from_2 && $currentTime < $delivery_today_till_2)
+            ){
+                return true;
+            }
+            else{
+                return false;
+            }
+   
+    }
+
+
+
+    
+    public function merchantOrderMethodPossibleToday($merchant, $orderDeliveryMethod){
+        $possibleTimes = null;
+        if($orderDeliveryMethod == "takeaway"){
+            $possibleTimes = $this->getPossibleRequestTimes($merchant)["takeaway"];
+        }
+        elseif($orderDeliveryMethod == "delivery"){
+            $possibleTimes = $this->getPossibleRequestTimes($merchant)["delivery"];
+        }         
+
+        if (count($possibleTimes) > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+        
+   
+    }
 }
